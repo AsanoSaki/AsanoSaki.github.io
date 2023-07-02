@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Python遥感常用模块Rasterio与Rioxarray教程 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Python" />
+  
+  <meta name="description" content="Python遥感常用模块Rasterio与Rioxarray教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python遥感常用模块Rasterio与Rioxarray教程">
+<meta property="og:url" content="https://asanosaki.github.io/posts/9681.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Python遥感常用模块Rasterio与Rioxarray教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-05-29T07:52:00.000Z">
+<meta property="article:modified_time" content="2023-05-29T08:01:23.998Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/9681.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Python遥感常用模块Rasterio与Rioxarray教程</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-05-29T07:52:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-05-29</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~6.39K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1685347283998"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Rasterio%E4%B8%8ERioxarray%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">2. 使用教程</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p><code>rasterio</code> 是一个很多模块是基于 <code>GDAL</code> 的 Python 包，可用于处理地理空间栅格数据，例如 GeoTIFF 文件。<code>xarray</code> 是一个为数组提供标签，例如尺寸、坐标和其他特定属性的 Python 包，它使大维数组的工作更加直观。<code>rioxarray</code> 结合了 <code>rasterio</code> 的功能和 <code>xarray</code> 的所有优点。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-Rasterio与Rioxarray安装">1. Rasterio与Rioxarray安装</h2>
+<p>首先安装 Rasterio 模块，（本人使用 <code>conda</code> 安装时遇到过报错 <code>ImportError: cannot import name 'CRS' from 'pyproj' (unknown location)</code>，是由于 <code>pyproj</code> 模块安装不全，因此建议采用后面的离线安装方式或者之后遇到问题时删除 <code>pyproj</code> 模块后再离线安装该模块）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install gdal</span><br><span class="line">conda install rasterio</span><br></pre></td></tr></table></figure>
+<p>如果安装失败可以采用离线安装的方式，Rasterio 依赖很多第三方库，所以比较麻烦，按下面的顺序依次安装即可，可以尝试使用 <code>pip</code> 安装或者下载 <code>.whl</code> 文件离线安装（注意对上 Python 版本）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pyproj</span><br><span class="line">Shapely</span><br><span class="line">GDAL</span><br><span class="line">Fiona</span><br><span class="line">rasterio</span><br></pre></td></tr></table></figure>
+<p>各个模块的链接：<a target="_blank" rel="noopener" href="https://pypi.org/project/pyproj/">Pyproj</a>、<a target="_blank" rel="noopener" href="https://pypi.org/project/shapely/">Shapely</a>、<a target="_blank" rel="noopener" href="https://pypi.org/project/GDAL/">GDAL</a>、<a target="_blank" rel="noopener" href="https://pypi.org/project/Fiona/">Fiona</a>、<a target="_blank" rel="noopener" href="https://pypi.org/project/rasterio/">Rasterio</a>。</p>
+<p>离线安装指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install E:\GDAL-1.2.10-cp310-cp310-win_amd64.whl</span><br></pre></td></tr></table></figure>
+<p>在 Python 中使用 Anaconda 安装 <code>rioxarray</code> 包时，首先需要安装 <code>GDAL</code> 和 <code>rasterio</code>，然后再安装 <code>rioxarray</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install rioxarray</span><br></pre></td></tr></table></figure>
+<h2 id="2-使用教程">2. 使用教程</h2>
+<p>（1）使用 Rioxarray 读取并展示图像：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rasterio</span><br><span class="line"><span class="keyword">import</span> rioxarray</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">img_path = <span class="string">&#x27;../images/tiff_img.tif&#x27;</span></span><br><span class="line"></span><br><span class="line">img = rioxarray.open_rasterio(img_path)</span><br><span class="line"><span class="built_in">print</span>(img.shape)  <span class="comment"># (22, 488, 480)，第一维为通道数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img))  <span class="comment"># &lt;class &#x27;xarray.core.dataarray.DataArray&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img.values))  <span class="comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.flat:</span><br><span class="line">    ax_img = ax.imshow(img[<span class="number">0</span>], cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axes.flat, [<span class="string">&#x27;img1&#x27;</span>, <span class="string">&#x27;img2&#x27;</span>]):</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">fig.colorbar(mappable=ax_img, label=<span class="string">&#x27;FSC&#x27;</span>, orientation=<span class="string">&#x27;horizontal&#x27;</span>, ax=axes, fraction=<span class="number">0.04</span>)  <span class="comment"># 图例，fraction可调整大小</span></span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>也可以用另一种形式展示（注意如果使用 Rasterio 读取图像则无法使用该方式展示图像）：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(dpi=<span class="number">300</span>, figsize=(<span class="number">15</span>, <span class="number">5</span>))</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.2</span>, wspace=<span class="number">0.5</span>)</span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">img[<span class="number">0</span>].plot(cmap=<span class="string">&#x27;terrain&#x27;</span>)  <span class="comment"># getting the first band</span></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">img[<span class="number">1</span>].plot(cmap=<span class="string">&#x27;terrain&#x27;</span>)</span><br><span class="line"><span class="comment"># plt.savefig(&#x27;1.png&#x27;, dpi=300, bbox_inches=&#x27;tight&#x27;, pad_inches=0)</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>（2）使用 Rasterio 读取图像：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img = rasterio.<span class="built_in">open</span>(img_path).read()</span><br><span class="line"><span class="built_in">print</span>(img.shape)  <span class="comment"># (22, 488, 480)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img))  <span class="comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+<p>（3）转换为 Tensor 类型：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img_torch = torch.tensor(np.array(img.values), dtype=torch.float32)  <span class="comment"># Rioxarray转Tensor</span></span><br><span class="line"><span class="built_in">print</span>(img_torch.shape)  <span class="comment"># torch.Size([22, 488, 480])</span></span><br><span class="line"></span><br><span class="line">img_torch = torch.tensor(img, dtype=torch.float32)  <span class="comment"># Rasterio转Tensor</span></span><br><span class="line"><span class="built_in">print</span>(img_torch.shape)  <span class="comment"># torch.Size([22, 488, 480])</span></span><br></pre></td></tr></table></figure>
+<p>（4）将 TIFF 图像逐像素提取出数据构建 CSV 文件：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_image</span>(<span class="params">img_path</span>):</span><br><span class="line">    img = rasterio.<span class="built_in">open</span>(img_path).read()</span><br><span class="line">    band, height, width = np.shape(img)</span><br><span class="line"></span><br><span class="line">    img_data_list = []</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> tqdm.trange(height):</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(width):</span><br><span class="line">            temp = img[::, x, y]</span><br><span class="line">            <span class="keyword">if</span> np.array(np.isnan(temp), dtype=np.int8).<span class="built_in">sum</span>() &gt; <span class="number">0</span>:  <span class="comment"># 过滤nan值</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                img_data_list.append(temp.tolist())</span><br><span class="line"></span><br><span class="line">    img_arr = np.array(img_data_list)</span><br><span class="line">    img_arr = np.around(img_arr, <span class="number">6</span>)  <span class="comment"># 将数据四舍五入保留6位小数</span></span><br><span class="line">    labels = img_arr[:, <span class="number">0</span>]  <span class="comment"># 第一个特征为标签</span></span><br><span class="line">    dataset = img_arr[:, <span class="number">1</span>:]  <span class="comment"># 之后的特征为训练数据</span></span><br><span class="line">    <span class="built_in">print</span>(os.path.basename(img_path), <span class="string">&#x27;读取成功!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># return dataset, labels</span></span><br><span class="line">    <span class="keyword">return</span> img_arr</span><br><span class="line"></span><br><span class="line">total_dataset = np.zeros((<span class="number">1</span>, <span class="number">22</span>), dtype=np.float32)</span><br><span class="line">img_data = read_image(img_path)</span><br><span class="line">total_dataset = np.append(total_dataset, img_data, axis=<span class="number">0</span>)</span><br><span class="line">total_dataset = np.delete(total_dataset, obj=<span class="number">0</span>, axis=<span class="number">0</span>)  <span class="comment"># 按行(axis=0)删除第一行(obj=0)元素</span></span><br><span class="line"><span class="built_in">print</span>(total_dataset, <span class="string">&#x27;\n&#x27;</span>, np.shape(total_dataset))</span><br><span class="line"><span class="comment"># [[0.570768 0.14354  0.159068 ... 0.458602 1.       0.4     ]</span></span><br><span class="line"><span class="comment">#  [0.307365 0.14354  0.159068 ... 0.458602 1.       0.4     ]</span></span><br><span class="line"><span class="comment">#  [0.005285 0.14354  0.159068 ... 0.428406 1.       0.4     ]</span></span><br><span class="line"><span class="comment">#  ...</span></span><br><span class="line"><span class="comment">#  [0.993229 0.393478 0.370807 ... 0.243081 1.       0.8     ]</span></span><br><span class="line"><span class="comment">#  [0.967867 0.370807 0.356894 ... 0.243081 1.       0.8     ]</span></span><br><span class="line"><span class="comment">#  [0.945627 0.321429 0.305714 ... 0.243081 1.       0.8     ]]</span></span><br><span class="line"><span class="comment">#  (116082, 22)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一张影像22个波段，每一波段为一种特征，特征名如下，其中FSC既是模型训练时的标签数据也是模型输出数据</span></span><br><span class="line">feature_name = [<span class="string">&#x27;FSC&#x27;</span>, <span class="string">&#x27;SR1&#x27;</span>, <span class="string">&#x27;SR2&#x27;</span>, <span class="string">&#x27;SR3&#x27;</span>, <span class="string">&#x27;SR4&#x27;</span>, <span class="string">&#x27;SR5&#x27;</span>, <span class="string">&#x27;SR6&#x27;</span>, <span class="string">&#x27;SR7&#x27;</span>, <span class="string">&#x27;NDVI&#x27;</span>, <span class="string">&#x27;NDSI&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;NDFSI&#x27;</span>, <span class="string">&#x27;SensorZenith&#x27;</span>, <span class="string">&#x27;SensorAzimuth&#x27;</span>, <span class="string">&#x27;SolarZenith&#x27;</span>, <span class="string">&#x27;SolarAzimuth&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;Dem&#x27;</span>, <span class="string">&#x27;Slope&#x27;</span>, <span class="string">&#x27;Aspect&#x27;</span>, <span class="string">&#x27;LST&#x27;</span>, <span class="string">&#x27;A2T&#x27;</span>, <span class="string">&#x27;SC&#x27;</span>, <span class="string">&#x27;LCT&#x27;</span>]</span><br><span class="line">df = pd.DataFrame(total_dataset, columns=feature_name)</span><br><span class="line">df.to_csv(<span class="string">&#x27;../data/MODIS_total_data.csv&#x27;</span>, index=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"><span class="comment">#              FSC       SR1       SR2       SR3  ...       LST       A2T   SC  LCT</span></span><br><span class="line"><span class="comment"># 0       0.570768  0.143540  0.159068  0.165776  ...  0.447205  0.458602  1.0  0.4</span></span><br><span class="line"><span class="comment"># 1       0.307365  0.143540  0.159068  0.165776  ...  0.447205  0.458602  1.0  0.4</span></span><br><span class="line"><span class="comment"># ...          ...       ...       ...       ...  ...       ...       ...  ...  ...</span></span><br><span class="line"><span class="comment"># 116080  0.967867  0.370807  0.356894  0.384162  ...  0.252946  0.243081  1.0  0.8</span></span><br><span class="line"><span class="comment"># 116081  0.945627  0.321429  0.305714  0.327329  ...  0.252946  0.243081  1.0  0.8</span></span><br><span class="line"><span class="comment"># [116082 rows x 22 columns]</span></span><br><span class="line"></span><br><span class="line">train_data, valid_data = train_test_split(df, test_size=<span class="number">0.3</span>, random_state=<span class="number">1</span>)  <span class="comment"># 按7:3的比例划分train_data与valid_data</span></span><br><span class="line">train_data.to_csv(<span class="string">&#x27;../data/MODIS_train_data.csv&#x27;</span>, index=<span class="literal">False</span>)</span><br><span class="line">valid_data.to_csv(<span class="string">&#x27;../data/MODIS_valid_data.csv&#x27;</span>, index=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(train_data)</span><br><span class="line"><span class="built_in">print</span>(valid_data)</span><br><span class="line"><span class="comment">#             FSC       SR1       SR2  ...       A2T        SC  LCT</span></span><br><span class="line"><span class="comment"># 65463  1.000000  0.868261  0.860124  ...  0.306415  0.954102  0.4</span></span><br><span class="line"><span class="comment"># 71636  0.000000  0.074969  0.090683  ...  0.492837  0.021780  0.4</span></span><br><span class="line"><span class="comment"># ...         ...       ...       ...  ...       ...       ...  ...</span></span><br><span class="line"><span class="comment"># 77708  0.836359  0.252298  0.268199  ...  0.400243  1.000000  0.4</span></span><br><span class="line"><span class="comment"># 98539  0.004958  0.048758  0.073168  ...  0.547051  0.000000  0.4</span></span><br><span class="line"><span class="comment"># [81257 rows x 22 columns]</span></span><br><span class="line"><span class="comment">#              FSC       SR1       SR2  ...       A2T        SC  LCT</span></span><br><span class="line"><span class="comment"># 24035   0.907556  0.579814  0.588075  ...  0.332088  1.000000  0.8</span></span><br><span class="line"><span class="comment"># 26625   0.988592  0.708696  0.702981  ...  0.334435  0.999297  0.4</span></span><br><span class="line"><span class="comment"># ...          ...       ...       ...  ...       ...       ...  ...</span></span><br><span class="line"><span class="comment"># 22745   0.000000  0.054348  0.127143  ...  0.494257  0.532436  0.4</span></span><br><span class="line"><span class="comment"># 31068   0.994422  0.562795  0.532174  ...  0.384267  1.000000  0.4</span></span><br><span class="line"><span class="comment"># [34825 rows x 22 columns]</span></span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/9681.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/9681.html";
+            const title         = "「Python遥感常用模块Rasterio与Rioxarray教程」";
+            const excerpt       = `rasterio 是一个很多模块是基于 GDAL 的 Python 包，可用于处理地理空间栅格数据，例如 GeoTIFF 文件。xarray 是一个为数组提供标签，例如尺寸、坐标和其他特定属性的 Python 包，它使大维数组的工作更加直观。rioxarray 结合了 rasterio 的功能和 xarray 的所有优点。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-05-29T08:01:23.998Z" itemprop="dateModified">Last edited: 2023-05-29</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Python绘图模块Plotly教程" href="/posts/31783.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Kaggle项目实战" href="/posts/6211.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                38
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Rasterio%E4%B8%8ERioxarray%E5%AE%89%E8%A3%85"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">2. 使用教程</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/31783.html"><i class="fa  fa-book"></i> Python绘图模块Plotly教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39408.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-注意力机制</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/7592.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-现代循环神经网络</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

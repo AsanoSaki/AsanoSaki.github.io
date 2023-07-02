@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>动手学深度学习笔记(李沐)-注意力机制 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="AI" />
+  
+  <meta name="description" content="动手学深度学习笔记(李沐)-注意力机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动手学深度学习笔记(李沐)-注意力机制">
+<meta property="og:url" content="https://asanosaki.github.io/posts/39408.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="动手学深度学习笔记(李沐)-注意力机制">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-05-21T09:57:00.000Z">
+<meta property="article:modified_time" content="2023-05-28T09:44:23.136Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/39408.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">动手学深度学习笔记(李沐)-注意力机制</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-05-21T09:57:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-05-21</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~23.83K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1685267063136"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%8F%90%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">1. 注意力提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B1%87%E8%81%9A%EF%BC%9ANadaraya-Watson%E6%A0%B8%E5%9B%9E%E5%BD%92"><span class="toc-number">2.</span> <span class="toc-text">2. 注意力汇聚：Nadaraya-Watson核回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%AF%84%E5%88%86%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3. 注意力评分函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Bahdanau%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84seq2seq%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4. Bahdanau注意力（使用注意力的seq2seq）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-number">5.</span> <span class="toc-text">5. 多头注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text">6. 自注意力和位置编码</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>李沐动手学深度学习（PyTorch）课程学习笔记第十章：注意力机制。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-注意力提示">1. 注意力提示</h2>
+<p>注意力机制（Attention Mechanism）是人们在机器学习模型中嵌入的一种特殊结构，用来自动学习和计算<strong>输入数据对输出数据的贡献</strong>大小。</p>
+<p><strong>非自主性提示</strong>是基于环境中物体的突出性和易见性。想象一下，假如我们面前有五个物品：一份报纸、一篇研究论文、一杯咖啡、一本笔记本和一本书，所有纸制品都是黑白印刷的，但咖啡杯是红色的。换句话说，这个咖啡杯在这种视觉环境中是突出和显眼的，不由自主地引起人们的注意，所以我们会把视力最敏锐的地方放到咖啡上。喝咖啡后，我们会变得兴奋并想读书，所以转过头，重新聚焦眼睛，然后看看书，与咖啡杯是由于突出性导致的选择不同，此时选择书是受到了<strong>认知和意识</strong>的控制，因此注意力在基于<strong>自主性提示</strong>去辅助选择时将更为谨慎。受试者的主观意愿推动，选择的力量也就更强大。自主性的与非自主性的注意力提示解释了人类的注意力的方式，下面来看看如何通过这两种注意力提示，用神经网络来设计注意力机制的框架。</p>
+<p>首先，考虑一个相对简单的状况，即只使用非自主性提示。要想将选择偏向于感官输入，则可以简单地使用参数化的全连接层，甚至是非参数化的最大汇聚层或平均汇聚层。</p>
+<p>因此，“是否包含自主性提示”将注意力机制与全连接层或汇聚层区别开来。在注意力机制的背景下，自主性提示被称为<strong>查询</strong>（query）。给定任何查询，注意力机制通过注意力汇聚（attention pooling）将选择引导至感官输入（sensory inputs，例如中间特征表示）。在注意力机制中，这些感官输入被称为<strong>值</strong>（value）。更通俗的解释，每个值都与一个<strong>键</strong>（key）配对，这可以想象为感官输入的非自主提示。可以通过设计注意力汇聚的方式，便于给定的查询（自主性提示）与键（非自主性提示）进行匹配，这将引导得出最匹配的值（感官输入）。</p>
+<p>平均汇聚层可以被视为输入的加权平均值，其中各输入的权重是一样的。实际上，注意力汇聚得到的是加权平均的总和值，其中权重是在给定的查询和不同的键之间计算得出的。为了可视化注意力权重，需要定义一个 <code>show_heatmaps</code> 函数，其输入 <code>matrices</code> 的形状是 <code>(要显示的行数, 要显示的列数, 查询的数目, 键的数目)</code>。下面使用一个简单的例子进行演示，在本例子中，仅当查询和键相同时，注意力权重为1，否则为0：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show_heatmaps</span>(<span class="params">matrices, xlabel, ylabel, titles=<span class="literal">None</span>, figsize=(<span class="params"><span class="number">8</span>, <span class="number">6</span></span>), cmap=<span class="string">&#x27;Reds&#x27;</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;显示矩阵热图&quot;&quot;&quot;</span></span><br><span class="line">    d2l.use_svg_display()</span><br><span class="line">    num_rows, num_cols = matrices.shape[<span class="number">0</span>], matrices.shape[<span class="number">1</span>]</span><br><span class="line">    fig, axes = plt.subplots(num_rows, num_cols, figsize=figsize, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>, squeeze=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">for</span> i, (row_axes, row_matrices) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, matrices)):</span><br><span class="line">        <span class="keyword">for</span> j, (ax, matrix) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(row_axes, row_matrices)):</span><br><span class="line">            pcm = ax.imshow(matrix.detach().numpy(), cmap=cmap)</span><br><span class="line">            <span class="keyword">if</span> i == num_rows - <span class="number">1</span>:</span><br><span class="line">                ax.set_xlabel(xlabel)</span><br><span class="line">            <span class="keyword">if</span> j == <span class="number">0</span>:</span><br><span class="line">                ax.set_ylabel(ylabel)</span><br><span class="line">            <span class="keyword">if</span> titles:</span><br><span class="line">                ax.set_title(titles[j])</span><br><span class="line">    fig.colorbar(pcm, ax=axes, shrink=<span class="number">0.6</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">attention_weights = torch.eye(<span class="number">10</span>).reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">show_heatmaps(attention_weights, xlabel=<span class="string">&#x27;Keys&#x27;</span>, ylabel=<span class="string">&#x27;Queries&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>此外可以使用 Plotly 绘制热力图：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> plotly.graph_objects <span class="keyword">as</span> go</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show_plotly_heatmaps</span>(<span class="params">x=<span class="literal">None</span>, y=<span class="literal">None</span>, z=<span class="literal">None</span>, colorscale=<span class="string">&#x27;reds&#x27;</span>, width=<span class="number">600</span>, height=<span class="number">600</span>, title=<span class="literal">None</span>, xtitle=<span class="literal">None</span>, ytitle=<span class="literal">None</span></span>):</span><br><span class="line">    heatmap_fig = go.Figure(</span><br><span class="line">        data=[</span><br><span class="line">            go.Heatmap(x=x, y=y, z=z, colorscale=colorscale)</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    heatmap_fig.update_layout(</span><br><span class="line">        autosize=<span class="literal">False</span>, width=width, height=height,</span><br><span class="line">        title=title,</span><br><span class="line">        xaxis=<span class="built_in">dict</span>(title=xtitle), yaxis=<span class="built_in">dict</span>(title=ytitle),</span><br><span class="line">        showlegend=<span class="literal">True</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    heatmap_fig.show()</span><br><span class="line"></span><br><span class="line">attention_weights = torch.eye(<span class="number">10</span>)</span><br><span class="line">show_plotly_heatmaps(z=attention_weights, title=<span class="string">&#x27;Attention Weights Heatmap&#x27;</span>, xtitle=<span class="string">&#x27;Keys&#x27;</span>, ytitle=<span class="string">&#x27;Queries&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="2-注意力汇聚：Nadaraya-Watson核回归">2. 注意力汇聚：Nadaraya-Watson核回归</h2>
+<p>上节介绍了框架下的注意力机制的主要成分：查询（自主提示）和键（非自主提示）之间的交互形成了注意力汇聚；注意力汇聚有选择地聚合了值（感官输入）以生成最终的输出。本节将介绍注意力汇聚的更多细节，以便从宏观上了解注意力机制在实践中的运作方式。具体来说，1964年提出的 Nadaraya-Watson 核回归模型是一个简单但完整的例子，可以用于演示具有注意力机制的机器学习，其理论介绍可见：<a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_attention-mechanisms/nadaraya-waston.html">注意力汇聚：Nadaraya-Watson核回归</a>。</p>
+<p>首先生成一个非线性函数的人工数据集：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">n_train = <span class="number">50</span>  <span class="comment"># 训练样本数</span></span><br><span class="line">x_train, _ = torch.sort(torch.rand(n_train) * <span class="number">5</span>)  <span class="comment"># 排序后的训练样本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * torch.sin(x) + x**<span class="number">0.8</span></span><br><span class="line"></span><br><span class="line">y_train = f(x_train) + torch.normal(<span class="number">0.0</span>, <span class="number">0.5</span>, (n_train,))  <span class="comment"># 训练样本的输出</span></span><br><span class="line">x_test = torch.arange(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0.1</span>)  <span class="comment"># 测试样本</span></span><br><span class="line">y_truth = f(x_test)  <span class="comment"># 测试样本的真实输出</span></span><br><span class="line">n_test = <span class="built_in">len</span>(x_test)  <span class="comment"># 测试样本数</span></span><br><span class="line"><span class="built_in">print</span>(n_test)  <span class="comment"># 50</span></span><br></pre></td></tr></table></figure>
+<p>函数 <code>plot_kernel_reg</code> 将绘制所有的训练样本（样本由圆圈表示），不带噪声项的真实数据生成函数（标记为 <code>Truth</code>），以及学习得到的预测函数（标记为 <code>Pred</code>）。先使用最简单的估计器来解决回归问题，即基于平均汇聚来计算所有训练样本输出值的平均值：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_kernel_reg</span>(<span class="params">y_hat</span>):</span><br><span class="line">    fig = go.Figure(</span><br><span class="line">        data=[</span><br><span class="line">            go.Scatter(x=x_test, y=y_truth, mode=<span class="string">&#x27;lines&#x27;</span>, name=<span class="string">&#x27;Truth&#x27;</span>),</span><br><span class="line">            go.Scatter(x=x_test, y=y_hat, mode=<span class="string">&#x27;lines&#x27;</span>, name=<span class="string">&#x27;Pred&#x27;</span>),</span><br><span class="line">            go.Scatter(x=x_train, y=y_train, mode=<span class="string">&#x27;markers&#x27;</span>, name=<span class="string">&#x27;Sample&#x27;</span>, opacity=<span class="number">0.5</span>)</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">    fig.update_layout(</span><br><span class="line">        autosize=<span class="literal">False</span>, width=<span class="number">1200</span>, height=<span class="number">800</span>,</span><br><span class="line">        xaxis=<span class="built_in">dict</span>(title=<span class="string">&#x27;x&#x27;</span>), yaxis=<span class="built_in">dict</span>(title=<span class="string">&#x27;y&#x27;</span>),</span><br><span class="line">        showlegend=<span class="literal">True</span></span><br><span class="line">    )</span><br><span class="line">    fig.show()</span><br><span class="line">    <span class="comment"># d2l.plot(x_test, [y_truth, y_hat], &#x27;x&#x27;, &#x27;y&#x27;, legend=[&#x27;Truth&#x27;, &#x27;Pred&#x27;],</span></span><br><span class="line">    <span class="comment">#          xlim=[0, 5], ylim=[-1, 5])</span></span><br><span class="line">    <span class="comment"># d2l.plt.plot(x_train, y_train, &#x27;o&#x27;, alpha=0.5)</span></span><br><span class="line"></span><br><span class="line">y_hat = torch.repeat_interleave(y_train.mean(), n_test)</span><br><span class="line">plot_kernel_reg(y_hat)</span><br></pre></td></tr></table></figure>
+<p>显然，平均汇聚忽略了输入，Nadaraya-Watson 核回归根据输入的位置对输出进行加权，是一个非参数模型。接下来，我们将基于这个非参数的注意力汇聚模型来绘制预测结果。从绘制的结果会发现新的模型预测线是平滑的，并且比平均汇聚的预测更接近真实。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># X_repeat.shape: (n_test, n_train)</span></span><br><span class="line"><span class="comment"># 每一行都包含着相同的测试输入（例如：同样的查询）</span></span><br><span class="line">X_repeat = x_test.repeat_interleave(n_train).reshape((-<span class="number">1</span>, n_train))</span><br><span class="line"><span class="comment"># x_train包含着键，attention_weights.shape: (n_test, n_train)</span></span><br><span class="line"><span class="comment"># 每一行都包含着要在给定的每个查询的值（y_train）之间分配的注意力权重</span></span><br><span class="line">attention_weights = nn.functional.softmax(-(X_repeat - x_train)**<span class="number">2</span> / <span class="number">2</span>, dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># y_hat的每个元素都是值的加权平均值，其中的权重是注意力权重</span></span><br><span class="line">y_hat = torch.matmul(attention_weights, y_train)  <span class="comment"># y_hat.shape: torch.Size([50])</span></span><br><span class="line">plot_kernel_reg(y_hat)</span><br></pre></td></tr></table></figure>
+<p>非参数的 Nadaraya-Watson 核回归具有一致性（consistency）的优点：如果有足够的数据，此模型会收敛到最优结果。尽管如此，我们还是可以轻松地将可学习的参数集成到注意力汇聚中。</p>
+<p>为了更有效地计算小批量数据的注意力，我们可以利用深度学习开发框架中提供的批量矩阵乘法：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X = torch.ones((<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>))</span><br><span class="line">Y = torch.ones((<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>))</span><br><span class="line"><span class="built_in">print</span>(torch.bmm(X, Y).shape)  <span class="comment"># torch.Size([2, 1, 6])</span></span><br></pre></td></tr></table></figure>
+<p>在注意力机制的背景中，我们可以使用小批量矩阵乘法来计算小批量数据中的加权平均值：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">weights = torch.ones((<span class="number">2</span>, <span class="number">10</span>)) * <span class="number">0.1</span></span><br><span class="line">values = torch.arange(<span class="number">20.0</span>).reshape((<span class="number">2</span>, <span class="number">10</span>))</span><br><span class="line"><span class="built_in">print</span>(torch.bmm(weights.unsqueeze(<span class="number">1</span>), values.unsqueeze(-<span class="number">1</span>)))</span><br><span class="line"><span class="comment"># tensor([[[ 4.5000]],</span></span><br><span class="line"><span class="comment">#         [[14.5000]]])</span></span><br></pre></td></tr></table></figure>
+<p>定义 Nadaraya-Watson 核回归的带参数版本为：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NWKernelRegression</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(**kwargs)</span><br><span class="line">        self.w = nn.Parameter(torch.rand((<span class="number">1</span>,), requires_grad=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, queries, keys, values</span>):</span><br><span class="line">        <span class="comment"># queries和attention_weights的形状为: (查询个数, “键-值”对个数)</span></span><br><span class="line">        queries = queries.repeat_interleave(keys.shape[<span class="number">1</span>]).reshape((-<span class="number">1</span>, keys.shape[<span class="number">1</span>]))</span><br><span class="line">        self.attention_weights = nn.functional.softmax(-((queries - keys) * self.w)**<span class="number">2</span> / <span class="number">2</span>, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># values的形状为: (查询个数, “键-值”对个数)</span></span><br><span class="line">        <span class="keyword">return</span> torch.bmm(self.attention_weights.unsqueeze(<span class="number">1</span>), values.unsqueeze(-<span class="number">1</span>)).reshape(-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>接下来，将训练数据集变换为键和值用于训练注意力模型。在带参数的注意力汇聚模型中，任何一个训练样本的输入都会和除自己以外的所有训练样本的“键-值”对进行计算，从而得到其对应的预测输出：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># X_tile.shape: (n_train, n_train)，每一行都包含着相同的训练输入</span></span><br><span class="line">X_tile = x_train.repeat(n_train, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># Y_tile.shape: (n_train, n_train)，每一行都包含着相同的训练输出</span></span><br><span class="line">Y_tile = y_train.repeat(n_train, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># keys.shape: (n_train, n_train-1)，将对角线元素筛去</span></span><br><span class="line">keys = X_tile[(<span class="number">1</span> - torch.eye(n_train)).<span class="built_in">type</span>(torch.<span class="built_in">bool</span>)].reshape((n_train, -<span class="number">1</span>))</span><br><span class="line"><span class="comment"># values.shape: (n_train, n_train-1)，将对角线元素筛去</span></span><br><span class="line">values = Y_tile[(<span class="number">1</span> - torch.eye(n_train)).<span class="built_in">type</span>(torch.<span class="built_in">bool</span>)].reshape((n_train, -<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>训练带参数的注意力汇聚模型时，使用平方损失函数和随机梯度下降：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">net = NWKernelRegression()</span><br><span class="line">loss_function = nn.MSELoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">optimizer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss = loss_function(net(x_train, keys, values), y_train)</span><br><span class="line">    loss.<span class="built_in">sum</span>().backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;epoch <span class="subst">&#123;epoch + <span class="number">1</span>&#125;</span>, loss <span class="subst">&#123;<span class="built_in">float</span>(loss.<span class="built_in">sum</span>()):<span class="number">.6</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>训练完带参数的注意力汇聚模型后可以发现：在尝试拟合带噪声的训练数据时，预测结果绘制的线不如之前非参数模型的平滑，因为与非参数的注意力汇聚模型相比，带参数的模型加入可学习的参数后，曲线在注意力权重较大的区域变得更不平滑。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># keys.shape: (n_test, n_train)，每一行包含着相同的训练输入（例如，相同的键）</span></span><br><span class="line">keys = x_train.repeat(n_test, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># value.shape: (n_test, n_train)</span></span><br><span class="line">values = y_train.repeat(n_test, <span class="number">1</span>)</span><br><span class="line">y_hat = net(x_test, keys, values).detach()</span><br><span class="line">plot_kernel_reg(y_hat)</span><br></pre></td></tr></table></figure>
+<h2 id="3-注意力评分函数">3. 注意力评分函数</h2>
+<p>在上一节中使用了高斯核来对查询和键之间的关系建模。高斯核的指数部分可以视为注意力评分函数（attention scoring function），简称<strong>评分函数</strong>（scoring function），然后把这个函数的输出结果输入到 Softmax 函数中进行运算。通过上述步骤，将得到与键对应的值的概率分布（即注意力权重）。最后，注意力汇聚的输出就是基于这些注意力权重的值的加权和。</p>
+<p>选择不同的注意力评分函数会导致不同的注意力汇聚操作。本节将介绍两个流行的评分函数，稍后将用他们来实现更复杂的注意力机制。</p>
+<p>正如上面提到的，Softmax 操作用于输出一个概率分布作为注意力权重。在某些情况下，并非所有的值都应该被纳入到注意力汇聚中。例如，为了在机器翻译中高效处理小批量数据集，某些文本序列被填充了没有意义的特殊词元。为了仅将有意义的词元作为值来获取注意力汇聚，可以指定一个有效序列长度（即词元的个数），以便在计算 Softmax 时过滤掉超出指定范围的位置。下面的 <code>masked_softmax</code> 函数实现了这样的掩蔽 Softmax 操作（masked softmax operation），其中任何超出有效长度的位置都被掩蔽并置为0。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">masked_softmax</span>(<span class="params">X, valid_lens</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;通过在最后一个轴上掩蔽元素来执行softmax操作&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># X: 3D张量，valid_lens: 1D或2D张量</span></span><br><span class="line">    <span class="keyword">if</span> valid_lens <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> nn.functional.softmax(X, dim=-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        shape = X.shape</span><br><span class="line">        <span class="keyword">if</span> valid_lens.dim() == <span class="number">1</span>:</span><br><span class="line">            valid_lens = torch.repeat_interleave(valid_lens, shape[<span class="number">1</span>])  <span class="comment"># [a, b] -&gt; [a, a, ..., b, b, ...]</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            valid_lens = valid_lens.reshape(-<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 最后一轴上被掩蔽的元素使用一个非常大的负值替换，从而其softmax输出为0</span></span><br><span class="line">        X = d2l.sequence_mask(X.reshape(-<span class="number">1</span>, shape[-<span class="number">1</span>]), valid_lens, value=-<span class="number">1e6</span>)</span><br><span class="line">        <span class="keyword">return</span> nn.functional.softmax(X.reshape(shape), dim=-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>为了演示此函数是如何工作的，考虑由两个2*4矩阵表示的样本，这两个样本的有效长度分别为2和3。经过掩蔽 Softmax 操作，超出有效长度的值都被掩蔽为0：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(masked_softmax(torch.rand(<span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>), torch.tensor([<span class="number">2</span>, <span class="number">3</span>])))</span><br><span class="line"><span class="comment"># tensor([[[0.3292, 0.6708, 0.0000, 0.0000],</span></span><br><span class="line"><span class="comment">#          [0.5249, 0.4751, 0.0000, 0.0000]],</span></span><br><span class="line"><span class="comment">#         [[0.3104, 0.4577, 0.2318, 0.0000],</span></span><br><span class="line"><span class="comment">#          [0.3227, 0.3408, 0.3365, 0.0000]]])</span></span><br></pre></td></tr></table></figure>
+<p>同样，也可以使用二维张量，为矩阵样本中的每一行指定有效长度：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(masked_softmax(torch.rand(<span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>), torch.tensor([[<span class="number">1</span>, <span class="number">3</span>], [<span class="number">2</span>, <span class="number">4</span>]])))</span><br><span class="line"><span class="comment"># tensor([[[1.0000, 0.0000, 0.0000, 0.0000],</span></span><br><span class="line"><span class="comment">#          [0.4203, 0.2752, 0.3045, 0.0000]],</span></span><br><span class="line"><span class="comment">#         [[0.4234, 0.5766, 0.0000, 0.0000],</span></span><br><span class="line"><span class="comment">#          [0.2979, 0.1618, 0.2246, 0.3157]]])</span></span><br></pre></td></tr></table></figure>
+<p>接下来将介绍加性注意力与缩放点积注意力，其理论分析可见：<a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_attention-mechanisms/attention-scoring-functions.html">注意力评分函数</a>。</p>
+<p>一般来说，当查询和键是不同长度的矢量时，可以使用加性注意力作为评分函数。将查询和键连结起来后输入到一个多层感知机（MLP）中，感知机包含一个隐藏层，其隐藏单元数是一个超参数。通过使用 <code>tanh</code> 作为激活函数，并且禁用偏置项：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AdditiveAttention</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;加性注意力&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, key_size, query_size, num_hiddens, dropout, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>(AdditiveAttention, self).__init__(**kwargs)</span><br><span class="line">        self.W_k = nn.Linear(key_size, num_hiddens, bias=<span class="literal">False</span>)</span><br><span class="line">        self.W_q = nn.Linear(query_size, num_hiddens, bias=<span class="literal">False</span>)</span><br><span class="line">        self.w_v = nn.Linear(num_hiddens, <span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.dropout = nn.Dropout(dropout)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, queries, keys, values, valid_lens</span>):</span><br><span class="line">        queries, keys = self.W_q(queries), self.W_k(keys)  <span class="comment"># (2, 1, 8), (2, 10, 8)</span></span><br><span class="line">        <span class="comment"># 维度扩展后使用广播方式进行求和</span></span><br><span class="line">        <span class="comment"># 扩展后的queries.shape: (batch_size, 查询的个数, 1, num_hidden)</span></span><br><span class="line">        <span class="comment"># 扩展后的key.shape: (batch_size, 1, “键-值”对的个数, num_hiddens)</span></span><br><span class="line">        features = queries.unsqueeze(<span class="number">2</span>) + keys.unsqueeze(<span class="number">1</span>)</span><br><span class="line">        features = torch.tanh(features)  <span class="comment"># (2, 1, 10, 8)</span></span><br><span class="line">        <span class="comment"># self.w_v仅有一个输出，因此从形状中移除最后那个大小为1的维度</span></span><br><span class="line">        <span class="comment"># scores.shape: (batch_size, 查询的个数, “键-值”对的个数)</span></span><br><span class="line">        scores = self.w_v(features).squeeze(-<span class="number">1</span>)  <span class="comment"># (2, 1, 10, 1) -&gt; (2, 1, 10)</span></span><br><span class="line">        self.attention_weights = masked_softmax(scores, valid_lens)  <span class="comment"># (2, 1, 10)</span></span><br><span class="line">        <span class="comment"># values.shape: (batch_size, “键-值”对的个数, 值的维度)</span></span><br><span class="line">        <span class="keyword">return</span> torch.bmm(self.dropout(self.attention_weights), values)</span><br><span class="line"></span><br><span class="line">queries, keys = torch.normal(<span class="number">0</span>, <span class="number">1</span>, (<span class="number">2</span>, <span class="number">1</span>, <span class="number">20</span>)), torch.ones((<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment"># values的小批量，两个值矩阵是相同的</span></span><br><span class="line">values = torch.arange(<span class="number">40</span>, dtype=torch.float32).reshape(<span class="number">1</span>, <span class="number">10</span>, <span class="number">4</span>).repeat(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">valid_lens = torch.tensor([<span class="number">2</span>, <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line">attention = AdditiveAttention(key_size=<span class="number">2</span>, query_size=<span class="number">20</span>, num_hiddens=<span class="number">8</span>, dropout=<span class="number">0.1</span>)</span><br><span class="line">attention.<span class="built_in">eval</span>()</span><br><span class="line"><span class="built_in">print</span>(attention(queries, keys, values, valid_lens))</span><br><span class="line"><span class="comment"># tensor([[[ 2.0000,  3.0000,  4.0000,  5.0000]],</span></span><br><span class="line"><span class="comment">#         [[10.0000, 11.0000, 12.0000, 13.0000]]], grad_fn=&lt;BmmBackward0&gt;)</span></span><br></pre></td></tr></table></figure>
+<p>尽管加性注意力包含了可学习的参数，但由于本例子中每个键都是相同的，所以注意力权重是均匀的，由指定的有效长度决定：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show_plotly_heatmaps函数在第一节中定义</span></span><br><span class="line">show_plotly_heatmaps(z=attention.attention_weights.detach().reshape((<span class="number">2</span>, <span class="number">10</span>)), height=<span class="number">300</span>, xtitle=<span class="string">&#x27;Keys&#x27;</span>, ytitle=<span class="string">&#x27;Queries&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>使用点积可以得到计算效率更高的评分函数，但是点积操作要求查询和键具有相同的长度，为了演示 <code>DotProductAttention</code> 类，我们使用与先前加性注意力例子中相同的键、值和有效长度。对于点积操作，我们令查询的特征维度与键的特征维度大小相同：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DotProductAttention</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;缩放点积注意力&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, dropout, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>(DotProductAttention, self).__init__(**kwargs)</span><br><span class="line">        self.dropout = nn.Dropout(dropout)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># queries.shape: (batch_size, 查询的个数, d)</span></span><br><span class="line">    <span class="comment"># keys.shape: (batch_size, “键-值”对的个数, d)</span></span><br><span class="line">    <span class="comment"># values.shape: (batch_size, “键-值”对的个数, 值的维度)</span></span><br><span class="line">    <span class="comment"># valid_lens.shape: (batch_size,)或者(batch_size, 查询的个数)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, queries, keys, values, valid_lens=<span class="literal">None</span></span>):</span><br><span class="line">        d = queries.shape[-<span class="number">1</span>]</span><br><span class="line">        scores = torch.bmm(queries, keys.transpose(<span class="number">1</span>, <span class="number">2</span>)) / math.sqrt(d)</span><br><span class="line">        self.attention_weights = masked_softmax(scores, valid_lens)</span><br><span class="line">        <span class="keyword">return</span> torch.bmm(self.dropout(self.attention_weights), values)</span><br><span class="line"></span><br><span class="line">queries = torch.normal(<span class="number">0</span>, <span class="number">1</span>, (<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">attention = DotProductAttention(dropout=<span class="number">0.5</span>)</span><br><span class="line">attention.<span class="built_in">eval</span>()</span><br><span class="line"><span class="built_in">print</span>(attention(queries, keys, values, valid_lens))</span><br><span class="line"><span class="comment"># tensor([[[ 2.0000,  3.0000,  4.0000,  5.0000]],</span></span><br><span class="line"><span class="comment">#         [[10.0000, 11.0000, 12.0000, 13.0000]]])</span></span><br></pre></td></tr></table></figure>
+<p>与加性注意力演示相同，由于键包含的是相同的元素，而这些元素无法通过任何查询进行区分，因此获得了均匀的注意力权重。</p>
+<h2 id="4-Bahdanau注意力（使用注意力的seq2seq）">4. Bahdanau注意力（使用注意力的seq2seq）</h2>
+<p>Bahdanau 注意力模型的原理可见：<a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_attention-mechanisms/bahdanau-attention.html">Bahdanau 注意力</a>。</p>
+<p>下面看看如何定义 Bahdanau 注意力，实现循环神经网络编码器-解码器。其实，我们只需重新定义解码器即可。为了更方便地显示学习的注意力权重，以下 <code>AttentionDecoder</code> 类定义了带有注意力机制解码器的基本接口：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.path.append(<span class="string">&quot;..&quot;</span>)</span><br><span class="line"><span class="keyword">from</span> util.functions <span class="keyword">import</span> train_seq2seq, predict_seq2seq, bleu, show_plotly_heatmaps</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AttentionDecoder</span>(d2l.Decoder):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;带有注意力机制解码器的基本接口&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>(AttentionDecoder, self).__init__(**kwargs)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">attention_weights</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br></pre></td></tr></table></figure>
+<p>接下来，让我们在接下来的 <code>Seq2SeqAttentionDecoder</code> 类中实现带有 Bahdanau 注意力的循环神经网络解码器。首先，初始化解码器的状态，需要下面的输入：</p>
+<ul>
+<li>编码器在所有时间步的最终层隐状态，将作为注意力的键和值；</li>
+<li>上一时间步的编码器全层隐状态，将作为初始化解码器的隐状态；</li>
+<li>编码器有效长度（排除在注意力池中填充词元）。</li>
+</ul>
+<p>在每个解码时间步骤中，解码器上一个时间步的最终层隐状态将用作查询。因此，注意力输出和输入嵌入都连结为循环神经网络解码器的输入。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Seq2SeqAttentionDecoder</span>(<span class="title class_ inherited__">AttentionDecoder</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, vocab_size, embed_size, num_hiddens, num_layers, dropout=<span class="number">0</span>, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>(Seq2SeqAttentionDecoder, self).__init__(**kwargs)</span><br><span class="line">        self.attention = d2l.AdditiveAttention(num_hiddens, num_hiddens, num_hiddens, dropout)</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embed_size)</span><br><span class="line">        self.rnn = nn.GRU(embed_size + num_hiddens, num_hiddens, num_layers, dropout=dropout)</span><br><span class="line">        self.dense = nn.Linear(num_hiddens, vocab_size)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_state</span>(<span class="params">self, enc_outputs, enc_valid_lens, *args</span>):</span><br><span class="line">        <span class="comment"># outputs.shape: (batch_size, num_steps, num_hiddens)</span></span><br><span class="line">        <span class="comment"># hidden_state.shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        outputs, hidden_state = enc_outputs</span><br><span class="line">        <span class="keyword">return</span> (outputs.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>), hidden_state, enc_valid_lens)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X, state</span>):</span><br><span class="line">        <span class="comment"># enc_outputs.shape: (batch_size, num_steps, num_hiddens)</span></span><br><span class="line">        <span class="comment"># hidden_state.shape: (num_layers, batch_size, num_hiddens)</span></span><br><span class="line">        enc_outputs, hidden_state, enc_valid_lens = state</span><br><span class="line">        X = self.embedding(X).permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)  <span class="comment"># X.shape: (num_steps, batch_size, embed_size)</span></span><br><span class="line">        outputs, self._attention_weights = [], []</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> X:</span><br><span class="line">            <span class="comment"># query.shape: (batch_size, 1, num_hiddens)</span></span><br><span class="line">            query = torch.unsqueeze(hidden_state[-<span class="number">1</span>], dim=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># context.shape: (batch_size, 1, num_hiddens)</span></span><br><span class="line">            context = self.attention(query, enc_outputs, enc_outputs, enc_valid_lens)</span><br><span class="line">            <span class="comment"># 在特征维度上连结</span></span><br><span class="line">            x = torch.cat((context, torch.unsqueeze(x, dim=<span class="number">1</span>)), dim=-<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 将x变形为(1, batch_size, embed_size + num_hiddens)</span></span><br><span class="line">            out, hidden_state = self.rnn(x.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>), hidden_state)</span><br><span class="line">            outputs.append(out)</span><br><span class="line">            self._attention_weights.append(self.attention.attention_weights)</span><br><span class="line">        <span class="comment"># 全连接层变换后，outputs的形状为(num_steps, batch_size, vocab_size)</span></span><br><span class="line">        outputs = self.dense(torch.cat(outputs, dim=<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> outputs.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>), [enc_outputs, hidden_state, enc_valid_lens]</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">attention_weights</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._attention_weights</span><br></pre></td></tr></table></figure>
+<p>接下来，使用包含7个时间步的4个序列输入的小批量测试 Bahdanau 注意力解码器：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">encoder = d2l.Seq2SeqEncoder(vocab_size=<span class="number">10</span>, embed_size=<span class="number">8</span>, num_hiddens=<span class="number">16</span>, num_layers=<span class="number">2</span>)</span><br><span class="line">encoder.<span class="built_in">eval</span>()</span><br><span class="line">decoder = Seq2SeqAttentionDecoder(vocab_size=<span class="number">10</span>, embed_size=<span class="number">8</span>, num_hiddens=<span class="number">16</span>, num_layers=<span class="number">2</span>)</span><br><span class="line">decoder.<span class="built_in">eval</span>()</span><br><span class="line">X = torch.zeros((<span class="number">4</span>, <span class="number">7</span>), dtype=torch.long)  <span class="comment"># (batch_size, num_steps)</span></span><br><span class="line">state = decoder.init_state(encoder(X), <span class="literal">None</span>)</span><br><span class="line">output, state = decoder(X, state)</span><br><span class="line"><span class="built_in">print</span>(output.shape, <span class="built_in">len</span>(state), state[<span class="number">0</span>].shape, <span class="built_in">len</span>(state[<span class="number">1</span>]), state[<span class="number">1</span>][<span class="number">0</span>].shape)</span><br><span class="line"><span class="comment"># torch.Size([4, 7, 10]) 3 torch.Size([4, 7, 16]) 2 torch.Size([4, 16])</span></span><br></pre></td></tr></table></figure>
+<p>我们在这里指定超参数，实例化一个带有 Bahdanau 注意力的编码器和解码器，并对这个模型进行机器翻译训练：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">embed_size, num_hiddens, num_layers, dropout = <span class="number">32</span>, <span class="number">32</span>, <span class="number">2</span>, <span class="number">0.1</span></span><br><span class="line">batch_size, num_steps, lr, num_epochs = <span class="number">64</span>, <span class="number">10</span>, <span class="number">0.005</span>, <span class="number">300</span></span><br><span class="line">device = torch.device(<span class="string">&#x27;cuda&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"></span><br><span class="line">train_iter, src_vocab, tgt_vocab = d2l.load_data_nmt(batch_size, num_steps)</span><br><span class="line">encoder = d2l.Seq2SeqEncoder(<span class="built_in">len</span>(src_vocab), embed_size, num_hiddens, num_layers, dropout)</span><br><span class="line">decoder = Seq2SeqAttentionDecoder(<span class="built_in">len</span>(tgt_vocab), embed_size, num_hiddens, num_layers, dropout)</span><br><span class="line">net = d2l.EncoderDecoder(encoder, decoder)</span><br><span class="line">train_seq2seq(net, train_iter, lr, num_epochs, tgt_vocab, device, <span class="string">&#x27;../logs/Bahdanau_seq2seq_train_log&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>模型训练后，我们用它将几个英语句子翻译成法语并计算它们的 BLEU 分数：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">engs = [<span class="string">&#x27;go .&#x27;</span>, <span class="string">&quot;i lost .&quot;</span>, <span class="string">&#x27;he\&#x27;s calm .&#x27;</span>, <span class="string">&#x27;i\&#x27;m home .&#x27;</span>]</span><br><span class="line">fras = [<span class="string">&#x27;va !&#x27;</span>, <span class="string">&#x27;j\&#x27;ai perdu .&#x27;</span>, <span class="string">&#x27;il est calme .&#x27;</span>, <span class="string">&#x27;je suis chez moi .&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> eng, fra <span class="keyword">in</span> <span class="built_in">zip</span>(engs, fras):</span><br><span class="line">    translation, dec_attention_weight_seq = predict_seq2seq(net, eng, src_vocab, tgt_vocab, num_steps, device, <span class="literal">True</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;eng&#125;</span> =&gt; <span class="subst">&#123;translation&#125;</span>, bleu <span class="subst">&#123;bleu(translation, fra, k=<span class="number">2</span>):<span class="number">.3</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>训练结束后，下面通过可视化注意力权重会发现每个查询都会在键值对上分配不同的权重，这说明在每个解码步中，输入序列的不同部分被选择性地聚集在注意力池中：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">attention_weights = torch.cat([step[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] <span class="keyword">for</span> step <span class="keyword">in</span> dec_attention_weight_seq], <span class="number">0</span>).reshape((-<span class="number">1</span>, num_steps))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加上一个包含序列结束词元</span></span><br><span class="line">show_plotly_heatmaps(z=attention_weights[:, :<span class="built_in">len</span>(engs[-<span class="number">1</span>].split()) + <span class="number">1</span>].cpu().detach(), xtitle=<span class="string">&#x27;Keys&#x27;</span>, ytitle=<span class="string">&#x27;Queries&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="5-多头注意力">5. 多头注意力</h2>
+<p>在实践中，当给定相同的查询、键和值的集合时，我们希望模型可以基于相同的注意力机制学习到不同的行为，然后将不同的行为作为知识组合起来，捕获序列内各种范围的依赖关系（例如，短距离依赖和长距离依赖关系）。因此，允许注意力机制组合使用查询、键和值的不同<strong>子空间表示</strong>（representation subspaces）可能是有益的。</p>
+<p>为此，与其只使用单独一个注意力汇聚，我们可以用独立学习得到的 <code>h</code> 组不同的<strong>线性投影</strong>（linear projections）来变换查询、键和值。然后，这 <code>h</code> 组变换后的查询、键和值将并行地送到注意力汇聚中。最后，将这 <code>h</code> 个注意力汇聚的输出拼接在一起，并且通过另一个可以学习的线性投影进行变换，以产生最终输出。这种设计被称为<strong>多头注意力</strong>（multihead attention）。对于 <code>h</code> 个注意力汇聚输出，每一个注意力汇聚都被称作一个<strong>头</strong>（head）。基于这种设计，每个头都可能会关注输入的不同部分，可以表示比简单加权平均值更复杂的函数。</p>
+<p>多头注意力模型的原理可见：<a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_attention-mechanisms/multihead-attention.html">多头注意力</a>。</p>
+<p>在实现过程中通常选择缩放点积注意力作为每一个注意力头：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MultiHeadAttention</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;多头注意力&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, key_size, query_size, value_size, num_hiddens, num_heads, dropout, bias=<span class="literal">False</span>, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>(MultiHeadAttention, self).__init__(**kwargs)</span><br><span class="line">        self.num_heads = num_heads</span><br><span class="line">        self.attention = d2l.DotProductAttention(dropout)</span><br><span class="line">        self.W_q = nn.Linear(query_size, num_hiddens, bias=bias)</span><br><span class="line">        self.W_k = nn.Linear(key_size, num_hiddens, bias=bias)</span><br><span class="line">        self.W_v = nn.Linear(value_size, num_hiddens, bias=bias)</span><br><span class="line">        self.W_o = nn.Linear(num_hiddens, num_hiddens, bias=bias)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, queries, keys, values, valid_lens</span>):</span><br><span class="line">        <span class="comment"># queries/keys/values的形状: (batch_size, 查询或者“键-值”对的个数, query_size/key_size/value_size)</span></span><br><span class="line">        <span class="comment"># valid_lens的形状: (batch_size,)或(batch_size, 查询的个数)</span></span><br><span class="line">        <span class="comment"># 经过变换后，输出的queries/keys/values的形状: (batch_size * num_heads, 查询或者“键-值”对的个数, num_hiddens / num_heads)</span></span><br><span class="line">        queries = transpose_qkv(self.W_q(queries), self.num_heads)</span><br><span class="line">        keys = transpose_qkv(self.W_k(keys), self.num_heads)</span><br><span class="line">        values = transpose_qkv(self.W_v(values), self.num_heads)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> valid_lens <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># 在轴0，将每一项（标量或者矢量）复制num_heads次</span></span><br><span class="line">            valid_lens = torch.repeat_interleave(valid_lens, repeats=self.num_heads, dim=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># output的形状: (batch_size * num_heads, 查询的个数, num_hiddens / num_heads)</span></span><br><span class="line">        output = self.attention(queries, keys, values, valid_lens)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># output_concat的形状: (batch_size, 查询的个数, num_hiddens)</span></span><br><span class="line">        output_concat = transpose_output(output, self.num_heads)</span><br><span class="line">        <span class="keyword">return</span> self.W_o(output_concat)</span><br></pre></td></tr></table></figure>
+<p>为了能够使多个头并行计算，上面的 <code>MultiHeadAttention</code> 类将使用下面定义的两个转置函数。具体来说，<code>transpose_output</code> 函数反转了 <code>transpose_qkv</code> 函数的操作：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">transpose_qkv</span>(<span class="params">X, num_heads</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;为了多注意力头的并行计算而变换形状&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 输入X的形状: (batch_size, 查询或者“键-值”对的个数, num_hiddens)</span></span><br><span class="line">    X = X.reshape(X.shape[<span class="number">0</span>], X.shape[<span class="number">1</span>], num_heads, -<span class="number">1</span>)  <span class="comment"># (batch_size, 查询或者“键-值”对的个数, num_heads, num_hiddens/num_heads)</span></span><br><span class="line">    X = X.permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>)  <span class="comment"># (batch_size, num_heads, 查询或者“键-值”对的个数, num_hiddens/num_heads)</span></span><br><span class="line">    <span class="keyword">return</span> X.reshape(-<span class="number">1</span>, X.shape[<span class="number">2</span>], X.shape[<span class="number">3</span>])  <span class="comment"># (batch_size*num_heads, 查询或者“键-值”对的个数, num_hiddens/num_heads)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transpose_output</span>(<span class="params">X, num_heads</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;逆转transpose_qkv函数的操作&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 输入X的形状: (batch_size*num_heads, 查询或者“键-值”对的个数, num_hiddens/num_heads)</span></span><br><span class="line">    X = X.reshape(-<span class="number">1</span>, num_heads, X.shape[<span class="number">1</span>], X.shape[<span class="number">2</span>])  <span class="comment"># (batch_size, num_heads, 查询或者“键-值”对的个数, num_hiddens/num_heads)</span></span><br><span class="line">    X = X.permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>)  <span class="comment"># (batch_size, 查询或者“键-值”对的个数, num_heads, num_hiddens/num_heads)</span></span><br><span class="line">    <span class="keyword">return</span> X.reshape(X.shape[<span class="number">0</span>], X.shape[<span class="number">1</span>], -<span class="number">1</span>)  <span class="comment"># (batch_size, 查询或者“键-值”对的个数, num_hiddens)</span></span><br></pre></td></tr></table></figure>
+<p>下面使用键和值相同的小例子来测试我们编写的 <code>MultiHeadAttention</code> 类。多头注意力输出的形状是 <code>(batch_size, num_queries, num_hiddens)</code>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num_hiddens, num_heads = <span class="number">100</span>, <span class="number">5</span></span><br><span class="line">attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, <span class="number">0.5</span>)</span><br><span class="line">attention.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line">batch_size, num_queries = <span class="number">2</span>, <span class="number">4</span></span><br><span class="line">num_kvpairs, valid_lens = <span class="number">6</span>, torch.tensor([<span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">X = torch.ones((batch_size, num_queries, num_hiddens))</span><br><span class="line">Y = torch.ones((batch_size, num_kvpairs, num_hiddens))</span><br><span class="line"><span class="built_in">print</span>(attention(X, Y, Y, valid_lens).shape)  <span class="comment"># torch.Size([2, 4, 100])</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-自注意力和位置编码">6. 自注意力和位置编码</h2>
+<p>在深度学习中，经常使用卷积神经网络（CNN）或循环神经网络（RNN）对序列进行编码。想象一下，有了注意力机制之后，我们将词元序列输入注意力池化中，以便同一组词元同时充当查询、键和值。具体来说，每个查询都会关注所有的键-值对并生成一个注意力输出。当查询、键和值来自同一组输入时被称为<strong>自注意力</strong>（self-attention），也被称为<strong>内部注意力</strong>（intra-attention）。本节将使用自注意力进行序列编码，以及如何使用序列的顺序作为补充信息。</p>
+<p>自注意力模型的原理可见：<a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_attention-mechanisms/self-attention-and-positional-encoding.html">自注意力和位置编码</a>。</p>
+<p>下面的代码片段是基于多头注意力对一个张量完成自注意力的计算，张量的形状为 <code>(批量大小, 时间步的数目或词元序列的长度, h)</code>，输出与输入的张量形状相同：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">num_hiddens, num_heads = <span class="number">100</span>, <span class="number">5</span></span><br><span class="line">attention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, <span class="number">0.5</span>)</span><br><span class="line">attention.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line">batch_size, num_queries, valid_lens = <span class="number">2</span>, <span class="number">4</span>, torch.tensor([<span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">X = torch.ones((batch_size, num_queries, num_hiddens))</span><br><span class="line"><span class="built_in">print</span>(attention(X, X, X, valid_lens).shape)  <span class="comment"># torch.Size([2, 4, 100])</span></span><br></pre></td></tr></table></figure>
+<p>在处理词元序列时，循环神经网络是逐个的重复地处理词元的，而自注意力则因为并行计算而放弃了顺序操作。为了使用序列的顺序信息，通过在输入表示中添加<strong>位置编码</strong>（positional encoding）来注入绝对的或相对的位置信息。位置编码可以通过学习得到也可以直接固定得到。接下来描述的是基于正弦函数和余弦函数的固定位置编码。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PositionalEncoding</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;位置编码&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_hiddens, dropout, max_len=<span class="number">1000</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(PositionalEncoding, self).__init__()</span><br><span class="line">        self.dropout = nn.Dropout(dropout)</span><br><span class="line">        <span class="comment"># 创建一个足够长的P</span></span><br><span class="line">        self.P = torch.zeros((<span class="number">1</span>, max_len, num_hiddens))</span><br><span class="line">        X = torch.arange(max_len, dtype=torch.float32).reshape(-<span class="number">1</span>, <span class="number">1</span>) /\</span><br><span class="line">            torch.<span class="built_in">pow</span>(<span class="number">10000</span>, torch.arange(<span class="number">0</span>, num_hiddens, <span class="number">2</span>, dtype=torch.float32) / num_hiddens)</span><br><span class="line">        self.P[:, :, <span class="number">0</span>::<span class="number">2</span>] = torch.sin(X)</span><br><span class="line">        self.P[:, :, <span class="number">1</span>::<span class="number">2</span>] = torch.cos(X)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X</span>):</span><br><span class="line">        X = X + self.P[:, :X.shape[<span class="number">1</span>], :].to(X.device)</span><br><span class="line">        <span class="keyword">return</span> self.dropout(X)</span><br></pre></td></tr></table></figure>
+<p>在位置嵌入矩阵 <code>P</code> 中，行代表词元在序列中的位置，列代表位置编码的不同维度。从下面的例子中可以看到位置嵌入矩阵的第6列和第7列的频率高于第8列和第9列。第6列和第7列之间的偏移量（第8列和第9列相同）是由于正弦函数和余弦函数的交替：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">encoding_dim, num_steps = <span class="number">32</span>, <span class="number">60</span></span><br><span class="line">pos_encoding = PositionalEncoding(encoding_dim, <span class="number">0</span>)</span><br><span class="line">pos_encoding.<span class="built_in">eval</span>()</span><br><span class="line">X = pos_encoding(torch.zeros((<span class="number">1</span>, num_steps, encoding_dim)))</span><br><span class="line">P = pos_encoding.P[:, :X.shape[<span class="number">1</span>], :]</span><br><span class="line">d2l.plot(torch.arange(num_steps), P[<span class="number">0</span>, :, <span class="number">6</span>:<span class="number">10</span>].T, xlabel=<span class="string">&#x27;Row (position)&#x27;</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>),</span><br><span class="line">         legend=[<span class="string">&quot;Col %d&quot;</span> % d <span class="keyword">for</span> d <span class="keyword">in</span> torch.arange(<span class="number">6</span>, <span class="number">10</span>)])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>通过绘制热力图可以看到，位置编码通过使用三角函数在编码维度上降低频率：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">P = P[<span class="number">0</span>, :, :]</span><br><span class="line">show_plotly_heatmaps(z=P, xtitle=<span class="string">&#x27;Column (encoding dimension)&#x27;</span>, ytitle=<span class="string">&#x27;Row (position)&#x27;</span>, colorscale=<span class="string">&#x27;Blues&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/39408.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/39408.html";
+            const title         = "「动手学深度学习笔记(李沐)-注意力机制」";
+            const excerpt       = `李沐动手学深度学习（PyTorch）课程学习笔记第十章：注意力机制。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-05-28T09:44:23.136Z" itemprop="dateModified">Last edited: 2023-05-28</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 动手学深度学习笔记(李沐)-现代循环神经网络" href="/posts/7592.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Python绘图模块Plotly教程" href="/posts/31783.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                38
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%8F%90%E7%A4%BA"><span class="toc-text">1. 注意力提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B1%87%E8%81%9A%EF%BC%9ANadaraya-Watson%E6%A0%B8%E5%9B%9E%E5%BD%92"><span class="toc-text">2. 注意力汇聚：Nadaraya-Watson核回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%AF%84%E5%88%86%E5%87%BD%E6%95%B0"><span class="toc-text">3. 注意力评分函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Bahdanau%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84seq2seq%EF%BC%89"><span class="toc-text">4. Bahdanau注意力（使用注意力的seq2seq）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">5. 多头注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-text">6. 自注意力和位置编码</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/31783.html"><i class="fa  fa-book"></i> Python绘图模块Plotly教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39408.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-注意力机制</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/7592.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-现代循环神经网络</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

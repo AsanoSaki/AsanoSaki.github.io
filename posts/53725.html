@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Linux学习笔记-命令、Tmux与Vim | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Linux" />
+  
+  <meta name="description" content="Linux学习笔记-命令、Tmux与Vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习笔记-命令、Tmux与Vim">
+<meta property="og:url" content="https://asanosaki.github.io/posts/53725.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Linux学习笔记-命令、Tmux与Vim">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2022-03-15T10:06:00.000Z">
+<meta property="article:modified_time" content="2023-06-11T07:42:16.046Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/53725.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Linux学习笔记-命令、Tmux与Vim</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-03-15T10:06:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-03-15</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~6.10K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1686469336046"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 常用文件管理命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 其它常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tmux%E4%B8%8EVim"><span class="toc-number">2.</span> <span class="toc-text">2. Tmux与Vim</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Tmux"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Tmux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Vim"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Vim</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文记录 Linux 的学习过程，内容为 Linux 常用文件管理命令、Tmux、Vim。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-常用命令">1. 常用命令</h2>
+<p>Linux 中描述路径有两种方式（假设当前用户的目录为 <code>AsanoSaki</code>）：</p>
+<ol>
+<li>绝对路径：从根目录（即 <code>/</code>）开始描述，例如：<code>/home/AsanoSaki/main.cpp</code>。</li>
+<li>相对路径：从当前的路径开始描述，例如：<code>AsanoSaki/main.cpp</code>（当前在 <code>home</code> 中）。</li>
+</ol>
+<p>绝对路径的开头一定是 <code>/</code>，相对路径开头一定不是 <code>/</code>。</p>
+<ul>
+<li><code>.</code> 表示当前目录，<code>..</code> 表示上一目录，假如当前在 <code>AsanoSaki</code> 目录下，则路径 <code>../AsanoSaki/./../AsanoSaki</code> 表示同一路径。</li>
+<li><code>~/</code> 表示家目录，等价于 <code>/home/AsanoSaki</code>。</li>
+</ul>
+<h3 id="1-1-常用文件管理命令">1.1 常用文件管理命令</h3>
+<ul>
+<li><code>ctrl+c</code>：取消命令，并且换行。如当前有一个程序正在运行且一直无法停止，则可以使用该操作将当前正在运行的程序中止。另一个作用是中断当前正在输入的这一行，直接跳到下一行重新输入。</li>
+<li><code>ctrl+u</code>：清空本行命令。</li>
+<li><code>tab</code>：可以补全命令和文件名，如果补全不了快速按两下 <code>tab</code> 键，可以显示备选选项。</li>
+<li><code>ls</code>：列出当前目录下所有文件，蓝色的是文件夹，白色的是普通文件，绿色的是可执行文件。</li>
+<li><code>pwd</code>：显示当前路径。</li>
+<li><code>cd XXX</code>：进入 <code>XXX</code> 目录下，<code>cd ..</code> 表示返回上层目录，<code>cd -</code> 表示返回上一个待过的目录。<code>cd</code> 后面既可以用相对路径也可以用绝对路径，不加目录则默认返回家目录。</li>
+<li><code>cp XXX YYY</code>：将 <code>XXX</code> 文件复制成 <code>YYY</code>，<code>XXX</code> 和 <code>YYY</code> 可以是一个路径，比如将目录 <code>a</code> 中的文件 <code>tmp.txt</code> 复制到目录 <code>b</code> 中：<code>cp a/tmp.txt b</code>。如果想顺带将复制后的文件重命名则可以写成：<code>cp a/tmp.txt b/tmp2.txt</code>。如果想把目录 <code>a</code> 整个复制到目录 <code>b</code> 下则可以写：<code>cp a b -r</code>。</li>
+<li><code>mkdir XXX</code>：创建目录 <code>XXX</code>。如在当前目录下创建文件夹 <code>a</code>：<code>mkdir a</code>。使用绝对路径在目录 <code>a</code> 下创建文件夹 <code>b</code>：<code>mkdir /home/AsanoSaki/a/b</code>。直接创建 <code>a</code> 里有 <code>b</code>，<code>b</code> 里有 <code>c</code> 的目录：<code>mkdir a/b/c -p</code>。</li>
+<li><code>rm XXX</code>：删除普通文件。<code>rm XXX -r</code>：删除文件夹。删除多个文件：<code>rm tmp1.txt tmp2.txt</code>。删除当前目录下的所有 <code>txt</code> 文件：<code>rm *.txt</code>。删除 <code>a</code> 中的所有文件：<code>rm a/*</code>。</li>
+<li><code>mv XXX YYY</code>：将 <code>XXX</code> 文件移动（剪切）到 <code>YYY</code>，和 <code>cp</code> 命令一样，<code>XXX</code> 和 <code>YYY</code> 可以是一个路径，重命名也是用这个命令。</li>
+<li><code>touch XXX</code>：创建一个文件。</li>
+<li><code>cat XXX</code>：展示文件 <code>XXX</code> 中的内容。</li>
+</ul>
+<h3 id="1-2-其它常用命令">1.2 其它常用命令</h3>
+<p>（1）系统状况</p>
+<ul>
+<li><code>top</code>：查看所有进程的信息（Linux 的任务管理器）。
+<ul>
+<li>打开后，输入 <code>M</code>：按使用内存排序。</li>
+<li>打开后，输入 <code>P</code>：按使用 CPU 排序。</li>
+<li>打开后，输入 <code>q</code>：退出。</li>
+</ul>
+</li>
+<li><code>df -h</code>：查看硬盘使用情况。</li>
+<li><code>free -h</code>：查看内存使用情况。</li>
+<li><code>du -sh</code>：查看当前目录占用的硬盘空间。</li>
+<li><code>ps aux</code>：查看所有进程。</li>
+<li><code>kill -9 pid</code>：杀死编号为 <code>pid</code> 的进程。
+<ul>
+<li>传递某个具体的信号：<code>kill -s SIGTERM pid</code>。</li>
+</ul>
+</li>
+<li><code>netstat -nt</code>：查看所有网络连接。</li>
+<li><code>w</code>：列出当前登陆的用户。</li>
+<li><code>ping www.baidu.com</code>：检查是否连网。</li>
+</ul>
+<p>（2）文件权限</p>
+<ul>
+<li><code>chmod</code>：修改文件权限
+<ul>
+<li><code>chmod +x xxx</code>：给 <code>xxx</code> 添加可执行权限。</li>
+<li><code>chmod -x xxx</code>：去掉 <code>xxx</code> 的可执行权限。</li>
+<li><code>chmod 777 xxx</code>：将 <code>xxx</code> 的权限改成 <code>777</code>（三个数字按顺序分别表示 <code>Owner</code>、<code>Group</code>、<code>Other Users</code>，每个数字的二进制例如7的二进制为111，表示具有 <code>rwx</code> 权限，某一位为0表示没有该权限）。</li>
+<li><code>chmod 777 xxx -R</code>：递归修改整个文件夹的权限。</li>
+</ul>
+</li>
+</ul>
+<p>（3）文件检索</p>
+<ul>
+<li><code>find /path/to/directory/ -name '*.py'</code>：搜索某个文件路径下的所有 <code>*.py</code> 文件。</li>
+<li><code>grep xxx</code>：从 <code>stdin</code> 中读入若干行数据，如果某行中包含 <code>xxx</code>，则输出该行；否则忽略该行。</li>
+<li><code>wc</code>：统计行数、单词数、字节数。
+<ul>
+<li>既可以从 <code>stdin</code> 中直接读入内容；也可以在命令行参数中传入文件名列表。</li>
+<li><code>wc -l</code>：统计行数。</li>
+<li><code>wc -w</code>：统计单词数。</li>
+<li><code>wc -c</code>：统计字节数。</li>
+</ul>
+</li>
+<li><code>tree</code>：展示当前目录的文件结构。
+<ul>
+<li><code>tree /path/to/directory/</code>：展示某个目录的文件结构。</li>
+<li><code>tree -a</code>：展示隐藏文件。</li>
+</ul>
+</li>
+<li><code>ag xxx</code>：搜索当前目录下的所有文件，检索 <code>xxx</code> 字符串。</li>
+<li><code>cut</code>：分割一行内容。
+<ul>
+<li>从 <code>stdin</code> 中读入多行数据。</li>
+<li><code>echo $PATH | cut -d ':' -f 3,5</code>：输出 <code>PATH</code> 用 <code>:</code> 分割后第3、5列数据。</li>
+<li><code>echo $PATH | cut -d ':' -f 3-5</code>：输出 <code>PATH</code> 用 <code>:</code> 分割后第3-5列数据。</li>
+<li><code>echo $PATH | cut -c 3,5</code>：输出 <code>PATH</code> 的第3、5个字符。</li>
+<li><code>echo $PATH | cut -c 3-5</code>：输出 <code>PATH</code> 的第3-5个字符。</li>
+</ul>
+</li>
+<li><code>sort</code>：将每行内容按字典序排序。
+<ul>
+<li>可以从 <code>stdin</code> 中读取多行数据。</li>
+<li>可以从命令行参数中读取文件名列表。</li>
+</ul>
+</li>
+<li><code>xargs</code>：将 <code>stdin</code> 中的数据用空格或回车分割成命令行参数。
+<ul>
+<li><code>find . -name '*.py' | xargs cat | wc -l</code>：统计当前目录下所有 Python 文件的总行数</li>
+</ul>
+</li>
+</ul>
+<p>（4）查看文件内容</p>
+<ul>
+<li><code>more</code>：浏览文件内容。
+<ul>
+<li>回车：下一行。</li>
+<li>空格：下一页。</li>
+<li><code>b</code>：上一页。</li>
+<li><code>q</code>：退出。</li>
+</ul>
+</li>
+<li><code>less</code>：与 <code>more</code> 类似，功能更全。
+<ul>
+<li>回车：下一行。</li>
+<li><code>y</code>：上一行。</li>
+<li><code>Page Down</code>：下一页。</li>
+<li><code>Page Up</code>：上一页。</li>
+<li><code>q</code>：退出。</li>
+</ul>
+</li>
+<li><code>head -3 xxx</code>：展示 <code>xxx</code> 的前3行内容。
+<ul>
+<li>同时支持从 <code>stdin</code> 读入内容。</li>
+</ul>
+</li>
+<li><code>tail -3 xxx</code>：展示 <code>xxx</code> 末尾3行内容。
+<ul>
+<li>同时支持从 <code>stdin</code> 读入内容。</li>
+</ul>
+</li>
+</ul>
+<p>（5）用户相关</p>
+<ul>
+<li><code>history</code>：展示当前用户的历史操作。内容存放在 <code>~/.bash_history</code> 中。</li>
+</ul>
+<p>（6）工具</p>
+<ul>
+<li><code>md5sum</code>：计算 <code>md5</code> 哈希值。
+<ul>
+<li>可以从 <code>stdin</code> 读入内容。</li>
+<li>也可以在命令行参数中传入文件名列表。</li>
+</ul>
+</li>
+<li><code>time command</code>：统计 <code>command</code> 命令的执行时间。</li>
+<li><code>ipython3</code>：交互式 Python3 环境。可以当做计算器，或者批量管理文件。
+<ul>
+<li><code>! echo &quot;Hello World&quot;</code>：<code>!</code> 表示执行 <code>shell</code> 脚本。</li>
+</ul>
+</li>
+<li><code>watch -n 0.1 command</code>：每0.1秒执行一次 <code>command</code> 命令。</li>
+<li><code>tar</code>：压缩文件。
+<ul>
+<li><code>tar -zcvf xxx.tar.gz /path/to/file/*</code>：压缩。</li>
+<li><code>tar -zxvf xxx.tar.gz</code>：解压缩。</li>
+</ul>
+</li>
+<li><code>diff xxx yyy</code>：查找文件 <code>xxx</code> 与 <code>yyy</code> 的不同点。</li>
+</ul>
+<p>（7）安装软件</p>
+<ul>
+<li><code>sudo command</code>：以 <code>root</code> 身份执行 <code>command</code> 命令。</li>
+<li><code>apt-get install xxx</code>：安装软件。</li>
+<li><code>pip install xxx --user --upgrade</code>：安装 Python 包。</li>
+</ul>
+<h2 id="2-Tmux与Vim">2. Tmux与Vim</h2>
+<h3 id="2-1-Tmux">2.1 Tmux</h3>
+<p>（1）功能</p>
+<ul>
+<li>分屏。</li>
+<li>允许断开 Terminal 连接后，继续运行进程。</li>
+</ul>
+<p>（2）结构</p>
+<p>一个 Tmux 可以包含多个 <code>session</code>，一个 <code>session</code> 可以包含多个 <code>window</code>，一个 <code>window</code> 可以包含多个 <code>pane</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">实例：</span><br><span class="line">    tmux:</span><br><span class="line">        session 0:</span><br><span class="line">            window 0:</span><br><span class="line">                pane 0</span><br><span class="line">                pane 1</span><br><span class="line">                pane 2</span><br><span class="line">                ...</span><br><span class="line">            window 1</span><br><span class="line">            window 2</span><br><span class="line">            ...</span><br><span class="line">        session 1</span><br><span class="line">        session 2</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p>（3）常用操作</p>
+<ul>
+<li><code>tmux [-u]</code>：新建一个 <code>session</code>，其中包含一个 <code>window</code>，<code>window</code> 中包含一个 <code>pane</code>，<code>pane</code> 里打开了一个 shell 对话框，<code>-u</code> 参数可以在 Tmux 中显示中文内容。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>%</code>：将当前 <code>pane</code> 左右平分成两个 <code>pane</code>。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>&quot;</code>（注意是双引号）：将当前 <code>pane</code> 上下平分成两个 <code>pane</code>。</li>
+<li><code>Ctrl + d</code>：关闭当前 <code>pane</code>；如果当前 <code>window</code> 的所有 <code>pane</code> 均已关闭，则自动关闭 <code>window</code>；如果当前 <code>session</code> 的所有 <code>window</code> 均已关闭，则自动关闭 <code>session</code>。</li>
+<li>鼠标点击可以选则 <code>pane</code>。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按方向键：选择相邻的 <code>pane</code>。</li>
+<li>鼠标拖动 <code>pane</code> 之间的分割线，可以调整分割线的位置。</li>
+<li>按住 <code>Ctrl + a</code> 的同时按方向键，可以调整 <code>pane</code> 之间分割线的位置。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>z</code>：将当前 <code>pane</code> 全屏/取消全屏。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>d</code>：挂起当前 <code>session</code>。</li>
+<li><code>tmux a</code>：打开之前挂起的 <code>session</code>。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>s</code>：选择其它 <code>session</code>：
+<ul>
+<li>方向键上：选择上一项；</li>
+<li>方向键下：选择下一项；</li>
+<li>方向键右：展开当前项；</li>
+<li>方向键左：闭合当前项。</li>
+</ul>
+</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>c</code>：在当前 <code>session</code> 中创建一个新的 <code>window</code>。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>w</code>：选择其他 <code>window</code>，操作方法与选择 <code>session</code> 完全相同。</li>
+<li>按下 <code>Ctrl + a</code> 后手指松开，然后按 <code>PageUp/PageDown</code>：翻阅当前 <code>pane</code> 内的内容。注意第一次唤醒该操作时只能按 <code>PageUp</code>。</li>
+<li>鼠标滚轮：翻阅当前 <code>pane</code> 内的内容。</li>
+<li>在 <code>tmux</code> 中选中文本时，需要按住 <code>shift</code> 键。（仅支持 Windows 和 Linux，不支持 Mac，不过该操作并不是必须的，因此影响不大）</li>
+<li><code>tmux</code> 中复制/粘贴文本的通用方式：
+<ol>
+<li>按下 <code>Ctrl + a</code> 后松开手指，然后按 <code>[</code>。</li>
+<li>用鼠标选中文本，被选中的文本会被自动复制到 <code>tmux</code> 的剪贴板。</li>
+<li>按下 <code>Ctrl + a</code> 后松开手指，然后按 <code>]</code>，会将剪贴板中的内容粘贴到光标处。</li>
+</ol>
+</li>
+</ul>
+<p>注意：Tmux 的配置文件为 <code>~/.tmux.conf</code>，默认 Tmux 前缀快捷键是 <code>Ctrl + b</code>！本文是已经修改过了配置文件后的操作说明，不过基本上操作逻辑都是一样的。</p>
+<h3 id="2-2-Vim">2.2 Vim</h3>
+<p>（1）功能</p>
+<ul>
+<li>命令行模式下的文本编辑器。</li>
+<li>根据文件扩展名自动判别编程语言。支持代码缩进、代码高亮等功能。</li>
+<li>使用方式：<code>vim &lt;filename&gt;</code>。
+<ul>
+<li>如果已有该文件，则打开它。</li>
+<li>如果没有该文件，则打开个一个新的文件，并命名为 <code>filename</code>。</li>
+</ul>
+</li>
+</ul>
+<p>（2）模式</p>
+<ul>
+<li>一般命令模式
+<ul>
+<li>默认模式。命令输入方式：类似于打游戏放技能，按不同字符，即可进行不同操作。可以复制、粘贴、删除文本等。</li>
+</ul>
+</li>
+<li>编辑模式
+<ul>
+<li>在一般命令模式里按下 <code>i</code>，会进入编辑模式。</li>
+<li>按下 <code>ESC</code> 会退出编辑模式，返回到一般命令模式。</li>
+</ul>
+</li>
+<li>命令行模式
+<ul>
+<li>在一般命令模式里按下 <code>:/?</code> 三个字符中的任意一个，会进入命令行模式。命令行在最下面。</li>
+<li>可以查找、替换、保存、退出、配置编辑器等。</li>
+</ul>
+</li>
+</ul>
+<p>（3）操作</p>
+<ul>
+<li><code>i</code>：进入编辑模式。</li>
+<li><code>ESC</code>：进入一般命令模式。</li>
+<li><code>h</code> 或左方向键：光标向左移动一个字符。</li>
+<li><code>j</code> 或下方向键：光标向下移动一个字符。</li>
+<li><code>k</code> 或上方向键：光标向上移动一个字符。</li>
+<li><code>l</code> 或右方向键：光标向右移动一个字符。</li>
+<li><code>n&lt;Space&gt;</code>：<code>n</code> 表示数字，按下数字后再按空格，光标会向右移动 <code>n</code> 个字符。</li>
+<li><code>0</code> 或 <code>Home</code>：光标移动到本行开头。</li>
+<li><code>$</code> 或 <code>End</code>：光标移动到本行末尾。</li>
+<li><code>G</code>：光标移动到最后一行。</li>
+<li><code>:n</code> 或 <code>nG</code>：<code>n</code> 为数字，光标移动到第 <code>n</code> 行。</li>
+<li><code>gg</code>：光标移动到第一行，相当于 <code>1G</code>。</li>
+<li><code>n&lt;Enter&gt;</code>：<code>n</code> 为数字，光标向下移动 <code>n</code> 行。</li>
+<li><code>/word</code>：向光标之下寻找第一个值为 <code>word</code> 的字符串。</li>
+<li><code>?word</code>：向光标之上寻找第一个值为 <code>word</code> 的字符串。</li>
+<li><code>n</code>：重复前一个查找操作。</li>
+<li><code>N</code>：反向重复前一个查找操作。</li>
+<li><code>:n1,n2s/word1/word2/g</code>：<code>n1</code> 与 <code>n2</code> 为数字，在第 <code>n1</code> 行与 <code>n2</code> 行之间寻找 <code>word1</code> 这个字符串，并将该字符串替换为 <code>word2</code>。</li>
+<li><code>:1,$s/word1/word2/g</code>：将全文的 <code>word1</code> 替换为 <code>word2</code>。</li>
+<li><code>:1,$s/word1/word2/gc</code>：将全文的 <code>word1</code> 替换为 <code>word2</code>，且在替换前要求用户确认。</li>
+<li><code>v</code>：选中文本，连续按两次 <code>ESC</code> 取消选中。</li>
+<li><code>d</code>：删除选中的文本。</li>
+<li><code>dd</code>：删除当前行（其实是剪切）。</li>
+<li><code>ggdG</code>：删除全部内容。</li>
+<li><code>y</code>：复制选中的文本。</li>
+<li><code>yy</code>：复制当前行。</li>
+<li><code>ggyG</code>：复制全部内容。</li>
+<li><code>p</code>：将复制的数据在光标的下一行/下一个位置粘贴。</li>
+<li><code>u</code>：撤销。</li>
+<li><code>Ctrl + r</code>：取消撤销。</li>
+<li><code>&gt;</code>：将选中的文本整体向右缩进一次。</li>
+<li><code>&lt;</code>：将选中的文本整体向左缩进一次。</li>
+<li><code>:w</code>：保存。</li>
+<li><code>:w!</code>：强制保存。</li>
+<li><code>:q</code>：退出。</li>
+<li><code>:q!</code>：强制退出。</li>
+<li><code>:wq</code>：保存并退出。</li>
+<li><code>:set paste</code>：设置成粘贴模式，取消代码自动缩进。</li>
+<li><code>:set nopaste</code>：取消粘贴模式，开启代码自动缩进。</li>
+<li><code>:set nu</code>：显示行号。</li>
+<li><code>:set nonu</code>：隐藏行号。</li>
+<li><code>gg=G</code>：将全文代码格式化。</li>
+<li><code>:noh</code>：关闭查找关键词高亮。</li>
+<li><code>Ctrl + q</code>：当 Vim 卡死时，可以取消当前正在执行的命令。</li>
+</ul>
+<p>异常处理：<br>
+每次用 Vim 编辑文件时，会自动创建一个 <code>&lt;filename&gt;.swp</code> 的临时文件。<br>
+如果打开某个文件时，该文件的 <code>swp</code> 文件已存在，则会报错。此时解决办法有两种：</p>
+<ul>
+<li>找到正在打开该文件的程序，并退出。</li>
+<li>直接删掉该 <code>swp</code> 文件即可。</li>
+</ul>
+<p>Vim 的配置文件在 <code>~/.vimrc</code> 中。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/53725.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/53725.html";
+            const title         = "「Linux学习笔记-命令、Tmux与Vim」";
+            const excerpt       = `本文记录 Linux 的学习过程，内容为 Linux 常用文件管理命令、Tmux、Vim。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Linux/" rel="tag">Linux</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-06-11T07:42:16.046Z" itemprop="dateModified">Last edited: 2023-06-11</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" VS Code实用插件推荐与使用教程" href="/posts/45632.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Linux学习笔记-Shell" href="/posts/31281.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                38
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">1.1 常用文件管理命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1.2 其它常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tmux%E4%B8%8EVim"><span class="toc-text">2. Tmux与Vim</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Tmux"><span class="toc-text">2.1 Tmux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Vim"><span class="toc-text">2.2 Vim</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/31783.html"><i class="fa  fa-book"></i> Python绘图模块Plotly教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39408.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-注意力机制</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/7592.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-现代循环神经网络</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

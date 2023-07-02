@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Web学习笔记-JavaScript | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Web" />
+  
+  <meta name="description" content="Web学习笔记-JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web学习笔记-JavaScript">
+<meta property="og:url" content="https://asanosaki.github.io/posts/40580.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Web学习笔记-JavaScript">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2022-11-14T03:14:00.000Z">
+<meta property="article:modified_time" content="2023-06-29T03:20:59.586Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/40580.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Web学习笔记-JavaScript</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-11-14T03:14:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-11-14</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~16.93K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1688008859586"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JS%E7%9A%84%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">1. JS的调用方式与执行顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">2. 变量与运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-number">3.</span> <span class="toc-text">3. 输入与输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="toc-number">4.</span> <span class="toc-text">4. 判断语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">5.</span> <span class="toc-text">5. 循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.</span> <span class="toc-text">6. 对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%95%B0%E7%BB%84"><span class="toc-number">7.</span> <span class="toc-text">7. 数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%87%BD%E6%95%B0"><span class="toc-number">8.</span> <span class="toc-text">8. 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E7%B1%BB"><span class="toc-number">9.</span> <span class="toc-text">9. 类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E4%BA%8B%E4%BB%B6"><span class="toc-number">10.</span> <span class="toc-text">10. 事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%B8%B8%E7%94%A8%E5%BA%93"><span class="toc-number">11.</span> <span class="toc-text">11. 常用库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-jQuery"><span class="toc-number">11.1.</span> <span class="toc-text">11.1 jQuery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-setTimeout%E4%B8%8EsetInterval"><span class="toc-number">11.2.</span> <span class="toc-text">11.2 setTimeout与setInterval</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-requestAnimationFrame"><span class="toc-number">11.3.</span> <span class="toc-text">11.3 requestAnimationFrame</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-4-Map%E4%B8%8ESet"><span class="toc-number">11.4.</span> <span class="toc-text">11.4 Map与Set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-5-localStorage"><span class="toc-number">11.5.</span> <span class="toc-text">11.5 localStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-6-JSON"><span class="toc-number">11.6.</span> <span class="toc-text">11.6 JSON</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-7-%E6%97%A5%E6%9C%9F"><span class="toc-number">11.7.</span> <span class="toc-text">11.7 日期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-8-WebSocket"><span class="toc-number">11.8.</span> <span class="toc-text">11.8 WebSocket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-9-window"><span class="toc-number">11.9.</span> <span class="toc-text">11.9 window</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-10-Canvas"><span class="toc-number">11.10.</span> <span class="toc-text">11.10 Canvas</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文记录 JavaScript 的学习过程。<br>
+JavaScript 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。目前 JavaScript 的标准是 ECMAScript6，简称 ES6。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-JS的调用方式与执行顺序">1. JS的调用方式与执行顺序</h2>
+<p>JS 常见使用方式有以下几种：</p>
+<ul>
+<li>直接在 HTML 的 <code>&lt;script type=&quot;module&quot;&gt;&lt;/script&gt;</code> 标签内写 JS 代码。</li>
+<li>直接引入 <code>.js</code> 文件：<code>&lt;script type=&quot;module&quot; src=&quot;/static/js/index.js&quot;&gt;&lt;/script&gt;</code>。</li>
+<li>将所需的代码通过 <code>import</code> 关键字引入到当前作用域。</li>
+</ul>
+<p>例如 <code>/static/js/index.js</code> 文件中的内容为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;acwing&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">print</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    name,</span><br><span class="line">    print</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;script type=&quot;module&quot;&gt;&lt;/script&gt;</code> 中的内容为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">import</span> &#123; name, print &#125; <span class="keyword">from</span> <span class="string">&quot;/static/js/index.js&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">print</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行顺序：</p>
+<ol>
+<li>类似于 HTML 与 CSS，按从上到下的顺序执行。</li>
+<li>事件驱动执行。</li>
+</ol>
+<p>HTML、CSS、JavaScript 三者之间的关系：</p>
+<ul>
+<li>CSS 控制 HTML；</li>
+<li>JavaScript 控制 HTML 与 CSS；</li>
+<li>为了方便开发与维护，尽量按照上述顺序写代码。例如：不要在 HTML 中调用 JavaScript 中的函数。</li>
+</ul>
+<h2 id="2-变量与运算符">2. 变量与运算符</h2>
+<p>（1）<code>let</code> 与 <code>const</code>：用来声明变量，作用范围为当前作用域。</p>
+<ul>
+<li><code>let</code> 用来定义变量。</li>
+<li><code>const</code> 用来定义常量。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> N = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="string">&quot;Hello World!&quot;</span>, x = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> dict = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;AsanoSaki&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(N);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s + <span class="string">&#x27; &#x27;</span> + x);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(dict.<span class="property">name</span>, dict.<span class="property">age</span>);</span><br></pre></td></tr></table></figure>
+<p>（2）变量类型：</p>
+<ul>
+<li><code>number</code>：数值变量，例如：<code>1, 2.5</code>。</li>
+<li><code>string</code>：字符串，例如：<code>&quot;acwing&quot;, 'AsanoSaki'</code>，单引号与双引号均可。字符串中的每个字符为只读类型。</li>
+<li><code>boolean</code>：布尔值，例如：<code>true, false</code>。</li>
+<li><code>object</code>：对象，类似于 C++ 中的指针，例如：<code>[1, 2, 3]</code>，<code>&#123; name: &quot;AsanoSaki&quot;, age: 18 &#125;</code>，<code>null</code>。</li>
+<li><code>undefined</code>：未定义的变量。</li>
+</ul>
+<p>类似于 Python，JavaScript 中的变量类型可以动态变化。</p>
+<p>（3）运算符：<br>
+与 C++、Python、Java 类似，不同点：</p>
+<ul>
+<li><code>**</code> 表示乘方。</li>
+<li>等于与不等于用 <code>===</code> 和 <code>!==</code>。</li>
+</ul>
+<h2 id="3-输入与输出">3. 输入与输出</h2>
+<p>（1）输入</p>
+<ul>
+<li>从 HTML 与用户的交互中输入信息，例如通过 <code>input</code>、<code>textarea</code> 等标签获取用户的键盘输入，通过 <code>click</code>、<code>hover</code> 等事件获取用户的鼠标输入。</li>
+<li>通过 <code>Ajax</code> 与 <code>WebSocket</code> 从服务器端获取输入。</li>
+<li>标准输入。</li>
+</ul>
+<p>（2）输出</p>
+<ul>
+<li>调试用 <code>console.log()</code>，会将信息输出到浏览器控制台。</li>
+<li>改变当前页面的 HTML 与 CSS。</li>
+<li>通过 <code>Ajax</code> 与 <code>WebSocket</code> 将结果返回到服务器。</li>
+</ul>
+<p>通过 HTML 输入输出示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/Web Application Lesson/static/css/index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    输入：</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">&quot;inputText&quot;</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;run&quot;</span>&gt;</span>Run<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    输出：</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">&quot;outputText&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">import</span> &#123; runOnclick &#125; <span class="keyword">from</span> <span class="string">&quot;/Web Application Lesson/static/js/index.js&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">runOnclick</span>();</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> inputText = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.inputText&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> run = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.run&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> outputText = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.outputText&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">runOnclick</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(inputText);</span><br><span class="line">    run.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> s = inputText.<span class="property">value</span>;</span><br><span class="line">        outputText.<span class="property">innerHTML</span> = s;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    runOnclick</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过标准输入输出示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> buf = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">process.<span class="property">stdin</span>.<span class="title function_">on</span>(<span class="string">&#x27;readable&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> chunk = process.<span class="property">stdin</span>.<span class="title function_">read</span>();</span><br><span class="line">    <span class="keyword">if</span> (chunk) buf += chunk.<span class="title function_">toString</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">process.<span class="property">stdin</span>.<span class="title function_">on</span>(<span class="string">&#x27;end&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    buf.<span class="title function_">split</span>(<span class="string">&#x27;\n&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">line</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> tokens = line.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">map</span>(<span class="keyword">function</span> (<span class="params">x</span>) &#123; <span class="keyword">return</span> <span class="built_in">parseInt</span>(x); &#125;);</span><br><span class="line">        <span class="keyword">if</span> (tokens.<span class="property">length</span> != <span class="number">2</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(tokens.<span class="title function_">reduce</span>(<span class="keyword">function</span> (<span class="params">a, b</span>) &#123; <span class="keyword">return</span> a + b; &#125;));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>（3）格式化字符串</p>
+<ul>
+<li>字符串中填入数值：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;AsanoSaki&#x27;</span>, age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">let</span> s = <span class="string">`My name is <span class="subst">$&#123;name&#125;</span>, I&#x27;m <span class="subst">$&#123;age&#125;</span> years old.`</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义多行字符串：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = </span><br><span class="line"><span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;标题&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;段落&lt;/p&gt;</span></span><br><span class="line"><span class="string">/div&gt;`</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>保留两位小数：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">1.234567</span>;</span><br><span class="line"><span class="keyword">let</span> s = <span class="string">`<span class="subst">$&#123;x.toFixed(<span class="number">2</span>)&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="4-判断语句">4. 判断语句</h2>
+<p>JavaScript 中的 <code>if-else</code> 语句与 C++、Python、Java 中类似。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> score = <span class="number">90</span>;</span><br><span class="line"><span class="keyword">if</span> (score &gt;= <span class="number">85</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">70</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">60</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;C&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;D&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JavaScript 中的逻辑运算符也与 C++、Java 中类似：<code>&amp;&amp;</code> 表示与、<code>||</code> 表示或、<code>!</code> 表示非。</p>
+<h2 id="5-循环语句">5. 循环语句</h2>
+<p>JavaScript 中的循环语句与 C++ 中类似，也包含 <code>for</code>、<code>while</code>、<code>do while</code> 循环。</p>
+<p>（1）<code>for</code> 循环</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举对象或数组时可以使用：</p>
+<ul>
+<li><code>for-in</code> 循环：可以枚举数组中的下标，以及对象中的 <code>key</code>。</li>
+<li><code>for-of</code> 循环：可以枚举数组中的值，以及对象中的 <code>value</code>。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> a) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> a) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）<code>while</code> 循环</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）<code>do while</code> 循环</p>
+<p><code>do while</code> 语句与 <code>while</code> 语句非常相似。唯一的区别是，<code>do while</code> 语句限制先循环体后检查条件。不管条件的值如何，我们都要至少执行一次循环体。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    i++;</span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="6-对象">6. 对象</h2>
+<p>英文名称：<code>Object</code>。<br>
+类似于 C++ 中的 <code>map</code>，由 <code>key:value</code> 对构成。</p>
+<ul>
+<li><code>value</code> 可以是变量、数组、对象、函数等。</li>
+<li>函数定义中的 <code>this</code> 用来引用该函数的“拥有者”。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="attr">money</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">friends</span>: [<span class="string">&quot;Tom&quot;</span>, <span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>],</span><br><span class="line">    <span class="attr">clothes</span>: &#123;</span><br><span class="line">        <span class="attr">color</span>: <span class="string">&quot;blue&quot;</span>,</span><br><span class="line">        <span class="attr">price</span>: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">add_money</span>: <span class="keyword">function</span> (<span class="params">x</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">money</span> += x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对象属性与函数的调用方式：</p>
+<ul>
+<li>（1）用 <code>.</code> 调用：<code>person.name</code>、<code>person.add_money()</code>。</li>
+<li>（2）用 <code>[]</code> 调用：<code>person[&quot;name&quot;]</code>、<code>person[&quot;add_money&quot;]()</code>。</li>
+</ul>
+<h2 id="7-数组">7. 数组</h2>
+<p>数组是一种特殊的对象，类似于 C++ 中的数组，但是 JavaScript 数组中的元素类型可以不同（数组中的元素可以是变量、数组、对象、函数）。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;abc&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = [</span><br><span class="line">    <span class="number">1</span>,  <span class="comment">// 变量</span></span><br><span class="line">    <span class="string">&quot;abc&quot;</span>,  <span class="comment">// 变量</span></span><br><span class="line">    [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="number">3</span>],  <span class="comment">// 数组</span></span><br><span class="line">    <span class="keyword">function</span> (<span class="params"></span>) &#123;  <span class="comment">// 函数</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;abc&quot;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;  <span class="comment">// 对象</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>可以通过下标访问数组元素，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">0</span>] = <span class="number">1</span>;  <span class="comment">// 访问数组a[]的第0个元素</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p>数组的常用属性和函数：</p>
+<ul>
+<li>属性 <code>length</code>：返回数组长度。注意 <code>length</code> 是属性，不是函数，因此调用的时候不要加 <code>()</code>。</li>
+<li>函数 <code>push()</code>：向数组末尾添加元素。</li>
+<li>函数 <code>pop()</code>：删除数组末尾的元素。</li>
+<li>函数 <code>splice(a, b)</code>：删除从下标 <code>a</code> 开始的 <code>b</code> 个元素。</li>
+<li>函数 <code>sort()</code>：将整个数组从小到大排序。
+<ul>
+<li>自定义比较函数：<code>array.sort(cmp)</code>，函数 <code>cmp</code> 输入两个需要比较的元素，返回一个实数，负数表示第一个参数排在第二个参数前面，零表示相等，正数表示第一个参数排在第二个参数后面。因此如果要实现从大到小排序只需要令函数为：<code>function(a, b) &#123; return b - a; &#125;</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-函数">8. 函数</h2>
+<p>JavaScript 中的函数是用对象来实现的，定义完函数后是允许再对这个对象进行修改的。函数的定义方式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> add = <span class="keyword">function</span> (<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">add</span> = (<span class="params">a, b</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数返回值：如果未定义返回值，则返回 <code>undefined</code>。</p>
+<h2 id="9-类">9. 类</h2>
+<p>与 C++ 中的 <code>Class</code> 类似，但是不存在私有成员，<code>this</code> 指向类的实例。</p>
+<p>（1）定义</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">init</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">sum</span> = <span class="variable language_">this</span>.<span class="property">x</span> + <span class="variable language_">this</span>.<span class="property">y</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`Point: (<span class="subst">$&#123;<span class="variable language_">this</span>.x&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.y&#125;</span>), Sum: <span class="subst">$&#123;<span class="variable language_">this</span>.sum&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="title function_">toString</span>());</span><br></pre></td></tr></table></figure>
+<p>（2）继承</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ColorPoint</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Point</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">x, y, c</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(x, y);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">color</span> = c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">super</span>.toString()&#125;</span>, Color: <span class="subst">$&#123;<span class="variable language_">this</span>.color&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li><code>super</code> 这个关键字，既可以当作函数使用，也可以当作对象使用。
+<ul>
+<li>作为函数调用时，代表父类的构造函数，且只能用在子类的构造函数之中。</li>
+<li>作为对象时，指向父类的原型对象。</li>
+</ul>
+</li>
+<li>在子类的构造函数中，只有调用 <code>super</code> 之后，才可以使用 <code>this</code> 关键字。</li>
+<li>成员重名时，子类的成员会覆盖父类的成员，类似于 C++ 中的多态。</li>
+</ul>
+<p>（3）静态方法</p>
+<p>在成员函数前添加 <code>static</code> 关键字即可。静态方法可以被子类继承，但是不会被类的实例继承，只能通过类名来调用。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`(<span class="subst">$&#123;<span class="variable language_">this</span>.x&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.y&#125;</span>)`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="title function_">print_class_name</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Point&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="title class_">Point</span>.<span class="title function_">print_class_name</span>();</span><br><span class="line">p.<span class="title function_">print_class_name</span>();  <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+<p>（4）静态变量</p>
+<p>在 ES6 中，只能通过 <code>class.propname</code> 定义和访问，子类可以继承父类的静态变量，即可以通过子类名访问静态变量。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">        <span class="title class_">Point</span>.<span class="property">cnt</span>++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`(<span class="subst">$&#123;<span class="variable language_">this</span>.x&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.y&#125;</span>)`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Point</span>.<span class="property">cnt</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    p[i] = <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Point</span>.<span class="property">cnt</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="10-事件">10. 事件</h2>
+<p>JavaScript 的代码一般通过事件触发。<br>
+可以通过 <code>addEventListener</code> 函数为元素绑定事件的触发函数。<br>
+常见的触发函数如下：</p>
+<p>（1）鼠标</p>
+<ul>
+<li><code>click</code>：鼠标左键点击。</li>
+<li><code>dblclick</code>：鼠标左键双击。</li>
+<li><code>contextmenu</code>：鼠标右键点击。</li>
+<li><code>mousedown</code>：鼠标按下，包括左键、滚轮、右键。
+<ul>
+<li><code>event.button</code>：0表示左键，1表示中键，2表示右键。</li>
+</ul>
+</li>
+<li><code>mouseup</code>：鼠标弹起，包括左键、滚轮、右键。
+<ul>
+<li><code>event.button</code>：0表示左键，1表示中键，2表示右键。</li>
+</ul>
+</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    div.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">type</span>, event.<span class="property">button</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    main</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）键盘</p>
+<ul>
+<li><code>keydown</code>：某个键是否被按住，事件会连续触发。
+<ul>
+<li><code>event.code</code>：返回按的是哪个键。</li>
+<li><code>event.altKey</code>、<code>event.ctrlKey</code>、<code>event.shiftKey</code> 分别表示是否同时按下了 <code>alt</code>、<code>ctrl</code>、<code>shift</code> 键。</li>
+</ul>
+</li>
+<li><code>keyup</code>：某个按键是否被释放。
+<ul>
+<li><code>event</code>常用属性同上。</li>
+</ul>
+</li>
+<li><code>keypress</code>：紧跟在 <code>keydown</code> 事件后触发，只有按下字符键时触发，适用于判定用户输入的字符。
+<ul>
+<li><code>event</code> 常用属性同上。</li>
+</ul>
+</li>
+</ul>
+<p><code>keydown</code>、<code>keyup</code>、<code>keypress</code> 的关系类似于鼠标的 <code>mousedown</code>、<code>mouseup</code>、<code>click</code>。</p>
+<p>（3）表单</p>
+<ul>
+<li><code>focus</code>：聚焦某个元素。</li>
+<li><code>blur</code>：取消聚焦某个元素。</li>
+<li><code>change</code>：某个元素的内容发生了改变。</li>
+</ul>
+<p>（4）窗口</p>
+<p>需要作用到 <code>window</code> 元素上。</p>
+<ul>
+<li><code>resize</code>：当窗口大小放生变化。</li>
+<li><code>scroll</code>：滚动指定的元素。</li>
+<li><code>load</code>：当元素全部被加载完成。</li>
+</ul>
+<h2 id="11-常用库">11. 常用库</h2>
+<h3 id="11-1-jQuery">11.1 jQuery</h3>
+<p>jQuery 能够让我们更加方便地去获取前端的某一个标签、绑定某个事件、改变前端的某个标签的 CSS 属性。</p>
+<p>（1）下载地址：<a target="_blank" rel="noopener" href="https://jquery.com/download/">jQuery 官网</a>。</p>
+<p>（2）使用方式：在 <code>&lt;head&gt;</code> 元素中添加：<code>&lt;script src=&quot;/Web Application Lesson/static/js/jquery-3.6.1.min.js&quot;&gt;&lt;/script&gt;</code>。</p>
+<p>（3）选择器<br>
+<code>$(selector)</code>，<code>selector</code> 类似于 CSS 的选择器。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">$(<span class="string">&#x27;.big-div&#x27;</span>);</span><br><span class="line">$(<span class="string">&#x27;div &gt; p&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>（4）事件<br>
+<code>$(selector).on(event, func)</code> 绑定事件，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;click div&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>$(selector).off(event, func)</code> 删除事件，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;click div&quot;</span>);</span><br><span class="line"></span><br><span class="line">    $(<span class="string">&#x27;div&#x27;</span>).<span class="title function_">off</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当存在多个相同类型的事件触发函数时，可以通过 <code>click.name</code> 来区分，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).<span class="title function_">on</span>(<span class="string">&#x27;click.first&#x27;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;click div&quot;</span>);</span><br><span class="line"></span><br><span class="line">    $(<span class="string">&#x27;div&#x27;</span>).<span class="title function_">off</span>(<span class="string">&#x27;click.first&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在事件触发的函数中的 <code>return false</code> 等价于同时执行：</p>
+<ul>
+<li><code>e.stopPropagation()</code>：阻止事件向上传递。例如 <code>a</code> 是 <code>div</code> 的子标签，当点击 <code>a</code> 时同样会触发 <code>div</code> 的 <code>click</code> 事件，当在 <code>a</code> 的事件触发函数中加上该语句时点击 <code>a</code> 就不会触发 <code>div</code> 的 <code>click</code> 事件。</li>
+<li><code>e.preventDefault()</code>：阻止事件的默认行为。例如点击 <code>a</code> 时不打开链接，并向上传递触发 <code>div</code> 的 <code>click</code> 事件。</li>
+</ul>
+<p>（5）元素的隐藏、展现</p>
+<ul>
+<li><code>$A.hide()</code>：隐藏，可以添加参数，表示消失时间（毫秒）。</li>
+<li><code>$A.show()</code>：展现，可以添加参数，表示出现时间。</li>
+<li><code>$A.fadeOut()</code>：颜色淡退至消失，可以添加参数，表示消失时间。</li>
+<li><code>$A.fadeIn()</code>：颜色淡增至出现，可以添加参数，表示出现时间。</li>
+</ul>
+<p>（6）元素的添加、删除</p>
+<ul>
+<li><code>$('&lt;div class=&quot;mydiv&quot;&gt;&lt;span&gt;Hello World&lt;/span&gt;&lt;/div&gt;')</code>：构造一个 <code>jQuery</code> 对象。</li>
+<li><code>$A.append($B)</code>：将 <code>$B</code> 添加到 <code>$A</code> 的末尾。</li>
+<li><code>$A.prepend($B)</code>：将 <code>$B</code> 添加到 <code>$A</code> 的开头。</li>
+<li><code>$A.remove()</code>：删除元素 <code>$A</code>。</li>
+<li><code>$A.empty()</code>：清空元素 <code>$A</code> 的所有儿子。</li>
+</ul>
+<p>（7）对类的操作（此处 <code>class_name</code> 无需加 <code>.</code>）</p>
+<ul>
+<li><code>$A.addClass(class_name)</code>：添加某个类。</li>
+<li><code>$A.removeClass(class_name)</code>：删除某个类。</li>
+<li><code>$A.hasClass(class_name)</code>：判断某个类是否存在。</li>
+</ul>
+<p>（8）对 CSS 的操作</p>
+<ul>
+<li><code>$(&quot;div&quot;).css(&quot;background-color&quot;)</code>：获取某个 CSS 的属性。</li>
+<li><code>$(&quot;div&quot;).css(&quot;background-color&quot;, &quot;yellow&quot;)</code>：设置某个 CSS 的属性。</li>
+<li>同时设置多个 CSS 的属性（注意 JS 中带 <code>-</code> 的标签必须加引号，如果不加会被当做减号）：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).<span class="title function_">css</span>(&#123;</span><br><span class="line">    <span class="attr">width</span>: <span class="string">&quot;200px&quot;</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="string">&quot;200px&quot;</span>,</span><br><span class="line">    <span class="string">&quot;background-color&quot;</span>: <span class="string">&quot;orange&quot;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>（9）对标签属性的操作（除 <code>class</code>、<code>id</code> 外可以随意创造新的属性，例如：<code>&lt;div abc=&quot;abc&quot;&gt;&lt;/div&gt;</code>）</p>
+<ul>
+<li><code>$('div').attr('id')</code>：获取属性。</li>
+<li><code>$('div').attr('id', 'ID')</code>：设置属性。</li>
+</ul>
+<p>（10）对 HTML 内容、文本的操作<br>
+不需要背每个标签该用哪种，用到的时候 Google 或者 Bing 即可。</p>
+<ul>
+<li><code>$A.html()</code>：获取、修改 HTML 内容（加参数即可修改），例如：<code>&lt;div&gt;&lt;span&gt;span content&lt;/span&gt;&lt;/div&gt;</code> 输出为 <code>&lt;span&gt;span content&lt;/span&gt;</code>。</li>
+<li><code>$A.text()</code>：获取、修改文本信息，例如：<code>&lt;div&gt;&lt;span&gt;span content&lt;/span&gt;&lt;/div&gt;</code> 输出为 <code>span content</code>。</li>
+<li><code>$A.val()</code>：获取、修改文本的值，一般用在 <code>input</code>、<code>textarea</code> 中。</li>
+</ul>
+<p>（11）查找</p>
+<ul>
+<li><code>$(selector).parent(filter)</code>：查找父元素。</li>
+<li><code>$(selector).parents(filter)</code>：查找所有祖先元素。</li>
+<li><code>$(selector).children(filter)</code>：在所有子元素中查找。</li>
+<li><code>$(selector).find(filter)</code>：在所有后代元素中查找。</li>
+</ul>
+<p>（12）<code>ajax</code><br>
+<code>ajax</code> 可以让我们在不刷新页面的情况下只从服务器端获取某些数据，一般是获取一个 <code>json</code> 数据。</p>
+<p><code>GET</code> 方法（从服务器端获取内容）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: url,</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">    <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">resp</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>POST</code> 方法（把表单内容提交给服务器）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: url,</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">    <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">resp</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="11-2-setTimeout与setInterval">11.2 setTimeout与setInterval</h3>
+<p>（1）<code>setTimeout(func, delay)</code><br>
+经过 <code>delay</code> 毫秒后，执行函数 <code>func()</code>，可以使用 <code>clearTimeout()</code> 关闭定时器。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> timeout_id = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;, <span class="number">2000</span>);  <span class="comment">// 2秒后在控制台输出&quot;Hello World!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">clearTimeout</span>(timeout_id);  <span class="comment">// 清除定时器</span></span><br></pre></td></tr></table></figure>
+<p>（2）<code>setInterval(func, delay)</code><br>
+每隔 <code>delay</code> 毫秒，执行一次函数 <code>func()</code>，第一次在第 <code>delay</code> 毫秒后执行，可以使用 <code>clearInterval()</code> 关闭周期执行的函数。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> interval_id = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;, <span class="number">2000</span>);  <span class="comment">// 每隔2秒，输出一次&quot;Hello World!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">clearInterval</span>(interval_id);  <span class="comment">// 清除周期执行的函数</span></span><br></pre></td></tr></table></figure>
+<h3 id="11-3-requestAnimationFrame">11.3 requestAnimationFrame</h3>
+<p><code>requestAnimationFrame(func)</code> 函数会在下次浏览器刷新页面之前执行一次，一般浏览器每秒刷新60次，因此通常会用递归写法使其每秒执行60次 <code>func()</code> 函数。调用时会向 <code>func()</code> 传入一个参数，表示函数执行的时间戳，单位为毫秒。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> $div = $(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> $window = $(<span class="variable language_">window</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">step</span>(<span class="params">timestamp</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(timestamp);</span><br><span class="line">        $div.<span class="title function_">width</span>($div.<span class="title function_">width</span>() + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> ($div.<span class="title function_">width</span>() &gt;= $window.<span class="title function_">width</span>()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="title function_">requestAnimationFrame</span>(step);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">requestAnimationFrame</span>(step);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>setTimeout</code> 和 <code>setInterval</code> 实现以上效果的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="title function_">timeout_func</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    $div.<span class="title function_">width</span>($div.<span class="title function_">width</span>() + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> ($div.<span class="title function_">width</span>() === $window.<span class="title function_">width</span>()) <span class="built_in">clearTimeout</span>(timeout_id);</span><br><span class="line">    <span class="keyword">else</span> timeout_id = <span class="built_in">setTimeout</span>(timeout_func, <span class="number">16.67</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> timeout_id = <span class="built_in">setTimeout</span>(timeout_func, <span class="number">16.67</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> interval_id = <span class="built_in">setInterval</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    $div.<span class="title function_">width</span>($div.<span class="title function_">width</span>() + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> ($div.<span class="title function_">width</span>() === $window.<span class="title function_">width</span>()) <span class="built_in">clearInterval</span>(interval_id);</span><br><span class="line">&#125;, <span class="number">16.67</span>);</span><br></pre></td></tr></table></figure>
+<p>与 <code>setTimeout</code> 和 <code>setInterval</code> 的区别：</p>
+<ul>
+<li><code>requestAnimationFrame</code> 渲染动画的效果更好，性能更佳。该函数可以保证每两次调用之间的时间间隔相同，但 <code>setTimeout</code> 与 <code>setInterval</code> 不能保证这点。<code>setTmeout</code> 两次调用之间的间隔包含回调函数的执行时间；<code>setInterval</code> 只能保证按固定时间间隔将回调函数压入栈中，但具体的执行时间间隔仍然受回调函数的执行时间影响。</li>
+<li>当页面在后台时，因为页面不再渲染，因此 <code>requestAnimationFrame</code> 不再执行。但 <code>setTimeout</code> 与 <code>setInterval</code> 函数会继续执行。</li>
+</ul>
+<h3 id="11-4-Map与Set">11.4 Map与Set</h3>
+<p>（1）Map<br>
+<code>Map</code> 对象保存键值对。</p>
+<ul>
+<li>用 <code>for...of</code> 或者 <code>forEach</code> 可以按<strong>插入</strong>顺序遍历。</li>
+<li>键值可以为任意值，包括函数、对象或任意基本类型。</li>
+</ul>
+<p>常用 API：</p>
+<ul>
+<li><code>set(key, value)</code>：插入键值对，如果 <code>key</code> 已存在，则会覆盖原有的 <code>value</code>。</li>
+<li><code>get(key)</code>：查找关键字，如果不存在，返回 <code>undefined</code>。</li>
+<li><code>size</code>：返回键值对数量。</li>
+<li><code>has(key)</code>：返回是否包含关键字 <code>key</code>。</li>
+<li><code>delete(key)</code>：删除关键字 <code>key</code>。</li>
+<li><code>clear()</code>：删除所有元素。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mp = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">mp.<span class="title function_">set</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;AsanoSaki&#x27;</span>);</span><br><span class="line">mp.<span class="title function_">set</span>(<span class="string">&#x27;phone&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mp, mp.<span class="title function_">get</span>(<span class="string">&#x27;name&#x27;</span>), mp.<span class="title function_">has</span>(<span class="string">&#x27;name&#x27;</span>), mp.<span class="property">size</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [k, v] <span class="keyword">of</span> mp) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(k, v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）Set<br>
+Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。</p>
+<ul>
+<li>用 <code>for...of</code> 或者 <code>forEach</code> 可以按插入顺序遍历。</li>
+</ul>
+<p>常用 API：</p>
+<ul>
+<li><code>add()</code>：添加元素。</li>
+<li><code>has()</code>：返回是否包含某个元素。</li>
+<li><code>size</code>：返回元素数量。</li>
+<li><code>delete()</code>：删除某个元素。</li>
+<li><code>clear()</code>：删除所有元素</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> st = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">st.<span class="title function_">add</span>(<span class="string">&#x27;AsanoSaki&#x27;</span>);</span><br><span class="line">st.<span class="title function_">add</span>(<span class="number">20</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(st, st.<span class="title function_">has</span>(<span class="number">20</span>), st.<span class="property">size</span>);</span><br><span class="line">st.<span class="title function_">forEach</span>(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(v);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="11-5-localStorage">11.5 localStorage</h3>
+<p><code>localStorage</code> 可以在用户的浏览器上存储键值对。常用 API：</p>
+<ul>
+<li><code>setItem(key, value)</code>：插入。</li>
+<li><code>getItem(key)</code>：查找。</li>
+<li><code>removeItem(key)</code>：删除。</li>
+<li><code>clear()</code>：清空。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;AsanoSaki&#x27;</span>);</span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;age&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;name&#x27;</span>));</span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">clear</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="11-6-JSON">11.6 JSON</h3>
+<p>JSON 对象用于序列化对象、数组、数值、字符串、布尔值和 <code>null</code>。常用 API：</p>
+<ul>
+<li><code>JSON.parse()</code>：将字符串解析成对象。</li>
+<li><code>JSON.stringify()</code>：将对象转化为字符串。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;AsanoSaki&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> new_obj = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(str);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(new_obj);</span><br></pre></td></tr></table></figure>
+<h3 id="11-7-日期">11.7 日期</h3>
+<p>（1）返回值为整数的 API，数值为 <code>1970-1-1 00:00:00 UTC</code>（世界标准时间）到某个时刻所经过的毫秒数：</p>
+<ul>
+<li><code>Date.now()</code>：返回现在时刻。</li>
+<li><code>Date.parse(&quot;2022-04-15T15:30:00.000+08:00&quot;)</code>：返回北京时间2022年4月15日15:30:00的时刻。</li>
+</ul>
+<p>（2）与 <code>Date</code> 对象的实例相关的 API：</p>
+<ul>
+<li><code>new Date()</code>：返回现在时刻。</li>
+<li><code>new Date(&quot;2022-04-15T15:30:00.000+08:00&quot;)</code>：返回北京时间2022年4月15日15:30:00的时刻。</li>
+<li>两个 <code>Date</code> 对象实例的差值为毫秒数。</li>
+<li><code>getDay()</code>：返回星期，0表示星期日，1-6表示星期一至星期六。</li>
+<li><code>getDate()</code>：返回日，数值为1-31。</li>
+<li><code>getMonth()</code>：返回月，数值为0-11。</li>
+<li><code>getFullYear()</code>：返回年份。</li>
+<li><code>getHours()</code>：返回小时。</li>
+<li><code>getMinutes()</code>：返回分钟。</li>
+<li><code>getSeconds()</code>：返回秒。</li>
+<li><code>getMilliseconds()</code>：返回毫秒。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> time = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(time);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(time.<span class="title function_">getDay</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(time.<span class="title function_">getDate</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(time.<span class="title function_">getMonth</span>());</span><br></pre></td></tr></table></figure>
+<h3 id="11-8-WebSocket">11.8 WebSocket</h3>
+<p>与服务器建立全双工连接。常用 API：</p>
+<ul>
+<li><code>new WebSocket('ws://localhost:8080');</code>：建立 WS 连接。</li>
+<li><code>send()</code>：向服务器端发送一个字符串。一般用 <code>JSON</code> 将传入的对象序列化为字符串。</li>
+<li><code>onopen</code>：类似于 <code>onclick</code>，当连接建立时触发。</li>
+<li><code>onmessage</code>：当从服务器端接收到消息时触发。</li>
+<li><code>close()</code>：关闭连接。</li>
+<li><code>onclose</code>：当连接关闭后触发。</li>
+</ul>
+<h3 id="11-9-window">11.9 window</h3>
+<ul>
+<li><code>window.open(&quot;https://www.acwing.com&quot;)</code>：在新标签栏中打开页面。</li>
+<li><code>location.reload()</code>：刷新页面。</li>
+<li><code>location.href = &quot;https://www.acwing.com&quot;</code>：在当前标签栏中打开页面。</li>
+</ul>
+<h3 id="11-10-Canvas">11.10 Canvas</h3>
+<p>Canvas 教程参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">Canvas Tutorial (English Version)</a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial">Canvas 教程（中文）</a>。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/40580.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/40580.html";
+            const title         = "「Web学习笔记-JavaScript」";
+            const excerpt       = `本文记录 JavaScript 的学习过程。
+JavaScript 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。目前 JavaScript 的标准是 ECMAScript6，简称 ES6。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Web/" rel="tag">Web</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-06-29T03:20:59.586Z" itemprop="dateModified">Last edited: 2023-06-29</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Web学习笔记-CSS" href="/posts/11050.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Windows安装配置Git教程" href="/posts/31252.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                38
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JS%E7%9A%84%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">1. JS的调用方式与执行顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">2. 变量与运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-text">3. 输入与输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="toc-text">4. 判断语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-text">5. 循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AF%B9%E8%B1%A1"><span class="toc-text">6. 对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%95%B0%E7%BB%84"><span class="toc-text">7. 数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%87%BD%E6%95%B0"><span class="toc-text">8. 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E7%B1%BB"><span class="toc-text">9. 类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E4%BA%8B%E4%BB%B6"><span class="toc-text">10. 事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%B8%B8%E7%94%A8%E5%BA%93"><span class="toc-text">11. 常用库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-jQuery"><span class="toc-text">11.1 jQuery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-setTimeout%E4%B8%8EsetInterval"><span class="toc-text">11.2 setTimeout与setInterval</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-requestAnimationFrame"><span class="toc-text">11.3 requestAnimationFrame</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-4-Map%E4%B8%8ESet"><span class="toc-text">11.4 Map与Set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-5-localStorage"><span class="toc-text">11.5 localStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-6-JSON"><span class="toc-text">11.6 JSON</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-7-%E6%97%A5%E6%9C%9F"><span class="toc-text">11.7 日期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-8-WebSocket"><span class="toc-text">11.8 WebSocket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-9-window"><span class="toc-text">11.9 window</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-10-Canvas"><span class="toc-text">11.10 Canvas</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/31783.html"><i class="fa  fa-book"></i> Python绘图模块Plotly教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39408.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-注意力机制</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/7592.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-现代循环神经网络</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

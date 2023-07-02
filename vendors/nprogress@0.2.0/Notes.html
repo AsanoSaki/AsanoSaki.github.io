@@ -1,0 +1,19 @@
+<h2 id="Testing">Testing</h2>
+<pre><code>$ npm install
+$ npm test
+</code></pre>
+<p>or try it out in the browser:</p>
+<pre><code>$ open test/index.html
+</code></pre>
+<h2 id="Testing-component-build">Testing component build</h2>
+<pre><code>$ component install
+$ component build
+$ open test/component.html
+</code></pre>
+<h2 id="Releasing">Releasing</h2>
+<pre><code>$ npm test
+$ bump *.json nprogress.js          # bump version numbers
+$ git release 0.1.1                 # release to bower/github
+$ npm publish                       # release to npm
+$ git push origin master:gh-pages   # update the site
+</code></pre>

@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Linux学习笔记-Shell | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Linux" />
+  
+  <meta name="description" content="Linux学习笔记-Shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习笔记-Shell">
+<meta property="og:url" content="https://asanosaki.github.io/posts/31281.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Linux学习笔记-Shell">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2022-03-17T01:39:00.000Z">
+<meta property="article:modified_time" content="2022-12-02T07:07:39.124Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/31281.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Linux学习笔记-Shell</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-03-17T01:39:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-03-17</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~15.65K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1669964859124"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Shell-%E6%A6%82%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">1. Shell 概论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">2. 注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">3. 变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 使用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 只读变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%88%A0%E9%99%A4%E5%8F%98%E9%87%8F"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 删除变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 变量类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%BB%98%E8%AE%A4%E5%8F%98%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">4. 默认变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%96%87%E4%BB%B6%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 文件参数变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%85%B6%E5%AE%83%E5%8F%82%E6%95%B0%E7%9B%B8%E5%85%B3%E5%8F%98%E9%87%8F"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 其它参数相关变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84"><span class="toc-number">5.</span> <span class="toc-text">5. 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%95%B0%E7%BB%84%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 数组定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%AF%BB%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E5%80%BC"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 读取数组中元素的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%AF%BB%E5%8F%96%E6%95%B4%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 读取整个数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 数组长度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-expr%E5%91%BD%E4%BB%A4"><span class="toc-number">6.</span> <span class="toc-text">6. expr命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 字符串表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%95%B4%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 整数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E9%80%BB%E8%BE%91%E5%85%B3%E7%B3%BB%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 逻辑关系表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-read%E5%91%BD%E4%BB%A4"><span class="toc-number">7.</span> <span class="toc-text">7. read命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-echo%E5%91%BD%E4%BB%A4"><span class="toc-number">8.</span> <span class="toc-text">8. echo命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-printf%E5%91%BD%E4%BB%A4"><span class="toc-number">9.</span> <span class="toc-text">9. printf命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-test%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%88%A4%E6%96%AD%E7%AC%A6%E5%8F%B7"><span class="toc-number">10.</span> <span class="toc-text">10. test命令与判断符号[]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">10.1.</span> <span class="toc-text">10.1 逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-test%E5%91%BD%E4%BB%A4"><span class="toc-number">10.2.</span> <span class="toc-text">10.2 test命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3-%E5%88%A4%E6%96%AD%E7%AC%A6%E5%8F%B7"><span class="toc-number">10.3.</span> <span class="toc-text">10.3 判断符号[]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="toc-number">11.</span> <span class="toc-text">11. 判断语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-if%E2%80%A6then%E5%BD%A2%E5%BC%8F"><span class="toc-number">11.1.</span> <span class="toc-text">11.1 if…then形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-case%E2%80%A6esac%E5%BD%A2%E5%BC%8F"><span class="toc-number">11.2.</span> <span class="toc-text">11.2 case…esac形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">12.</span> <span class="toc-text">12. 循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-for%E2%80%A6in%E2%80%A6do%E2%80%A6done"><span class="toc-number">12.1.</span> <span class="toc-text">12.1 for…in…do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-for-%E2%80%A6-%E2%80%A6-%E2%80%A6-do%E2%80%A6done"><span class="toc-number">12.2.</span> <span class="toc-text">12.2 for ((…;…;…)) do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-while%E2%80%A6do%E2%80%A6done"><span class="toc-number">12.3.</span> <span class="toc-text">12.3 while…do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-4-until%E2%80%A6do%E2%80%A6done"><span class="toc-number">12.4.</span> <span class="toc-text">12.4 until…do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-5-break"><span class="toc-number">12.5.</span> <span class="toc-text">12.5 break</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-6-continue"><span class="toc-number">12.6.</span> <span class="toc-text">12.6 continue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%87%BD%E6%95%B0"><span class="toc-number">13.</span> <span class="toc-text">13. 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-exit%E5%91%BD%E4%BB%A4"><span class="toc-number">14.</span> <span class="toc-text">14. exit命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">15.</span> <span class="toc-text">15. 文件重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E5%BC%95%E5%85%A5%E5%A4%96%E9%83%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">16.</span> <span class="toc-text">16. 引入外部脚本</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文记录 Linux 的学习过程，内容为 Shell 命令语言。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-Shell-概论">1. Shell 概论</h2>
+<p>Shell 是我们通过命令行与操作系统沟通的语言。</p>
+<p>Shell 脚本可以直接在命令行中执行，也可以将一套逻辑组织成一个文件，方便复用。</p>
+<p>Linux 中常见的 Shell 脚本有很多种，常见的有：</p>
+<ul>
+<li>Bourne Shell（<code>/usr/bin/sh</code> 或 <code>/bin/sh</code>）</li>
+<li>Bourne Again Shell（<code>/bin/bash</code>）</li>
+<li>C Shell（<code>/usr/bin/csh</code>）</li>
+<li>K Shell（<code>/usr/bin/ksh</code>）</li>
+<li>zsh</li>
+<li>…</li>
+</ul>
+<p>Linux 系统中一般默认使用 bash，所以接下来讲解 bash 中的语法。</p>
+<p>文件开头需要写 <code>#! /bin/bash</code>，指明 bash 为脚本解释器。</p>
+<p>新建一个 <code>test.sh</code> 文件，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line">echo &quot;Hello World!&quot;</span><br></pre></td></tr></table></figure>
+<p>运行方式：</p>
+<p>（1）作为可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ chmod +x test.sh  # 使脚本具有可执行权限</span><br><span class="line">acs@9e0ebfcd82d7:~$ ./test.sh  # 当前路径下执行</span><br><span class="line">Hello World!  # 脚本输出</span><br><span class="line">acs@9e0ebfcd82d7:~$ /home/acs/test.sh  # 绝对路径下执行</span><br><span class="line">Hello World!  # 脚本输出</span><br><span class="line">acs@9e0ebfcd82d7:~$ ~/test.sh  # 家目录路径下执行</span><br><span class="line">Hello World!  # 脚本输出</span><br></pre></td></tr></table></figure>
+<p>（2）用解释器执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ bash test.sh</span><br><span class="line">Hello World!  # 脚本输出</span><br></pre></td></tr></table></figure>
+<h2 id="2-注释">2. 注释</h2>
+<p>（1）单行注释</p>
+<p>每行中 <code>#</code> 之后的内容均是注释：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这是一行注释</span></span><br><span class="line"></span><br><span class="line">echo &#x27;Hello World&#x27;  #  这也是注释</span><br></pre></td></tr></table></figure>
+<p>（2）多行注释</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:&lt;&lt;EOF</span><br><span class="line">第一行注释</span><br><span class="line">第二行注释</span><br><span class="line">第三行注释</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>其中 <code>EOF</code> 可以换成其它任意字符串，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">:&lt;&lt;abc</span><br><span class="line">第一行注释</span><br><span class="line">第二行注释</span><br><span class="line">第三行注释</span><br><span class="line">abc</span><br><span class="line"></span><br><span class="line">:&lt;&lt;orz</span><br><span class="line">第一行注释</span><br><span class="line">第二行注释</span><br><span class="line">第三行注释</span><br><span class="line">orz</span><br></pre></td></tr></table></figure>
+<h2 id="3-变量">3. 变量</h2>
+<h3 id="3-1-定义变量">3.1 定义变量</h3>
+<p>定义变量不需要加 <code>$</code> 符号，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name1=&#x27;yxc&#x27;  # 单引号定义字符串</span><br><span class="line">name2=&quot;yxc&quot;  # 双引号定义字符串</span><br><span class="line">name3=yxc    # 也可以不加引号，同样表示字符串</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-使用变量">3.2 使用变量</h3>
+<p>使用变量，需要加上 <code>$</code> 符号，或者 <code>$&#123;&#125;</code> 符号。花括号是可选的，主要为了帮助解释器识别变量边界。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name=yxc</span><br><span class="line">echo $name  # 输出yxc</span><br><span class="line">echo $&#123;name&#125;  # 输出yxc</span><br><span class="line">echo $&#123;name&#125;acwing  # 输出yxcacwing</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-只读变量">3.3 只读变量</h3>
+<p>使用 <code>readonly</code> 或者 <code>declare</code> 可以将变量变为只读。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name=yxc</span><br><span class="line">readonly name</span><br><span class="line">declare -r name  # 两种写法均可</span><br><span class="line"></span><br><span class="line">name=abc  # 会报错，因为此时name只读</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-删除变量">3.4 删除变量</h3>
+<p><code>unset</code> 可以删除变量。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=yxc</span><br><span class="line">unset name</span><br><span class="line">echo $name  # 输出空行</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-变量类型">3.5 变量类型</h3>
+<ul>
+<li>自定义变量（局部变量）：子进程不能访问的变量。</li>
+<li>环境变量（全局变量）：子进程可以访问的变量。</li>
+</ul>
+<p>自定义变量改成环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ name=AsanoSaki  # 定义变量</span><br><span class="line">acs@9e0ebfcd82d7:~$ export name  # 第一种方法</span><br><span class="line">acs@9e0ebfcd82d7:~$ declare -x name  # 第二种方法</span><br></pre></td></tr></table></figure>
+<p>环境变量改为自定义变量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ export name=AsanoSaki  # 定义环境变量</span><br><span class="line">acs@9e0ebfcd82d7:~$ declare +x name  # 改为自定义变量</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-字符串">3.6 字符串</h3>
+<p>字符串可以用单引号，也可以用双引号，也可以不用引号，不用引号与双引号是一样的。</p>
+<p>单引号与双引号的区别：</p>
+<ul>
+<li>单引号中的内容会原样输出，不会执行、不会取变量。</li>
+<li>双引号中的内容可以执行、可以取变量。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=yxc  # 不用引号</span><br><span class="line">echo &#x27;hello, $name \&quot;hh\&quot;&#x27;  # 单引号字符串，输出 hello, $name \&quot;hh\&quot;</span><br><span class="line">echo &quot;hello, $name \&quot;hh\&quot;&quot;  # 双引号字符串，输出 hello, yxc &quot;hh&quot;</span><br></pre></td></tr></table></figure>
+<p>获取字符串长度：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;yxc&quot;</span><br><span class="line">echo $&#123;#name&#125;  # 输出3</span><br></pre></td></tr></table></figure>
+<p>提取子串：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;hello, yxc&quot;</span><br><span class="line">echo $&#123;name:0:5&#125;  # 提取从0开始的5个字符</span><br></pre></td></tr></table></figure>
+<h2 id="4-默认变量">4. 默认变量</h2>
+<h3 id="4-1-文件参数变量">4.1 文件参数变量</h3>
+<p>在执行 Shell 脚本时，可以向脚本传递参数。<code>$1</code> 是第一个参数，<code>$2</code> 是第二个参数，以此类推。特殊的，<code>$0</code> 是文件名（包含路径）。例如：</p>
+<p>创建文件 <code>test.sh</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">echo &quot;文件名：&quot;$0</span><br><span class="line">echo &quot;第一个参数：&quot;$1</span><br><span class="line">echo &quot;第二个参数：&quot;$2</span><br><span class="line">echo &quot;第三个参数：&quot;$3</span><br><span class="line">echo &quot;第四个参数：&quot;$4</span><br></pre></td></tr></table></figure>
+<p>然后执行该脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ chmod +x test.sh </span><br><span class="line">acs@9e0ebfcd82d7:~$ ./test.sh 1 2 3 4</span><br><span class="line"></span><br><span class="line">文件名：./test.sh</span><br><span class="line">第一个参数：1</span><br><span class="line">第二个参数：2</span><br><span class="line">第三个参数：3</span><br><span class="line">第四个参数：4</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-其它参数相关变量">4.2 其它参数相关变量</h3>
+<ul>
+<li><code>$#</code>：代表文件传入的参数个数，如上例中值为4。</li>
+<li><code>$*</code>：由所有参数构成的用空格隔开的字符串，如上例中值为 <code>&quot;$1 $2 $3 $4&quot;</code>。</li>
+<li><code>$@</code>：每个参数分别用双引号括起来的字符串，如上例中值为 <code>&quot;$1&quot; &quot;$2&quot; &quot;$3&quot; &quot;$4&quot;</code>。</li>
+<li><code>$$</code>：脚本当前运行的进程 ID。</li>
+<li><code>$?</code>：上一条命令的退出状态（注意不是 <code>stdout</code>，而是 <code>exit code</code>）。0表示正常退出，其他值表示错误。</li>
+<li><code>$(command)</code>：返回 <code>command</code> 这条命令的 <code>stdout</code>（可嵌套）</li>
+<li><strong>`command`</strong>：返回 <code>command</code> 这条命令的 <code>stdout</code>（不可嵌套）。注意是 <code>~</code> 下面的那个点号。</li>
+</ul>
+<h2 id="5-数组">5. 数组</h2>
+<p>数组中可以存放多个<strong>不同类型</strong>的值，只支持一维数组，初始化时不需要指明数组大小，数组下标从0开始。</p>
+<h3 id="5-1-数组定义">5.1 数组定义</h3>
+<p>数组用小括号表示，元素之间用空格隔开。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array=(1 abc &quot;def&quot; AsanoSaki)</span><br></pre></td></tr></table></figure>
+<p>也可以直接定义数组中某个元素的值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array[0]=1</span><br><span class="line">array[1]=abc</span><br><span class="line">array[2]=&quot;def&quot;</span><br><span class="line">array[3]=yxc</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-读取数组中元素的值">5.2 读取数组中元素的值</h3>
+<p>格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;array[index]&#125;</span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array=(1 abc &quot;def&quot; AsanoSaki)</span><br><span class="line">echo $&#123;array[0]&#125;</span><br><span class="line">echo $&#123;array[1]&#125;</span><br><span class="line">echo $&#123;array[2]&#125;</span><br><span class="line">echo $&#123;array[3]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-读取整个数组">5.3 读取整个数组</h3>
+<p>格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;array[@]&#125;  <span class="comment"># 第一种写法</span></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;array[*]&#125;  <span class="comment"># 第二种写法</span></span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array=(1 abc &quot;def&quot; AsanoSaki)</span><br><span class="line"></span><br><span class="line">echo $&#123;array[@]&#125;  # 第一种写法</span><br><span class="line">echo $&#123;array[*]&#125;  # 第二种写法</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-数组长度">5.4 数组长度</h3>
+<p>类似于字符串：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="comment">#array[@]&#125;  # 第一种写法</span></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;<span class="comment">#array[*]&#125;  # 第二种写法</span></span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array=(1 abc &quot;def&quot; AsanoSaki)</span><br><span class="line"></span><br><span class="line">echo $&#123;#array[@]&#125;  # 第一种写法</span><br><span class="line">echo $&#123;#array[*]&#125;  # 第二种写法</span><br></pre></td></tr></table></figure>
+<h2 id="6-expr命令">6. expr命令</h2>
+<p><code>expr</code> 命令用于求表达式的值，格式为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr 表达式</span><br></pre></td></tr></table></figure>
+<p>表达式说明：</p>
+<ul>
+<li>用空格隔开每一项。</li>
+<li>用反斜杠放在 Shell 特定的字符前面（发现表达式运行错误时，可以试试转义）。</li>
+<li>对包含空格和其他特殊字符的字符串要用引号括起来。</li>
+<li><code>expr</code> 会在 <code>stdout</code> 中输出结果。如果为逻辑关系表达式，则若结果为真，<code>stdout</code> 为1，否则为0。</li>
+<li><code>expr</code> 的 <code>exit code</code>：如果为逻辑关系表达式，则若结果为真，<code>exit code</code> 为0，否则为1。</li>
+</ul>
+<h3 id="6-1-字符串表达式">6.1 字符串表达式</h3>
+<ul>
+<li><code>length STRING</code>：返回 <code>STRING</code> 的长度。</li>
+<li><code>index STRING CHARSET</code>：<code>CHARSET</code> 中任意单个字符在 <code>STRING</code> 中最前面的字符位置，下标从1开始。如果在 <code>STRING</code> 中完全不存在 <code>CHARSET</code> 中的字符，则返回0。</li>
+<li><code>substr STRING POSITION LENGTH</code>：返回 <code>STRING</code> 字符串中从 <code>POSITION</code> 开始，长度最大为 <code>LENGTH</code> 的子串。如果 <code>POSITION</code> 或 <code>LENGTH</code> 为负数、0或非数值，则返回空字符串。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">str=&quot;Hello World!&quot;</span><br><span class="line"></span><br><span class="line">echo `expr length &quot;$str&quot;`  # ``不是单引号，表示执行该命令，输出12</span><br><span class="line">echo `expr index &quot;$str&quot; aWd`  # 输出7，下标从1开始</span><br><span class="line">echo `expr substr &quot;$str&quot; 2 3`  # 输出 ell，下标从1开始</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-整数表达式">6.2 整数表达式</h3>
+<p><code>expr</code> 支持普通的算术操作，算术表达式优先级低于字符串表达式，高于逻辑关系表达式。</p>
+<ul>
+<li><code>+ -</code>：加减运算。两端参数会转换为整数，如果转换失败则报错。</li>
+<li><code>* / %</code>：乘、除与取模运算。两端参数会转换为整数，如果转换失败则报错。注意 <code>*</code> 需要转义。</li>
+<li><code>()</code>：可以改变优先级，但需要<strong>用反斜杠转义</strong>。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=3</span><br><span class="line">b=4</span><br><span class="line"></span><br><span class="line">echo `expr $a + $b`  # 输出7</span><br><span class="line">echo `expr $a - $b`  # 输出-1</span><br><span class="line">echo `expr $a \* $b`  # 输出12，*需要转义</span><br><span class="line">echo `expr $a / $b`  # 输出0，整除</span><br><span class="line">echo `expr $a % $b` # 输出3</span><br><span class="line">echo `expr \( $a + 1 \) \* \( $b + 1 \)`  # 输出20，值为(a + 1) * (b + 1)</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-逻辑关系表达式">6.3 逻辑关系表达式</h3>
+<ul>
+<li><code>|</code>：如果第一个参数非空且非0，则返回第一个参数的值，否则返回第二个参数的值，但要求第二个参数的值也是非空或非0，否则返回0。如果第一个参数是非空或非0时，不会计算第二个参数。</li>
+<li><code>&amp;</code>：如果两个参数都非空且非0，则返回第一个参数，否则返回0。如果第一个参为0或为空，则不会计算第二个参数。</li>
+<li><code>&lt; &lt;= = == != &gt;= &gt;</code>：比较两端的参数，如果为 <code>true</code>，则返回1，否则返回0。<code>==</code> 是 <code>=</code> 的同义词。<code>expr</code> 首先尝试将两端参数转换为整数，并做算术比较，如果转换失败，则按字符集排序规则做字符比较。</li>
+<li><code>()</code>：可以改变优先级，但需要<strong>用反斜杠转义</strong>。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a=3</span><br><span class="line">b=4</span><br><span class="line"></span><br><span class="line">echo `expr $a \&gt; $b`  # 输出0，&gt;需要转义</span><br><span class="line">echo `expr $a &#x27;&lt;&#x27; $b`  # 输出1，也可以将特殊字符用引号引起来</span><br><span class="line">echo `expr $a &#x27;&gt;=&#x27; $b`  # 输出0</span><br><span class="line">echo `expr $a \&lt;\= $b`  # 输出1</span><br><span class="line"></span><br><span class="line">c=0</span><br><span class="line">d=5</span><br><span class="line"></span><br><span class="line">echo `expr $c \&amp; $d`  # 输出0</span><br><span class="line">echo `expr $a \&amp; $b`  # 输出3</span><br><span class="line">echo `expr $c \| $d`  # 输出5</span><br><span class="line">echo `expr $a \| $b`  # 输出3</span><br></pre></td></tr></table></figure>
+<h2 id="7-read命令">7. read命令</h2>
+<p><code>read</code> 命令用于从标准输入中读取单行数据。当读到文件结束符时，<code>exit code</code> 为1，否则为0。</p>
+<p>参数说明：</p>
+<ul>
+<li><code>-p</code>：后面可以接提示信息。</li>
+<li><code>-t</code>：后面跟秒数，定义输入字符的等待时间，超过等待时间后会自动忽略此命令。</li>
+</ul>
+<p>实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ read name  # 读入name的值</span><br><span class="line">GitHub AsanoSaki  # 标准输入</span><br><span class="line">acs@9e0ebfcd82d7:~$ echo $name  # 输出name的值</span><br><span class="line">GitHub AsanoSaki  #标准输出</span><br><span class="line">acs@9e0ebfcd82d7:~$ read -p &quot;Please input your name: &quot; -t 30 name  # 读入name的值，等待时间30秒</span><br><span class="line">Please input your name: GitHub AsanoSaki  # 标准输入</span><br><span class="line">acs@9e0ebfcd82d7:~$ echo $name  # 输出name的值</span><br><span class="line">GitHub AsanoSaki  # 标准输出</span><br></pre></td></tr></table></figure>
+<h2 id="8-echo命令">8. echo命令</h2>
+<p><code>echo</code> 用于输出字符串。命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo STRING</span><br></pre></td></tr></table></figure>
+<p>（1）显示普通字符串</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Hello AC Terminal&quot;</span><br><span class="line">echo Hello AC Terminal  # 引号可以省略</span><br></pre></td></tr></table></figure>
+<p>（2）显示转义字符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;\&quot;Hello AC Terminal\&quot;&quot;  # 注意只能使用双引号，如果使用单引号，则不转义</span><br><span class="line">echo \&quot;Hello AC Terminal\&quot;  # 也可以省略双引号</span><br></pre></td></tr></table></figure>
+<p>（3）显示变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=AsanoSaki</span><br><span class="line">echo &quot;My name is $name&quot;  # 输出 My name is AsanoSaki</span><br></pre></td></tr></table></figure>
+<p>（4）显示换行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;Hi\n&quot;  # -e 开启转义</span><br><span class="line">echo &quot;AsanoSaki&quot;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hi</span><br><span class="line"></span><br><span class="line">AsanoSaki</span><br></pre></td></tr></table></figure>
+<p>（5）显示不换行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;Hi \c&quot; # -e 开启转义 \c 不换行</span><br><span class="line">echo &quot;AsanoSaki&quot;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi AsanoSaki</span><br></pre></td></tr></table></figure>
+<p>（6）显示结果定向至文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Hello World&quot; &gt; output.txt  # 将内容以覆盖的方式输出到output.txt中</span><br></pre></td></tr></table></figure>
+<p>（7）原样输出字符串，不进行转义或取变量（用单引号）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=acwing</span><br><span class="line">echo &#x27;$name\&quot;&#x27;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">name\&quot;</span></span><br></pre></td></tr></table></figure>
+<p>（8）显示命令的执行结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo `date`</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wed Sep 1 11:45:33 CST 2021</span><br></pre></td></tr></table></figure>
+<h2 id="9-printf命令">9. printf命令</h2>
+<p><code>printf</code> 命令用于格式化输出，类似于 C/C++ 中的 <code>printf</code> 函数。默认不会在字符串末尾添加换行符。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf format-string [arguments...]</span><br></pre></td></tr></table></figure>
+<p>脚本内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">printf &quot;%10d.\n&quot; 123  # 占10位，右对齐</span><br><span class="line">printf &quot;%-10.2f.\n&quot; 123.123321  # 占10位，保留2位小数，左对齐</span><br><span class="line">printf &quot;My name is %s\n&quot; &quot;AsanoSaki&quot;  # 格式化输出字符串</span><br><span class="line">printf &quot;%d * %d = %d\n&quot; 2 3 `expr 2 \* 3`  # 表达式的值作为参数</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">       123.</span><br><span class="line">123.12    .</span><br><span class="line">My name is AsanoSaki</span><br><span class="line">2 * 3 = 6</span><br></pre></td></tr></table></figure>
+<h2 id="10-test命令与判断符号">10. test命令与判断符号[]</h2>
+<h3 id="10-1-逻辑运算符">10.1 逻辑运算符</h3>
+<ul>
+<li><code>&amp;&amp;</code> 表示与，<code>||</code> 表示或。</li>
+<li>二者具有短路原则：
+<ul>
+<li><code>expr1 &amp;&amp; expr2</code>：当 <code>expr1</code> 为假时，直接忽略 <code>expr2</code>。</li>
+<li><code>expr1 || expr2</code>：当 <code>expr1</code> 为真时，直接忽略 <code>expr2</code>。</li>
+</ul>
+</li>
+<li>表达式的 <code>exit code</code> 为0，表示真；为非零，表示假（与 C/C++ 中的定义相反）。</li>
+</ul>
+<h3 id="10-2-test命令">10.2 test命令</h3>
+<p>在命令行中输入 <code>man test</code>，可以查看 <code>test</code> 命令的用法。</p>
+<p><code>test</code> 命令用于判断文件类型，以及对变量做比较。</p>
+<p><code>test</code> 命令用 <code>exit code</code> 返回结果，而不是使用 <code>stdout</code>。0表示真，非0表示假。</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test 2 -lt 3  # 为真，返回值为0</span><br><span class="line">echo $?  # 输出上个命令的返回值，输出0</span><br><span class="line">acs@9e0ebfcd82d7:~$ ls  # 列出当前目录下的所有文件</span><br><span class="line">homework  output.txt  test.sh  tmp</span><br><span class="line">acs@9e0ebfcd82d7:~$ test -e test.sh &amp;&amp; echo &quot;exist&quot; || echo &quot;Not exist&quot;</span><br><span class="line">exist  # test.sh 文件存在</span><br><span class="line">acs@9e0ebfcd82d7:~$ test -e test2.sh &amp;&amp; echo &quot;exist&quot; || echo &quot;Not exist&quot;</span><br><span class="line">Not exist  # testh2.sh 文件不存在</span><br></pre></td></tr></table></figure>
+<p>（1）文件<strong>类型</strong>判断</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test -e filename  # 判断文件是否存在</span><br></pre></td></tr></table></figure>
+<p>其它参数如下：</p>
+<ul>
+<li><code>-e</code>：文件是否存在。</li>
+<li><code>-f</code>：是否为文件。</li>
+<li><code>-d</code>：是否为目录。</li>
+</ul>
+<p>（2）文件<strong>权限</strong>判断</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test -r filename  # 判断文件是否可读</span><br></pre></td></tr></table></figure>
+<p>其它参数如下：</p>
+<ul>
+<li><code>-r</code>：文件是否可读。</li>
+<li><code>-w</code>：文件是否可写。</li>
+<li><code>-x</code>：文件是否可执行。</li>
+<li><code>-s</code>：是否为非空文件。</li>
+</ul>
+<p>（3）整数间比较</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test $a -eq $b  # a是否等于b</span><br></pre></td></tr></table></figure>
+<p>其它参数如下：</p>
+<ul>
+<li><code>-eq</code>：<code>a</code> 是否等于 <code>b</code>。</li>
+<li><code>-ne</code>：<code>a</code> 是否不等于 <code>b</code>。</li>
+<li><code>-gt</code>：<code>a</code> 是否大于 <code>b</code>。</li>
+<li><code>-lt</code>：<code>a</code> 是否小于 <code>b</code>。</li>
+<li><code>-ge</code>：<code>a</code> 是否大于等于 <code>b</code>。</li>
+<li><code>-le</code>：<code>a</code> 是否小于等于 <code>b</code>。</li>
+</ul>
+<p>（4）字符串比较</p>
+<ul>
+<li><code>test -z STRING</code>：判断 <code>STRING</code> 是否为空，如果为空，则返回 <code>true</code>。</li>
+<li><code>test -n STRING</code>：判断 <code>STRING</code> 是否非空，如果非空，则返回 <code>true</code>（<code>-n</code> 可以省略）。</li>
+<li><code>test str1 == str2</code>：判断 <code>str1</code> 是否等于 <code>str2</code>。</li>
+<li><code>test str1 != str2</code>：判断 <code>str1</code> 是否不等于 <code>str2</code>。</li>
+</ul>
+<p>（5）多重条件判定</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test -r filename -a -x filename</span><br></pre></td></tr></table></figure>
+<p>其它参数如下：</p>
+<ul>
+<li><code>-a</code>：两条件是否同时成立。</li>
+<li><code>-o</code>：两条件是否至少一个成立。</li>
+<li><code>!</code>：取反，如 <code>test ! -x file</code>，当 <code>file</code> 不可执行时，返回 <code>true</code>。</li>
+</ul>
+<h3 id="10-3-判断符号">10.3 判断符号[]</h3>
+<p><code>[]</code> 与 <code>test</code> 用法几乎一模一样，更常用于 <code>if</code> 语句中。另外 <code>[[]]</code> 是 <code>[]</code> 的加强版，支持的特性更多。</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ 2 -lt 3 ]  # 为真，返回值为0</span><br><span class="line">echo $?  # 输出上个命令的返回值，输出0</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ ls  # 列出当前目录下的所有文件</span><br><span class="line">homework  output.txt  test.sh  tmp</span><br><span class="line">acs@9e0ebfcd82d7:~$ [ -e test.sh ] &amp;&amp; echo &quot;exist&quot; || echo &quot;Not exist&quot;</span><br><span class="line">exist  # test.sh 文件存在</span><br><span class="line">acs@9e0ebfcd82d7:~$ [ -e test2.sh ] &amp;&amp; echo &quot;exist&quot; || echo &quot;Not exist&quot;</span><br><span class="line">Not exist  # testh2.sh 文件不存在</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li><code>[]</code> 内的每一项都要用空格隔开。</li>
+<li><code>[]</code> 内的变量，最好用双引号括起来。</li>
+<li><code>[]</code> 内的常数，最好用单或双引号括起来。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;acwing AsanoSaki&quot;</span><br><span class="line">[ $name == &quot;acwing AsanoSaki&quot; ]  # 错误，等价于 [ acwing AsanoSaki == &quot;acwing AsanoSaki&quot; ]</span><br><span class="line">[ &quot;$name&quot; == &quot;acwing AsanoSaki&quot; ]  # 正确</span><br></pre></td></tr></table></figure>
+<h2 id="11-判断语句">11. 判断语句</h2>
+<h3 id="11-1-if…then形式">11.1 if…then形式</h3>
+<p>类似于 C/C++ 中的 <code>if-else</code> 语句。</p>
+<p>（1）单层 <code>if</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=3</span><br><span class="line">b=4</span><br><span class="line"></span><br><span class="line">if [ &quot;$a&quot; -lt &quot;$b&quot; ] &amp;&amp; [ &quot;$a&quot; -gt 2 ]</span><br><span class="line">then</span><br><span class="line">    echo $&#123;a&#125;在范围内</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3在范围内</span><br></pre></td></tr></table></figure>
+<p>（2）单层 <code>if-else</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">else</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=3</span><br><span class="line">b=4</span><br><span class="line"></span><br><span class="line">if ! [ &quot;$a&quot; -lt &quot;$b&quot; ]</span><br><span class="line">then</span><br><span class="line">    echo $&#123;a&#125;不小于$&#123;b&#125;</span><br><span class="line">else</span><br><span class="line">    echo $&#123;a&#125;小于$&#123;b&#125;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3小于4</span><br></pre></td></tr></table></figure>
+<p>（3）多层 <code>if-elif-elif-else</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">elif condition</span><br><span class="line">then</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">elif condition</span><br><span class="line">then</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">else</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a=4</span><br><span class="line"></span><br><span class="line">if [ $a -eq 1 ]</span><br><span class="line">then</span><br><span class="line">    echo $&#123;a&#125;等于1</span><br><span class="line">elif [ $a -eq 2 ]</span><br><span class="line">then</span><br><span class="line">    echo $&#123;a&#125;等于2</span><br><span class="line">elif [ $a -eq 3 ]</span><br><span class="line">then</span><br><span class="line">    echo $&#123;a&#125;等于3</span><br><span class="line">else</span><br><span class="line">    echo 其他</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">其他</span><br></pre></td></tr></table></figure>
+<h3 id="11-2-case…esac形式">11.2 case…esac形式</h3>
+<p>类似于 C/C++ 中的 <code>switch</code> 语句。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">case $变量名称 in</span><br><span class="line">    值1)</span><br><span class="line">        语句1</span><br><span class="line">        语句2</span><br><span class="line">        ...</span><br><span class="line">        ;;  # 类似于C/C++中的break</span><br><span class="line">    值2)</span><br><span class="line">        语句1</span><br><span class="line">        语句2</span><br><span class="line">        ...</span><br><span class="line">        ;;</span><br><span class="line">    *)  # 类似于C/C++中的default</span><br><span class="line">        语句1</span><br><span class="line">        语句2</span><br><span class="line">        ...</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a=4</span><br><span class="line"></span><br><span class="line">case $a in</span><br><span class="line">    1)</span><br><span class="line">        echo $&#123;a&#125;等于1</span><br><span class="line">        ;;</span><br><span class="line">    2)</span><br><span class="line">        echo $&#123;a&#125;等于2</span><br><span class="line">        ;;</span><br><span class="line">    3)</span><br><span class="line">        echo $&#123;a&#125;等于3</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo 其他</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">其他</span><br></pre></td></tr></table></figure>
+<h2 id="12-循环语句">12. 循环语句</h2>
+<h3 id="12-1-for…in…do…done">12.1 for…in…do…done</h3>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for var in val1 val2 val3</span><br><span class="line">do</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例一，输出 <code>a 2 cc</code>，每个元素一行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in a 2 cc</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例二，输出当前路径下的所有文件名，每个文件名一行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for file in `ls`</span><br><span class="line">do</span><br><span class="line">    echo $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例三，输出1到10：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in $(seq 1 10)</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例四，使用 <code>&#123;1..10&#125;</code> 或者 <code>&#123;a..z&#125;</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;a..z&#125;</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="12-2-for-…-…-…-do…done">12.2 for ((…;…;…)) do…done</h3>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for ((expression; condition; expression))</span><br><span class="line">do</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例，输出1到10，每个数占一行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for ((i=1; i&lt;=10; i++))</span><br><span class="line">do</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="12-3-while…do…done">12.3 while…do…done</h3>
+<p><code>while...do...done</code>：当条件为假时结束。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while condition</span><br><span class="line">do</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例，文件结束符为 <code>Ctrl+d</code>，输入文件结束符后 <code>read</code> 指令返回 <code>false</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while read name</span><br><span class="line">do</span><br><span class="line">    echo $name</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="12-4-until…do…done">12.4 until…do…done</h3>
+<p><code>until...do...done</code>：当条件为真时结束。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">until condition</span><br><span class="line">do</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>示例，当用户输入 <code>yes</code> 或者 <code>YES</code> 时结束，否则一直等待读入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until [ &quot;$&#123;word&#125;&quot; == &quot;yes&quot; ] || [ &quot;$&#123;word&#125;&quot; == &quot;YES&quot; ]</span><br><span class="line">do</span><br><span class="line">    read -p &quot;Please input yes/YES to stop this program: &quot; word</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="12-5-break">12.5 break</h3>
+<p><code>break</code>：跳出当前一层循环，注意与 C/C++ 不同的是：<code>break</code> 不能跳出 <code>case</code> 语句。</p>
+<p>示例，每读入非 EOF 的字符串，会输出一遍1到7。该程序可以输入 <code>Ctrl+d</code> 文件结束符来结束，也可以直接用 <code>Ctrl+c</code> 杀掉该进程：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">while read name</span><br><span class="line">do</span><br><span class="line">    for ((i=1;i&lt;=10;i++))</span><br><span class="line">    do</span><br><span class="line">        case $i in</span><br><span class="line">            8)</span><br><span class="line">                break</span><br><span class="line">                ;;</span><br><span class="line">            *)</span><br><span class="line">                echo $i</span><br><span class="line">                ;;</span><br><span class="line">        esac</span><br><span class="line">    done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="12-6-continue">12.6 continue</h3>
+<p><code>continue</code>：跳出当前循环。</p>
+<p>示例，输出1到10中的所有奇数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for ((i=1;i&lt;=10;i++))</span><br><span class="line">do</span><br><span class="line">    if [ `expr $i % 2` -eq 0 ]</span><br><span class="line">    then</span><br><span class="line">        continue</span><br><span class="line">    fi</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>直接关闭进程的方式：</p>
+<ol>
+<li>使用 <code>top</code> 命令找到进程的 <code>PID</code>。</li>
+<li>输入 <code>kill -9 PID</code> 即可关掉此进程。</li>
+</ol>
+<h2 id="13-函数">13. 函数</h2>
+<p><code>bash</code> 中的函数类似于 <code>C/C++</code> 中的函数，但 <code>return</code> 的返回值与 C/C++ 不同，返回的是 <code>exit code</code>，取值为 <code>[0, 255]</code>，0表示正常结束。</p>
+<p>如果想获取函数的输出结果，可以通过 <code>echo</code> 输出到 <code>stdout</code> 中，然后通过 <code>$(function_name)</code> 来获取 <code>stdout</code> 中的结果。</p>
+<p>函数的 <code>return</code> 值可以通过 <code>$?</code> 来获取。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[function] func_name() &#123;  # function关键字可以省略</span><br><span class="line">    语句1</span><br><span class="line">    语句2</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）不获取 <code>return</code> 值和 <code>stdout</code> 值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">func() &#123;</span><br><span class="line">    name=AsanoSaki</span><br><span class="line">    echo &quot;Hello $name&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AsanoSaki</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello yxc</span><br></pre></td></tr></table></figure>
+<p>（2）获取 <code>return</code> 值和 <code>stdout</code> 值（不写 <code>return</code> 时，默认 <code>return 0</code>）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func() &#123;</span><br><span class="line">    name=AsanoSaki</span><br><span class="line">    echo &quot;Hello $name&quot;</span><br><span class="line"></span><br><span class="line">    return 123</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output=$(func)</span><br><span class="line">ret=$?</span><br><span class="line"></span><br><span class="line">echo &quot;output = $output&quot;</span><br><span class="line">echo &quot;return = $ret&quot;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output = Hello AsanoSaki</span><br><span class="line">return = 123</span><br></pre></td></tr></table></figure>
+<p>（3）函数的输入参数</p>
+<p>在函数内，<code>$1</code> 表示第一个输入参数，<code>$2</code> 表示第二个输入参数，依此类推。</p>
+<p>注意：函数内的 <code>$0</code> 仍然是文件名，而不是函数名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">func() &#123;  # 递归计算 $1 + ($1 - 1) + ($1 - 2) + ... + 0</span><br><span class="line">    word=&quot;&quot;</span><br><span class="line">    while [ &quot;$&#123;word&#125;&quot; != &#x27;y&#x27; ] &amp;&amp; [ &quot;$&#123;word&#125;&quot; != &#x27;n&#x27; ]</span><br><span class="line">    do</span><br><span class="line">        read -p &quot;要进入func($1)函数吗？请输入y/n：&quot; word</span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">    if [ &quot;$word&quot; == &#x27;n&#x27; ]</span><br><span class="line">    then</span><br><span class="line">        echo 0</span><br><span class="line">        return 0</span><br><span class="line">    fi  </span><br><span class="line"></span><br><span class="line">    if [ $1 -le 0 ] </span><br><span class="line">    then</span><br><span class="line">        echo 0</span><br><span class="line">        return 0</span><br><span class="line">    fi  </span><br><span class="line"></span><br><span class="line">    sum=$(func $(expr $1 - 1))</span><br><span class="line">    echo $(expr $sum + $1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo $(func 10)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">55</span><br></pre></td></tr></table></figure>
+<p>（4）函数内的局部变量</p>
+<p>可以在函数内定义局部变量，作用范围仅在当前函数内。可以在递归函数中定义局部变量。</p>
+<p>命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local 变量名=变量值</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">func() &#123;</span><br><span class="line">    local name=AsanoSaki</span><br><span class="line">    echo $name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func</span><br><span class="line"></span><br><span class="line">echo $name</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AsanoSaki</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>第一行为函数内的 <code>name</code> 变量，第二行为函数外调用 <code>name</code> 变量，会发现此时该变量不存在。</p>
+<h2 id="14-exit命令">14. exit命令</h2>
+<p><code>exit</code> 命令用来退出当前 Shell 进程，并返回一个退出状态；使用 <code>$?</code> 可以接收这个退出状态。</p>
+<p><code>exit</code> 命令可以接受一个整数值作为参数，代表退出状态。如果不指定，默认状态值是0。</p>
+<p><code>exit</code> 退出状态只能是一个介于0到255之间的整数，其中只有0表示成功，其它值都表示失败。</p>
+<p>示例，创建脚本 <code>test.sh</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ]  # 如果传入参数个数等于1，则正常退出；否则非正常退出。</span><br><span class="line">then</span><br><span class="line">    echo &quot;arguments not valid&quot;</span><br><span class="line">    exit 1</span><br><span class="line">else</span><br><span class="line">    echo &quot;arguments valid&quot;</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>执行该脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ chmod +x test.sh </span><br><span class="line">acs@9e0ebfcd82d7:~$ ./test.sh acwing</span><br><span class="line">arguments valid</span><br><span class="line">acs@9e0ebfcd82d7:~$ echo $?  # 传入一个参数，则正常退出，exit code为0</span><br><span class="line">0</span><br><span class="line">acs@9e0ebfcd82d7:~$ ./test.sh </span><br><span class="line">arguments not valid</span><br><span class="line">acs@9e0ebfcd82d7:~$ echo $?  # 传入参数个数不是1，则非正常退出，exit code为1</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<h2 id="15-文件重定向">15. 文件重定向</h2>
+<p>每个进程默认打开3个文件描述符：</p>
+<ul>
+<li><code>stdin</code>：标准输入，从命令行读取数据，文件描述符为0。</li>
+<li><code>stdout</code>：标准输出，向命令行输出数据，文件描述符为1。</li>
+<li><code>stderr</code>：标准错误输出，向命令行输出数据，文件描述符为2。</li>
+</ul>
+<p>可以用文件重定向将这三个文件重定向到其他文件中。</p>
+<p>重定向命令列表：</p>
+<ul>
+<li><code>command &gt; file</code>：将 <code>stdout</code> 重定向到 <code>file</code> 中。</li>
+<li><code>command &lt; file</code>：将 <code>stdin</code> 重定向到 <code>file</code> 中。</li>
+<li><code>command &gt;&gt; file</code>：将 <code>stdout</code> 以追加方式重定向到 <code>file</code> 中。</li>
+<li><code>command n&gt; file</code>：将文件描述符 <code>n</code> 重定向到 <code>file</code> 中。</li>
+<li><code>command n&gt;&gt; file</code>：将文件描述符 <code>n</code> 以追加方式重定向到 <code>file</code> 中。</li>
+</ul>
+<p>输入和输出重定向：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;Hello \c&quot; &gt; output.txt  # 将stdout重定向到output.txt中</span><br><span class="line">echo &quot;World&quot; &gt;&gt; output.txt  # 将字符串追加到output.txt中</span><br><span class="line"></span><br><span class="line">read str &lt; output.txt  # 从output.txt中读取字符串</span><br><span class="line"></span><br><span class="line">echo $str  # 输出结果：Hello World</span><br></pre></td></tr></table></figure>
+<p>同时重定向 <code>stdin</code> 和 <code>stdout</code>：</p>
+<p>创建 bash 脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">read a</span><br><span class="line">read b</span><br><span class="line"></span><br><span class="line">echo $(expr &quot;$a&quot; + &quot;$b&quot;)</span><br></pre></td></tr></table></figure>
+<p>创建 <code>input.txt</code>，里面的内容为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<p>执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ chmod +x test.sh  # 添加可执行权限</span><br><span class="line">acs@9e0ebfcd82d7:~$ ./test.sh &lt; input.txt &gt; output.txt  # 从input.txt中读取内容，将输出写入output.txt中</span><br><span class="line">acs@9e0ebfcd82d7:~$ cat output.txt  # 查看output.txt中的内容</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+<h2 id="16-引入外部脚本">16. 引入外部脚本</h2>
+<p>类似于 C/C++ 中的 <code>include</code> 操作，bash 也可以引入其他文件中的代码。</p>
+<p>语法格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">. filename  # 注意点和文件名之间有一个空格</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">source filename</span><br></pre></td></tr></table></figure>
+<p>示例，创建 <code>test1.sh</code>，内容为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">name=AsanoSaki  # 定义变量name</span><br></pre></td></tr></table></figure>
+<p>然后创建 <code>test2.sh</code>，内容为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">source test1.sh  # 或 . test1.sh</span><br><span class="line"></span><br><span class="line">echo My name is: $name  # 可以使用test1.sh中的变量</span><br></pre></td></tr></table></figure>
+<p>执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">acs@9e0ebfcd82d7:~$ chmod +x test2.sh </span><br><span class="line">acs@9e0ebfcd82d7:~$ ./test2.sh </span><br><span class="line">My name is: AsanoSaki</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/31281.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/31281.html";
+            const title         = "「Linux学习笔记-Shell」";
+            const excerpt       = `本文记录 Linux 的学习过程，内容为 Shell 命令语言。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Linux/" rel="tag">Linux</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2022-12-02T07:07:39.124Z" itemprop="dateModified">Last edited: 2022-12-02</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Linux学习笔记-命令、Tmux与Vim" href="/posts/53725.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Linux学习笔记-SSH与Git" href="/posts/20491.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                38
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Shell-%E6%A6%82%E8%AE%BA"><span class="toc-text">1. Shell 概论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E9%87%8A"><span class="toc-text">2. 注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%98%E9%87%8F"><span class="toc-text">3. 变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-text">3.1 定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-text">3.2 使用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F"><span class="toc-text">3.3 只读变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%88%A0%E9%99%A4%E5%8F%98%E9%87%8F"><span class="toc-text">3.4 删除变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.5 变量类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">3.6 字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%BB%98%E8%AE%A4%E5%8F%98%E9%87%8F"><span class="toc-text">4. 默认变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%96%87%E4%BB%B6%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F"><span class="toc-text">4.1 文件参数变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%85%B6%E5%AE%83%E5%8F%82%E6%95%B0%E7%9B%B8%E5%85%B3%E5%8F%98%E9%87%8F"><span class="toc-text">4.2 其它参数相关变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84"><span class="toc-text">5. 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%95%B0%E7%BB%84%E5%AE%9A%E4%B9%89"><span class="toc-text">5.1 数组定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%AF%BB%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E5%80%BC"><span class="toc-text">5.2 读取数组中元素的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%AF%BB%E5%8F%96%E6%95%B4%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="toc-text">5.3 读取整个数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="toc-text">5.4 数组长度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-expr%E5%91%BD%E4%BB%A4"><span class="toc-text">6. expr命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">6.1 字符串表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%95%B4%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">6.2 整数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E9%80%BB%E8%BE%91%E5%85%B3%E7%B3%BB%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">6.3 逻辑关系表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-read%E5%91%BD%E4%BB%A4"><span class="toc-text">7. read命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-echo%E5%91%BD%E4%BB%A4"><span class="toc-text">8. echo命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-printf%E5%91%BD%E4%BB%A4"><span class="toc-text">9. printf命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-test%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%88%A4%E6%96%AD%E7%AC%A6%E5%8F%B7"><span class="toc-text">10. test命令与判断符号[]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">10.1 逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-test%E5%91%BD%E4%BB%A4"><span class="toc-text">10.2 test命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3-%E5%88%A4%E6%96%AD%E7%AC%A6%E5%8F%B7"><span class="toc-text">10.3 判断符号[]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="toc-text">11. 判断语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-if%E2%80%A6then%E5%BD%A2%E5%BC%8F"><span class="toc-text">11.1 if…then形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-case%E2%80%A6esac%E5%BD%A2%E5%BC%8F"><span class="toc-text">11.2 case…esac形式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-text">12. 循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-for%E2%80%A6in%E2%80%A6do%E2%80%A6done"><span class="toc-text">12.1 for…in…do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-for-%E2%80%A6-%E2%80%A6-%E2%80%A6-do%E2%80%A6done"><span class="toc-text">12.2 for ((…;…;…)) do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-while%E2%80%A6do%E2%80%A6done"><span class="toc-text">12.3 while…do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-4-until%E2%80%A6do%E2%80%A6done"><span class="toc-text">12.4 until…do…done</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-5-break"><span class="toc-text">12.5 break</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-6-continue"><span class="toc-text">12.6 continue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%87%BD%E6%95%B0"><span class="toc-text">13. 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-exit%E5%91%BD%E4%BB%A4"><span class="toc-text">14. exit命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">15. 文件重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E5%BC%95%E5%85%A5%E5%A4%96%E9%83%A8%E8%84%9A%E6%9C%AC"><span class="toc-text">16. 引入外部脚本</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/31783.html"><i class="fa  fa-book"></i> Python绘图模块Plotly教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39408.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-注意力机制</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/7592.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-现代循环神经网络</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

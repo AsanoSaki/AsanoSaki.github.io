@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>动手学深度学习笔记(李沐)-预备知识 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="AI" />
+  
+  <meta name="description" content="动手学深度学习笔记(李沐)-预备知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动手学深度学习笔记(李沐)-预备知识">
+<meta property="og:url" content="https://asanosaki.github.io/posts/15604.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="动手学深度学习笔记(李沐)-预备知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-01-18T08:37:00.000Z">
+<meta property="article:modified_time" content="2023-06-02T06:43:31.821Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/15604.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">动手学深度学习笔记(李沐)-预备知识</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-01-18T08:37:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-01-18</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~8.24K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1685688211821"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. 环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2. 数据操作与数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3. 线性代数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text">4. 自动微分</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>李沐动手学深度学习（PyTorch）课程学习笔记第一章：预备知识。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-环境安装">1. 环境安装</h2>
+<p>首先安装好 PyTorch 环境：<a href="/posts/15428.html">Anaconda与PyTorch安装教程</a>。</p>
+<p>安装需要的包：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install d2l</span><br></pre></td></tr></table></figure>
+<h2 id="2-数据操作与数据预处理">2. 数据操作与数据预处理</h2>
+<p>张量表示一个数值组成的数组，这个数组可能有多个维度：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">12</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])</span></span><br></pre></td></tr></table></figure>
+<p>我们可以通过张量的 <code>shape</code> 属性来访问张量的形状和张量中元素的总数：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.shape)  <span class="comment"># torch.Size([12])</span></span><br><span class="line"><span class="built_in">print</span>(x.numel())  <span class="comment"># 12</span></span><br></pre></td></tr></table></figure>
+<p>要改变一个张量的形状而不改变元素数量和元素值，我们可以调用 <code>reshape</code> 函数：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = x.reshape(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment"># tensor([[ 0,  1,  2,  3],</span></span><br><span class="line"><span class="comment">#         [ 4,  5,  6,  7],</span></span><br><span class="line"><span class="comment">#         [ 8,  9, 10, 11]])</span></span><br></pre></td></tr></table></figure>
+<p>使用全0、全1、其他常量或者从特定分布中随机采样的数字：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(torch.zeros((<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)))</span><br><span class="line"><span class="comment"># tensor([[[0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#          [0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#          [0., 0., 0., 0.]],</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment">#         [[0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#          [0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#          [0., 0., 0., 0.]]])</span></span><br><span class="line"><span class="built_in">print</span>(torch.ones((<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)))</span><br><span class="line"><span class="comment"># tensor([[[1., 1., 1., 1.],</span></span><br><span class="line"><span class="comment">#          [1., 1., 1., 1.],</span></span><br><span class="line"><span class="comment">#          [1., 1., 1., 1.]],</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment">#         [[1., 1., 1., 1.],</span></span><br><span class="line"><span class="comment">#          [1., 1., 1., 1.],</span></span><br><span class="line"><span class="comment">#          [1., 1., 1., 1.]]])</span></span><br></pre></td></tr></table></figure>
+<p>通过提供包含数值的 Python 列表（或嵌套列表）来为所需张量中的每个元素赋予确定值：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([2, 3, 4, 5])</span></span><br></pre></td></tr></table></figure>
+<p>常见的标准算术运算符（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code> 和 <code>**</code>）都可以被升级为按元素运算：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = torch.tensor([<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;x + y:&#x27;</span>, x + y, <span class="string">&#x27;x - y:&#x27;</span>, x - y)  <span class="comment"># x + y: tensor([3., 4., 5.]) x - y: tensor([-1., 0., 1.])</span></span><br><span class="line"><span class="built_in">print</span>(torch.exp(x))  <span class="comment"># tensor([ 2.7183,  7.3891, 20.0855])</span></span><br></pre></td></tr></table></figure>
+<p>我们也可以把多个张量拼接在一起：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = torch.arange(<span class="number">6</span>, dtype=torch.float32).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">y = torch.tensor([[<span class="number">2.0</span>, <span class="number">1</span>, <span class="number">4</span>], [<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="comment"># dim表示在哪个维度上拼接</span></span><br><span class="line"><span class="built_in">print</span>(torch.cat((x, y), dim=<span class="number">0</span>).shape)  <span class="comment"># torch.Size([4, 3])</span></span><br><span class="line"><span class="built_in">print</span>(torch.cat((x, y), dim=<span class="number">1</span>).shape)  <span class="comment"># torch.Size([2, 6])</span></span><br></pre></td></tr></table></figure>
+<p>通过逻辑运算符构建二元张量：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = torch.tensor([<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(x == y)  <span class="comment"># tensor([True, False, True])</span></span><br></pre></td></tr></table></figure>
+<p>对张量中的所有元素进行求和会产生一个只有一个元素的张量，或者指定在某一维度上求和：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(x.<span class="built_in">sum</span>())  <span class="comment"># tensor(9)</span></span><br><span class="line"><span class="built_in">print</span>(x.<span class="built_in">sum</span>(<span class="number">0</span>))  <span class="comment"># tensor([2, 3, 4])</span></span><br></pre></td></tr></table></figure>
+<p>即使形状不同，我们仍然可以通过调用广播机制（broadcasting mechanism）来执行按元素操作：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = torch.arange(<span class="number">3</span>).reshape((<span class="number">3</span>, <span class="number">1</span>))</span><br><span class="line">y = torch.arange(<span class="number">2</span>).reshape((<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment"># 必须维度一样才能广播，先将x复制成3行2列，再将y复制成3行2列，然后运算</span></span><br><span class="line"><span class="built_in">print</span>(x + y)</span><br><span class="line"><span class="comment"># tensor([[0, 1],</span></span><br><span class="line"><span class="comment">#         [1, 2],</span></span><br><span class="line"><span class="comment">#         [2, 3]])</span></span><br></pre></td></tr></table></figure>
+<p>与 NumPy 张量相互转化：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = x.numpy()</span><br><span class="line">b = torch.tensor(a)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a), <span class="built_in">type</span>(b))  <span class="comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt; &lt;class &#x27;torch.Tensor&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+<p>将大小为1的张量转换为 Python 标量：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">3.5</span>])</span><br><span class="line"><span class="built_in">print</span>(x, x.item(), <span class="built_in">float</span>(x))  <span class="comment"># tensor([3.5000]) 3.5 3.5</span></span><br></pre></td></tr></table></figure>
+<p>创建一个人工数据集，并存储在 CSV（逗号分隔值）文件中：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.makedirs(os.path.join(<span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;data&#x27;</span>), exist_ok=<span class="literal">True</span>)</span><br><span class="line">data_file = os.path.join(<span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;house_tiny.csv&#x27;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(data_file, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&#x27;NumRooms,Alley,Price\n&#x27;</span>)  <span class="comment"># 列名</span></span><br><span class="line">    f.write(<span class="string">&#x27;NA,Pave,127500\n&#x27;</span>)  <span class="comment"># 每行表示一个数据样本</span></span><br><span class="line">    f.write(<span class="string">&#x27;2,NA,106000\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;4,NA,178100\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;NA,NA,140000\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>从创建的 CSV 文件中加载原始数据集：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(data_file)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="comment">#    NumRooms Alley   Price</span></span><br><span class="line"><span class="comment"># 0       NaN  Pave  127500</span></span><br><span class="line"><span class="comment"># 1       2.0   NaN  106000</span></span><br><span class="line"><span class="comment"># 2       4.0   NaN  178100</span></span><br><span class="line"><span class="comment"># 3       NaN   NaN  140000</span></span><br></pre></td></tr></table></figure>
+<p>为了处理缺失的数据，典型的方法包括<strong>插值</strong>和<strong>删除</strong>，这里，我们将考虑插值：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">inputs, outputs = data.iloc[:, <span class="number">0</span>:<span class="number">2</span>], data.iloc[:, <span class="number">2</span>]  <span class="comment"># 将data的第0、1列作为input，第2列作为output</span></span><br><span class="line">inputs = inputs.fillna(inputs.mean(numeric_only=<span class="literal">True</span>))  <span class="comment"># 将input中为NaN的数据用平均值填充</span></span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br><span class="line"><span class="comment">#    NumRooms Alley</span></span><br><span class="line"><span class="comment"># 0       3.0  Pave</span></span><br><span class="line"><span class="comment"># 1       2.0   NaN</span></span><br><span class="line"><span class="comment"># 2       4.0   NaN</span></span><br><span class="line"><span class="comment"># 3       3.0   NaN</span></span><br></pre></td></tr></table></figure>
+<p>对于 <code>inputs</code> 中的类别值或离散值，我们可以将 <code>NaN</code> 视为一个类别：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inputs = pd.get_dummies(inputs, dummy_na=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br><span class="line"><span class="comment">#    NumRooms  Alley_Pave  Alley_nan</span></span><br><span class="line"><span class="comment"># 0       3.0           1          0</span></span><br><span class="line"><span class="comment"># 1       2.0           0          1</span></span><br><span class="line"><span class="comment"># 2       4.0           0          1</span></span><br><span class="line"><span class="comment"># 3       3.0           0          1</span></span><br></pre></td></tr></table></figure>
+<p>现在 <code>inputs</code> 和 <code>outputs</code> 中的所有条目都是数值类型，它们可以转换为张量格式：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x, y = torch.tensor(inputs.values), torch.tensor(outputs.values)</span><br><span class="line"><span class="built_in">print</span>(x, y)</span><br><span class="line"><span class="comment"># tensor([[3., 1., 0.],</span></span><br><span class="line"><span class="comment">#         [2., 0., 1.],</span></span><br><span class="line"><span class="comment">#         [4., 0., 1.],</span></span><br><span class="line"><span class="comment">#         [3., 0., 1.]], dtype=torch.float64) tensor([127500, 106000, 178100, 140000])</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-线性代数">3. 线性代数</h2>
+<p>标量由只有一个元素的张量表示，你可以将向量视为标量值组成的列表：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.tensor(<span class="number">3.0</span>)</span><br><span class="line">y = torch.tensor(<span class="number">2.0</span>)</span><br><span class="line"><span class="built_in">print</span>(x + y, x * y)  <span class="comment"># tensor(5.) tensor(6.)</span></span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([0, 1, 2, 3])</span></span><br></pre></td></tr></table></figure>
+<p>访问张量的长度和形状：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(x))  <span class="comment"># 4</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)  <span class="comment"># torch.Size([4])</span></span><br></pre></td></tr></table></figure>
+<p>矩阵和矩阵的转置：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A = torch.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(A.T)</span><br><span class="line"><span class="comment"># tensor([[0, 3, 6],</span></span><br><span class="line"><span class="comment">#         [1, 4, 7],</span></span><br><span class="line"><span class="comment">#         [2, 5, 8]])</span></span><br></pre></td></tr></table></figure>
+<p>给定具有相同形状的任何两个张量，任何按元素二元运算的结果都将是相同形状的张量：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A = torch.arange(<span class="number">12</span>, dtype=torch.float32).reshape(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">B = A.clone()  <span class="comment"># 通过分配新内存，将A的一个副本分配给B</span></span><br><span class="line"><span class="built_in">print</span>(A + B)</span><br><span class="line"><span class="comment"># tensor([[ 0.,  2.,  4.,  6.],</span></span><br><span class="line"><span class="comment">#         [ 8., 10., 12., 14.],</span></span><br><span class="line"><span class="comment">#         [16., 18., 20., 22.]])</span></span><br></pre></td></tr></table></figure>
+<p>求和与求平均值：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(A.<span class="built_in">sum</span>())  <span class="comment"># tensor(66.)，所有元素求和</span></span><br><span class="line"><span class="built_in">print</span>(A.<span class="built_in">sum</span>(axis=<span class="number">0</span>))  <span class="comment"># tensor([12., 15., 18., 21.])，在第0维上求和</span></span><br><span class="line"><span class="built_in">print</span>(A.<span class="built_in">sum</span>(axis=<span class="number">1</span>))  <span class="comment"># tensor([ 6., 22., 38.])，在第1维上求和</span></span><br><span class="line"><span class="built_in">print</span>(A.mean())  <span class="comment"># tensor(5.5000)，所有元素均值</span></span><br><span class="line"><span class="built_in">print</span>(A.mean(axis=<span class="number">1</span>))  <span class="comment"># tensor([1.5000, 5.5000, 9.5000])，在第1维上求均值</span></span><br><span class="line"><span class="built_in">print</span>(A.<span class="built_in">sum</span>(axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>))  <span class="comment"># 计算总和或均值时保持维度不变</span></span><br><span class="line"><span class="comment"># tensor([[ 6.],</span></span><br><span class="line"><span class="comment">#         [22.],</span></span><br><span class="line"><span class="comment">#         [38.]])</span></span><br></pre></td></tr></table></figure>
+<p>点积是相同位置的按元素乘积的和，<code>torch.dot</code> 只能对一维向量做点积。注意 NumPy 中的 <code>np.dot</code> 函数计算的是两个矩阵的矩阵乘法，而非对应元素相乘求和：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.arange(<span class="number">4</span>, dtype=torch.float32)  <span class="comment"># tensor([0., 1., 2., 3.])</span></span><br><span class="line">y = torch.ones(<span class="number">4</span>, dtype=torch.float32)  <span class="comment"># tensor([1., 1., 1., 1.])</span></span><br><span class="line"><span class="built_in">print</span>(torch.dot(x, y))  <span class="comment"># tensor(6.)</span></span><br></pre></td></tr></table></figure>
+<p>矩阵向量积：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = torch.arange(<span class="number">6</span>, dtype=torch.float32).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># tensor([[0., 1., 2.],</span></span><br><span class="line"><span class="comment">#         [3., 4., 5.]])</span></span><br><span class="line">y = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.float32)  <span class="comment"># tensor([1., 2., 3.])</span></span><br><span class="line"><span class="built_in">print</span>(torch.mv(x, y))  <span class="comment"># tensor([ 8., 26.])</span></span><br></pre></td></tr></table></figure>
+<p>矩阵乘法，<code>torch.mm</code> 与 <code>np.dot</code> 类似：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">x = torch.arange(<span class="number">6</span>, dtype=torch.float32).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># tensor([[0., 1., 2.],</span></span><br><span class="line"><span class="comment">#         [3., 4., 5.]])</span></span><br><span class="line">y = torch.ones(<span class="number">6</span>, dtype=torch.float32).reshape(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># tensor([[1., 1.],</span></span><br><span class="line"><span class="comment">#         [1., 1.],</span></span><br><span class="line"><span class="comment">#         [1., 1.]])</span></span><br><span class="line"><span class="built_in">print</span>(torch.mm(x, y))</span><br><span class="line"><span class="comment"># tensor([[ 3.,  3.],</span></span><br><span class="line"><span class="comment">#         [12., 12.]])</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="built_in">print</span>(np.dot(x, y))</span><br><span class="line"><span class="comment"># [[ 3.  3.]</span></span><br><span class="line"><span class="comment">#  [12. 12.]]</span></span><br></pre></td></tr></table></figure>
+<p>L2 范数是向量所有元素的平方和的平方根：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">3</span>, -<span class="number">4</span>], dtype=torch.float32)</span><br><span class="line"><span class="built_in">print</span>(torch.norm(x))  <span class="comment"># tensor(5.)</span></span><br><span class="line"><span class="built_in">print</span>(torch.norm(x, <span class="number">2</span>))  <span class="comment"># tensor(5.)</span></span><br></pre></td></tr></table></figure>
+<p>L1 范数为向量所有元素的绝对值之和：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">abs</span>(x).<span class="built_in">sum</span>())  <span class="comment"># tensor(7.)</span></span><br><span class="line"><span class="built_in">print</span>(torch.norm(x, <span class="number">1</span>))  <span class="comment"># tensor(7.)</span></span><br></pre></td></tr></table></figure>
+<p>F 范数（弗罗贝尼乌斯范数）是矩阵所有元素的平方和的平方根：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(torch.norm(torch.ones((<span class="number">4</span>, <span class="number">9</span>))))  <span class="comment"># tensor(6.)</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-自动微分">4. 自动微分</h2>
+<p>先举一个简单的例子：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">4.0</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([0., 1., 2., 3.])</span></span><br><span class="line"></span><br><span class="line">x.requires_grad_(<span class="literal">True</span>)  <span class="comment"># 等价于x = torch.arange(4.0, requires_grad=True)</span></span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># 默认值是None</span></span><br><span class="line"></span><br><span class="line">y = <span class="number">2</span> * torch.dot(x, x)  <span class="comment"># 计算y，注意一个标量函数关于向量x的梯度是向量，并且与x具有相同的形状</span></span><br><span class="line"><span class="built_in">print</span>(y)  <span class="comment"># tensor(28., grad_fn=&lt;MulBackward0&gt;)，隐式构造了计算图，所以有一个求梯度的函数</span></span><br><span class="line"></span><br><span class="line">y.backward()  <span class="comment"># 通过调用反向传播函数来自动计算y关于x每个分量的梯度</span></span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># tensor([ 0.,  4.,  8., 12.])，y=2*x*x的导数为4x</span></span><br><span class="line"><span class="built_in">print</span>(x.grad == <span class="number">4</span> * x)  <span class="comment"># tensor([True, True, True, True])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在计算x的另一个函数</span></span><br><span class="line"><span class="comment"># 在默认情况下，PyTorch会累积梯度，我们需要清除之前的值</span></span><br><span class="line">x.grad.zero_()</span><br><span class="line">y = x.<span class="built_in">sum</span>()</span><br><span class="line">y.backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># tensor([1., 1., 1., 1.])</span></span><br></pre></td></tr></table></figure>
+<p>当 <code>y</code> 不是标量时，向量 <code>y</code> 关于向量 <code>x</code> 的导数的最自然解释是一个矩阵。对于高阶和高维的 <code>y</code> 和 <code>x</code>，求导的结果可以是一个高阶张量。</p>
+<p>然而，虽然这些更奇特的对象确实出现在高级机器学习中（包括深度学习中），但当调用向量的反向计算时，我们通常会试图计算一批训练样本中每个组成部分的损失函数的导数。这里，我们的目的不是计算微分矩阵，而是单独计算批量中每个样本的偏导数之和：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对非标量调用backward()需要传入一个gradient参数，该参数指定微分函数关于self的梯度。</span></span><br><span class="line"><span class="comment"># 本例只想求偏导数的和，所以传递一个1的梯度是合适的</span></span><br><span class="line">x.grad.zero_()</span><br><span class="line">y = x * x</span><br><span class="line"><span class="built_in">print</span>(y)  <span class="comment"># tensor([0., 1., 4., 9.], grad_fn=&lt;MulBackward0&gt;)</span></span><br><span class="line"><span class="comment"># 等价于y.backward(torch.ones(len(x)))</span></span><br><span class="line">y.<span class="built_in">sum</span>().backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># tensor([0., 2., 4., 6.])</span></span><br></pre></td></tr></table></figure>
+<p>有时，我们希望将某些计算移动到记录的计算图之外。例如，假设 <code>y</code> 是作为 <code>x</code> 的函数计算的，而 <code>z</code> 则是作为 <code>y</code> 和 <code>x</code> 的函数计算的。想象一下，我们想计算 <code>z</code> 关于 <code>x</code> 的梯度，但由于某种原因，希望将 <code>y</code> 视为一个常数，并且只考虑到 <code>x</code> 在 <code>y</code> 被计算后发挥的作用。</p>
+<p>这里可以分离 <code>y</code> 来返回一个新变量 <code>u</code>，该变量与 <code>y</code> 具有相同的值，但丢弃计算图中如何计算 <code>y</code> 的任何信息。换句话说，梯度不会向后流经 <code>u</code> 到 <code>x</code>。因此，下面的反向传播函数计算 <code>z = u * x</code> 关于 <code>x</code> 的偏导数，同时将 <code>u</code> 作为常数处理，而不是计算 <code>z = x * x * x</code> 关于 <code>x</code> 的偏导数。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x.grad.zero_()</span><br><span class="line">y = x * x</span><br><span class="line">u = y.detach()</span><br><span class="line">z = u * x</span><br><span class="line"></span><br><span class="line">z.<span class="built_in">sum</span>().backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad == u)  <span class="comment"># tensor([True, True, True, True])</span></span><br><span class="line"></span><br><span class="line">x.grad.zero_()</span><br><span class="line">y.<span class="built_in">sum</span>().backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad == <span class="number">2</span> * x)  <span class="comment"># tensor([True, True, True, True])</span></span><br></pre></td></tr></table></figure>
+<p>使用自动微分的一个好处是：即使构建函数的计算图需要通过 Python 控制流（例如，条件、循环或任意函数调用），我们仍然可以计算得到变量的梯度。在下面的代码中，<code>while</code> 循环的迭代次数和 <code>if</code> 语句的结果都取决于输入 <code>a</code> 的值。对于任何 <code>a</code>，存在某个常量标量 <code>k</code>，使得 <code>d = f(a) = k * a</code>，其中 <code>k</code> 的值取决于输入 <code>a</code>，因此可以用 <code>d / a</code> 验证梯度是否正确。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">a</span>):</span><br><span class="line">    b = a * <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> b.norm() &lt; <span class="number">1000</span>:</span><br><span class="line">        b = b * <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> b.<span class="built_in">sum</span>() &gt; <span class="number">0</span>:</span><br><span class="line">        c = b</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        c = <span class="number">100</span> * b</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">a = torch.randn(size=(), requires_grad=<span class="literal">True</span>)</span><br><span class="line">d = f(a)</span><br><span class="line">d.backward()</span><br><span class="line"><span class="built_in">print</span>(a.grad == d / a)  <span class="comment"># tensor(True)</span></span><br></pre></td></tr></table></figure>
+<p>下一章：<a href="/posts/19931.html">线性神经网络</a>。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/15604.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/15604.html";
+            const title         = "「动手学深度学习笔记(李沐)-预备知识」";
+            const excerpt       = `李沐动手学深度学习（PyTorch）课程学习笔记第一章：预备知识。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-06-02T06:43:31.821Z" itemprop="dateModified">Last edited: 2023-06-02</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 实用机器学习课程笔记(Stanford)" href="/posts/33687.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 动手学深度学习笔记(李沐)-线性神经网络" href="/posts/19931.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                38
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-text">1. 环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">2. 数据操作与数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-text">3. 线性代数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86"><span class="toc-text">4. 自动微分</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/31783.html"><i class="fa  fa-book"></i> Python绘图模块Plotly教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39408.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-注意力机制</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/7592.html"><i class="fa  fa-book"></i> 动手学深度学习笔记(李沐)-现代循环神经网络</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
