@@ -4,9 +4,9 @@
     <title>AsanoSaki • Posts by &#34;ai&#34; tag</title>
     <link href="https://asanosaki.github.io" />
     <updated>2023-08-09T02:03:00.000Z</updated>
+    <category term="Others" />
     <category term="AI" />
     <category term="Hexo" />
-    <category term="Others" />
     <category term="Linux" />
     <category term="MySQL" />
     <category term="Python" />
@@ -37,7 +37,7 @@
         <title>分割图像的着色与相似度匹配</title>
         <link rel="alternate" href="https://asanosaki.github.io/posts/21944.html"/>
         <content type="html">&lt;blockquote&gt;
-&lt;p&gt;介绍图像分割后产生的。&lt;/p&gt;
+&lt;p&gt;介绍图像分割后产生的 Mask 灰度图的着色以及相似度匹配计算。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;1-分割图像着色&#34;&gt;1. 分割图像着色&lt;/h2&gt;

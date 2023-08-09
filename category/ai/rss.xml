@@ -7,9 +7,9 @@
         <language>zh-CN</language>
         <pubDate>Wed, 09 Aug 2023 10:03:00 +0800</pubDate>
         <lastBuildDate>Wed, 09 Aug 2023 10:03:00 +0800</lastBuildDate>
+        <category>Others</category>
         <category>AI</category>
         <category>Hexo</category>
-        <category>Others</category>
         <category>Linux</category>
         <category>MySQL</category>
         <category>Python</category>
@@ -42,7 +42,7 @@
             <category>AI</category>
             <pubDate>Tue, 08 Aug 2023 14:14:00 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
-&lt;p&gt;介绍图像分割后产生的。&lt;/p&gt;
+&lt;p&gt;介绍图像分割后产生的 Mask 灰度图的着色以及相似度匹配计算。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;1-分割图像着色&#34;&gt;1. 分割图像着色&lt;/h2&gt;
