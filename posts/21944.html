@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>分割图像的着色与相似度匹配 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="AI" />
+  
+  <meta name="description" content="分割图像的着色与相似度匹配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分割图像的着色与相似度匹配">
+<meta property="og:url" content="https://asanosaki.github.io/posts/21944.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="分割图像的着色与相似度匹配">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-08-08T06:14:00.000Z">
+<meta property="article:modified_time" content="2023-08-09T02:00:27.705Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/21944.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">分割图像的着色与相似度匹配</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-08-08T06:14:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-08-08</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~11.08K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1691546427705"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%86%E5%89%B2%E5%9B%BE%E5%83%8F%E7%9D%80%E8%89%B2"><span class="toc-number">1.</span> <span class="toc-text">1. 分割图像着色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%86%E5%89%B2%E5%9B%BE%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D"><span class="toc-number">2.</span> <span class="toc-text">2. 分割图相似度匹配</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>介绍图像分割后产生的。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-分割图像着色">1. 分割图像着色</h2>
+<p>以 SAM 分割为例，我们分割出来产生的 <code>masks</code> 为一个 List，长度为分割出来的类别数，List 中的每个元素为一个 Dict，记录了分割目标的面积、边界框等信息，其中的 <code>segmentation</code> 字段为分割出来的二值图，宽高与原图一致，目标像素点为 True，否则为 False。</p>
+<p>我们实现两种方式分别对分割出来的 <code>masks</code> 以及保存下来的若干张分割图像进行合并与上色。灰度图像和伪彩色图像都对应一个索引表，这个索引表又叫调色板。图像的像素值就是索引，灰度图的索引表为：</p>
+<table>
+    <thead>
+        <tr>
+            <th>像素值</th>
+            <th>R</th>
+            <th>G</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+        <tr>
+            <td>255</td>
+            <td>255</td>
+            <td>255</td>
+            <td>255</td>
+        </tr>
+    </tbody>
+</table>
+<p>索引表不同的像素值对应的 RGB 值就是该像素的颜色，灰度图像的索引表中的 RGB 值都与像素值相同。同理，只要修改这些 RGB 数值，就可以显示伪彩色图像了。注意调色板的索引从0-255，因此，调色板的每个索引对应的 RGB 值都要进行设置。</p>
+<p>代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调色板</span></span><br><span class="line">_palette = []</span><br><span class="line">color_num = <span class="number">100</span>  <span class="comment"># 不同的颜色数量</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(color_num // <span class="number">4</span>):</span><br><span class="line">    _palette.append([(<span class="number">255</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">50</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">100</span> + i * <span class="number">8</span>) % <span class="number">256</span>])</span><br><span class="line">    _palette.append([(<span class="number">100</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">50</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">255</span> + i * <span class="number">8</span>) % <span class="number">256</span>])</span><br><span class="line">    _palette.append([(<span class="number">33</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">133</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">233</span> + i * <span class="number">8</span>) % <span class="number">256</span>])</span><br><span class="line">    _palette.append([(<span class="number">68</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">218</span> + i * <span class="number">8</span>) % <span class="number">256</span>, (<span class="number">138</span> + i * <span class="number">8</span>) % <span class="number">256</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(color_num, <span class="number">256</span>):  <span class="comment"># 补上后面的灰度值索引</span></span><br><span class="line">    _palette.append([i, i, i])</span><br><span class="line">color_palette = np.array(_palette, dtype=<span class="string">&#x27;uint8&#x27;</span>).reshape(-<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># print(color_palette.shape)  # (256, 3)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 给mask上色</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">colorize_mask</span>(<span class="params">mask</span>):</span><br><span class="line">    mask = Image.fromarray(mask.astype(np.uint8))</span><br><span class="line">    mask = mask.convert(mode=<span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">    mask.putpalette(color_palette)</span><br><span class="line">    <span class="comment"># mask = mask.convert(mode=&#x27;RGB&#x27;)</span></span><br><span class="line">    <span class="keyword">return</span> mask</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 给mask上色并保存</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_colorize_mask</span>(<span class="params">mask, output_dir, file_name</span>):</span><br><span class="line">    save_mask = colorize_mask(mask)</span><br><span class="line">    save_mask.save(os.path.join(output_dir, file_name))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示SAM分割出来的masks</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show_origin_masks</span>(<span class="params">masks</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(masks) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    sorted_masks = <span class="built_in">sorted</span>(masks, key=(<span class="keyword">lambda</span> x: x[<span class="string">&#x27;area&#x27;</span>]), reverse=<span class="literal">True</span>)  <span class="comment"># 按面积从大到小排序</span></span><br><span class="line">    <span class="comment"># ax = plt.gca()  # 在原本的图片上绘制</span></span><br><span class="line">    <span class="comment"># ax.set_autoscale_on(False)  # 在原本的图片上绘制</span></span><br><span class="line"></span><br><span class="line">    img = np.ones((sorted_masks[<span class="number">0</span>][<span class="string">&#x27;segmentation&#x27;</span>].shape[<span class="number">0</span>], sorted_masks[<span class="number">0</span>][<span class="string">&#x27;segmentation&#x27;</span>].shape[<span class="number">1</span>], <span class="number">4</span>))  <span class="comment"># img.shape: (1080, 1920, 4)</span></span><br><span class="line">    img[:, :, <span class="number">3</span>] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> mask <span class="keyword">in</span> sorted_masks:</span><br><span class="line">        m = mask[<span class="string">&#x27;segmentation&#x27;</span>]  <span class="comment"># (1080, 1920)的True or False矩阵</span></span><br><span class="line">        color_mask = np.concatenate([np.random.random(<span class="number">3</span>), [<span class="number">0.35</span>]])  <span class="comment"># 第4维表示透明度</span></span><br><span class="line">        img[m] = color_mask</span><br><span class="line">    <span class="comment"># ax.imshow(img)  # 在原本的图片上绘制</span></span><br><span class="line">    plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示目录img_masks_path中的masks</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show_img_masks</span>(<span class="params">masks_dir, height, width, threshold</span>):</span><br><span class="line">    mask = np.zeros((height, width))</span><br><span class="line">    img_mask_names = os.listdir(masks_dir)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> idx, img_mask_name <span class="keyword">in</span> <span class="built_in">enumerate</span>(img_mask_names):</span><br><span class="line">        img_mask = Image.<span class="built_in">open</span>(os.path.join(masks_dir, img_mask_name))</span><br><span class="line">        img_mask = np.asarray(img_mask, dtype=np.bool_)</span><br><span class="line">        <span class="keyword">if</span> np.<span class="built_in">sum</span>(img_mask) &lt; threshold:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        mask[img_mask] = idx + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    Image.fromarray(mask).show()  <span class="comment"># 上色前的mask</span></span><br><span class="line">    mask = colorize_mask(mask)</span><br><span class="line">    mask.show()  <span class="comment"># 上色后的mask</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取原始图像</span></span><br><span class="line">image = Image.<span class="built_in">open</span>(<span class="string">&#x27;../images/people.jpg&#x27;</span>)</span><br><span class="line">width, height = image.size</span><br><span class="line">image.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取SAM分割的若干masks图像进行合并上色显示</span></span><br><span class="line">masks_dir = <span class="string">&#x27;../images/people_sam/&#x27;</span></span><br><span class="line">threshold = <span class="number">200</span></span><br><span class="line">show_img_masks(masks_dir, height, width, threshold)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示上色前后的mask</span></span><br><span class="line">test_mask_path = <span class="string">&#x27;../images/test_mask.png&#x27;</span></span><br><span class="line">test_mask = Image.<span class="built_in">open</span>(test_mask_path)</span><br><span class="line">test_mask.show()</span><br><span class="line">test_mask = np.array(test_mask, dtype=np.uint8)</span><br><span class="line"><span class="built_in">print</span>(test_mask.shape)  <span class="comment"># (1080, 1920)</span></span><br><span class="line"></span><br><span class="line">mask_gray = Image.fromarray(test_mask, <span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">mask_gray.show()</span><br><span class="line">mask_color = colorize_mask(test_mask)</span><br><span class="line">mask_color.show()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(np.unique(mask_color)))  <span class="comment"># [0, 1, 2, 3, 4, 5, 6, ..., 44]，可以看成类别</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-分割图相似度匹配">2. 分割图相似度匹配</h2>
+<p><strong>区域相似度</strong>（Region Similarity）：为了测量基于区域的分割相似度，即错误像素的数量，我们使用 Jaccard 索引 𝒥 表示， 𝒥 定义为预测的分割输出 Mask 和真值 Mask 之间的交并比 IoU（Intersection over Union），Jaccard 索引提供了关于错误分类像素的直观的信息。</p>
+<p><strong>边沿精度</strong>（Contour Accuracy）：边沿精度即计算 F-score，F-score 评估的是预测 Mask 的边界是否与真值 Mask 的边界对应。首先应提取预测 Mask 和真值 Mask 的边界元素坐标，将边界上的元素置为 True，非边界的元素置为 False。F-score 被定义为<strong>精度</strong>和<strong>召回率</strong>的调和平均数。</p>
+<p><strong>精度</strong>（Precision，P，也称查准率）：分母应是<strong>预测</strong> Mask 的边界元素总数，分子则是在预测 Mask 为边界的那些元素中真正属于真值的。换句话说，预测 Mask 假设有100个元素为边界元素，但实际上可能只有70个存在于真值图的对应位置上，即70个真值的正样本被正确（True）预测为 Positive，属于 True Positive（TP），所以此时的查准率为70%，剩下的30个元素是错误（False）预测为 Positive，属于 False Positive（FP）。</p>
+<p><strong>召回率</strong>（Recall，R，也称查全率）：分母是<strong>真值</strong> Mask 的边界元素总数，分子表示多少个本质的正样本被预测出来。例如真值 Mask 的边界有140个元素，但实际的预测 Mask 中只有70个真值的正样本被正确（True）预测为 Positive（TP），还有70个被错误（False）预测为 Negative（False Negative），那么此时的 Recall 为50%。</p>
+<p>J &amp; F 指标的计算代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> skimage.morphology <span class="keyword">import</span> binary_dilation, disk</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_eval_iou</span>(<span class="params">annotation, segmentation</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Compute region similarity as the Jaccard Index.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        annotation   (ndarray): binary annotation   map.</span></span><br><span class="line"><span class="string">        segmentation (ndarray): binary segmentation map.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Return:</span></span><br><span class="line"><span class="string">        jaccard (float): region similarity</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    annotation = annotation.astype(np.bool_)</span><br><span class="line">    segmentation = segmentation.astype(np.bool_)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> np.isclose(np.<span class="built_in">sum</span>(annotation), <span class="number">0</span>) <span class="keyword">and</span> np.isclose(np.<span class="built_in">sum</span>(segmentation), <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> np.<span class="built_in">sum</span>((annotation &amp; segmentation)) / np.<span class="built_in">sum</span>((annotation | segmentation), dtype=np.float32)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_eval_boundary</span>(<span class="params">foreground_mask, gt_mask, bound_th=<span class="number">0.008</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Compute mean, recall and decay from per-frame evaluation.</span></span><br><span class="line"><span class="string">    Calculates precision/recall for boundaries between foreground_mask and</span></span><br><span class="line"><span class="string">    gt_mask using morphological operators to speed it up.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        foreground_mask (ndarray): binary segmentation image.</span></span><br><span class="line"><span class="string">        gt_mask         (ndarray): binary annotated image.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        F (float): boundaries F-measure</span></span><br><span class="line"><span class="string">        P (float): boundaries precision</span></span><br><span class="line"><span class="string">        R (float): boundaries recall</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> np.atleast_3d(foreground_mask).shape[<span class="number">2</span>] == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    bound_pix = bound_th <span class="keyword">if</span> bound_th &gt;= <span class="number">1</span> <span class="keyword">else</span> \</span><br><span class="line">        np.ceil(bound_th * np.linalg.norm(foreground_mask.shape))  <span class="comment"># np.linalg.norm计算范数，默认为L2范数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Get the pixel boundaries of both masks</span></span><br><span class="line">    fg_boundary = seg2bmap(foreground_mask)  <span class="comment"># 将边界置为True</span></span><br><span class="line">    gt_boundary = seg2bmap(gt_mask)</span><br><span class="line"></span><br><span class="line">    fg_dil = binary_dilation(fg_boundary, disk(bound_pix))  <span class="comment"># 二值化膨胀</span></span><br><span class="line">    gt_dil = binary_dilation(gt_boundary, disk(bound_pix))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Get the intersection</span></span><br><span class="line">    gt_match = gt_boundary * fg_dil  <span class="comment"># 计算GT中与FG边缘匹配的像素</span></span><br><span class="line">    fg_match = fg_boundary * gt_dil  <span class="comment"># 计算FG中与GT边缘匹配的像素</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Area of the intersection</span></span><br><span class="line">    n_fg = np.<span class="built_in">sum</span>(fg_boundary)  <span class="comment"># FG边缘像素数量</span></span><br><span class="line">    n_gt = np.<span class="built_in">sum</span>(gt_boundary)  <span class="comment"># GT边缘像素数量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#% Compute precision and recall</span></span><br><span class="line">    <span class="keyword">if</span> n_fg == <span class="number">0</span> <span class="keyword">and</span> n_gt &gt; <span class="number">0</span>:</span><br><span class="line">        precision = <span class="number">1</span></span><br><span class="line">        recall = <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> n_fg &gt; <span class="number">0</span> <span class="keyword">and</span> n_gt == <span class="number">0</span>:</span><br><span class="line">        precision = <span class="number">0</span></span><br><span class="line">        recall = <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> n_fg == <span class="number">0</span> <span class="keyword">and</span> n_gt == <span class="number">0</span>:</span><br><span class="line">        precision = <span class="number">1</span></span><br><span class="line">        recall = <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        precision = np.<span class="built_in">sum</span>(fg_match) / <span class="built_in">float</span>(n_fg)</span><br><span class="line">        recall = np.<span class="built_in">sum</span>(gt_match) / <span class="built_in">float</span>(n_gt)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute F measure</span></span><br><span class="line">    <span class="keyword">if</span> precision + recall == <span class="number">0</span>:</span><br><span class="line">        F_score = <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        F_score = <span class="number">2</span> * precision * recall / (precision + recall)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> F_score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">seg2bmap</span>(<span class="params">seg, width=<span class="literal">None</span>, height=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    From a segmentation, compute a binary boundary map with 1 pixel wide</span></span><br><span class="line"><span class="string">    boundaries.  The boundary pixels are offset by 1/2 pixel towards the</span></span><br><span class="line"><span class="string">    origin from the actual segment boundary.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        seg     : Segments labeled from 1..k.</span></span><br><span class="line"><span class="string">        width      :	Width of desired bmap  &lt;= seg.shape[1]</span></span><br><span class="line"><span class="string">        height  :    Height of desired bmap &lt;= seg.shape[0]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        bmap (ndarray):    Binary boundary map.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    seg = seg.astype(np.bool_)</span><br><span class="line">    seg[seg &gt; <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> np.atleast_3d(seg).shape[<span class="number">2</span>] == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    width = seg.shape[<span class="number">1</span>] <span class="keyword">if</span> width <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> width</span><br><span class="line">    height = seg.shape[<span class="number">0</span>] <span class="keyword">if</span> height <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> height</span><br><span class="line"></span><br><span class="line">    h,w = seg.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    ar1 = <span class="built_in">float</span>(width) / <span class="built_in">float</span>(height)</span><br><span class="line">    ar2 = <span class="built_in">float</span>(w) / <span class="built_in">float</span>(h)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> <span class="keyword">not</span> (width &gt; w | height &gt; h | <span class="built_in">abs</span>(ar1 - ar2) &gt; <span class="number">0.01</span>),\</span><br><span class="line">            <span class="string">&#x27;Can&#x27;</span><span class="string">&#x27;t convert %dx%d seg to %dx%d bmap.&#x27;</span>%(w, h, width, height)</span><br><span class="line"></span><br><span class="line">    e = np.zeros_like(seg)</span><br><span class="line">    s = np.zeros_like(seg)</span><br><span class="line">    se = np.zeros_like(seg)</span><br><span class="line"></span><br><span class="line">    e[:, :-<span class="number">1</span>] = seg[:, <span class="number">1</span>:]</span><br><span class="line">    s[:-<span class="number">1</span>, :] = seg[<span class="number">1</span>:, :]</span><br><span class="line">    se[:-<span class="number">1</span>, :-<span class="number">1</span>] = seg[<span class="number">1</span>:, <span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">    b = seg^e | seg^s | seg^se</span><br><span class="line">    b[-<span class="number">1</span>, :] = seg[-<span class="number">1</span>, :]^e[-<span class="number">1</span>, :]</span><br><span class="line">    b[:, -<span class="number">1</span>] = seg[:, -<span class="number">1</span>]^s[:, -<span class="number">1</span>]</span><br><span class="line">    b[-<span class="number">1</span>, -<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> w == width <span class="keyword">and</span> h == height:</span><br><span class="line">        bmap = b</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        bmap = np.zeros((height, width))</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(w):</span><br><span class="line">            <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(h):</span><br><span class="line">                <span class="keyword">if</span> b[y, x]:</span><br><span class="line">                    j = <span class="number">1</span> + math.floor((y - <span class="number">1</span>) + height / h)</span><br><span class="line">                    i = <span class="number">1</span> + math.floor((x - <span class="number">1</span>) + width / h)</span><br><span class="line">                    bmap[j, i] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> bmap</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">database_path = <span class="string">&#x27;../data/mask_database/&#x27;</span></span><br><span class="line">test_path = <span class="string">&#x27;../data/mask_test/&#x27;</span></span><br><span class="line">database_img_name_list = os.listdir(database_path)</span><br><span class="line">test_img_name_list = os.listdir(test_path)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> test_img_name <span class="keyword">in</span> test_img_name_list:</span><br><span class="line">    test_img = Image.<span class="built_in">open</span>(test_path + test_img_name)</span><br><span class="line">    h, w = test_img.size</span><br><span class="line">    test_img = np.asarray(test_img)</span><br><span class="line"></span><br><span class="line">    best_iou, best_F, best_iou_dbname, best_F_dbname = <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="literal">None</span>, <span class="literal">None</span></span><br><span class="line">    <span class="keyword">for</span> database_img_name <span class="keyword">in</span> database_img_name_list:</span><br><span class="line">        database_img = Image.<span class="built_in">open</span>(database_path + database_img_name).resize((h, w))</span><br><span class="line">        database_img = np.asarray(database_img)</span><br><span class="line"></span><br><span class="line">        iou = db_eval_iou(test_img, database_img)</span><br><span class="line">        F_score = db_eval_boundary(test_img, database_img)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> iou &gt; best_iou:</span><br><span class="line">            best_iou = iou</span><br><span class="line">            best_iou_dbname = database_img_name</span><br><span class="line">        <span class="keyword">if</span> F_score &gt; best_F:</span><br><span class="line">            best_F = F_score</span><br><span class="line">            best_F_dbname = database_img_name</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;[<span class="subst">&#123;test_img_name&#125;</span>] best iou: <span class="subst">&#123;best_iou:<span class="number">.4</span>f&#125;</span> (<span class="subst">&#123;best_iou_dbname&#125;</span>), best F: <span class="subst">&#123;best_F:<span class="number">.4</span>f&#125;</span> (<span class="subst">&#123;best_F_dbname&#125;</span>)&#x27;</span>)</span><br><span class="line">    <span class="comment"># [0_70.png] best iou: 0.7433 (0_9_156_197_151.png), best F: 0.2681 (0_2_152_212_77.png)</span></span><br><span class="line">    <span class="comment"># [0_71.png] best iou: 0.9399 (0_3_140_238_157.png), best F: 0.7001 (0_3_140_238_157.png)</span></span><br><span class="line">    <span class="comment"># [0_72.png] best iou: 0.7066 (0_10_190_185_95.png), best F: 0.2735 (0_7_93_244_223.png)</span></span><br><span class="line">    <span class="comment"># [0_75.png] best iou: 0.9089 (0_5_241_130_227.png), best F: 0.5160 (0_5_241_130_227.png)</span></span><br><span class="line">    <span class="comment"># [0_77.png] best iou: 0.5177 (0_18_252_79_113.png), best F: 0.2171 (0_1_245_116_182.png)</span></span><br><span class="line">    <span class="comment"># [0_78.png] best iou: 0.7393 (0_4_251_231_252.png), best F: 0.2872 (0_9_156_197_151.png)</span></span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/21944.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/21944.html";
+            const title         = "「分割图像的着色与相似度匹配」";
+            const excerpt       = `介绍图像分割后产生的。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-08-09T02:00:27.705Z" itemprop="dateModified">Last edited: 2023-08-09</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" DeAOT视频追踪论文阅读笔记" href="/posts/6828.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" KMeans聚类与PCA主成分分析" href="/posts/23991.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                41
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%86%E5%89%B2%E5%9B%BE%E5%83%8F%E7%9D%80%E8%89%B2"><span class="toc-text">1. 分割图像着色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%86%E5%89%B2%E5%9B%BE%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D"><span class="toc-text">2. 分割图相似度匹配</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/23991.html"><i class="fa  fa-book"></i> KMeans聚类与PCA主成分分析</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/21944.html"><i class="fa  fa-book"></i> 分割图像的着色与相似度匹配</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/6828.html"><i class="fa  fa-book"></i> DeAOT视频追踪论文阅读笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>KMeans聚类与PCA主成分分析 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="AI" />
+  
+  <meta name="description" content="KMeans聚类与PCA主成分分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMeans聚类与PCA主成分分析">
+<meta property="og:url" content="https://asanosaki.github.io/posts/23991.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="KMeans聚类与PCA主成分分析">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-08-09T02:03:00.000Z">
+<meta property="article:modified_time" content="2023-08-09T02:25:01.634Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/23991.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">KMeans聚类与PCA主成分分析</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-08-09T02:03:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-08-09</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~5.26K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1691547901634"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AEK-Means%E8%81%9A%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">1. 二维数据K-Means聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%AB%98%E7%BB%B4%E6%95%B0%E6%8D%AEPCA%E5%90%8E%E8%81%9A%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">2. 高维数据PCA后聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%AB%98%E7%BB%B4%E6%95%B0%E6%8D%AE%E8%81%9A%E7%B1%BB%E5%B9%B6%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%AD%E5%BF%83%E7%9A%84%E7%9B%B8%E4%BC%BC%E5%BA%A6"><span class="toc-number">3.</span> <span class="toc-text">3. 高维数据聚类并计算与中心的相似度</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>介绍二维数据与高维数据的 K-Means 聚类算法以及高维数据的 PCA 主成分分析方法。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-二维数据K-Means聚类">1. 二维数据K-Means聚类</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans, MiniBatchKMeans</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以center为中心产生随机分布的数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_random_data</span>(<span class="params">center, data_num, data_dim=<span class="number">2</span>, fix_seed=<span class="literal">True</span></span>):</span><br><span class="line">    <span class="keyword">if</span> fix_seed:</span><br><span class="line">        np.random.seed(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 产生-2~2的随机数</span></span><br><span class="line">    offset = np.random.rand(data_num, data_dim) * <span class="number">4</span> - <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> center + offset</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">centers = [[<span class="number">2</span>, <span class="number">8</span>], [<span class="number">5</span>, <span class="number">2</span>], [<span class="number">9</span>, <span class="number">6</span>]]</span><br><span class="line">center_num = <span class="built_in">len</span>(centers)</span><br><span class="line">data_num = <span class="number">500</span>  <span class="comment"># 每个center产生的样本数量</span></span><br><span class="line"></span><br><span class="line">data = np.zeros([data_num * center_num, <span class="number">2</span>])</span><br><span class="line"><span class="keyword">for</span> i, center <span class="keyword">in</span> <span class="built_in">enumerate</span>(centers):</span><br><span class="line">    data[i * data_num:(i + <span class="number">1</span>) * data_num] = get_random_data(center, data_num)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示数据</span></span><br><span class="line"><span class="built_in">print</span>(data.shape)  <span class="comment"># (1500, 2)</span></span><br><span class="line">plt.scatter(data[:, <span class="number">0</span>], data[:, <span class="number">1</span>], s=<span class="number">5</span>, color=<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------- KMeans聚类 ----------</span></span><br><span class="line">kms = KMeans(n_clusters=<span class="number">3</span>, init=<span class="string">&#x27;k-means++&#x27;</span>)  <span class="comment"># 聚出3类</span></span><br><span class="line">kms.fit(data)  <span class="comment"># 模型拟合</span></span><br><span class="line">centers = kms.cluster_centers_  <span class="comment"># 计算聚类中心</span></span><br><span class="line">labels = kms.labels_  <span class="comment"># 聚类后每个样本的类别标签</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------- MiniBatchKMeans聚类 ----------</span></span><br><span class="line"><span class="comment"># mbk = MiniBatchKMeans(init=&#x27;k-means++&#x27;, n_clusters=3, batch_size=32, random_state=0)</span></span><br><span class="line"><span class="comment"># mbk.fit(data)</span></span><br><span class="line"><span class="comment"># centers = mbk.cluster_centers_</span></span><br><span class="line"><span class="comment"># labels = mbk.labels_</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">plt.scatter(data[:, <span class="number">0</span>], data[:, <span class="number">1</span>], s=<span class="number">5</span>, c=labels, cmap=<span class="string">&#x27;Accent&#x27;</span>, alpha=<span class="number">0.5</span>)  <span class="comment"># 画出聚类后带标签的样本</span></span><br><span class="line">plt.scatter(centers[:, <span class="number">0</span>], centers[:, <span class="number">1</span>], marker=<span class="string">&#x27;*&#x27;</span>, s=<span class="number">120</span>, c=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], cmap=<span class="string">&#x27;Accent&#x27;</span>)  <span class="comment"># 画出聚类中心</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="2-高维数据PCA后聚类">2. 高维数据PCA后聚类</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生高维数据</span></span><br><span class="line">hd_centers = [</span><br><span class="line">    [<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>],</span><br><span class="line">    [<span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">5</span>],</span><br><span class="line">    [<span class="number">3</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">4</span>]</span><br><span class="line">]</span><br><span class="line">hd_center_num = <span class="built_in">len</span>(hd_centers)</span><br><span class="line">hd_data_num = <span class="number">500</span></span><br><span class="line"></span><br><span class="line">hd_data = np.zeros([hd_data_num * hd_center_num, <span class="number">10</span>])</span><br><span class="line"><span class="keyword">for</span> i, center <span class="keyword">in</span> <span class="built_in">enumerate</span>(hd_centers):</span><br><span class="line">    hd_data[i * hd_data_num:(i + <span class="number">1</span>) * hd_data_num] = get_random_data(center, hd_data_num, data_dim=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(hd_data.shape)  <span class="comment"># (1500, 10)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------- PCA主成分分析降维 ----------</span></span><br><span class="line">pca = PCA(n_components=<span class="number">2</span>)  <span class="comment"># 降成二维</span></span><br><span class="line">pca.fit(hd_data)</span><br><span class="line">pca_data = pca.transform(hd_data)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(pca_data.shape)  <span class="comment"># (1500, 2)</span></span><br><span class="line">plt.scatter(pca_data[:, <span class="number">0</span>], pca_data[:, <span class="number">1</span>], s=<span class="number">5</span>, color=<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------- KMeans聚类 ----------</span></span><br><span class="line">kms = KMeans(n_clusters=<span class="number">3</span>, init=<span class="string">&#x27;k-means++&#x27;</span>)</span><br><span class="line">kms.fit(pca_data)  <span class="comment"># 模型拟合</span></span><br><span class="line">centers = kms.cluster_centers_  <span class="comment"># 计算聚类中心</span></span><br><span class="line">labels = kms.labels_  <span class="comment"># 聚类后每个样本的类别标签</span></span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">plt.scatter(pca_data[:, <span class="number">0</span>], pca_data[:, <span class="number">1</span>], s=<span class="number">5</span>, c=labels, cmap=<span class="string">&#x27;Accent&#x27;</span>, alpha=<span class="number">0.5</span>)  <span class="comment"># 画出聚类后带标签的样本</span></span><br><span class="line">plt.scatter(centers[:, <span class="number">0</span>], centers[:, <span class="number">1</span>], marker=<span class="string">&#x27;*&#x27;</span>, s=<span class="number">120</span>, c=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], cmap=<span class="string">&#x27;Accent&#x27;</span>)  <span class="comment"># 画出聚类中心</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="3-高维数据聚类并计算与中心的相似度">3. 高维数据聚类并计算与中心的相似度</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生高维数据</span></span><br><span class="line">hd_centers = [</span><br><span class="line">    [<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>],</span><br><span class="line">    [<span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">5</span>],</span><br><span class="line">    [<span class="number">3</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">4</span>]</span><br><span class="line">]</span><br><span class="line">hd_center_num = <span class="built_in">len</span>(hd_centers)</span><br><span class="line">hd_data_num = <span class="number">500</span></span><br><span class="line"></span><br><span class="line">hd_data = np.zeros([hd_data_num * hd_center_num, <span class="number">10</span>])</span><br><span class="line"><span class="keyword">for</span> i, center <span class="keyword">in</span> <span class="built_in">enumerate</span>(hd_centers):</span><br><span class="line">    hd_data[i * hd_data_num:(i + <span class="number">1</span>) * hd_data_num] = get_random_data(center, hd_data_num, data_dim=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(hd_data.shape)  <span class="comment"># (1500, 10)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对原始高维数据聚类</span></span><br><span class="line">kms = KMeans(n_clusters=<span class="number">3</span>, init=<span class="string">&#x27;k-means++&#x27;</span>)</span><br><span class="line">kms.fit(hd_data)  <span class="comment"># 模型拟合</span></span><br><span class="line">centers = kms.cluster_centers_  <span class="comment"># 计算聚类中心</span></span><br><span class="line">labels = kms.labels_  <span class="comment"># 聚类后每个样本的类别标签</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(centers.shape)  <span class="comment"># (3, 10)，3个聚类中心的高维向量</span></span><br><span class="line"><span class="built_in">print</span>(labels[:<span class="number">10</span>])  <span class="comment"># [1 1 1 1 1 1 1 1 1 1]，第1类的标签</span></span><br><span class="line"><span class="built_in">print</span>(labels[<span class="number">500</span>:<span class="number">510</span>])  <span class="comment"># [2 2 2 2 2 2 2 2 2 2]，第2类的标签</span></span><br><span class="line"><span class="built_in">print</span>(labels[<span class="number">1490</span>:])  <span class="comment"># [0 0 0 0 0 0 0 0 0 0]，第3类的标签</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算每个向量分别与3个聚类中心的余弦相似度</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CosineSimilarity</span>(<span class="params">x, y</span>):</span><br><span class="line">    normalized_x = x / np.linalg.norm(x, axis=-<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    normalized_y = y / np.linalg.norm(y, axis=-<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(normalized_x * normalized_y, axis=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">data_cnt = hd_data_num * hd_center_num</span><br><span class="line">true_cnt = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, data <span class="keyword">in</span> <span class="built_in">enumerate</span>(hd_data):</span><br><span class="line">    score_0 = CosineSimilarity(data, centers[<span class="number">0</span>])</span><br><span class="line">    score_1 = CosineSimilarity(data, centers[<span class="number">1</span>])</span><br><span class="line">    score_2 = CosineSimilarity(data, centers[<span class="number">2</span>])</span><br><span class="line">    max_idx = np.argmax([score_0, score_1, score_2])</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;ID: <span class="subst">&#123;i&#125;</span>, Score0: <span class="subst">&#123;score_0:<span class="number">.2</span>f&#125;</span>, Score1: <span class="subst">&#123;score_1:<span class="number">.2</span>f&#125;</span>, Score2: <span class="subst">&#123;score_2:<span class="number">.2</span>f&#125;</span>, Pred_label: <span class="subst">&#123;max_idx&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">500</span>:</span><br><span class="line">        <span class="keyword">if</span> max_idx == <span class="number">1</span>:</span><br><span class="line">            true_cnt = true_cnt + <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> i &lt; <span class="number">1000</span>:</span><br><span class="line">        <span class="keyword">if</span> max_idx == <span class="number">2</span>:</span><br><span class="line">            true_cnt = true_cnt + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> max_idx == <span class="number">0</span>:</span><br><span class="line">            true_cnt = true_cnt + <span class="number">1</span></span><br><span class="line"><span class="comment"># ID: 0, Score0: 0.85, Score1: 0.98, Score2: 0.85, Pred_label: 1</span></span><br><span class="line"><span class="comment"># ID: 1, Score0: 0.84, Score1: 0.92, Score2: 0.79, Pred_label: 1</span></span><br><span class="line"><span class="comment"># ID: 2, Score0: 0.87, Score1: 0.93, Score2: 0.90, Pred_label: 1</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment"># ID: 500, Score0: 0.85, Score1: 0.78, Score2: 0.99, Pred_label: 2</span></span><br><span class="line"><span class="comment"># ID: 501, Score0: 0.85, Score1: 0.75, Score2: 0.98, Pred_label: 2</span></span><br><span class="line"><span class="comment"># ID: 502, Score0: 0.83, Score1: 0.71, Score2: 0.98, Pred_label: 2</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment"># ID: 1000, Score0: 0.99, Score1: 0.81, Score2: 0.87, Pred_label: 0</span></span><br><span class="line"><span class="comment"># ID: 1001, Score0: 0.98, Score1: 0.77, Score2: 0.83, Pred_label: 0</span></span><br><span class="line"><span class="comment"># ID: 1002, Score0: 0.99, Score1: 0.76, Score2: 0.87, Pred_label: 0</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;All: <span class="subst">&#123;data_cnt&#125;</span>, True: <span class="subst">&#123;true_cnt&#125;</span>, Acc: <span class="subst">&#123;true_cnt / data_cnt:<span class="number">.2</span>f&#125;</span>&#x27;</span>)  <span class="comment"># All: 1500, True: 1499, Acc: 1.00</span></span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/23991.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/23991.html";
+            const title         = "「KMeans聚类与PCA主成分分析」";
+            const excerpt       = `介绍二维数据与高维数据的 K-Means 聚类算法以及高维数据的 PCA 主成分分析方法。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-08-09T02:25:01.634Z" itemprop="dateModified">Last edited: 2023-08-09</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 分割图像的着色与相似度匹配" href="/posts/21944.html">&lt; Previous</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                41
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AEK-Means%E8%81%9A%E7%B1%BB"><span class="toc-text">1. 二维数据K-Means聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%AB%98%E7%BB%B4%E6%95%B0%E6%8D%AEPCA%E5%90%8E%E8%81%9A%E7%B1%BB"><span class="toc-text">2. 高维数据PCA后聚类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%AB%98%E7%BB%B4%E6%95%B0%E6%8D%AE%E8%81%9A%E7%B1%BB%E5%B9%B6%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%AD%E5%BF%83%E7%9A%84%E7%9B%B8%E4%BC%BC%E5%BA%A6"><span class="toc-text">3. 高维数据聚类并计算与中心的相似度</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/23991.html"><i class="fa  fa-book"></i> KMeans聚类与PCA主成分分析</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/21944.html"><i class="fa  fa-book"></i> 分割图像的着色与相似度匹配</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/6828.html"><i class="fa  fa-book"></i> DeAOT视频追踪论文阅读笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/9681.html"><i class="fa  fa-book"></i> Python遥感常用模块Rasterio与Rioxarray教程</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
