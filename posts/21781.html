@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>DeepLabV3Plus核心代码详解 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="AI" />
+  
+  <meta name="description" content="DeepLabV3Plus核心代码详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLabV3Plus核心代码详解">
+<meta property="og:url" content="https://asanosaki.github.io/posts/21781.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="DeepLabV3Plus核心代码详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-08-19T07:49:00.000Z">
+<meta property="article:modified_time" content="2023-08-20T06:09:36.249Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io/">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
+                                                                
+                                                                Zlibrary
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/21781.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">DeepLabV3Plus核心代码详解</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-08-19T07:49:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-08-19</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~19.96K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1692511776249"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Atrous-Spatial-Pyramid-Pooling"><span class="toc-number">1.</span> <span class="toc-text">1. Atrous Spatial Pyramid Pooling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-ASPP-Conv"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 ASPP Conv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-ASPP-Pooling"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 ASPP Pooling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-ASPP"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 ASPP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AFResNet"><span class="toc-number">2.</span> <span class="toc-text">2. 空洞卷积ResNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-IntermediateLayerGetter"><span class="toc-number">3.</span> <span class="toc-text">3. IntermediateLayerGetter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-DeepLabV3Plus"><span class="toc-number">4.</span> <span class="toc-text">4. DeepLabV3Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-AtrousSeparableConvolution"><span class="toc-number">5.</span> <span class="toc-text">5. AtrousSeparableConvolution</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文记录 DeepLabV3+ 论文（Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation）的阅读笔记。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-Atrous-Spatial-Pyramid-Pooling">1. Atrous Spatial Pyramid Pooling</h2>
+<p>ASPP（Atrous Spatial Pyramid Pooling），空洞空间金字塔池化。简单理解就是个至尊版池化层，其目的与普通的池化层一致，尽可能地去提取特征。</p>
+<p>ASPP 本质上由一个 1×1 的卷积层、三个 3×3 的空洞卷积层 <code>ASPP Conv</code> 以及一个全局池化层 <code>ASPP Pooling</code>。五个模块输出的特征图尺寸都与输入相同，因此最后将它们在通道维度上 Concat 起来然后再通过一个 1×1 的卷积层降维得到 ASPP 的输出。</p>
+<h3 id="1-1-ASPP-Conv">1.1 ASPP Conv</h3>
+<p>空洞卷积层与一般卷积层之间的差别在于膨胀率（dilation rate），膨胀率控制的是卷积时的 <code>padding</code> 以及 <code>dilation</code>。ASPP 应用了多个不同膨胀率的<strong>并行</strong>空洞卷积。通过不同的填充与膨胀，可以在不改变输出图像尺寸的情况下获取不同尺度的感受野，提取多尺度的信息。注意卷积核尺寸始终保持 3×3 不变：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ASPPConv</span>(nn.Sequential):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, out_channels, dilation</span>):</span><br><span class="line">        modules = [</span><br><span class="line">            nn.Conv2d(in_channels, out_channels, <span class="number">3</span>, padding=dilation, dilation=dilation, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(out_channels),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">        ]</span><br><span class="line">        <span class="built_in">super</span>(ASPPConv, self).__init__(*modules)</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-ASPP-Pooling">1.2 ASPP Pooling</h3>
+<p>ASPP Pooling 首先是一个 <code>AdaptiveAvgPool2d</code> 层。所谓自适应均值池化，其自适应的地方在于不需要指定 <code>kernel size</code> 和 <code>stride</code>，只需指定最后的输出尺寸（此处为 1×1）。通过将各通道的特征图尺寸分别压缩至 1×1，从而提取各通道的特征，进而获取全局的特征。然后是一个 1×1 的卷积层，对上一步获取的特征进行进一步的提取，并降维。需要注意的是，在 ASPP Pooling 的网络结构部分，只是对特征进行了提取；而在 <code>forward</code> 方法中，除了顺序执行网络的各层外，最终还将特征图从 1×1 上采样回原来的尺寸：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ASPPPooling</span>(nn.Sequential):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, out_channels</span>):</span><br><span class="line">        <span class="built_in">super</span>(ASPPPooling, self).__init__(</span><br><span class="line">            nn.AdaptiveAvgPool2d(<span class="number">1</span>),</span><br><span class="line">            nn.Conv2d(in_channels, out_channels, <span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(out_channels),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        size = x.shape[-<span class="number">2</span>:]  <span class="comment"># 记录输入的尺寸</span></span><br><span class="line">        x = <span class="built_in">super</span>(ASPPPooling, self).forward(x)  <span class="comment"># 图像尺寸变为(1, 1)</span></span><br><span class="line">        <span class="keyword">return</span> F.interpolate(x, size=size, mode=<span class="string">&#x27;bilinear&#x27;</span>, align_corners=<span class="literal">False</span>)  <span class="comment"># 上采样为输入的尺寸</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-3-ASPP">1.3 ASPP</h3>
+<p>我们将以上模块进行组合即可构建完整的 ASPP 模块：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ASPP</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, atrous_rates</span>):</span><br><span class="line">        <span class="built_in">super</span>(ASPP, self).__init__()</span><br><span class="line">        out_channels = <span class="number">256</span></span><br><span class="line">        modules = []  <span class="comment"># 五个分支输出图像大小均与原图相同</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># (n, 2048, h, w) -&gt; (n, 256, h, w)</span></span><br><span class="line">        modules.append(nn.Sequential(</span><br><span class="line">            nn.Conv2d(in_channels, out_channels, <span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(out_channels),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>)))</span><br><span class="line"></span><br><span class="line">        rate1, rate2, rate3 = <span class="built_in">tuple</span>(atrous_rates)  <span class="comment"># 膨胀率</span></span><br><span class="line">        modules.append(ASPPConv(in_channels, out_channels, rate1))  <span class="comment"># (n, 2048, h, w) -&gt; (n, 256, h, w)</span></span><br><span class="line">        modules.append(ASPPConv(in_channels, out_channels, rate2))  <span class="comment"># (n, 2048, h, w) -&gt; (n, 256, h, w)</span></span><br><span class="line">        modules.append(ASPPConv(in_channels, out_channels, rate3))  <span class="comment"># (n, 2048, h, w) -&gt; (n, 256, h, w)</span></span><br><span class="line">        modules.append(ASPPPooling(in_channels, out_channels))  <span class="comment"># (n, 2048, h, w) -&gt; (n, 256, h, w)</span></span><br><span class="line"></span><br><span class="line">        self.convs = nn.ModuleList(modules)</span><br><span class="line"></span><br><span class="line">        self.project = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">5</span> * out_channels, out_channels, <span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(out_channels),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Dropout(<span class="number">0.1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 假设ASPP的输入为ResNet101中layer4的输出，即x.shape: (n, 2048, h, w)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> conv <span class="keyword">in</span> self.convs:</span><br><span class="line">            res.append(conv(x))</span><br><span class="line">        res = torch.cat(res, dim=<span class="number">1</span>)  <span class="comment"># (n, 256*5, h, w)</span></span><br><span class="line">        <span class="keyword">return</span> self.project(res)  <span class="comment"># (n, 256, h, w)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    aspp = ASPP(in_channels=<span class="number">2048</span>, atrous_rates=[<span class="number">6</span>, <span class="number">12</span>, <span class="number">18</span>])</span><br><span class="line"></span><br><span class="line">    x = torch.randn(<span class="number">8</span>, <span class="number">2048</span>, <span class="number">18</span>, <span class="number">32</span>)</span><br><span class="line">    <span class="built_in">print</span>(aspp(x).shape)  <span class="comment"># torch.Size([8, 256, 18, 32])</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-空洞卷积ResNet">2. 空洞卷积ResNet</h2>
+<p>本文以ResNet50、101、152为例，构建加入了空洞卷积的 ResNet 网络。ResNet网络一共有四大层，我们记为 layer1、layer2、layer3 以及 layer4，默认情况下输出的 Feature Map 宽高尺寸比原图像小32倍，我们可以在第2~4层使用空洞卷积，假设在最后一层使用了空洞卷积，那么最后输出的 Feature Map 宽高尺寸比原图像小16倍：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.hub <span class="keyword">import</span> load_state_dict_from_url</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model_urls = &#123;</span><br><span class="line">    <span class="string">&#x27;resnet50&#x27;</span>: <span class="string">&#x27;https://download.pytorch.org/models/resnet50-19c8e357.pth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;resnet101&#x27;</span>: <span class="string">&#x27;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;resnet152&#x27;</span>: <span class="string">&#x27;https://download.pytorch.org/models/resnet152-b121ed2d.pth&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">conv3x3</span>(<span class="params">in_planes, out_planes, stride=<span class="number">1</span>, groups=<span class="number">1</span>, dilation=<span class="number">1</span></span>):</span><br><span class="line">    <span class="keyword">return</span> nn.Conv2d(in_planes, out_planes, kernel_size=<span class="number">3</span>, stride=stride,</span><br><span class="line">                     padding=dilation, groups=groups, bias=<span class="literal">False</span>, dilation=dilation)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">conv1x1</span>(<span class="params">in_planes, out_planes, stride=<span class="number">1</span></span>):</span><br><span class="line">    <span class="keyword">return</span> nn.Conv2d(in_planes, out_planes, kernel_size=<span class="number">1</span>, stride=stride, bias=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bottleneck</span>(nn.Module):</span><br><span class="line">    expansion = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, inplanes, planes, stride=<span class="number">1</span>, downsample=<span class="literal">None</span>, groups=<span class="number">1</span>,</span></span><br><span class="line"><span class="params">                 base_width=<span class="number">64</span>, dilation=<span class="number">1</span>, norm_layer=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(Bottleneck, self).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> norm_layer <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            norm_layer = nn.BatchNorm2d</span><br><span class="line"></span><br><span class="line">        width = <span class="built_in">int</span>(planes * (base_width / <span class="number">64.</span>)) * groups</span><br><span class="line"></span><br><span class="line">        self.conv1 = conv1x1(inplanes, width)</span><br><span class="line">        self.bn1 = norm_layer(width)</span><br><span class="line">        self.conv2 = conv3x3(width, width, stride, groups, dilation)</span><br><span class="line">        self.bn2 = norm_layer(width)</span><br><span class="line">        self.conv3 = conv1x1(width, planes * self.expansion)</span><br><span class="line">        self.bn3 = norm_layer(planes * self.expansion)</span><br><span class="line">        self.relu = nn.ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">        self.downsample = downsample</span><br><span class="line">        self.stride = stride</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        identity = x</span><br><span class="line"></span><br><span class="line">        out = self.relu(self.bn1(self.conv1(x)))</span><br><span class="line">        out = self.relu(self.bn2(self.conv2(out)))</span><br><span class="line">        out = self.bn3(self.conv3(out))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.downsample <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            identity = self.downsample(x)</span><br><span class="line"></span><br><span class="line">        out += identity</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.relu(out)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ResNet</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, block, layers, replace_stride_with_dilation=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 num_classes=<span class="number">1000</span>, groups=<span class="number">1</span>, width_per_group=<span class="number">64</span>, norm_layer=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(ResNet, self).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> norm_layer <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            norm_layer = nn.BatchNorm2d</span><br><span class="line">        self._norm_layer = norm_layer</span><br><span class="line"></span><br><span class="line">        self.inplanes = <span class="number">64</span></span><br><span class="line">        self.dilation = <span class="number">1</span></span><br><span class="line">        self.groups = groups</span><br><span class="line">        self.base_width = width_per_group</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> replace_stride_with_dilation <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            replace_stride_with_dilation = [<span class="literal">False</span>, <span class="literal">False</span>, <span class="literal">False</span>]  <span class="comment"># 分别表示在layer2/3/4是否使用空洞卷积</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(replace_stride_with_dilation) != <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">f&quot;replace_stride_with_dilation should be None or a 3-element tuple, got <span class="subst">&#123;replace_stride_with_dilation&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">3</span>, self.inplanes, kernel_size=<span class="number">7</span>, stride=<span class="number">2</span>, padding=<span class="number">3</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.bn1 = norm_layer(self.inplanes)</span><br><span class="line">        self.relu = nn.ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">        self.maxpool = nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        self.layer1 = self._make_layer(block, <span class="number">64</span>, layers[<span class="number">0</span>])</span><br><span class="line">        self.layer2 = self._make_layer(block, <span class="number">128</span>, layers[<span class="number">1</span>], stride=<span class="number">2</span>, dilate=replace_stride_with_dilation[<span class="number">0</span>])</span><br><span class="line">        self.layer3 = self._make_layer(block, <span class="number">256</span>, layers[<span class="number">2</span>], stride=<span class="number">2</span>, dilate=replace_stride_with_dilation[<span class="number">1</span>])</span><br><span class="line">        self.layer4 = self._make_layer(block, <span class="number">512</span>, layers[<span class="number">3</span>], stride=<span class="number">2</span>, dilate=replace_stride_with_dilation[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        self.avgpool = nn.AdaptiveAvgPool2d((<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">        self.fc = nn.Linear(<span class="number">512</span> * block.expansion, num_classes)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.modules():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">                nn.init.kaiming_normal_(m.weight, mode=<span class="string">&#x27;fan_out&#x27;</span>, nonlinearity=<span class="string">&#x27;relu&#x27;</span>)</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, (nn.BatchNorm2d, nn.GroupNorm)):</span><br><span class="line">                nn.init.constant_(m.weight, <span class="number">1</span>)</span><br><span class="line">                nn.init.constant_(m.bias, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_make_layer</span>(<span class="params">self, block, planes, blocks, stride=<span class="number">1</span>, dilate=<span class="literal">False</span></span>):</span><br><span class="line">        norm_layer = self._norm_layer</span><br><span class="line">        downsample = <span class="literal">None</span></span><br><span class="line">        previous_dilation = self.dilation</span><br><span class="line">        <span class="keyword">if</span> dilate:  <span class="comment"># 如果使用空洞卷积那么就不对图像的尺寸进行下采样</span></span><br><span class="line">            self.dilation *= stride</span><br><span class="line">            stride = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> stride != <span class="number">1</span> <span class="keyword">or</span> self.inplanes != planes * block.expansion:</span><br><span class="line">            downsample = nn.Sequential(</span><br><span class="line">                conv1x1(self.inplanes, planes * block.expansion, stride),</span><br><span class="line">                norm_layer(planes * block.expansion),</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line">        layers = []</span><br><span class="line">        layers.append(block(self.inplanes, planes, stride, downsample, self.groups,</span><br><span class="line">                            self.base_width, previous_dilation, norm_layer))</span><br><span class="line">        self.inplanes = planes * block.expansion</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, blocks):</span><br><span class="line">            layers.append(block(self.inplanes, planes, groups=self.groups, base_width=self.base_width,</span><br><span class="line">                                dilation=self.dilation, norm_layer=norm_layer))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*layers)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        dict_out = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        x = self.relu(self.bn1(self.conv1(x)))</span><br><span class="line">        x = self.maxpool(x)</span><br><span class="line"></span><br><span class="line">        x = self.layer1(x)</span><br><span class="line">        x = self.layer2(x)</span><br><span class="line">        x = self.layer3(x)</span><br><span class="line">        x = self.layer4(x)</span><br><span class="line">        dict_out[<span class="string">&#x27;layer4&#x27;</span>] = x</span><br><span class="line"></span><br><span class="line">        x = self.avgpool(x)</span><br><span class="line">        x = torch.flatten(x, start_dim=<span class="number">1</span>)</span><br><span class="line">        x = self.fc(x)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, dict_out</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_resnet</span>(<span class="params">arch, block, layers, pretrained, progress, replace_stride_with_dilation</span>):</span><br><span class="line">    model = ResNet(block, layers, replace_stride_with_dilation)</span><br><span class="line">    <span class="keyword">if</span> pretrained:</span><br><span class="line">        state_dict = load_state_dict_from_url(model_urls[arch], progress=progress)</span><br><span class="line">        model.load_state_dict(state_dict)</span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">resnet50</span>(<span class="params">pretrained=<span class="literal">False</span>, progress=<span class="literal">True</span>, replace_stride_with_dilation=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> get_resnet(<span class="string">&#x27;resnet50&#x27;</span>, Bottleneck, [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">3</span>], pretrained, progress, replace_stride_with_dilation)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">resnet101</span>(<span class="params">pretrained=<span class="literal">False</span>, progress=<span class="literal">True</span>, replace_stride_with_dilation=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> get_resnet(<span class="string">&#x27;resnet101&#x27;</span>, Bottleneck, [<span class="number">3</span>, <span class="number">4</span>, <span class="number">23</span>, <span class="number">3</span>], pretrained, progress, replace_stride_with_dilation)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">resnet152</span>(<span class="params">pretrained=<span class="literal">False</span>, progress=<span class="literal">True</span>, replace_stride_with_dilation=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> get_resnet(<span class="string">&#x27;resnet152&#x27;</span>, Bottleneck, [<span class="number">3</span>, <span class="number">8</span>, <span class="number">36</span>, <span class="number">3</span>], pretrained, progress, replace_stride_with_dilation)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    net1 = resnet101(pretrained=<span class="literal">True</span>, replace_stride_with_dilation=[<span class="literal">False</span>, <span class="literal">False</span>, <span class="literal">True</span>])  <span class="comment"># 在layer4使用空洞卷积</span></span><br><span class="line">    net2 = resnet101(pretrained=<span class="literal">True</span>, replace_stride_with_dilation=[<span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">True</span>])  <span class="comment"># 在layer3与layer4使用空洞卷积</span></span><br><span class="line"></span><br><span class="line">    x = torch.randn(<span class="number">8</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line">    out1, dict_out1 = net1(x)</span><br><span class="line">    out2, dict_out2 = net2(x)</span><br><span class="line">    <span class="built_in">print</span>(dict_out1[<span class="string">&#x27;layer4&#x27;</span>].shape)  <span class="comment"># torch.Size([8, 2048, 14, 14])，有一层使用空洞卷积因此输出尺寸为输入的1/16</span></span><br><span class="line">    <span class="built_in">print</span>(dict_out2[<span class="string">&#x27;layer4&#x27;</span>].shape)  <span class="comment"># torch.Size([8, 2048, 28, 28])，有两层使用空洞卷积因此输出尺寸为输入的1/8</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-IntermediateLayerGetter">3. IntermediateLayerGetter</h2>
+<p>我们需要用到 ResNet 特征提取层提取出的特征，其中有浅层特征（layer1 的输出）与深层特征（layer4 的输出），两者的通道维度我们分别记作 <code>low_level_channels</code> 与 <code>in_channels</code>，越深层的特征蕴含的语义信息越丰富，但是目标的位置信息更为模糊，小目标的特征可能还会丢失。因此我们需要记录下这些特征，实现 <code>IntermediateLayerGetter</code>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="keyword">from</span> ResNet <span class="keyword">import</span> resnet101</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IntermediateLayerGetter</span>(nn.ModuleDict):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, model, return_layers</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">set</span>(return_layers).issubset([name <span class="keyword">for</span> name, _ <span class="keyword">in</span> model.named_children()]):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;return_layers are not present in model&quot;</span>)</span><br><span class="line"></span><br><span class="line">        origin_ret_layers = return_layers.copy()  <span class="comment"># 之后会删除return_layers的内容因此需要备份</span></span><br><span class="line">        layers = OrderedDict()</span><br><span class="line">        <span class="keyword">for</span> name, module <span class="keyword">in</span> model.named_children():</span><br><span class="line">            layers[name] = module</span><br><span class="line">            <span class="keyword">if</span> name <span class="keyword">in</span> return_layers:</span><br><span class="line">                <span class="keyword">del</span> return_layers[name]</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> return_layers:  <span class="comment"># 到layer4结束，即layers中没有avgpool与fc层</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>(IntermediateLayerGetter, self).__init__(layers)</span><br><span class="line">        self.return_layers = origin_ret_layers  <span class="comment"># &#123;&#x27;layer4&#x27;: &#x27;out&#x27;, &#x27;layer1&#x27;: &#x27;low_level&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        out = OrderedDict()  <span class="comment"># 输出以字典形式返回</span></span><br><span class="line">        <span class="keyword">for</span> name, module <span class="keyword">in</span> self.named_children():</span><br><span class="line">            x = module(x)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> name <span class="keyword">in</span> self.return_layers:  <span class="comment"># 记录下需要返回的中间层输出，映射为自定义的名称</span></span><br><span class="line">                out_name = self.return_layers[name]</span><br><span class="line">                out[out_name] = x</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    model = resnet101(pretrained=<span class="literal">True</span>, replace_stride_with_dilation=[<span class="literal">False</span>, <span class="literal">False</span>, <span class="literal">True</span>])</span><br><span class="line">    model = IntermediateLayerGetter(model, &#123;<span class="string">&#x27;layer4&#x27;</span>: <span class="string">&#x27;out&#x27;</span>, <span class="string">&#x27;layer1&#x27;</span>: <span class="string">&#x27;low_level&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    x = torch.randn(<span class="number">8</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line">    output = model(x)</span><br><span class="line">    <span class="built_in">print</span>(output[<span class="string">&#x27;low_level&#x27;</span>].shape, output[<span class="string">&#x27;out&#x27;</span>].shape)  <span class="comment"># torch.Size([8, 256, 56, 56]) torch.Size([8, 2048, 14, 14])</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-DeepLabV3Plus">4. DeepLabV3Plus</h2>
+<p>ResNet 与 ASPP 均为 DeepLabV3 的 Encoder 部分，现在先介绍一下 Decoder 部分 <code>DeepLabHeadV3Plus</code>。</p>
+<p>ResNet 提取出的浅层特征与深层特征的通道维度我们分别记作 <code>low_level_channels</code> 与 <code>in_channels</code>。先对浅层特征做一个投影，降低通道维度，将投影后的特征记作 <code>low_level_feature</code>；接着将深层特征通过 ASPP，并上采样到与 <code>low_level_feature</code> 相同的尺寸，将该特征记作 <code>output_feature</code>；最后将这两个特征在通道维度上 Concat 起来后通过分类头将通道维度映射为分类数量：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> ResNet</span><br><span class="line"><span class="keyword">from</span> IntermediateLayerGetter <span class="keyword">import</span> IntermediateLayerGetter</span><br><span class="line"><span class="keyword">from</span> ASPP <span class="keyword">import</span> ASPP</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DeepLabHeadV3Plus</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, low_level_channels, num_classes, aspp_dilate=[<span class="number">6</span>, <span class="number">12</span>, <span class="number">18</span>]</span>):</span><br><span class="line">        <span class="built_in">super</span>(DeepLabHeadV3Plus, self).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 浅层特征的投影层</span></span><br><span class="line">        self.project = nn.Sequential(</span><br><span class="line">            nn.Conv2d(low_level_channels, <span class="number">48</span>, <span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">48</span>),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 深层特征的ASPP层</span></span><br><span class="line">        self.aspp = ASPP(in_channels, aspp_dilate)  <span class="comment"># aspp_dilate = [6, 12, 18]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 分类头</span></span><br><span class="line">        self.classifier = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">304</span>, <span class="number">256</span>, <span class="number">3</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">256</span>),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="number">256</span>, num_classes, <span class="number">1</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        self._init_weight()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, feature</span>):</span><br><span class="line">        <span class="comment"># feature[&#x27;low_level&#x27;]: (n, 256, h/4, w/4), feature[&#x27;out&#x27;]: (n, 2048, h/16, w/16)</span></span><br><span class="line">        low_level_feature = self.project(feature[<span class="string">&#x27;low_level&#x27;</span>])  <span class="comment"># (n, 256, h/4, w/4) -&gt; (n, 48, h/4, w/4)</span></span><br><span class="line">        size = low_level_feature.shape[<span class="number">2</span>:]  <span class="comment"># (h/4, w/4)</span></span><br><span class="line">        output_feature = self.aspp(feature[<span class="string">&#x27;out&#x27;</span>])  <span class="comment"># (n, 2048, h/16, w/16) -&gt; (n, 256, h/16, w/16)</span></span><br><span class="line">        output_feature = F.interpolate(output_feature, size=size, mode=<span class="string">&#x27;bilinear&#x27;</span>, align_corners=<span class="literal">False</span>)  <span class="comment"># 上采样为与low_level_feature尺寸一致</span></span><br><span class="line">        <span class="keyword">return</span> self.classifier(torch.cat([low_level_feature, output_feature], dim=<span class="number">1</span>))  <span class="comment"># (n, 48+256, h/4, w/4) -&gt; (n, num_classes, h/4, w/4)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_init_weight</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.modules():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">                nn.init.kaiming_normal_(m.weight)</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, (nn.BatchNorm2d, nn.GroupNorm)):</span><br><span class="line">                nn.init.constant_(m.weight, <span class="number">1</span>)</span><br><span class="line">                nn.init.constant_(m.bias, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>空间金字塔池化模块能够通过使用滤波器（卷积）或池化操作以多种比率（rate）和多个有效感受野（fields-of-view）探测传入特征，对<strong>多尺度</strong>的上下文信息进行编码；Encoder-Decoder 结构的模块能够通过逐渐恢复空间信息来捕获更清晰的对象边界。DeepLabV3Plus 结合了这两者的优点，通过添加了一个简单而有效的解码器模块来扩展  DeepLabv3，以细化分割结果，尤其是沿对象边界的分割结果。</p>
+<p>此外还可将深度可分离卷积应用于 ASPP 和解码器模块，从而形成更快、更强的编码器-解码器网络，该部分代码在下一节中介绍。</p>
+<p>最后我们组合所有的模块即可构建完整的 <code>DeepLabV3Plus</code>，注意最后需要对 Decoder 的分类头输出进行上采样，恢复到原始的输入图像大小：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DeepLabV3Plus</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, backbone, classifier</span>):</span><br><span class="line">        <span class="built_in">super</span>(DeepLabV3Plus, self).__init__()</span><br><span class="line">        self.backbone = backbone</span><br><span class="line">        self.classifier = classifier</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):  <span class="comment"># (n, c, h, w)</span></span><br><span class="line">        input_shape = x.shape[-<span class="number">2</span>:]  <span class="comment"># (h, w)</span></span><br><span class="line">        features = self.backbone(x)  <span class="comment"># features[&#x27;low_level&#x27;]: (n, 256, h/4, w/4), feature[&#x27;out&#x27;]: (n, 2048, h/16, w/16)</span></span><br><span class="line">        x = self.classifier(features)  <span class="comment"># (n, num_classes, h/4, w/4)</span></span><br><span class="line">        x = F.interpolate(x, size=input_shape, mode=<span class="string">&#x27;bilinear&#x27;</span>, align_corners=<span class="literal">False</span>)  <span class="comment"># (n, num_classes, h, w)</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_deeplabv3plus_model</span>(<span class="params">args</span>):</span><br><span class="line">    <span class="keyword">if</span> args[<span class="string">&#x27;output_stride&#x27;</span>] == <span class="number">8</span>:</span><br><span class="line">        replace_stride_with_dilation = [<span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">True</span>]</span><br><span class="line">        aspp_dilate = [<span class="number">12</span>, <span class="number">24</span>, <span class="number">36</span>]</span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># output_stride == 16</span></span><br><span class="line">        replace_stride_with_dilation = [<span class="literal">False</span>, <span class="literal">False</span>, <span class="literal">True</span>]</span><br><span class="line">        aspp_dilate = [<span class="number">6</span>, <span class="number">12</span>, <span class="number">18</span>]</span><br><span class="line"></span><br><span class="line">    return_layers = &#123;<span class="string">&#x27;layer4&#x27;</span>: <span class="string">&#x27;out&#x27;</span>, <span class="string">&#x27;layer1&#x27;</span>: <span class="string">&#x27;low_level&#x27;</span>&#125;</span><br><span class="line">    backbone = ResNet.__dict__[args[<span class="string">&#x27;backbone&#x27;</span>]](<span class="literal">True</span>, <span class="literal">True</span>, replace_stride_with_dilation)</span><br><span class="line">    backbone = IntermediateLayerGetter(backbone, return_layers)</span><br><span class="line"></span><br><span class="line">    in_channels = <span class="number">2048</span></span><br><span class="line">    low_level_channels = <span class="number">256</span></span><br><span class="line">    classifier = DeepLabHeadV3Plus(in_channels, low_level_channels, args[<span class="string">&#x27;num_classes&#x27;</span>], aspp_dilate)</span><br><span class="line"></span><br><span class="line">    model = DeepLabV3Plus(backbone, classifier)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    args = &#123;</span><br><span class="line">        <span class="string">&#x27;num_classes&#x27;</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="string">&#x27;output_stride&#x27;</span>: <span class="number">16</span>,</span><br><span class="line">        <span class="string">&#x27;backbone&#x27;</span>: <span class="string">&#x27;resnet101&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;device&#x27;</span>: <span class="string">&#x27;cuda&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    model = get_deeplabv3plus_model(args)</span><br><span class="line">    model.to(args[<span class="string">&#x27;device&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="built_in">input</span> = torch.randn(<span class="number">8</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>, device=args[<span class="string">&#x27;device&#x27;</span>])</span><br><span class="line">    output = model(<span class="built_in">input</span>)</span><br><span class="line">    <span class="built_in">print</span>(output.shape)  <span class="comment"># torch.Size([8, 4, 224, 224])</span></span><br><span class="line"></span><br><span class="line">    pred = output.detach().<span class="built_in">max</span>(dim=<span class="number">1</span>)[<span class="number">1</span>].cpu().numpy()</span><br><span class="line">    <span class="built_in">print</span>(pred.shape)  <span class="comment"># (8, 224, 224)</span></span><br><span class="line">    <span class="built_in">print</span>(pred[<span class="number">0</span>, <span class="number">0</span>, :<span class="number">10</span>])  <span class="comment"># [0 0 0 3 3 3 2 1 1 1]</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-AtrousSeparableConvolution">5. AtrousSeparableConvolution</h2>
+<p>深度可分离卷积，将标准卷积分解为 Depth-wise 卷积与 Point-wise 卷积，大大降低了计算复杂度。我们在其中结合空洞卷积即可构建空洞可分离卷积：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AtrousSeparableConvolution</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, out_channels, kernel_size,</span></span><br><span class="line"><span class="params">                 stride=<span class="number">1</span>, padding=<span class="number">0</span>, dilation=<span class="number">1</span>, bias=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(AtrousSeparableConvolution, self).__init__()</span><br><span class="line">        self.sepconv = nn.Sequential(</span><br><span class="line">            nn.Conv2d(in_channels, in_channels, kernel_size, stride, padding, dilation, groups=in_channels, bias=bias),</span><br><span class="line">            nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">1</span>, stride=<span class="number">1</span>, padding=<span class="number">0</span>, bias=bias),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        self._init_weight()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> self.sepconv(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_init_weight</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.modules():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">                nn.init.kaiming_normal_(m.weight)</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, (nn.BatchNorm2d, nn.GroupNorm)):</span><br><span class="line">                nn.init.constant_(m.weight, <span class="number">1</span>)</span><br><span class="line">                nn.init.constant_(m.bias, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_to_separable_conv</span>(<span class="params">module</span>):</span><br><span class="line">    new_module = module</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(module, nn.Conv2d) <span class="keyword">and</span> module.kernel_size[<span class="number">0</span>] &gt; <span class="number">1</span>:</span><br><span class="line">        new_module = AtrousSeparableConvolution(module.in_channels,</span><br><span class="line">                                                module.out_channels,</span><br><span class="line">                                                module.kernel_size,</span><br><span class="line">                                                module.stride,</span><br><span class="line">                                                module.padding,</span><br><span class="line">                                                module.dilation,</span><br><span class="line">                                                module.bias)</span><br><span class="line">    <span class="keyword">for</span> name, child <span class="keyword">in</span> module.named_children():  <span class="comment"># 递归修改每一层</span></span><br><span class="line">        new_module.add_module(name, convert_to_separable_conv(child))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> new_module</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    args = &#123;</span><br><span class="line">        <span class="string">&#x27;num_classes&#x27;</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="string">&#x27;output_stride&#x27;</span>: <span class="number">16</span>,</span><br><span class="line">        <span class="string">&#x27;backbone&#x27;</span>: <span class="string">&#x27;resnet101&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;device&#x27;</span>: <span class="string">&#x27;cuda&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;separable_conv&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    model = get_deeplabv3plus_model(args)</span><br><span class="line">    <span class="keyword">if</span> args[<span class="string">&#x27;separable_conv&#x27;</span>]:</span><br><span class="line">        convert_to_separable_conv(model.classifier)</span><br><span class="line">    <span class="comment"># print(model)</span></span><br><span class="line">    model.to(args[<span class="string">&#x27;device&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="built_in">input</span> = torch.randn(<span class="number">8</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>, device=args[<span class="string">&#x27;device&#x27;</span>])</span><br><span class="line">    output = model(<span class="built_in">input</span>)</span><br><span class="line">    <span class="built_in">print</span>(output.shape)  <span class="comment"># torch.Size([8, 4, 224, 224])</span></span><br><span class="line"></span><br><span class="line">    pred = output.detach().<span class="built_in">max</span>(dim=<span class="number">1</span>)[<span class="number">1</span>].cpu().numpy()</span><br><span class="line">    <span class="built_in">print</span>(pred.shape)  <span class="comment"># (8, 224, 224)</span></span><br><span class="line">    <span class="built_in">print</span>(pred[<span class="number">0</span>, <span class="number">0</span>, :<span class="number">10</span>])  <span class="comment"># [0 0 0 3 3 3 2 1 1 1]</span></span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/21781.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/21781.html";
+            const title         = "「DeepLabV3Plus核心代码详解」";
+            const excerpt       = `本文记录 DeepLabV3+ 论文（Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation）的阅读笔记。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-08-20T06:09:36.249Z" itemprop="dateModified">Last edited: 2023-08-20</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" KMeans聚类与PCA主成分分析" href="/posts/23991.html">&lt; Previous</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                42
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Atrous-Spatial-Pyramid-Pooling"><span class="toc-text">1. Atrous Spatial Pyramid Pooling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-ASPP-Conv"><span class="toc-text">1.1 ASPP Conv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-ASPP-Pooling"><span class="toc-text">1.2 ASPP Pooling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-ASPP"><span class="toc-text">1.3 ASPP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AFResNet"><span class="toc-text">2. 空洞卷积ResNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-IntermediateLayerGetter"><span class="toc-text">3. IntermediateLayerGetter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-DeepLabV3Plus"><span class="toc-text">4. DeepLabV3Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-AtrousSeparableConvolution"><span class="toc-text">5. AtrousSeparableConvolution</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.72em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.76em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.68em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/21781.html"><i class="fa  fa-book"></i> DeepLabV3Plus核心代码详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/23991.html"><i class="fa  fa-book"></i> KMeans聚类与PCA主成分分析</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/21944.html"><i class="fa  fa-book"></i> 分割图像的着色与相似度匹配</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/6828.html"><i class="fa  fa-book"></i> DeAOT视频追踪论文阅读笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/6211.html"><i class="fa  fa-book"></i> Kaggle项目实战</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
