@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-09-09T09:38:00.000Z">
-<meta property="article:modified_time" content="2023-09-11T04:04:52.666Z">
+<meta property="article:modified_time" content="2023-09-13T09:41:18.219Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -439,7 +439,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~20.20K
+                        ~20.26K
                     
                     words
                 </li>
@@ -450,7 +450,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1694405092666"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1694598078219"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -528,6 +528,8 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NavBar</span> <span class="keyword">from</span> <span class="string">&#x27;./navbar&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Boxes</span> <span class="keyword">from</span> <span class="string">&#x27;./boxes&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">App</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">    state = &#123; </span><br><span class="line">        <span class="attr">boxes</span>: [</span><br><span class="line">            &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">x</span>: <span class="number">0</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">id</span>: <span class="number">2</span>, <span class="attr">x</span>: <span class="number">1</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">id</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">id</span>: <span class="number">4</span>, <span class="attr">x</span>: <span class="number">3</span>&#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">componentDidUpdate</span>(<span class="params">prevProps, prevState</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;App - Update&#x27;</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(prevProps, <span class="variable language_">this</span>.<span class="property">props</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(prevState, <span class="variable language_">this</span>.<span class="property">state</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;App - Render&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            ...</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
 <p>输出的 <code>state</code> 内容如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;boxes: Array(4)&#125;</span><br><span class="line">    boxes: Array(4)</span><br><span class="line">        0: &#123;id: 1, x: 0&#125;</span><br><span class="line">        1: &#123;id: 2, x: 1&#125;</span><br><span class="line">        2: &#123;id: 3, x: 2&#125;</span><br><span class="line">        3: &#123;id: 4, x: 3&#125;</span><br><span class="line">        length: 4</span><br><span class="line">        [[Prototype]]: Array(0)</span><br><span class="line">    [[Prototype]]: Object</span><br><span class="line"></span><br><span class="line">&#123;boxes: Array(4)&#125;</span><br><span class="line">    boxes: Array(4)</span><br><span class="line">        0: &#123;id: 1, x: 1&#125;  (此处有区别)</span><br><span class="line">        1: &#123;id: 2, x: 1&#125;</span><br><span class="line">        2: &#123;id: 3, x: 2&#125;</span><br><span class="line">        3: &#123;id: 4, x: 3&#125;</span><br><span class="line">        length: 4</span><br><span class="line">        [[Prototype]]: Array(0)</span><br><span class="line">    [[Prototype]]: Object</span><br></pre></td></tr></table></figure>
+<p>上一章：<a href="/posts/60453.html">Web学习笔记-React（配置环境、ES6语法补充、Components）</a>。</p>
+<p>下一章：<a href="/posts/25510.html">Web学习笔记-React（路由）</a>。</p>
 </div>
         </div>
         
@@ -614,7 +616,7 @@
                     <a class="tag-none-link" href="/tags/Web/" rel="tag">Web</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-09-11T04:04:52.666Z" itemprop="dateModified">Last edited: 2023-09-11</time>
+                    <time datetime="2023-09-13T09:41:18.219Z" itemprop="dateModified">Last edited: 2023-09-13</time>
                 </div>
             </div>
         </footer>
