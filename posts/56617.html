@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Django学习笔记-VS Code本地运行项目 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Django" />
+  
+  <meta name="description" content="Django学习笔记-VS Code本地运行项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记-VS Code本地运行项目">
+<meta property="og:url" content="https://asanosaki.github.io/posts/56617.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Django学习笔记-VS Code本地运行项目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-07-06T05:19:00.000Z">
+<meta property="article:modified_time" content="2023-10-12T02:29:24.859Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/56617.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Django学习笔记-VS Code本地运行项目</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-07-06T05:19:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-07-06</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~16.25K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697077764859"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B0%86%E9%A1%B9%E7%9B%AE%E4%BC%A0%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 将项目传到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">2. 虚拟环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">3. 修改项目相关文件</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>截止到上一章节，我们的项目一直是部署在云服务器上，包括编写代码以及调试运行也是在云服务器上，现在我们尝试将其放回 Windows 本地环境运行。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-将项目传到本地">1. 将项目传到本地</h2>
+<p>这一步可以使用 Git 也可以使用 SCP，由于之前项目上传在 AcGit 上，只能在 AC Terminal 中拉取，因此使用 SCP 远程传输：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 20000 asanosaki@&lt;公网IP&gt;:djangoapp .  # 在要存放项目的目录执行该指令</span><br></pre></td></tr></table></figure>
+<h2 id="2-虚拟环境配置">2. 虚拟环境配置</h2>
+<p>我们需要先配置一个和云服务上相同的虚拟环境，首先在 VS Code 中打开该项目并且打开终端，在项目根目录下创建虚拟环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv venv</span><br></pre></td></tr></table></figure>
+<p>虚拟环境创建成功之后，一般不会自动启用，所以需要启用它，进入 <code>venv/Scripts</code> 目录运行脚本 <code>Activate.ps1</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd .\venv\Scripts\</span><br><span class="line">.\Activate.ps1</span><br></pre></td></tr></table></figure>
+<p>此时在 VS Code 中可以看到命令行首部多了 <code>(venv)</code>，说明已进入虚拟环境，然后在右下角选择虚拟环境中的解释器即可。</p>
+<p>现在我们在虚拟环境中安装所需的环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django</span><br></pre></td></tr></table></figure>
+<h2 id="3-修改项目相关文件">3. 修改项目相关文件</h2>
+<p>首先修改一下我们的打包脚本 <code>compress_game_js.sh</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">JS_PATH=../game/static/js/</span><br><span class="line">JS_PATH_DIST=$&#123;JS_PATH&#125;dist/</span><br><span class="line">JS_PATH_SRC=$&#123;JS_PATH&#125;src/</span><br><span class="line"></span><br><span class="line">find $&#123;JS_PATH_SRC&#125; -type f -name &#x27;*.js&#x27; | sort | xargs cat &gt; $&#123;JS_PATH_DIST&#125;game.js</span><br></pre></td></tr></table></figure>
+<p>然后打开 Git Bash，进入 <code>scripts</code> 文件夹即可运行脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh compress_game_js.sh</span><br></pre></td></tr></table></figure>
+<p>然后将 <code>djangoapp/settings.py</code> 中的 Redis 配置删除，即删除以下这段话：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;BACKEND&#x27;</span>: <span class="string">&#x27;django_redis.cache.RedisCache&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;LOCATION&#x27;</span>: <span class="string">&#x27;redis://127.0.0.1:6379/1&#x27;</span>,</span><br><span class="line">        <span class="string">&quot;OPTIONS&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;CLIENT_CLASS&quot;</span>: <span class="string">&quot;django_redis.client.DefaultClient&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">USER_AGENTS_CACHE = <span class="string">&#x27;default&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>同样在该文件中需要将 <code>localhost</code> 添加到 <code>ALLOWED_HOSTS</code> 中：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = [<span class="string">&quot;8.130.54.44&quot;</span>, <span class="string">&quot;app4007.acapp.acwing.com.cn&quot;</span>, <span class="string">&quot;localhost&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>然后将 AcWing 一键授权登录的相关文件夹删除：<code>game/views/settings/acwing</code>、<code>game/urls/settings/acwing</code>，然后修改 <code>urls/settings/index.py</code> 中的路由：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> game.views.settings.getinfo <span class="keyword">import</span> getinfo</span><br><span class="line"><span class="keyword">from</span> game.views.settings.login <span class="keyword">import</span> mylogin</span><br><span class="line"><span class="keyword">from</span> game.views.settings.logout <span class="keyword">import</span> mylogout</span><br><span class="line"><span class="keyword">from</span> game.views.settings.register <span class="keyword">import</span> register</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;getinfo/&#x27;</span>, getinfo, name=<span class="string">&#x27;settings_getinfo&#x27;</span>),</span><br><span class="line">    path(<span class="string">&#x27;login/&#x27;</span>, mylogin, name=<span class="string">&#x27;settings_login&#x27;</span>),</span><br><span class="line">    path(<span class="string">&#x27;logout/&#x27;</span>, mylogout, name=<span class="string">&#x27;settings_logout&#x27;</span>),</span><br><span class="line">    path(<span class="string">&#x27;register/&#x27;</span>, register, name=<span class="string">&#x27;settings_register&#x27;</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>修改 <code>AcGame</code> 类，去掉 AcWingOS API，且改为非模块化引入 JS 方式，即去掉 <code>export</code> 关键字：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGame</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">id</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">id</span> = id;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$ac_game</span> = $(<span class="string">&#x27;#&#x27;</span> + id);  <span class="comment">// jQuery通过id找对象的方式</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">settings</span> = <span class="keyword">new</span> <span class="title class_">Settings</span>(<span class="variable language_">this</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">menu</span> = <span class="keyword">new</span> <span class="title class_">AcGameMenu</span>(<span class="variable language_">this</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span> = <span class="keyword">new</span> <span class="title class_">AcGamePlayground</span>(<span class="variable language_">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时前端的 <code>web.html</code> 文件也需要修改：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;css/jquery-ui.min.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.1.min.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;css/game.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/dist/game.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">&quot;margin: 0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;ac_game_1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        $(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> ac_game = <span class="keyword">new</span> <span class="title class_">AcGame</span>(<span class="string">&quot;ac_game_1&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最后修改 <code>Settings</code> 类，去掉 AcWing 一键登录功能，且修改 <code>ajax</code> 请求的地址：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Settings</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">platform</span> = <span class="string">&#x27;WEB&#x27;</span>;  <span class="comment">// 默认为Web前端</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">username</span> = <span class="string">&#x27;&#x27;</span>;  <span class="comment">// 初始用户信息为空</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">avatar</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&#x27;ac_game_settings&#x27;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&#x27;ac_game_settings_login&#x27;&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_title&#x27;&gt;</span></span><br><span class="line"><span class="string">                        Login</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_username&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;input type=&#x27;text&#x27; placeholder=&#x27;Username&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_password&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;input type=&#x27;password&#x27; placeholder=&#x27;Password&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_submit&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;button&gt;Login&lt;/button&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_errormessage&#x27;&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_option&#x27;&gt;</span></span><br><span class="line"><span class="string">                        Register</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&#x27;ac_game_settings_register&#x27;&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_title&#x27;&gt;</span></span><br><span class="line"><span class="string">                        Register</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_username&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;input type=&#x27;text&#x27; placeholder=&#x27;Username&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_password ac_game_settings_password_first&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;input type=&#x27;password&#x27; placeholder=&#x27;Password&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_password ac_game_settings_password_second&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;input type=&#x27;password&#x27; placeholder=&#x27;Confirm Password&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_submit&#x27;&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class=&#x27;ac_game_settings_item&#x27;&gt;</span></span><br><span class="line"><span class="string">                            &lt;button&gt;Register&lt;/button&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_errormessage&#x27;&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_settings_option&#x27;&gt;</span></span><br><span class="line"><span class="string">                        Login</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login</span> = <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_login&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_username</span> = <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_username input&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_password</span> = <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_password input&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_submit</span> = <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_submit button&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_errormessage</span> = <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_errormessage&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_register</span> = <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_option&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">hide</span>();</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register</span> = <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_register&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_username</span> = <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_username input&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_password</span> = <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_password_first input&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_confirm_password</span> = <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_password_second input&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_submit</span> = <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_submit button&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_errormessage</span> = <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_errormessage&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_login</span> = <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_option&#x27;</span>)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">hide</span>();</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$settings</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;  <span class="comment">// 在初始化时需要从服务器端获取用户信息</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">getinfo</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;  <span class="comment">// 绑定监听函数</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events_login</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events_register</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events_login</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_register</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">register</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_submit</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">login_on_remote</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events_register</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_login</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">login</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_submit</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">register_on_remote</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">login_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上登录</span></span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">let</span> username = <span class="variable language_">this</span>.<span class="property">$login_username</span>.<span class="title function_">val</span>();</span><br><span class="line">        <span class="keyword">let</span> password = <span class="variable language_">this</span>.<span class="property">$login_password</span>.<span class="title function_">val</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_errormessage</span>.<span class="title function_">empty</span>();  <span class="comment">// 先清空报错信息</span></span><br><span class="line"></span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;http://localhost:8000/settings/login/&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">username</span>: username,</span><br><span class="line">                <span class="attr">password</span>: password,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);</span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;  <span class="comment">// 登录成功</span></span><br><span class="line">                    location.<span class="title function_">reload</span>();  <span class="comment">// 刷新页面</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 登录失败</span></span><br><span class="line">                    outer.<span class="property">$login_errormessage</span>.<span class="title function_">html</span>(resp.<span class="property">result</span>);  <span class="comment">// 显示报错信息</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">register_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上注册</span></span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">let</span> username = <span class="variable language_">this</span>.<span class="property">$register_username</span>.<span class="title function_">val</span>();</span><br><span class="line">        <span class="keyword">let</span> password = <span class="variable language_">this</span>.<span class="property">$register_password</span>.<span class="title function_">val</span>();</span><br><span class="line">        <span class="keyword">let</span> confirm_password = <span class="variable language_">this</span>.<span class="property">$register_confirm_password</span>.<span class="title function_">val</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register_errormessage</span>.<span class="title function_">empty</span>();</span><br><span class="line"></span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;http://localhost:8000/settings/register/&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">username</span>: username,</span><br><span class="line">                <span class="attr">password</span>: password,</span><br><span class="line">                <span class="attr">confirm_password</span>: confirm_password,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);</span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                    location.<span class="title function_">reload</span>();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    outer.<span class="property">$register_errormessage</span>.<span class="title function_">html</span>(resp.<span class="property">result</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">logout_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上登出</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">platform</span> === <span class="string">&#x27;ACAPP&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// AcApp应该是直接关闭窗口退出</span></span><br><span class="line"></span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;http://localhost:8000/settings/logout/&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);</span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                    location.<span class="title function_">reload</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">register</span>(<span class="params"></span>) &#123;  <span class="comment">// 打开注册界面</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">hide</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">login</span>(<span class="params"></span>) &#123;  <span class="comment">// 打开登录界面</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$register</span>.<span class="title function_">hide</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getinfo</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;http://localhost:8000/settings/getinfo/&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">platform</span>: outer.<span class="property">platform</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;  <span class="comment">// 调用成功的回调函数，返回的Json字典会传给resp</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);  <span class="comment">// 控制台输出查看结果</span></span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                    outer.<span class="property">username</span> = resp.<span class="property">username</span>;</span><br><span class="line">                    outer.<span class="property">avatar</span> = resp.<span class="property">avatar</span>;</span><br><span class="line">                    outer.<span class="title function_">hide</span>();</span><br><span class="line">                    outer.<span class="property">root</span>.<span class="property">menu</span>.<span class="title function_">show</span>();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 如果未登录则需要弹出登录界面</span></span><br><span class="line">                    outer.<span class="title function_">login</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">hide</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>顺带还需要修改一下 <code>game.css</code>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ac_game_menu</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;/static/image/menu/background2.jpeg&#x27;</span>);  <span class="comment">/* 注意不用带公网IP */</span></span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">    user-select: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20vw</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">20%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup_bt</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">15vw</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">3vh</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: italic;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">39</span>, <span class="number">21</span>, <span class="number">28</span>, <span class="number">0.6</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">0.5vw</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup_bt</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.2</span>);</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">100ms</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_playground</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    user-select: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;/static/image/menu/background2.jpeg&#x27;</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">    user-select: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_login</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">32vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20vw</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_register</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">39vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20vw</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_title</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">3.5vh</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">7vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_username</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_password</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_submit</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_errormessage</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.5vh</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">1vw</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_option</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.5vh</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">padding-right</span>: <span class="number">1vw</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_item</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_item</span> &gt; <span class="selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">3vh</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_settings_item</span> &gt; <span class="selector-tag">button</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">3vh</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">2vh</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">199</span>, <span class="number">237</span>, <span class="number">204</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">7px</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到此已经可以在本地运行该项目了，我们也可以根据<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720/article/details/132521497"> Django 学习笔记-实现联机对战（上）</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720/article/details/133273444"> Django 学习笔记-实现联机对战（下）</a>统一长度单位以及添加闪现技能与技能冷却，因为这些部分与云端内容无关。</p>
+<p>最后我们将 <code>.git</code> 文件夹删除，重新上传至 Github（先创建一个仓库 <code>Small_Ball_Fight</code>）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin git@github.com:AsanoSaki/Small_Ball_Fight.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;create small ball fight&quot;</span><br><span class="line">git push --set-upstream origin master</span><br></pre></td></tr></table></figure>
+<p>上一章：<a href="/posts/54821.html">Django学习笔记-Web端授权AcWing一键登录</a>。</p>
+<p>下一章：<a href="/posts/57210.html">Django学习笔记-AcApp端授权AcWing一键登录</a>。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/56617.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/56617.html";
+            const title         = "「Django学习笔记-VS Code本地运行项目」";
+            const excerpt       = `截止到上一章节，我们的项目一直是部署在云服务器上，包括编写代码以及调试运行也是在云服务器上，现在我们尝试将其放回 Windows 本地环境运行。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Django/" rel="tag">Django</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-12T02:29:24.859Z" itemprop="dateModified">Last edited: 2023-10-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Django学习笔记-Web端授权AcWing一键登录" href="/posts/54821.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" DeAOT视频追踪论文阅读笔记" href="/posts/6828.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                59
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B0%86%E9%A1%B9%E7%9B%AE%E4%BC%A0%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-text">1. 将项目传到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 虚拟环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="toc-text">3. 修改项目相关文件</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

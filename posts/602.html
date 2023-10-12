@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Django学习笔记-创建菜单界面 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Django" />
+  
+  <meta name="description" content="Django学习笔记-创建菜单界面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记-创建菜单界面">
+<meta property="og:url" content="https://asanosaki.github.io/posts/602.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Django学习笔记-创建菜单界面">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-06-10T12:04:00.000Z">
+<meta property="article:modified_time" content="2023-10-12T02:26:26.244Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/602.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Django学习笔记-创建菜单界面</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-06-10T12:04:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-06-10</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~12.13K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697077586244"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">1. 项目总体设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%E4%B8%8E%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%88%9B%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">2. 全局设置与项目结构创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAHTML"><span class="toc-number">3.</span> <span class="toc-text">3. 创建HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BAViews%E4%B8%8E%E6%9B%B4%E6%96%B0URL"><span class="toc-number">4.</span> <span class="toc-text">4. 创建Views与更新URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%9B%E5%BB%BA%E8%8F%9C%E5%8D%95"><span class="toc-number">5.</span> <span class="toc-text">5. 创建菜单</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本节内容是项目结构的划分与游戏菜单界面的设计。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-项目总体设计">1. 项目总体设计</h2>
+<p>（1）系统设计</p>
+<ul>
+<li><code>menu</code>：菜单页面；</li>
+<li><code>playground</code>：游戏界面；</li>
+<li><code>settings</code>：设置界面。</li>
+</ul>
+<p>（2）文件结构</p>
+<ul>
+<li><code>templates</code>：管理 HTML 文件；</li>
+<li><code>urls</code>：管理路由，即链接与函数的对应关系；</li>
+<li><code>views</code>：管理 HTTP 函数；</li>
+<li><code>models</code>：管理数据库数据；</li>
+<li><code>static</code>：管理静态文件，比如：
+<ul>
+<li><code>css</code>：对象的格式，比如位置、长宽、颜色、背景、字体大小等；</li>
+<li><code>js</code>：对象的逻辑，比如对象的创建与销毁、事件函数、移动、变色等；</li>
+<li><code>image</code>：图片；</li>
+<li><code>audio</code>：声音；</li>
+<li>……</li>
+</ul>
+</li>
+<li><code>consumers</code>：管理 WebSocket 函数。</li>
+</ul>
+<p>（3）素材地址</p>
+<ul>
+<li>背景图片：
+<ul>
+<li>下载方式：<code>wget --output-document=自定义图片名称 图片地址</code>；</li>
+<li>本地上传：<code>scp -P 20000 .\xxx.jpeg asanosaki@&lt;公网IP&gt;:</code>。</li>
+</ul>
+</li>
+<li><code>jQuery</code> 库：
+<ul>
+<li><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;http://&lt;公网IP&gt;:8000/static/css/jquery-ui.min.css&quot;&gt;</code>；</li>
+<li><code>&lt;script src=&quot;http://&lt;公网IP&gt;:8000/static/js/jquery-3.6.1.min.js&quot;&gt;&lt;/script&gt;</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-全局设置与项目结构创建">2. 全局设置与项目结构创建</h2>
+<p>为了后期方便项目的维护管理，首先先将 <code>game</code> 中的 <code>urls.py</code>、<code>models.py</code>、<code>views.py</code> 删除，将其创建为一个目录，并在这三个目录下创建好 <code>__init__.py</code> 文件，注释掉上一节中在总 URL 文件中的配置信息，然后创建好 <code>static</code> 目录。</p>
+<p>接着进行一些项目的全局设置，首先设置一下项目的时区，打开 <code>~/djangoapp/djangoapp/settings.py</code>，修改 <code>TIME_ZONE</code> 和 <code>USE_TZ</code>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TIME_ZONE = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line">USE_TZ = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>如果 <code>USE_TZ</code> 设置为 <code>True</code> 时，Django 会使用系统默认设置的时区，即 <code>America/Chicago</code>，此时的 <code>TIME_ZONE</code> 不管有没有设置都不起作用。</p>
+<p>注意：由于我们是在云服务器上开发的，如果是 Windows 则设置 <code>TIME_ZONE</code> 是无效的，Django 会使用本机的时间。</p>
+<p>然后将自己创建的 App 加载进来，找到 <code>INSTALLED_APPS</code>，将 <code>game/apps.py</code> 添加进来：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;game.apps.GameConfig&#x27;</span>,  <span class="comment"># 添加此行</span></span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>找到 <code>STATIC_URL = 'static/'</code>，在其附近添加几行：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os  <span class="comment"># 在文件首部导入包</span></span><br><span class="line"></span><br><span class="line">STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">&#x27;static&#x27;</span>)  <span class="comment"># 表示要将静态文件放到static目录下</span></span><br><span class="line">STATIC_URL = <span class="string">&#x27;static/&#x27;</span></span><br><span class="line">MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">&#x27;media&#x27;</span>)</span><br><span class="line">MEDIA_URL = <span class="string">&#x27;media/&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>我们在 <code>game/static/</code> 中创建 <code>image/menu/</code> 目录用来存放菜单界面的背景，将图片 <code>background.png</code> 放入该目录中即可在自己的网址上访问这张图片：<code>http://&lt;公网IP&gt;:8000/static/image/menu/background.png</code>。</p>
+<p>一般 CSS 文件只需要一个就行，因此只需要在 <code>game/static/css/</code> 中创建一个 <code>game.css</code> 文件即可。JS 文件最后一般会有很多，因此在 <code>game/static/js/</code> 中创建两个目录：<code>dist</code> 和 <code>src</code>，分别表示最终合并在一起生成的 <code>js</code> 文件以及许多 <code>js</code> 源文件，我们可以写一个脚本完成合并操作，在 <code>~/djangoapp/</code> 目录下创建一个 <code>scripts</code> 目录，然后在该目录中编写一个 <code>compress_game_js.sh</code> 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">JS_PATH=/home/asanosaki/djangoapp/game/static/js/</span><br><span class="line">JS_PATH_DIST=$&#123;JS_PATH&#125;dist/</span><br><span class="line">JS_PATH_SRC=$&#123;JS_PATH&#125;src/</span><br><span class="line"></span><br><span class="line">find $&#123;JS_PATH_SRC&#125; -type f -name &#x27;*.js&#x27; | sort | xargs cat &gt; $&#123;JS_PATH_DIST&#125;game.js</span><br></pre></td></tr></table></figure>
+<p>添加可执行权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x compress_game_js.sh</span><br></pre></td></tr></table></figure>
+<p>我们执行一下该脚本：<code>./compress_game_js.sh</code>，可以看到 <code>~/djangoapp/game/static/js/dist/</code> 中多了一个 <code>game.js</code> 文件。</p>
+<p>此时我们先将代码上传至 Git：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/djangoapp/</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#x27;create project structure&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h2 id="3-创建HTML">3. 创建HTML</h2>
+<p>我们先在 <code>templates</code> 目录下创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>。由于项目是前后端分离的，最后可以放在多种不同的终端上运行，因此我们再建一个 <code>multiends</code> 目录。</p>
+<p>在 <code>static/src</code> 目录下也创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>，然后再创建一个文件 <code>zbase.js</code>，表示总文件，由于打包工具是按照字典序打包的，该文件中为总的 Class，会调用前面三个目录中的 Class，JS 在调用之前必须定义好，因此在打包时需要保证前面三个目录中的文件在 <code>zbase.js</code> 之前被打包，因此加一个字典序最大的字母在首部。</p>
+<p>在 <code>zbase.js</code> 中定义好总类：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGame</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">id</span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>templates/multiends/</code> 中创建 <code>web.html</code>，文件内容如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://&lt;公网IP&gt;:8000/static/css/jquery-ui.min.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://&lt;公网IP&gt;:8000/static/js/jquery-3.6.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;css/game.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/dist/game.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">&quot;margin: 0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;ac_game_1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        $(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> ac_game = <span class="keyword">new</span> <span class="title class_">AcGame</span>(<span class="string">&quot;ac_game_1&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-创建Views与更新URL">4. 创建Views与更新URL</h2>
+<p>我们先在 <code>views</code> 目录下创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>，这三个目录都是存放 Python 文件的，因此每个目录下都需要一个 <code>__init__.py</code> 文件。</p>
+<p>然后再在 <code>views</code> 目录下创建一个 <code>index.py</code> 作为总函数，该函数只会在 Web 端被调用，主要作用是用来返回上一节中的 HTML 文件的：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;multiends/web.html&#x27;</span>)  <span class="comment"># 从templates目录之后开始写路径，因为Django默认会从templates开始找HTML</span></span><br></pre></td></tr></table></figure>
+<p>现在我们开始写路由，先在 <code>urls</code> 目录下创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>，在每个目录下都创建一个 <code>__init__.py</code> 文件。接着同样创建一个 <code>index.py</code>，用来将所有该路径下其它目录中的路径 Include 进来，可以参考总 URL 文件编写。</p>
+<p>先在三个目录中也创建好 <code>index.py</code>，内容如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"></span><br><span class="line">urlpatterns = []</span><br></pre></td></tr></table></figure>
+<p>此前在 <code>views</code> 目录中实现的 <code>index.py</code> 为总函数，即整个项目只有一个主链接，因此 <code>urls</code> 目录中的 <code>index.py</code> 也要将其 Include 进来：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> game.views.index <span class="keyword">import</span> index</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, index, name=<span class="string">&#x27;index&#x27;</span>),</span><br><span class="line">    path(<span class="string">&#x27;menu/&#x27;</span>, include(<span class="string">&#x27;game.urls.menu.index&#x27;</span>)),</span><br><span class="line">    path(<span class="string">&#x27;playground/&#x27;</span>, include(<span class="string">&#x27;game.urls.playground.index&#x27;</span>)),</span><br><span class="line">    path(<span class="string">&#x27;settings/&#x27;</span>, include(<span class="string">&#x27;game.urls.settings.index&#x27;</span>)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>最后修改一下总 URL 文件（<code>~/djangoapp/djangoapp/</code> 中的 <code>urls.py</code>）：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(<span class="string">&#x27;game.urls.index&#x27;</span>)),</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>此时梳理一下路由顺序：首先会进入到 <code>~/djangoapp/djangoapp/</code> 中的 <code>urls.py</code> 中，然后发现浏览器链接中没有带后缀（例如 <code>admin/</code>），所以会进到 <code>game.urls.index</code> 中，由于没有后缀因此又调用第一个路由，也就是直接调用 <code>game.views.index</code> 中的 <code>index</code> 函数，该函数会渲染 <code>multiends/web.html</code> 里面的内容。</p>
+<p>Tips：浏览器中按 F12 打开控制台后如果看到报错：<code>The Cross-Origin-Opener-Policy header has been ignored, because the URL's origin was untrustworthy. It was defined either in the final response or a redirect.</code>，表示出现了跨域问题，在 <code>settings.py</code> 中添加如下代码即可：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SECURE_CROSS_ORIGIN_OPENER_POLICY = <span class="string">&#x27;None&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>最后将代码上传至 Git：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;modify html &amp; js &amp; views &amp; urls&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h2 id="5-创建菜单">5. 创建菜单</h2>
+<p>我们需要创建一个菜单对象，首先在 <code>static/js/src/menu/</code> 目录中创建一个 <code>zbase.js</code> 文件，内容如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGameMenu</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;  <span class="comment">// root用来传AcGame对象</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="comment">// 如果是HTML对象通常会加一个&#x27;$&#x27;符号</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$menu</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&#x27;ac_game_menu&#x27;&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$menu</span>);  <span class="comment">// 将this.$menu添加到主类的div中</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>game.css</code> 中定义相应的样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ac_game_menu</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;/static/image/menu/background.png&#x27;</span>);  <span class="comment">/* 注意不用带公网IP */</span></span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后需要更新 <code>static/js/src/</code> 中的 <code>zbase.js</code> 文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGame</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">id</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">id</span> = id;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$ac_game</span> = $(<span class="string">&#x27;#&#x27;</span> + id);  <span class="comment">// jQuery通过id找对象的方式</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">menu</span> = <span class="keyword">new</span> <span class="title class_">AcGameMenu</span>(<span class="variable language_">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时即可在页面中看到自己的背景图片（注意更新完 JS 文件后都需要执行一下打包脚本 <code>compress_game_js.sh</code>）。</p>
+<p>Tips：如果修改完 CSS 文件后网页没有变化说明页面把 CSS 文件缓存下来了，可以按 F12 打开控制台，在 Network 选项卡中勾选上 <code>Disable cache</code>。</p>
+<p>现在我们在菜单界面添加几个按钮，首先修改菜单目录中的 <code>zbase.js</code> 文件（修改完记得运行打包脚本）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGameMenu</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;  <span class="comment">// root用来传AcGame对象</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="comment">// 如果是HTML对象通常会加一个&#x27;$&#x27;符号</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$menu</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&#x27;ac_game_menu&#x27;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&#x27;ac_game_menu_btgroup&#x27;&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_menu_btgroup_bt ac_game_menu_btgroup_bt_single&#x27;&gt;</span></span><br><span class="line"><span class="string">                        单人模式</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;br&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_menu_btgroup_bt ac_game_menu_btgroup_bt_multi&#x27;&gt;</span></span><br><span class="line"><span class="string">                        多人模式</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;br&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_menu_btgroup_bt ac_game_menu_btgroup_bt_settings&#x27;&gt;</span></span><br><span class="line"><span class="string">                        设置</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$menu</span>);  <span class="comment">// 将this.$menu添加到主类的div中</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$single</span> = <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_menu_btgroup_bt_single&#x27;</span>);  <span class="comment">// class名前面要加&#x27;.&#x27;</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$multi</span> = <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_menu_btgroup_bt_multi&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span> = <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_menu_btgroup_bt_settings&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后修改 <code>game.css</code> 设置一下按钮的样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ac_game_menu</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;/static/image/menu/background.png&#x27;</span>);  <span class="comment">/* 注意不用带公网IP */</span></span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">    user-select: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20vw</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">35vh</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">19vw</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup_bt</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18vw</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">6vh</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: italic;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2vh</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">39</span>, <span class="number">21</span>, <span class="number">28</span>, <span class="number">0.6</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">0.5vw</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup_bt</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.2</span>);</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">100ms</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们实现点击按钮切换页面的功能，需要给每个按钮绑定一个函数，我们可以定义一个 <code>start</code> 函数放在构造函数中，表示对象被创建出来时需要执行的一些初始化操作，即在 <code>start</code> 中可以绑定一些事件。</p>
+<p>首先我们先把游戏界面的简易版本写出来，在 <code>static/js/src/playground/</code> 目录中创建一个 <code>zbase.js</code> 文件，内容如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGamePlayground</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$playground</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div&gt;</span></span><br><span class="line"><span class="string">                游戏界面</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$playground</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">hide</span>();  <span class="comment">// 初始化时需要先关闭playground界面</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示playground界面</span></span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$playground</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭playground界面</span></span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$playground</span>.<span class="title function_">hide</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后更新一下总的 <code>zbase.js</code> 文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGame</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">id</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">id</span> = id;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$ac_game</span> = $(<span class="string">&#x27;#&#x27;</span> + id);  <span class="comment">// jQuery通过id找对象的方式</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">menu</span> = <span class="keyword">new</span> <span class="title class_">AcGameMenu</span>(<span class="variable language_">this</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span> = <span class="keyword">new</span> <span class="title class_">AcGamePlayground</span>(<span class="variable language_">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后在菜单界面中设置一下按钮点击的响应操作，点击单人模式按钮即可跳转到 <code>AcGamePlayground</code> 界面：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGameMenu</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;  <span class="comment">// root用来传AcGame对象</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="comment">// 如果是HTML对象通常会加一个&#x27;$&#x27;符号</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$menu</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&#x27;ac_game_menu&#x27;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&#x27;ac_game_menu_btgroup&#x27;&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_menu_btgroup_bt ac_game_menu_btgroup_bt_single&#x27;&gt;</span></span><br><span class="line"><span class="string">                        单人模式</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;br&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_menu_btgroup_bt ac_game_menu_btgroup_bt_multi&#x27;&gt;</span></span><br><span class="line"><span class="string">                        多人模式</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;br&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class=&#x27;ac_game_menu_btgroup_bt ac_game_menu_btgroup_bt_settings&#x27;&gt;</span></span><br><span class="line"><span class="string">                        设置</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$menu</span>);  <span class="comment">// 将this.$menu添加到主类的div中</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$single</span> = <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_menu_btgroup_bt_single&#x27;</span>);  <span class="comment">// class名前面要加&#x27;.&#x27;</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$multi</span> = <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_menu_btgroup_bt_multi&#x27;</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span> = <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_menu_btgroup_bt_settings&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给按钮绑定监听函数</span></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="comment">// 注意在function中调用this指的是function本身，因此需要先将外面的this存起来</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$single</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">hide</span>();  <span class="comment">// 关闭menu界面</span></span><br><span class="line">            outer.<span class="property">root</span>.<span class="property">playground</span>.<span class="title function_">show</span>();  <span class="comment">// 显示playground界面</span></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$multi</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示menu界面</span></span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭menu界面</span></span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$menu</span>.<span class="title function_">hide</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将代码上传至 Git：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;modify html &amp; css &amp; menu &amp; playground&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>上一章：<a href="/posts/26150.html">Django学习笔记-概述与项目环境配置</a>。</p>
+<p>下一章：<a href="/posts/4217.html">Django学习笔记-创建游戏界面</a>。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/602.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/602.html";
+            const title         = "「Django学习笔记-创建菜单界面」";
+            const excerpt       = `本节内容是项目结构的划分与游戏菜单界面的设计。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Django/" rel="tag">Django</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-12T02:26:26.244Z" itemprop="dateModified">Last edited: 2023-10-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Django学习笔记-概述与项目环境配置" href="/posts/26150.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Django学习笔记-创建游戏界面" href="/posts/4217.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                59
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="toc-text">1. 项目总体设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%E4%B8%8E%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%88%9B%E5%BB%BA"><span class="toc-text">2. 全局设置与项目结构创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAHTML"><span class="toc-text">3. 创建HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BAViews%E4%B8%8E%E6%9B%B4%E6%96%B0URL"><span class="toc-text">4. 创建Views与更新URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%9B%E5%BB%BA%E8%8F%9C%E5%8D%95"><span class="toc-text">5. 创建菜单</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

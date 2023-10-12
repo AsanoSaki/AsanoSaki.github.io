@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Django Channels、WS协议及同步与异步详解 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Django" />
+  
+  <meta name="description" content="Django Channels、WS协议及同步与异步详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django Channels、WS协议及同步与异步详解">
+<meta property="og:url" content="https://asanosaki.github.io/posts/45720.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Django Channels、WS协议及同步与异步详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-10-11T08:28:00.000Z">
+<meta property="article:modified_time" content="2023-10-12T02:37:11.565Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/45720.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Django Channels、WS协议及同步与异步详解</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-10-11T08:28:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-11</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~10.14K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697078231565"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5"><span class="toc-number">1.</span> <span class="toc-text">1. 同步与异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-WebSocket"><span class="toc-number">2.</span> <span class="toc-text">2. WebSocket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9C%A8JavaScript%E4%B8%AD%E4%BD%BF%E7%94%A8WebSocket"><span class="toc-number">3.</span> <span class="toc-text">3. 在JavaScript中使用WebSocket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Django-Channels"><span class="toc-number">4.</span> <span class="toc-text">4. Django Channels</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>介绍同步与异步、WebSocket 协议以及 Django Channels 三者的概念及其联系，并结合代码示例进行讲解。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-同步与异步">1. 同步与异步</h2>
+<p>在 Django 中，同步和异步主要涉及到请求处理的方式。这两种方式的主要区别在于它们如何处理多个并发请求：</p>
+<ul>
+<li>同步（Synchronous）：在同步模式下，Django 会为<strong>每个请求</strong>创建一个<strong>单独</strong>的线程或进程。这意味着，如果一个请求正在等待响应（例如，等待数据库查询返回结果），那么整个线程或进程将被<strong>阻塞</strong>，直到响应返回。这可能会导致资源的浪费，因为在等待期间，线程或进程不能做其他任何事情。</li>
+<li>异步（Asynchronous）：与同步模式不同，异步模式允许单个线程或进程<strong>同时处理多个请求</strong>。当一个请求需要等待响应时（例如，等待数据库查询返回结果），线程或进程可以切换到另一个请求，继续执行其他任务，而不是被阻塞。这样可以更有效地利用系统资源，提高并发处理能力。</li>
+</ul>
+<p>Django 3.1 版本开始引入了对异步视图和中间件的支持，这意味着你可以编写异步的视图函数，这些函数可以使用 Python 的 <code>async</code> 和 <code>await</code> 关键字进行定义。这使得 Django 可以更好地处理 I/O 密集型任务，如 HTTP 请求、数据库操作和文件读写等。</p>
+<p>然而需要注意的是，并非所有的 Django 组件都支持异步操作。例如，Django 的 ORM（对象关系映射）目前仍然是同步的，这意味着你不能在异步视图或中间件中直接使用它。如果你需要在异步代码中执行数据库操作，你需要使用 Django 提供的 <code>sync_to_async</code> 或 <code>async_to_sync</code> 函数来确保数据库操作在同步环境中执行。</p>
+<p>总的来说，同步和异步各有优势和适用场景。对于 CPU 密集型任务，同步模式可能更合适；而对于 I/O 密集型任务，异步模式可能会带来更好的性能。在实际开发中，你可能需要根据应用的具体需求和性能要求来选择使用同步还是异步。</p>
+<p>（1）同步代码样例</p>
+<p>现在我们来看一些同步与异步的样例，首先是同步视图，在下面这个例子中，当请求到达 <code>sync_view</code> 时，Django 将等待视图函数完成后才会处理下一个请求：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sync_view</span>(<span class="params">request</span>):  <span class="comment"># 这是一个同步视图</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;Hello, this is a synchronous view!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>下面这个例子在视图中同步地从数据库获取所有的博客对象，然后将它们传递给模板：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Blog</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sync_view</span>(<span class="params">request</span>):</span><br><span class="line">    blogs = Blog.objects.<span class="built_in">all</span>()  <span class="comment"># 获取所有的博客对象</span></span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;blog/index.html&#x27;</span>, &#123;<span class="string">&#x27;blogs&#x27;</span>: blogs&#125;)</span><br></pre></td></tr></table></figure>
+<p>（2）异步代码样例</p>
+<p>在下面这个例子中，<code>async_view</code> 是一个异步视图。当请求到达这个视图时，Django 可以在等待 <code>asyncio.sleep(1)</code> 完成时处理其他请求：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">async_view</span>(<span class="params">request</span>):  <span class="comment"># 这是一个异步视图</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;Hello, this is an asynchronous view!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>请注意，要使用异步视图，你需要确保你的 Django 项目正在运行在支持异步的 ASGI 服务器上，而不是传统的 WSGI 服务器。此外，你的中间件和任何你在视图中调用的代码也必须支持异步。否则，你可能会遇到问题。如果你的代码库主要是同步的，那么最好坚持使用同步视图。如果你正在编写新的、主要使用 Python 的异步库的代码，那么异步视图可能会很有用。请记住，混合使用同步和异步代码可以很复杂，需要谨慎对待。</p>
+<p>再来看下面的例子，我们创建了一个新的 <code>get_blogs</code> 异步函数，它使用 <code>run_in_executor</code> 方法在一个单独的线程中运行数据库查询。这允许 Django 在等待数据库查询完成时处理其他请求：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> JsonResponse</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Blog</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">async_view</span>(<span class="params">request</span>):  <span class="comment"># 异步获取所有的博客对象</span></span><br><span class="line">    blogs = <span class="keyword">await</span> get_blogs()</span><br><span class="line">    <span class="keyword">return</span> JsonResponse(&#123;<span class="string">&#x27;blogs&#x27;</span>: <span class="built_in">list</span>(blogs.values())&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get_blogs</span>():</span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    blogs = <span class="keyword">await</span> loop.run_in_executor(<span class="literal">None</span>, Blog.objects.<span class="built_in">all</span>)</span><br><span class="line">    <span class="keyword">return</span> blogs</span><br></pre></td></tr></table></figure>
+<p>请注意，虽然这个示例展示了如何在 Django 视图中使用异步代码操作数据库，但是 Django 的数据库层目前还不支持原生的异步操作。因此，在实践中，你可能需要使用像 <code>asgiref.sync_to_async</code> 这样的工具来安全地在异步视图中执行同步数据库操作。同时，你也需要确保你的数据库驱动程序和数据库服务器能够处理并发连接。否则，你可能会遇到性能问题或错误。如果你不确定如何正确地使用异步代码，那么最好使用同步视图和同步数据库操作。</p>
+<h2 id="2-WebSocket">2. WebSocket</h2>
+<p>WebSocket 是一种用于在 Web 和移动应用程序之间进行实时通信的新标准。WebSocket 设计为在 Web 浏览器和 Web 服务器之间实现，但也可以由客户端或服务器应用程序使用。WebSocket 是一种提供单个 TCP 连接上的<strong>全双工</strong>通信通道的协议，可以实现服务器和客户端之间的实时交互。</p>
+<p>WebSocket 与 HTTP 不同，其主要区别如下：</p>
+<ul>
+<li>通信方式：HTTP 是<strong>单向</strong>的，客户端发送请求，服务器发送响应。而 WebSocket 是<strong>双向</strong>的，在客户端-服务器通信的场景中使用的全双工协议，即客户端和服务器可以同时发送和接收数据。</li>
+<li>连接：HTTP 每次请求都需要重新建立连接，而 WebSocket 使用<strong>长连接</strong>实现数据<strong>实时</strong>推送。一旦通信链接建立和连接打开后，消息交换将以双向模式进行，客户端-服务器之间的连接会持久存在。</li>
+<li>数据传输：HTTP 协议中的数据传输是文本格式的，而 WebSocket 可以传输文本和二进制数据。</li>
+<li>性能：由于 HTTP 的每次请求都需要建立连接和断开连接，而 WebSocket 可以在一次连接上进行多次通信，因此 WebSocket 在性能上比 HTTP 有优势。</li>
+<li>应用场景：HTTP 主要用于客户端和服务器之间的请求和响应，如浏览器请求网页和服务器返回网页的 HTML 文件。WebSocket 可以实现双向通信，常常用于实时通信场景。</li>
+<li>协议头：HTTP 协议头的大小从200字节到2KB不等，常见大小是700-800字节。而 WebSocket 协议头相对较小，这使得其在高频率、小数据量的通信场景下更有优势。</li>
+<li>状态：HTTP 是无状态协议，而 WebSocket 是有状态协议。这意味着客户端和服务器之间的连接将保持活动状态，直到被任何一方（客户端或服务器）终止。</li>
+</ul>
+<p>两种协议都位于 OSI 模型的第七层，并依赖于第四层的 TCP。尽管它们是不同的，但 RFC 6455 指出，WebSocket 旨在通过 HTTP 端口443和80工作，并支持 HTTP 代理和中介，从而使其与 HTTP 兼容。为了实现兼容性，WebSocket 握手使用 HTTP Upgrade 头从 HTTP 协议切换到 WebSocket 协议。</p>
+<p>WebSocket 协议使得 Web 浏览器（或其他客户端应用程序）和 Web 服务器之间可以在不需要客户端请求的情况下发送内容，以及在保持连接打开的同时传递消息。这样，客户端和服务器之间可以进行<strong>双向持续的对话</strong>。通信通常是通过 TCP 端口号443（或80，如果是非安全连接）进行的，这对于使用防火墙阻止非 Web Internet 连接的环境是有利的。</p>
+<p>在 Django 中实现 WebSocket，你可以选择使用 <code>channels</code> 或者 <code>dwebsocket</code>。但是，<code>channels</code> 被更广泛地使用，因为它可以完美地集成到 Django 的生态系统中。</p>
+<h2 id="3-在JavaScript中使用WebSocket">3. 在JavaScript中使用WebSocket</h2>
+<p>（1）创建 <code>WebSocket</code> 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://localhost:8888&#x27;</span>);  <span class="comment">// 如果是安全连接则地址为wss://...</span></span><br></pre></td></tr></table></figure>
+<p>（2）连接成功时的回调函数</p>
+<p>当 WebSocket 连接成功时，<code>onopen</code> 事件会被触发。你可以在这个函数中发送消息到服务器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ws.<span class="property">onopen</span> = <span class="keyword">function</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;客户端连接成功&#x27;</span>);</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&#x27;hello&#x27;</span>);  <span class="comment">// 向服务器发送消息</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>（3）从服务器接收信息时的回调函数</p>
+<p>当从服务器接收到信息时，<code>onmessage</code> 事件会被触发。你可以在这个函数中处理接收到的数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ws.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;收到服务器响应&#x27;</span>, e.<span class="property">data</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>（4）连接关闭时的回调函数</p>
+<p>当连接关闭后，<code>onclose</code> 事件会被触发。你可以在这个函数中处理连接关闭后的逻辑：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ws.<span class="property">onclose</span> = <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;关闭客户端连接&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>（5）连接失败时的回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ws.<span class="property">onerror</span> = <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>（6）监听窗口关闭事件</p>
+<p>当窗口关闭时，主动去关闭 WebSocket 连接，防止连接还没断开就关闭窗口，这样服务端会抛异常：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onbeforeunload</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ws.<span class="title function_">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-Django-Channels">4. Django Channels</h2>
+<p>Django Channels 是一个开源框架，它扩展了 Django 的功能，使得 Django 不仅可以处理 HTTP，还可以处理需要长时间连接的协议，如 WebSocket、MQTT（消息队列遥测传输）、聊天协议、广播等实时应用。</p>
+<p>Channels 允许 Django 项目支持“长连接”，它用 ASGI 替换了 Django 的默认 WSGI。ASGI（Asynchronous Server Gateway Interface）为异步 Python Web 服务器和应用程序提供了一个接口，同时支持 WSGI 提供的所有功能。</p>
+<p>Channels 保留了 Django 的同步行为，并添加了一层异步协议，允许用户编写完全同步、异步或两者混合的视图（Views）。Django Channels 提供了一种通信系统，叫做 Channel Layer，它可以让多个 <code>Consumer</code> 实例之间互相通信，以及与外部 Django 程序实现互通。</p>
+<ul>
+<li>Channel Layer 主要包括两种抽象概念：Channel 和 Group。Channel 是一个发送消息的通道，每个 Channel 都有一个名称，拥有这个名称的人都可以往 Channel 里面发送消息。Group 是多个 Channel 的集合，每个 Group 都有一个名称，拥有这个名称的人都可以往这个 Group 里添加/删除 Channel，也可以往 Group 里发送消息。Group 内的所有 Channel 都可以收到，但是不能给 Group 内的具体某个 Channel 发送消息。使用 Django Channels 可以实现一些实时通讯的功能，如在线聊天室、游戏、通知等。</li>
+<li><code>Consumer</code> 是 Channels 的基本单位，相当于 Django 的视图，它是一个事件驱动的类，可以处理不同类型的事件，如连接、断开、接收消息等，支持同步和异步应用程序。</li>
+</ul>
+<p>现在我们来看一下 Django Channels 的样例，首先需要安装 Channels 和 Channels Redis：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install channels channels_redis</span><br></pre></td></tr></table></figure>
+<p>然后需要在你的项目设置中（<code>settings.py</code> 文件）配置 <code>CHANNEL_LAYERS</code> 需要添加 <code>channels</code> 到你的 <code>INSTALLED_APPS</code> 列表，并设置 <code>ASGI_APPLICATION</code> 和 <code>CHANNEL_LAYERS</code>。例如：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [ </span><br><span class="line">    <span class="string">&#x27;channels&#x27;</span>,  <span class="comment"># 添加此行</span></span><br><span class="line">    <span class="string">&#x27;game.apps.GameConfig&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">ASGI_APPLICATION = <span class="string">&#x27;djangoapp.asgi.application&#x27;</span>  <span class="comment"># &#x27;djangoapp&#x27;为你的项目名</span></span><br><span class="line"></span><br><span class="line">CHANNEL_LAYERS = &#123;</span><br><span class="line">    <span class="string">&quot;default&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;BACKEND&quot;</span>: <span class="string">&quot;channels_redis.core.RedisChannelLayer&quot;</span>,</span><br><span class="line">        <span class="string">&quot;CONFIG&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;hosts&quot;</span>: [(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">6379</span>)],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，我们假设你正在本地运行一个 Redis 服务器，它监听在6379端口。如果你的 Redis 服务器在其他地方或者使用了不同的端口，你需要更新 <code>hosts</code> 设置。</p>
+<p>接下来你需要在 Django App 的目录下创建一个路由文件 <code>routing.py</code>，作用相当于 HTTP 的 <code>urls</code>，并在其中定义你的 WebSocket 路由。我们先创建出来：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"></span><br><span class="line">websocket_urlpatterns = [</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>此外，你还需要运行一个兼容的 ASGI 服务器，如 Daphne 或 Uvicorn。我们安装 Daphne：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install daphne</span><br></pre></td></tr></table></figure>
+<p>输入 <code>daphne</code> 命令查看是否可用，如果不可用说明应该是没有配置环境变量，按如下方式修改环境变量（需要重启系统）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/environment</span><br><span class="line">在 PATH=&#x27;xxx&#x27; 后面添加 &#x27;:/home/&lt;用户名&gt;/.local/bin&#x27;</span><br><span class="line">即: &#x27;xxx:/home/&lt;用户名&gt;/.local/bin&#x27;</span><br></pre></td></tr></table></figure>
+<p>为了在 Django 项目中使用 Daphne，你需要确保你的项目已经配置为使用 ASGI 而不是 WSGI。这通常意味着你需要在你的项目中创建一个 <code>asgi.py</code> 文件，并在你的设置文件中设置 <code>ASGI_APPLICATION</code> 变量（之前已经设置好了）。</p>
+<p>现在我们配置 <code>djangoapp/djangoapp/asgi.py</code> 文件：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> channels.auth <span class="keyword">import</span> AuthMiddlewareStack</span><br><span class="line"><span class="keyword">from</span> channels.routing <span class="keyword">import</span> ProtocolTypeRouter, URLRouter</span><br><span class="line"><span class="keyword">from</span> django.core.asgi <span class="keyword">import</span> get_asgi_application</span><br><span class="line"><span class="keyword">from</span> game.routing <span class="keyword">import</span> websocket_urlpatterns</span><br><span class="line"></span><br><span class="line">os.environ.setdefault(<span class="string">&#x27;DJANGO_SETTINGS_MODULE&#x27;</span>, <span class="string">&#x27;djangoapp.settings&#x27;</span>)  <span class="comment"># &#x27;djangoapp&#x27;为你的项目名</span></span><br><span class="line"></span><br><span class="line">application = ProtocolTypeRouter(&#123;</span><br><span class="line">    <span class="string">&quot;http&quot;</span>: get_asgi_application(),</span><br><span class="line">    <span class="string">&quot;websocket&quot;</span>: AuthMiddlewareStack(URLRouter(websocket_urlpatterns))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>现在我们在 Django App 目录下创建 <code>consumers.py</code>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> channels.generic.websocket <span class="keyword">import</span> AsyncWebsocketConsumer</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ChatConsumer</span>(<span class="title class_ inherited__">AsyncWebsocketConsumer</span>):</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">connect</span>(<span class="params">self</span>):</span><br><span class="line">        self.room_name = self.scope[<span class="string">&#x27;url_route&#x27;</span>][<span class="string">&#x27;kwargs&#x27;</span>][<span class="string">&#x27;room_name&#x27;</span>]</span><br><span class="line">        self.room_group_name = <span class="string">&#x27;chat_%s&#x27;</span> % self.room_name</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 加入房间</span></span><br><span class="line">        <span class="keyword">await</span> self.channel_layer.group_add(</span><br><span class="line">            self.room_group_name,</span><br><span class="line">            self.channel_name</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">await</span> self.accept()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">disconnect</span>(<span class="params">self, close_code</span>):</span><br><span class="line">        <span class="comment"># 离开房间</span></span><br><span class="line">        <span class="keyword">await</span> self.channel_layer.group_discard(</span><br><span class="line">            self.room_group_name,</span><br><span class="line">            self.channel_name</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 接收来自WebSocket的消息</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">receive</span>(<span class="params">self, text_data</span>):</span><br><span class="line">        text_data_json = json.loads(text_data)</span><br><span class="line">        message = text_data_json[<span class="string">&#x27;message&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 发送消息到房间组</span></span><br><span class="line">        <span class="keyword">await</span> self.channel_layer.group_send(</span><br><span class="line">            self.room_group_name,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;chat_message&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;message&#x27;</span>: message</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 接收来自房间组的消息</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">chat_message</span>(<span class="params">self, event</span>):</span><br><span class="line">        message = event[<span class="string">&#x27;message&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 发送消息到WebSocket</span></span><br><span class="line">        <span class="keyword">await</span> self.send(text_data=json.dumps(&#123;</span><br><span class="line">            <span class="string">&#x27;message&#x27;</span>: message</span><br><span class="line">        &#125;))</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，我们创建了一个 <code>ChatConsumer</code> 类，它是一个异步的 WebSocket Consumer，这个类继承自 <code>AsyncWebsocketConsumer</code>，这是 Django Channels 提供的一个基础类。</p>
+<p>其中的主要函数说明如下：</p>
+<ul>
+<li><code>async def connect(self)</code>：当一个 WebSocket 连接打开时，这个方法会被调用。在这个方法中，我们从 URL 路由中获取房间名，并将其保存在 <code>self.room_name</code> 中。然后，我们创建一个房间组名，并将其保存在 <code>self.room_group_name</code> 中。然后，我们将当前的 Channel 添加到房间组中。最后，我们接受 WebSocket 连接。</li>
+<li><code>async def disconnect(self, close_code)</code>：当一个 WebSocket 连接关闭时，这个方法会被调用。在这个方法中，我们将当前的 Channel 从房间组中移除。</li>
+<li><code>async def receive(self, text_data)</code>：当从 WebSocket 接收到消息时，这个方法会被调用。在这个方法中，我们首先将接收到的文本数据解析为 JSON，然后我们从 JSON 数据中获取消息，并将其发送到房间组中。</li>
+<li><code>async def chat_message(self, event)</code>：这是一个自定义的事件处理器方法，当从房间组接收到类型为 <code>chat_message</code> 的事件时，这个方法会被调用。在这个方法中，我们首先从事件中获取消息，然后我们将消息发送回 WebSocket。</li>
+</ul>
+<p>总的来说，这段代码的功能为：当用户连接到 WebSocket 时，他们会被添加到一个名为 <code>chat_&#123;room_name&#125;</code> 的组中。当他们发送消息时，这个消息会被广播到他们所在的组中的所有其他用户。当他们接收到组中的消息时，这个消息会被发送回他们的 WebSocket，即实现了一个简单的聊天室功能。</p>
+<p>最后我们定义一下 Consumer 的路由，以下代码将 URL 路径 <code>ws/chat/&#123;room_name&#125;/</code> 映射到我们的 <code>ChatConsumer</code>。这意味着当用户连接到这个路径的 WebSocket 时，他们会被连接到聊天室：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> re_path</span><br><span class="line"><span class="keyword">from</span> .consumers <span class="keyword">import</span> ChatConsumer</span><br><span class="line"></span><br><span class="line">websocket_urlpatterns = [</span><br><span class="line">    re_path(<span class="string">r&#x27;ws/chat/(?P&lt;room_name&gt;\w+)/$&#x27;</span>, ChatConsumer.as_asgi()),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/45720.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/45720.html";
+            const title         = "「Django Channels、WS协议及同步与异步详解」";
+            const excerpt       = `介绍同步与异步、WebSocket 协议以及 Django Channels 三者的概念及其联系，并结合代码示例进行讲解。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Django/" rel="tag">Django</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-12T02:37:11.565Z" itemprop="dateModified">Last edited: 2023-10-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Django使用SMTP发送邮件教程" href="/posts/60606.html">&lt; Previous</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                59
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5"><span class="toc-text">1. 同步与异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-WebSocket"><span class="toc-text">2. WebSocket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9C%A8JavaScript%E4%B8%AD%E4%BD%BF%E7%94%A8WebSocket"><span class="toc-text">3. 在JavaScript中使用WebSocket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Django-Channels"><span class="toc-text">4. Django Channels</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-11-08T04:05:00.000Z">
-<meta property="article:modified_time" content="2023-09-13T09:38:59.932Z">
+<meta property="article:modified_time" content="2023-10-09T07:22:10.783Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -273,13 +273,6 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://mirror.yibook.org">
-                                                                
-                                                                Zlibrary
-                                                            </a>
-                                                        </li>
-                                                    
-                                                        <li>
                                                             <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
                                                                 
                                                                 Flysheep
@@ -311,6 +304,13 @@
                                                             <a target="_blank" rel="noopener" href="https://reactjs.org">
                                                                 
                                                                 React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
                                                             </a>
                                                         </li>
                                                     
@@ -439,7 +439,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~14.01K
+                        ~14.36K
                     
                     words
                 </li>
@@ -450,7 +450,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1694597939932"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1696836130783"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -556,7 +556,11 @@ HTML 提醒注意（Bring Attention To）元素 <code>&lt;b&gt;</code> 用于吸
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.baidu.com&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>Baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.acwing.com&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">height</span>=<span class="string">&quot;200&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/Web Application Lesson/images/logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;logo&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="2-6-表单">2.6 表单</h3>
 <p>（1）<code>&lt;form&gt;</code> 标签：<br>
-<code>&lt;form&gt;</code> 元素表示文档中的一个区域，此区域包含交互控件，用于向 Web 服务器提交信息。</p>
+<code>&lt;form&gt;</code> 元素表示文档中的一个区域，此区域包含交互控件，用于向 Web 服务器提交信息。其常用的属性介绍如下：</p>
+<ul>
+<li><code>action</code>：处理表单提交的 URL，就是想让表单提交到的地址。</li>
+<li><code>method</code>：浏览器提交表单使用的 HTTP 请求方式，若为 <code>&quot;get&quot;</code> 表单数据会附加在 <code>action</code> 属性的 URL 中，并以 <code>'?'</code> 作为分隔符；若为 <code>&quot;post&quot;</code> 表单数据会包含在表单体内然后发送给服务器。</li>
+</ul>
 <p>（2）<code>&lt;input&gt;</code> 标签：<br>
 <code>&lt;input&gt;</code> 元素表示一个用来填写内容的输入框，常见类型有：</p>
 <ul>
@@ -564,11 +568,12 @@ HTML 提醒注意（Bring Attention To）元素 <code>&lt;b&gt;</code> 用于吸
 <li><code>&lt;input type=&quot;number&quot;&gt;</code>：用于让用户输入一个数字。其包括内置验证以拒绝非数字输入。浏览器可能会选择提供步进箭头，让用户可以使用鼠标增加和减少输入的值，或者只需用指尖敲击即可。</li>
 <li><code>&lt;input type=&quot;email&quot;&gt;</code>：带有 <code>email</code>（电子邮箱）类型标记的输入框元素（<code>&lt;input&gt;</code>）能够让用户输入或编辑一个电子邮箱地址，此外，如果指定了 <code>multiple</code> 属性，用户还可以输入多个电子邮箱地址。在表单提交前，输入框会自动验证输入值是否是一个或多个合法的电子邮箱地址（非空值且符合电子邮箱地址格式）<code>CSS</code> 伪标签 <code>:valid</code> 和 <code>:invalid</code> 能够在校验后自动应用。</li>
 <li><code>&lt;input type=&quot;password&quot;&gt;</code>：<code>&lt;input&gt;</code> 元素里有一种叫做 <code>password</code> 的值，给我们一个方法让用户更加安全的输入密码。这个元素是作为一行纯文本编辑器控件呈现的，其中文本被遮蔽以致于无法读取，通常通过用诸如星号（<code>*</code>）或点（<code>•</code>）等符号替换每个字符来实现。这个符号会根据用户的浏览器和操作系统来具体显示哪个。</li>
-<li><code>&lt;input type=&quot;radio&quot;&gt;</code>：<code>&lt;input&gt;</code> 的 <code>radio</code> 类型元素默认渲染为小型圆圈图表，填充即为激活，类似于复选框（checkbox）类型。单选按钮允许你选择单一的值来提交表单。<code>name</code> 属性相同的为一组 <code>radio</code>。</li>
+<li><code>&lt;input type=&quot;radio&quot;&gt;</code>：<code>&lt;input&gt;</code> 的 <code>radio</code> 类型元素默认渲染为小型圆圈图表，填充即为激活，类似于复选框（checkbox）类型。单选按钮允许你选择单一的值（<code>value</code> 属性）来提交表单。<code>name</code> 属性相同的为一组 <code>radio</code>，提交表单时的数据为 <code>name=value</code> 形式。</li>
+<li><code>&lt;input type=&quot;checkbox&quot;&gt;</code>：复选框，如果添加 <code>checked</code> 属性表示该复选框是否被默认选中（当页面加载时），当表单被提交时，只有当前被选中的复选框的 <code>value</code> 属性的值会被提交给服务器。</li>
 </ul>
 <p>常用属性有：</p>
 <ul>
-<li><code>name</code>：名称</li>
+<li><code>name</code>：名称，提交表单时以 <code>name=value</code> 的形式提交</li>
 <li><code>id</code>：唯一ID</li>
 <li><code>maxlength</code>：最大长度</li>
 <li><code>minlength</code>：最小长度</li>
@@ -732,7 +737,7 @@ MDN 官方文档：MDN Web Docs。`;
                     <a class="tag-none-link" href="/tags/Web/" rel="tag">Web</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-09-13T09:38:59.932Z" itemprop="dateModified">Last edited: 2023-09-13</time>
+                    <time datetime="2023-10-09T07:22:10.783Z" itemprop="dateModified">Last edited: 2023-10-09</time>
                 </div>
             </div>
         </footer>
@@ -783,7 +788,7 @@ MDN 官方文档：MDN Web Docs。`;
                 Articles
             </span>
             <span class="count">
-                45
+                59
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -791,7 +796,7 @@ MDN 官方文档：MDN Web Docs。`;
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -799,7 +804,7 @@ MDN 官方文档：MDN Web Docs。`;
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -822,7 +827,7 @@ MDN 官方文档：MDN Web Docs。`;
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
   </aside>
 
 
@@ -831,7 +836,7 @@ MDN 官方文档：MDN Web Docs。`;
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.64em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.68em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.72em;">Others</a> <a href="/tags/Python/" style="font-size: 0.64em;">Python</a> <a href="/tags/Web/" style="font-size: 0.76em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
       </div>
   </aside>
 
@@ -845,34 +850,62 @@ MDN 官方文档：MDN Web Docs。`;
         
           
           
-            <a class="list-group-item" href="/posts/41844.html"><i class="fa  fa-book"></i> Web学习笔记-React（Redux）</a>
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/25510.html"><i class="fa  fa-book"></i> Web学习笔记-React（路由）</a>
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/18290.html"><i class="fa  fa-book"></i> Web学习笔记-React（组合Components）</a>
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/21781.html"><i class="fa  fa-book"></i> DeepLabV3Plus核心代码详解</a>
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/23991.html"><i class="fa  fa-book"></i> KMeans聚类与PCA主成分分析</a>
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

@@ -4,9 +4,10 @@
     <title>AsanoSaki • Posts by &#34;mysql&#34; category</title>
     <link href="https://asanosaki.github.io" />
     <updated>2022-12-04T09:13:00.000Z</updated>
-    <category term="AI" />
-    <category term="Hexo" />
     <category term="Others" />
+    <category term="AI" />
+    <category term="Django" />
+    <category term="Hexo" />
     <category term="Linux" />
     <category term="MySQL" />
     <category term="Python" />
@@ -403,6 +404,33 @@ B+Tree 性质：
 &lt;ul&gt;
 &lt;li&gt;MySQL 使用索引时需要索引有序，假设现在建立了 &lt;code&gt;name, age, school&lt;/code&gt; 的联合索引，那么索引的排序为：先按照 &lt;code&gt;name&lt;/code&gt; 排序，如果 &lt;code&gt;name&lt;/code&gt; 相同，则按照 &lt;code&gt;age&lt;/code&gt; 排序，如果 &lt;code&gt;age&lt;/code&gt; 的值也相等，则按照 &lt;code&gt;school&lt;/code&gt; 进行排序。&lt;/li&gt;
 &lt;li&gt;当进行查询时，此时索引仅仅按照 &lt;code&gt;name&lt;/code&gt; 严格有序，因此必须首先使用 &lt;code&gt;name&lt;/code&gt; 字段进行&lt;strong&gt;等值查询&lt;/strong&gt;，之后对于匹配到的列而言，其按照 &lt;code&gt;age&lt;/code&gt; 字段严格有序，此时可以使用 &lt;code&gt;age&lt;/code&gt; 字段用做索引查找，以此类推。因此在建立联合索引的时候应该注意索引列的顺序，一般情况下，将查询需求频繁或者字段选择性高的列放在前面。此外可以根据特例的查询或者表结构进行单独的调整。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-9-MySQL的最左前缀原则是什么？&#34;&gt;4.9 MySQL的最左前缀原则是什么？&lt;/h3&gt;
+&lt;p&gt;最左前缀原则就是&lt;strong&gt;最左优先&lt;/strong&gt;，在创建多列索引时，要根据业务需求，&lt;code&gt;where&lt;/code&gt; 子句中使用&lt;strong&gt;最频繁&lt;/strong&gt;的一列放在最左边。MySQL 会一直向右匹配直到遇到&lt;strong&gt;范围查询&lt;/strong&gt;（&lt;code&gt;&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;&lt;/code&gt;、&lt;code&gt;between&lt;/code&gt;、&lt;code&gt;like&lt;/code&gt;）就停止匹配，比如：对于 &lt;code&gt;a = 1 and b = 2 and c &amp;gt; 3 and d = 4&lt;/code&gt;，如果建立 &lt;code&gt;(a, b, c)&lt;/code&gt; 顺序的索引，&lt;code&gt;d&lt;/code&gt; 是用不到索引的，如果建立 &lt;code&gt;(a, b, d, c)&lt;/code&gt; 的索引则都可以用到，&lt;code&gt;a, b, d&lt;/code&gt; 的顺序可以任意调整。&lt;code&gt;=&lt;/code&gt; 和 &lt;code&gt;in&lt;/code&gt; 可以&lt;strong&gt;乱序&lt;/strong&gt;，比如 &lt;code&gt;a = 1 and b = 2 and c = 3&lt;/code&gt; 建立 &lt;code&gt;(a, b, c)&lt;/code&gt; 索引可以任意顺序，MySQL 的查询优化器会帮你优化成索引可以识别的形式。&lt;/p&gt;
+&lt;h3 id=&#34;4-10-前缀索引是什么？&#34;&gt;4.10 前缀索引是什么？&lt;/h3&gt;
+&lt;p&gt;因为可能我们索引的字段非常长，这既占内存空间，也不利于维护。所以我们就想，如果只把很长字段的前面的公共部分作为一个索引，就会产生超级加倍的效果。但是，我们需要注意，&lt;code&gt;order by&lt;/code&gt; 不支持前缀索引。&lt;/p&gt;
+&lt;p&gt;创建前缀索引的流程如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先计算完整列的选择性：&lt;code&gt;select count(distinct col_1)/count(1) from table_1&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;再计算不同前缀长度的选择性：&lt;code&gt;select count(distinct left(col_1, 4))/count(1) from table_1&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;找到最优长度之后，创建前缀索引：&lt;code&gt;create index idx_front on table_1 (col_1(4))&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-11-如何创建索引？&#34;&gt;4.11 如何创建索引？&lt;/h3&gt;
+&lt;p&gt;创建索引有以下三种方式：&lt;/p&gt;
+&lt;p&gt;（1）在执行 &lt;code&gt;CREATE TABLE&lt;/code&gt; 时创建索引：&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;CREATE&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;TABLE&lt;/span&gt; table_name (&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    id &lt;span class=&#34;type&#34;&gt;INT&lt;/span&gt; auto_increment &lt;span class=&#34;keyword&#34;&gt;PRIMARY&lt;/span&gt; KEY,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    first_name &lt;span class=&#34;type&#34;&gt;VARCHAR&lt;/span&gt; (&lt;span class=&#34;number&#34;&gt;16&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    last_name &lt;span class=&#34;type&#34;&gt;VARCHAR&lt;/span&gt; (&lt;span class=&#34;number&#34;&gt;16&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    id_card &lt;span class=&#34;type&#34;&gt;VARCHAR&lt;/span&gt; (&lt;span class=&#34;number&#34;&gt;18&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    information text,&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    KEY name (first_name, last_name),&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    FULLTEXT KEY (information) ,  &lt;span class=&#34;comment&#34;&gt;-- 在information字段上建立全文索引&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;UNIQUE&lt;/span&gt; KEY (id_card)  &lt;span class=&#34;comment&#34;&gt;-- 在id_card字段上建立唯一索引&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;（2）使用 &lt;code&gt;ALTER TABLE&lt;/code&gt; 命令添加索引：&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;ALTER&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;TABLE&lt;/span&gt; table_name &lt;span class=&#34;keyword&#34;&gt;ADD&lt;/span&gt; INDEX index_name (column_list);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;ALTER TABLE&lt;/code&gt; 用来创建普通索引、&lt;code&gt;UNIQUE&lt;/code&gt; 索引或 &lt;code&gt;PRIMARY KEY&lt;/code&gt; 索引。&lt;/p&gt;
+&lt;p&gt;其中 &lt;code&gt;table_name&lt;/code&gt; 是要增加索引的表名，&lt;code&gt;column_list&lt;/code&gt; 指出对哪些列进行索引，如果索引多列则各列之间用逗号分隔。&lt;/p&gt;
+&lt;p&gt;索引名 &lt;code&gt;index_name&lt;/code&gt; 可自己命名，缺省时，MySQL 将根据第一个索引列赋一个名称。另外，&lt;code&gt;ALTER TABLE&lt;/code&gt; 允许在单个语句中更改多个表，因此可以同时创建多个索引。&lt;/p&gt;
+&lt;p&gt;（3）使用 &lt;code&gt;CREATE INDEX&lt;/code&gt; 命令创建索引：&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;CREATE&lt;/span&gt; INDEX index_name &lt;span class=&#34;keyword&#34;&gt;ON&lt;/span&gt; table_name (column_list);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;4-12-创建索引时需要注意什么？&#34;&gt;4.12 创建索引时需要注意什么？&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;非空字段：应该指定列为 &lt;code&gt;NOT NULL&lt;/code&gt;，除非你想存储 &lt;code&gt;NULL&lt;/code&gt;。在 MySQL 中，含有空值的列很难进行查询优化，因为它们使得索引、索引的统计信息以及比较运算更加复杂。你应该用0或者一个特殊的值或者一个空串代替空值；&lt;/li&gt;
+&lt;li&gt;取值离散（变量各个取值之间的差异程度）大的字段的列放到联合索引的前面，可以通过 &lt;code&gt;count()&lt;/code&gt; 函数查看字段的差异值，返回值越大说明字段的唯一值越多，字段的离散程度高；&lt;/li&gt;
+&lt;li&gt;索引字段越小越好：数据库的数据存储以页为单位，一页存储的数据越多则一次 I/O 操作获取的数据越多，效率越高。&lt;/li&gt;
 &lt;/ul&gt;
 </content>
         <category term="MySQL" />

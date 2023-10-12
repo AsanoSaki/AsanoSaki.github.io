@@ -4,9 +4,10 @@
     <title>AsanoSaki • Posts by &#34;web&#34; tag</title>
     <link href="https://asanosaki.github.io" />
     <updated>2023-09-11T02:56:00.000Z</updated>
-    <category term="AI" />
-    <category term="Hexo" />
     <category term="Others" />
+    <category term="AI" />
+    <category term="Django" />
+    <category term="Hexo" />
     <category term="Linux" />
     <category term="MySQL" />
     <category term="Python" />
@@ -1213,7 +1214,11 @@ HTML 提醒注意（Bring Attention To）元素 &lt;code&gt;&amp;lt;b&amp;gt;&lt
 &lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;https://www.baidu.com&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;target&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;_blank&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Baidu&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;https://www.acwing.com&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;target&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;_blank&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;height&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;200&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;src&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;/Web Application Lesson/images/logo.png&amp;quot;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;alt&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&amp;quot;logo&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&#34;2-6-表单&#34;&gt;2.6 表单&lt;/h3&gt;
 &lt;p&gt;（1）&lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; 标签：&lt;br&gt;
-&lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; 元素表示文档中的一个区域，此区域包含交互控件，用于向 Web 服务器提交信息。&lt;/p&gt;
+&lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; 元素表示文档中的一个区域，此区域包含交互控件，用于向 Web 服务器提交信息。其常用的属性介绍如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;action&lt;/code&gt;：处理表单提交的 URL，就是想让表单提交到的地址。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;method&lt;/code&gt;：浏览器提交表单使用的 HTTP 请求方式，若为 &lt;code&gt;&amp;quot;get&amp;quot;&lt;/code&gt; 表单数据会附加在 &lt;code&gt;action&lt;/code&gt; 属性的 URL 中，并以 &lt;code&gt;&#39;?&#39;&lt;/code&gt; 作为分隔符；若为 &lt;code&gt;&amp;quot;post&amp;quot;&lt;/code&gt; 表单数据会包含在表单体内然后发送给服务器。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;（2）&lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 标签：&lt;br&gt;
 &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 元素表示一个用来填写内容的输入框，常见类型有：&lt;/p&gt;
 &lt;ul&gt;
@@ -1221,11 +1226,12 @@ HTML 提醒注意（Bring Attention To）元素 &lt;code&gt;&amp;lt;b&amp;gt;&lt
 &lt;li&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;number&amp;quot;&amp;gt;&lt;/code&gt;：用于让用户输入一个数字。其包括内置验证以拒绝非数字输入。浏览器可能会选择提供步进箭头，让用户可以使用鼠标增加和减少输入的值，或者只需用指尖敲击即可。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;email&amp;quot;&amp;gt;&lt;/code&gt;：带有 &lt;code&gt;email&lt;/code&gt;（电子邮箱）类型标记的输入框元素（&lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt;）能够让用户输入或编辑一个电子邮箱地址，此外，如果指定了 &lt;code&gt;multiple&lt;/code&gt; 属性，用户还可以输入多个电子邮箱地址。在表单提交前，输入框会自动验证输入值是否是一个或多个合法的电子邮箱地址（非空值且符合电子邮箱地址格式）&lt;code&gt;CSS&lt;/code&gt; 伪标签 &lt;code&gt;:valid&lt;/code&gt; 和 &lt;code&gt;:invalid&lt;/code&gt; 能够在校验后自动应用。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;password&amp;quot;&amp;gt;&lt;/code&gt;：&lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 元素里有一种叫做 &lt;code&gt;password&lt;/code&gt; 的值，给我们一个方法让用户更加安全的输入密码。这个元素是作为一行纯文本编辑器控件呈现的，其中文本被遮蔽以致于无法读取，通常通过用诸如星号（&lt;code&gt;*&lt;/code&gt;）或点（&lt;code&gt;•&lt;/code&gt;）等符号替换每个字符来实现。这个符号会根据用户的浏览器和操作系统来具体显示哪个。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;radio&amp;quot;&amp;gt;&lt;/code&gt;：&lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 的 &lt;code&gt;radio&lt;/code&gt; 类型元素默认渲染为小型圆圈图表，填充即为激活，类似于复选框（checkbox）类型。单选按钮允许你选择单一的值来提交表单。&lt;code&gt;name&lt;/code&gt; 属性相同的为一组 &lt;code&gt;radio&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;radio&amp;quot;&amp;gt;&lt;/code&gt;：&lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 的 &lt;code&gt;radio&lt;/code&gt; 类型元素默认渲染为小型圆圈图表，填充即为激活，类似于复选框（checkbox）类型。单选按钮允许你选择单一的值（&lt;code&gt;value&lt;/code&gt; 属性）来提交表单。&lt;code&gt;name&lt;/code&gt; 属性相同的为一组 &lt;code&gt;radio&lt;/code&gt;，提交表单时的数据为 &lt;code&gt;name=value&lt;/code&gt; 形式。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;checkbox&amp;quot;&amp;gt;&lt;/code&gt;：复选框，如果添加 &lt;code&gt;checked&lt;/code&gt; 属性表示该复选框是否被默认选中（当页面加载时），当表单被提交时，只有当前被选中的复选框的 &lt;code&gt;value&lt;/code&gt; 属性的值会被提交给服务器。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;常用属性有：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt;：名称&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt;：名称，提交表单时以 &lt;code&gt;name=value&lt;/code&gt; 的形式提交&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;id&lt;/code&gt;：唯一ID&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;maxlength&lt;/code&gt;：最大长度&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;minlength&lt;/code&gt;：最小长度&lt;/li&gt;

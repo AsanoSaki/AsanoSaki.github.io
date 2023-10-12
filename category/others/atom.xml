@@ -4,9 +4,10 @@
     <title>AsanoSaki • Posts by &#34;others&#34; category</title>
     <link href="https://asanosaki.github.io" />
     <updated>2022-12-02T02:58:00.000Z</updated>
-    <category term="AI" />
-    <category term="Hexo" />
     <category term="Others" />
+    <category term="AI" />
+    <category term="Django" />
+    <category term="Hexo" />
     <category term="Linux" />
     <category term="MySQL" />
     <category term="Python" />
@@ -73,6 +74,26 @@
 &lt;p&gt;Get off the bus/train/plane. 下公交/动车/飞机（先站起来再下车）&lt;/p&gt;
 &lt;p&gt;Get off my car. 表示别碰我的车&lt;/p&gt;
 &lt;p&gt;Get down from the car. 表示别站在车顶/引擎盖上&lt;/p&gt;
+&lt;h3 id=&#34;纠结-很值&#34;&gt;纠结/很值&lt;/h3&gt;
+&lt;p&gt;Which should I buy? I’m in two minds. 我应该买哪个？我很纠结&lt;/p&gt;
+&lt;p&gt;They’re both worth the money. 他们都很值（worthy 表示值得/配得上的人或事物，不能用于价格值不值）&lt;/p&gt;
+&lt;h3 id=&#34;近视度数&#34;&gt;近视度数&lt;/h3&gt;
+&lt;p&gt;What’s your prescription? / How strong are your glasses? 你眼睛多少度？&lt;/p&gt;
+&lt;p&gt;This eye is minus two, and this eye is minus two point five. 这只眼睛200度，这只250度&lt;/p&gt;
+&lt;p&gt;I’m short-sighted not long-sighted. 我是近视眼，不是远视眼&lt;/p&gt;
+&lt;p&gt;I’m wearing contact lenses. 我戴隐形眼镜&lt;/p&gt;
+&lt;h3 id=&#34;吃什么容易长胖&#34;&gt;吃什么容易长胖&lt;/h3&gt;
+&lt;p&gt;This steak is very fatty. 这个牛排太肥了&lt;/p&gt;
+&lt;p&gt;It’s very fattening. 太容易长胖了&lt;/p&gt;
+&lt;p&gt;Fruit is good for me. 吃水果对身体好&lt;/p&gt;
+&lt;h3 id=&#34;称呼老师&#34;&gt;称呼老师&lt;/h3&gt;
+&lt;p&gt;日常一般不会在老师面前直接称呼 Teacher，只会在介绍自己的职业或是间接称呼别人会用&lt;/p&gt;
+&lt;p&gt;小学、初高中比较严格，一般说：Mr/Mrs/Miss/Ms + 姓氏，也可以单独说 Sir/Miss&lt;/p&gt;
+&lt;p&gt;在大学，教书的老师可以称呼为 Professor/Doctor + 姓氏&lt;/p&gt;
+&lt;h3 id=&#34;手机没电借充电宝&#34;&gt;手机没电借充电宝&lt;/h3&gt;
+&lt;p&gt;My phone is dead. 我的手机没电了&lt;/p&gt;
+&lt;p&gt;Can I use your power bank? 我能用一下你的充电宝吗？&lt;/p&gt;
+&lt;p&gt;Can I also borrow that charging cable? 我能再借一下那个充电线吗？&lt;/p&gt;
 &lt;h2 id=&#34;2-情景对话&#34;&gt;2. 情景对话&lt;/h2&gt;
 &lt;h3 id=&#34;Day1&#34;&gt;Day1&lt;/h3&gt;
 &lt;p&gt;Hey bro!（Hello 较正式，bro 更不正式，因此 Hello bro 很奇怪）&lt;/p&gt;
@@ -173,48 +194,52 @@
 &lt;p&gt;Windows 下安装 Git 以及配置与 Github 的远程连接。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
-&lt;p&gt;（1）首先前往 Git 官网：&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;，下载安装文件：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/a3464f035edc4602b77b0a30e7e20927.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（2）打开安装程序，把 &lt;code&gt;Only show new options&lt;/code&gt; 的勾去掉，点击 &lt;code&gt;Next&lt;/code&gt;：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/acfeb99dcbc348678ed3018896486dff.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（3）此处可以选用默认设置，也可以勾上 &lt;code&gt;Add a Git Bash Profile to Windows Terminal&lt;/code&gt;：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/44e0f21c3f3d4518a6baee9ddcd0a6db.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（4）此处选择编辑器，一般直接使用 &lt;code&gt;Vim&lt;/code&gt; 即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/ceff4c6d201349bbb69382327320e5fb.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（5）此处是设置 Git 初始化分支的名称，默认为 &lt;code&gt;master&lt;/code&gt;，也可以选择自定义：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/c877b79b65c04960b59d0183fccd5acb.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（6）此处选择使用 Git 的方式，通常选第一个：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/e77844da80104b9c81d714bd6fa4547f.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（7）选择 &lt;code&gt;SSH&lt;/code&gt;，第一个即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/fe9648ad17b444c887cf825a1f50eba3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（8）选择 &lt;code&gt;https&lt;/code&gt; 传输后端，第一个选项使用 OpenSSL 库，第二个选项使用本机 Windows 安全通道库，选第一个即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/fb0d613fa4f24216b9d974700a8ce0b0.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（9）配置结束行转换方式，也就是 Git 处理文本结束行的方式，Windows 选择第一个即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/c2a183145ddf4661b5a229a2130dc3df.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（10）配置终端使用 Git Bash，第一个选项是使用 MinTTY 作为终端模拟器，第二个选项是使用 Windows 的默认控制台，一般选择第一个：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/6145b71262154b27b82367b43805479a.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（11）选择 &lt;code&gt;git pull&lt;/code&gt; 的默认行为，第一个选项是 &lt;code&gt;git pull&lt;/code&gt; 的标准行为：尽可能快进当前分支到一个被捕获的分支，否则创建合并提交；第二个选项是将当前分支改为获取的分支。如果没有要重基的本地提交，这相当于快进；第三个选项是仅仅快进，快进到获取的分支，如果不可能，就失败。此处选择第一个选项即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/772eb5d50aaf40e5970707d5539c9f1b.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（12）选择 Git 凭证助手，选第一个即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/9a45284b2dc3438dab6354c6530a896a.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（13）配置额外特性，第一个选项是启用文件系统缓存，第二个选项是支持符号链接，勾上第一个即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/7bda5e591a354174aa735643c740a42e.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（14）实验特性，一般不用选，直接安装即可：&lt;br&gt;
-&lt;img src=&#34;https://img-blog.csdnimg.cn/9a4e60e623fb4a23a7a0eb7a493c96f1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;（15）安装好后打开 Git Bash，输入 &lt;code&gt;git -v&lt;/code&gt;，即可看到以下结果：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/af0ad4d1be3c4a2094581ea9fe10e1c3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（1）首先前往 &lt;a href=&#34;https://git-scm.com/&#34;&gt;Git 官网&lt;/a&gt;，下载安装文件：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/afd0f15bc1ba472298da6be93fd8aa6b.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（2）打开安装程序，设置好安装路径，然后点击下一步后在此处可以选用默认设置，也可以勾上 &lt;code&gt;Additional icons&lt;/code&gt;（桌面图标） 和 &lt;code&gt;Add a Git Bash Profile to Windows Terminal&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/fd3ffec317f44439aa7897a568f0e82b.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（3）直接点击下一步：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/b5cc490f9ceb4853b84a8c47ce461279.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（4）此处选择编辑器，一般直接使用 Vim 即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/2492e93d068f4e5e83f98148903a25f6.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（5）此处是设置 Git 初始化分支的名称，默认为 &lt;code&gt;master&lt;/code&gt;，也可以选择自定义：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/5a5fce6362d346c59b007026c18e9acf.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（6）此处选择使用 Git 的方式，通常选第二个：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/4c639a86d5b14c9fa4a354d27e677911.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（7）选择 SSH，第一个即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/6652e0adbeb84930951c06ef6d148fdb.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（8）选择 HTTPS 传输后端，第一个选项使用 OpenSSL 库，第二个选项使用本机 Windows 安全通道库，选第一个即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/12f4acbf229240309ee024cc2e9492cb.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（9）配置结束行转换方式，也就是 Git 处理文本结束行的方式，Windows 选择第一个即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/d5551e096ea2436f87c99829ac1fd929.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（10）配置终端使用 Git Bash，第一个选项是使用 MinTTY 作为终端模拟器，第二个选项是使用 Windows 的默认控制台，一般选择第一个：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/babd2fe966c042788b8338f5c851e172.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（11）选择 &lt;code&gt;git pull&lt;/code&gt; 的默认行为，第一个选项是 &lt;code&gt;git pull&lt;/code&gt; 的标准行为：尽可能快进当前分支到一个被捕获的分支，否则创建合并提交；第二个选项是将当前分支改为获取的分支。如果没有要重基的本地提交，这相当于快进；第三个选项是仅仅快进，快进到获取的分支，如果不可能，就失败。此处选择第一个选项即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/f0dc4cd54abe46bca86004ae731cfd46.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（12）选择 Git 凭证助手，选第一个即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/837d3ca0f24549cd858c7502277bd41b.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（13）配置额外特性，第一个选项是启用文件系统缓存，第二个选项是支持符号链接，勾上第一个即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/69984af63ca54a1da5a9165ccd8cdcf3.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（14）实验特性，一般不用选，直接安装即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/227b12977a0440819dc7bafd5b77fc30.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（15）安装好后在任意目录下点击鼠标右键应该能看到 &lt;code&gt;Open Git Bash here&lt;/code&gt; 选项，我们可以通过该选项在某一目录中打开 Git Bash，然后我们打开后输入 &lt;code&gt;git -v&lt;/code&gt;，即可看到 Git 的版本号：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/47a50c44ea6442a8b7fd609d69f9f7bc.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在窗口顶部右键即可打开设置页面（Options），可以调整字体大小与窗口的默认大小：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/e1123ce8d4864687aee360458543b50c.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/1948dcafc99348e29ce03f5dccca6334.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/34732de0a41341ba85e04870ce537429.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
 &lt;p&gt;（16）输入以下命令配置 Git：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config --global user.name &amp;quot;Github用户名&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global user.email &amp;quot;Github邮箱&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;例如：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config --global user.name &amp;quot;AsanoSaki&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global user.email &amp;quot;Yujie_Yi@foxmail.com&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;生成公钥（输完命令连按几次回车）：&lt;/p&gt;
+&lt;p&gt;生成公钥：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh-keygen -t rsa&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;将 &lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt; 中的内容复制到 GitHub 的 SSH Keys 中：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/0ee1b8da92b34025a146c8e8ee27e5d6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/0ee1b8da92b34025a146c8e8ee27e5d6.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
 &lt;p&gt;测试是否连接上 GitHub：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh -T git@github.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;结果如下说明配置成功：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/093e9bbe95264d6594e40fda280bd519.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/093e9bbe95264d6594e40fda280bd519.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如果出现报错提示：&lt;code&gt;ssh: connect to host github.com port 22: Connection timed out&lt;/code&gt;，说明22端口可能被防火墙屏蔽了，可以尝试连接 GitHub 的443端口，我们将 &lt;code&gt;~/.ssh/config&lt;/code&gt; 文件修改成以下内容，这样 SSH 连接 GitHub 的时候就会使用443端口：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Host github.com&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    HostName ssh.github.com&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    User 你的GitHub用户名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Port 443&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 </content>

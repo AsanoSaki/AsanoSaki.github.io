@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Django学习笔记-概述与项目环境配置 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Django" />
+  
+  <meta name="description" content="Django学习笔记-概述与项目环境配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记-概述与项目环境配置">
+<meta property="og:url" content="https://asanosaki.github.io/posts/26150.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Django学习笔记-概述与项目环境配置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-06-08T09:16:00.000Z">
+<meta property="article:modified_time" content="2023-10-12T02:25:30.247Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/26150.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Django学习笔记-概述与项目环境配置</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-06-08T09:16:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-06-08</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~5.20K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697077530247"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Django%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. Django概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">2. 开发环境介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEDocker%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">3. 配置Docker环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Django%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="toc-number">4.</span> <span class="toc-text">4. Django项目创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Django-App%E5%88%9B%E5%BB%BA"><span class="toc-number">5.</span> <span class="toc-text">5. Django App创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%9B%B4%E6%94%B9Django%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0"><span class="toc-number">6.</span> <span class="toc-text">6. 更改Django项目名称</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文记录 Django 的学习过程。<br>
+Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/">Django Web Docs</a>。<br>
+本节内容是 Django 框架的介绍以及本次开发的小游戏项目的环境配置与初始化。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-Django概述">1. Django概述</h2>
+<p>Django 是后起之秀，近些年越来越流行，Youtube（月活20亿+）、Instagram（月活10亿+）等公司采用了 Django 框架。可以作为 Web、App、小程序、AcWing 云端 App（AC APP）等各种项目的后端。</p>
+<p>Django 优势：</p>
+<ul>
+<li>开发效率高，生态完善，有<a target="_blank" rel="noopener" href="https://www.djangoproject.com/">官方社区</a>长期支持。</li>
+<li>运行效率高（常见误区：Python 运行效率低，所以 Python 写的应用运行效率低）。
+<ul>
+<li>项目运行效率瓶颈有很多，比如：数据库查询、网络带宽/延迟、硬盘读写速度等，这些与框架关系不大。</li>
+<li>计算密集型的模块可以用 C/C++ 实现，然后编译成动态链接库再 <code>import</code> 进来。</li>
+<li>计算密集型的微服务可以通过 <code>thrift</code> 等工具对接，微服务的 <code>Server</code> 端代码可以用 C/C++ 语言实现。</li>
+<li>有很多工具可以将 Python 代码翻译成 C/C++，比如 Cython、Pypy。AcWing 题库中的不少题目，会发现 Python3 比 Java 还快一些。</li>
+</ul>
+</li>
+<li>既适合大公司，也适合个人开发者，平均开发一个 Web/AC App 只需要半个月至一个月。</li>
+</ul>
+<h2 id="2-开发环境介绍">2. 开发环境介绍</h2>
+<ul>
+<li>完全无需配置本地环境。利用 AC Terminal 直接在云端开发，使用工具：<code>vim</code>、<code>tmux</code> 等。不推荐在本地开发。
+<ul>
+<li>本项目会涉及多台服务器间的网络通信，如果在本地开发，未来不方便调试和部署。</li>
+<li>在本地开发无法统一开发环境，部分 Python 包在 Windows 系统上安装困难。</li>
+</ul>
+</li>
+<li>需要租一台具有公网 IP 的云服务器，并安装 <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">Docker</a>。
+<ul>
+<li>服务器配置无要求。</li>
+<li>后期可以利用 <code>Docker</code> 随意迁移。</li>
+</ul>
+</li>
+<li>在 AC Terminal 的 <code>/var/lib/acwing/docker/images/</code> 目录下给大家提供统一的课程 <code>Docker</code> 镜像（也会讲解如何自己配置 Django 开发环境）。
+<ul>
+<li>标准化开发环境，避免未来出现软件版本不兼容。</li>
+<li>省去配环境的环节。</li>
+</ul>
+</li>
+<li>使用 <a target="_blank" rel="noopener" href="https://git.acwing.com/">AC Git</a> 管理项目代码。
+<ul>
+<li>方便回滚代码。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-配置Docker环境">3. 配置Docker环境</h2>
+<p>首先拉取一个 Ubuntu 镜像：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ubuntu:20.04</span><br></pre></td></tr></table></figure>
+<p>创建容器后进入容器配置基本环境并创建用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 20000:22 -p 8000:8000 --name ubuntu_django -itd ubuntu:20.04</span><br><span class="line">docker attach ubuntu_django</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install sudo</span><br><span class="line">apt-get install vim</span><br><span class="line">apt-get install tmux</span><br><span class="line">apt-get install ipython3</span><br><span class="line">apt-get install tree</span><br><span class="line">apt-get install silversearcher-ag</span><br><span class="line">apt-get install openssh-server</span><br><span class="line">adduser asanosaki</span><br><span class="line">usermod -aG sudo asanosaki</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>然后去云服务器官网放行20000端口和8000端口，以阿里云为例，协议类型选 <code>TCP</code>，端口范围分别为 <code>目的: 8000/8000</code> 与 <code>目的: 20000/20000</code>，授权对象都为 <code>源: 0.0.0.0/0</code>。</p>
+<p>通过 SSH 远程连接容器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh asanosaki@localhost -p 20000</span><br></pre></td></tr></table></figure>
+<p>如果出现 <code>kex_exchange_identification: read: Connection reset by peer</code> 报错，就去进入容器的根用户下编辑 <code>hosts.allow</code> 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts.allow</span><br></pre></td></tr></table></figure>
+<p>在文件中添加一行：<code>sshd: ALL</code>，然后重启 SSH 服务：<code>service ssh restart</code>。</p>
+<p>进入容器根用户安装剩余的环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install python3</span><br><span class="line">apt-get install python3-pip</span><br><span class="line">apt-get install git</span><br><span class="line">pip install Django</span><br><span class="line">pip install uwsgi</span><br><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
+<p>在命令行查看 Django 版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin --version</span><br></pre></td></tr></table></figure>
+<h2 id="4-Django项目创建">4. Django项目创建</h2>
+<p>通过以下命令创建一个 Django 项目：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject djangoapp</span><br></pre></td></tr></table></figure>
+<p>将项目上传至 Git（注意需要先在容器中生成公钥，并在 Git 中添加公钥）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd djangoapp/</span><br><span class="line">git init</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx@qq.com&quot;</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial project&quot;</span><br><span class="line">git remote add origin git@git.acwing.com:&lt;用户ID&gt;/&lt;仓库名&gt;.git</span><br><span class="line">git push --set-upstream origin master</span><br></pre></td></tr></table></figure>
+<p>尝试启动一下项目：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py runserver 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+<p>这时候访问一下网址：<code>http://&lt;云服务器的公网IP&gt;:8000/</code>，会看到提示：<code>Invalid HTTP_HOST header: '&lt;云服务器的公网IP&gt;:8000'. You may need to add '&lt;云服务器的公网IP&gt;' to ALLOWED_HOSTS.</code>，这是因为 Django 是个很安全的框架，会自动屏蔽很多可疑的访问，我们需要将公网 IP 添加到 <code>settings.py</code> 文件的 <code>ALLOWED_HOSTS</code> 中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd djangoapp/  # 此时在 ~/djangoapp/djangoapp 中</span><br><span class="line">vim settings.py</span><br><span class="line">找到 ALLOWED_HOSTS = []，改为 ALLOWED_HOSTS = [&quot;&lt;公网IP&gt;&quot;]  # 注意要用引号</span><br></pre></td></tr></table></figure>
+<p>Tips：如果找不到 <code>ALLOWED_HOSTS</code> 可以使用 <code>ag</code> 命令查找：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ag ALLOWED_HOSTS</span><br></pre></td></tr></table></figure>
+<p>现在即可成功访问网址。</p>
+<p>此时会看到项目文件夹下出现了一个 <code>__pycache__</code> 目录，这个是预编译好的一些文件，用于加速 Python 运行，我们在往 Git 上传代码时最好不要上传这些中间文件，我们可以在仓库的根目录下添加一个 <code>.gitignore</code> 文件，文件内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**/__pycache__</span><br><span class="line">*.swp  # 过滤掉swap文件</span><br></pre></td></tr></table></figure>
+<p>最后上传至 Git：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;modify ALLOWED_HOSTS&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h2 id="5-Django-App创建">5. Django App创建</h2>
+<p>在上一节中启动的页面为 Django 的默认页面，我们在开发时需要创建一个新的 App 写自己的页面，首先通过以下指令创建一个名为 <code>game</code> 的 App，创建好后当前目录下会生成一个名为 <code>game</code> 的目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py startapp game</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;init app game&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>此时启动 <code>runserver</code> 指令时会发现出现了报错：<code>You have 18 unapplied migration(s). Your project may not work properly ......</code>，原因是有一部分的数据库修改还没有同步到数据库里，运行以下指令同步数据库的修改：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py migrate</span><br></pre></td></tr></table></figure>
+<p>打开 <code>http://&lt;公网IP&gt;:8000/admin/</code> 页面可以看到 Django 自带的管理员页面，我们可以创建管理员用户（假设用户名和密码都为 <code>admin</code>）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py createsuperuser</span><br></pre></td></tr></table></figure>
+<p>然后即可登录管理员账户进入管理员界面。</p>
+<p>我们再回过头来进入之前创建的 App 中，能看到有几个比较重要的文件：<code>models.py</code>、<code>views.py</code>，我们先手动创建剩余的比较重要的文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch urls.py</span><br><span class="line">mkdir templates</span><br></pre></td></tr></table></figure>
+<p>接下来整个项目需要操作的就这四个文件，其中 <code>models.py</code> 存储各种数据结构，<code>views.py</code> 存储视图（函数），例如每点一次按钮都要调用一次服务器端的函数，<code>urls.py</code> 是一个路由，用户访问某个功能（页面）时传的是一个地址（URL），服务器端拿到这个地址后需要做一个路由，查看调用的是哪个函数，<code>templates</code> 存储 HTML 文件。</p>
+<p>首先在 <code>views.py</code> 中写一个简单的函数：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;Hello World!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>然后参考 <code>~/djangoapp/djangoapp/urls.py</code>（总 URL 文件）编写 <code>game</code> 中的 <code>urls.py</code> 文件：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> game.views <span class="keyword">import</span> index</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, index, name=<span class="string">&#x27;index&#x27;</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>然后我们需要更新一下总 URL 文件（<code>~/djangoapp/djangoapp/urls.py</code>）：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;game/&#x27;</span>, include(<span class="string">&#x27;game.urls&#x27;</span>)),</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>此时我们在项目根目录下启动项目：<code>python3 manage.py runserver 0.0.0.0:8000</code>，然后打开网址 <code>http://&lt;公网IP&gt;:8000/game/</code> 即可看到我们的网页，最后更新一下 Git 即可。</p>
+<h2 id="6-更改Django项目名称">6. 更改Django项目名称</h2>
+<p>我们以 <code>settings.py</code> 文件为例，假设项目的目录结构为：<code>OLD_NAME/OLD_NAME/settings.py</code>，项目根目录的名称可以随意改变，即我们可以先改为 <code>NEW_NAME/OLD_NAME/...</code>，然后我们再将第二级 <code>OLD_NAME</code> 目录改为 <code>NEW_NAME</code>，修改完第二级目录的名字后我们还需要改以下几个文件：</p>
+<ul>
+<li><code>settings.py</code></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ROOT_URLCONF = <span class="string">&#x27;NEW_NAME.urls&#x27;</span></span><br><span class="line">WSGI_APPLICATION = <span class="string">&#x27;NEW_NAME.wsgi.application&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>manage.py</code></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ.setdefault(<span class="string">&#x27;DJANGO_SETTINGS_MODULE&#x27;</span>, <span class="string">&#x27;NEW_NAME.settings&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>asgi.py</code></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ.setdefault(<span class="string">&#x27;DJANGO_SETTINGS_MODULE&#x27;</span>, <span class="string">&#x27;NEW_NAME.settings&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>wsgi.py</code></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ.setdefault(<span class="string">&#x27;DJANGO_SETTINGS_MODULE&#x27;</span>, <span class="string">&#x27;NEW_NAME.settings&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>上一章：无。</p>
+<p>下一章：<a href="/posts/602.html">Django学习笔记-创建菜单界面</a>。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/26150.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/26150.html";
+            const title         = "「Django学习笔记-概述与项目环境配置」";
+            const excerpt       = `本文记录 Django 的学习过程。
+Django 官方文档：Django Web Docs。
+本节内容是 Django 框架的介绍以及本次开发的小游戏项目的环境配置与初始化。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Django/" rel="tag">Django</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-12T02:25:30.247Z" itemprop="dateModified">Last edited: 2023-10-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Kaggle项目实战" href="/posts/6211.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Django学习笔记-创建菜单界面" href="/posts/602.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                59
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Django%E6%A6%82%E8%BF%B0"><span class="toc-text">1. Django概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="toc-text">2. 开发环境介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEDocker%E7%8E%AF%E5%A2%83"><span class="toc-text">3. 配置Docker环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Django%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="toc-text">4. Django项目创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Django-App%E5%88%9B%E5%BB%BA"><span class="toc-text">5. Django App创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%9B%B4%E6%94%B9Django%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0"><span class="toc-text">6. 更改Django项目名称</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

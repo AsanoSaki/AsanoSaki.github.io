@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Django学习笔记-实现聊天系统 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Django" />
+  
+  <meta name="description" content="Django学习笔记-实现聊天系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记-实现聊天系统">
+<meta property="og:url" content="https://asanosaki.github.io/posts/54938.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Django学习笔记-实现聊天系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-10-04T07:08:00.000Z">
+<meta property="article:modified_time" content="2023-10-12T02:31:37.132Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/54938.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Django学习笔记-实现聊天系统</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-10-04T07:08:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-04</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~11.65K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697077897132"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%9E%E7%8E%B0%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F%E5%89%8D%E7%AB%AF%E7%95%8C%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">1. 实现聊天系统前端界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E5%90%8E%E7%AB%AF%E5%90%8C%E6%AD%A5%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">2. 实现后端同步函数</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本节内容是通过 WebSocket 实现多人模式中的在线聊天系统。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-实现聊天系统前端界面">1. 实现聊天系统前端界面</h2>
+<p>聊天系统整体可以分为两部分：输入框与历史记录。</p>
+<p>我们需要先修改一下之前代码中的一个小 BUG，当在一个窗口中按 Q 时，另一个窗口中点击鼠标左键也能攻击，因为按下按键的事件被所有窗口都捕捉到了，这是不合理的。</p>
+<p>我们之前监听的对象是 <code>window</code>，每个地图是一个 <code>canvas</code> 元素，因此我们可以绑定到 <code>canvas</code> 对象上。由于不是所有对象都能添加绑定事件的，因此我们还需要对 <code>canvas</code> 做一个修改，需要添加 <code>tabindex</code> 参数并将其聚焦后才能监听事件，首先在 <code>GameMap</code> 类中修改一下 <code>canvas</code> 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GameMap</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">playground</span>) &#123;  <span class="comment">// 需要将AcGamePlayground传进来</span></span><br><span class="line">        <span class="variable language_">super</span>();  <span class="comment">// 调用基类构造函数，相当于将自己添加到了AC_GAME_OBJECTS中</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span> = playground;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$canvas</span> = $(<span class="string">`&lt;canvas tabindex=0&gt;&lt;/canvas&gt;`</span>);  <span class="comment">// 画布，用来渲染画面，tabindex=0表示能够监听事件</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$canvas</span>.<span class="title function_">focus</span>();  <span class="comment">// 聚焦后才能监听事件</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>Player</code> 类中修改：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Player</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">game_map</span>.<span class="property">$canvas</span>.<span class="title function_">keydown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (outer.<span class="property">playground</span>.<span class="property">state</span> !== <span class="string">&#x27;fighting&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">81</span> &amp;&amp; outer.<span class="property">fireball_coldtime</span> &lt; outer.<span class="property">eps</span>) &#123;  <span class="comment">// Q键</span></span><br><span class="line">                outer.<span class="property">cur_skill</span> = <span class="string">&#x27;fireball&#x27;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">70</span> &amp;&amp; outer.<span class="property">blink_coldtime</span> &lt; outer.<span class="property">eps</span>) &#123;  <span class="comment">// F键</span></span><br><span class="line">                outer.<span class="property">cur_skill</span> = <span class="string">&#x27;blink&#x27;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>聊天的前端界面需要创建一个新的文件，我们在 <code>~/djangoapp/game/static/js/src/playground</code> 目录下创建一个 <code>chat_field</code> 目录，并进入该目录创建 <code>zbase.js</code> 文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ChatField</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">playground</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span> = playground;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">func_id</span> = <span class="literal">null</span>;  <span class="comment">// 在每次打开输入框时需要将之前历史记录框的计时函数删掉</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$history</span> = $(<span class="string">`&lt;div class=&#x27;ac_game_chat_field_history&#x27;&gt;&lt;/div&gt;`</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span> = $(<span class="string">`&lt;input type=&#x27;text&#x27; class=&#x27;ac_game_chat_field_input&#x27;&gt;`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$history</span>.<span class="title function_">hide</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">hide</span>();</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">$playground</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$history</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">$playground</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$input</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">keydown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;  <span class="comment">// 输入框也需要监听ESC事件</span></span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">27</span>) &#123;</span><br><span class="line">                outer.<span class="title function_">hide_input</span>();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">show_history</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$history</span>.<span class="title function_">fadeIn</span>();  <span class="comment">// 慢慢显示出来</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">func_id</span>) <span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">func_id</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">func_id</span> = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="property">$history</span>.<span class="title function_">fadeOut</span>();</span><br><span class="line">            outer.<span class="property">func_id</span> = <span class="literal">null</span>;</span><br><span class="line">        &#125;, <span class="number">3000</span>);  <span class="comment">// 显示3秒后消失</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">show_input</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">show</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">show_history</span>();  <span class="comment">// 打开输入框顺带打开历史记录</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">focus</span>();  <span class="comment">// 聚焦一下才能输入</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">hide_input</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">hide</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">game_map</span>.<span class="property">$canvas</span>.<span class="title function_">focus</span>();  <span class="comment">// 关闭输入框后要重新聚焦回Canvas上</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>AcGamePlayground</code> 类中创建出来：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGamePlayground</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示playground界面</span></span><br><span class="line">    <span class="title function_">show</span>(<span class="params">mode</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 单人模式下创建AI敌人</span></span><br><span class="line">        <span class="keyword">if</span> (mode === <span class="string">&#x27;single mode&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">players</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">Player</span>(<span class="variable language_">this</span>, <span class="variable language_">this</span>.<span class="property">width</span> / <span class="number">2</span> / <span class="variable language_">this</span>.<span class="property">scale</span>, <span class="number">0.5</span>, <span class="number">0.07</span>, <span class="variable language_">this</span>.<span class="title function_">get_random_color</span>(), <span class="number">0.15</span>, <span class="string">&#x27;robot&#x27;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mode === <span class="string">&#x27;multi mode&#x27;</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">mps</span> = <span class="keyword">new</span> <span class="title class_">MultiPlayerSocket</span>(<span class="variable language_">this</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">mps</span>.<span class="property">uuid</span> = <span class="variable language_">this</span>.<span class="property">players</span>[<span class="number">0</span>].<span class="property">uuid</span>;  <span class="comment">// 用每名玩家的唯一编号区分不同的窗口</span></span><br><span class="line"></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">chat_field</span> = <span class="keyword">new</span> <span class="title class_">ChatField</span>(<span class="variable language_">this</span>);  <span class="comment">// 聊天区</span></span><br><span class="line"></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">mps</span>.<span class="property">ws</span>.<span class="property">onopen</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                outer.<span class="property">mps</span>.<span class="title function_">send_create_player</span>(outer.<span class="property">root</span>.<span class="property">settings</span>.<span class="property">username</span>, outer.<span class="property">root</span>.<span class="property">settings</span>.<span class="property">avatar</span>);</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在在 <code>Player</code> 类中即可监听事件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Player</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">game_map</span>.<span class="property">$canvas</span>.<span class="title function_">keydown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">13</span> &amp;&amp; outer.<span class="property">playground</span>.<span class="property">mode</span> === <span class="string">&#x27;multi mode&#x27;</span>) &#123;  <span class="comment">// 还没满人允许使用聊天功能</span></span><br><span class="line">                outer.<span class="property">playground</span>.<span class="property">chat_field</span>.<span class="title function_">show_input</span>();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">27</span> &amp;&amp; outer.<span class="property">playground</span>.<span class="property">mode</span> === <span class="string">&#x27;multi mode&#x27;</span>) &#123;</span><br><span class="line">                outer.<span class="property">playground</span>.<span class="property">chat_field</span>.<span class="title function_">hide_input</span>();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (outer.<span class="property">playground</span>.<span class="property">state</span> !== <span class="string">&#x27;fighting&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">81</span> &amp;&amp; outer.<span class="property">fireball_coldtime</span> &lt; outer.<span class="property">eps</span>) &#123;  <span class="comment">// Q键</span></span><br><span class="line">                outer.<span class="property">cur_skill</span> = <span class="string">&#x27;fireball&#x27;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">70</span> &amp;&amp; outer.<span class="property">blink_coldtime</span> &lt; outer.<span class="property">eps</span>) &#123;  <span class="comment">// F键</span></span><br><span class="line">                outer.<span class="property">cur_skill</span> = <span class="string">&#x27;blink&#x27;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们还需要实现一下聊天区的 CSS 样式（在 <code>~/djangoapp/game/static/css</code> 目录的 <code>game.css</code> 文件中）：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_chat_field_history</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">40%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">15%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, <span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20%</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">77</span>, <span class="number">77</span>, <span class="number">77</span>, <span class="number">0.2</span>);</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.5vh</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_chat_field_history</span>::-webkit-scrollbar &#123;  <span class="comment">/* 滚动条 */</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_chat_field_input</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">86%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">15%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, <span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">2vh</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">222</span>, <span class="number">225</span>, <span class="number">230</span>, <span class="number">0.2</span>);</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.5vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们实现在历史记录区域里添加新消息的功能：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ChatField</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">playground</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">keydown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;  <span class="comment">// 输入框也需要监听ESC事件</span></span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">27</span>) &#123;</span><br><span class="line">                outer.<span class="title function_">hide_input</span>();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">13</span>) &#123;  <span class="comment">// 按Enter键时发送消息</span></span><br><span class="line">                <span class="keyword">let</span> username = outer.<span class="property">playground</span>.<span class="property">root</span>.<span class="property">settings</span>.<span class="property">username</span>;</span><br><span class="line">                <span class="keyword">let</span> text = outer.<span class="property">$input</span>.<span class="title function_">val</span>();</span><br><span class="line">                outer.<span class="title function_">hide_input</span>();  <span class="comment">// 发送完消息后关闭输入框</span></span><br><span class="line">                <span class="keyword">if</span> (text) &#123;  <span class="comment">// 信息不为空才渲染出来</span></span><br><span class="line">                    outer.<span class="property">$input</span>.<span class="title function_">val</span>(<span class="string">&#x27;&#x27;</span>);  <span class="comment">// 将输入框清空</span></span><br><span class="line">                    outer.<span class="title function_">add_message</span>(username, text);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">render_message</span>(<span class="params">message</span>) &#123;  <span class="comment">// 渲染消息</span></span><br><span class="line">        <span class="keyword">return</span> $(<span class="string">`&lt;div&gt;<span class="subst">$&#123;message&#125;</span>&lt;/div&gt;`</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_message</span>(<span class="params">username, text</span>) &#123;  <span class="comment">// 向历史记录区里添加消息</span></span><br><span class="line">        <span class="keyword">let</span> message = <span class="string">`[<span class="subst">$&#123;username&#125;</span>] <span class="subst">$&#123;text&#125;</span>`</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$history</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="title function_">render_message</span>(message));</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">show_history</span>();  <span class="comment">// 每次发新消息时都显示一下历史记录</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$history</span>.<span class="title function_">scrollTop</span>(<span class="variable language_">this</span>.<span class="property">$history</span>[<span class="number">0</span>].<span class="property">scrollHeight</span>);  <span class="comment">// 将滚动条移动到最底部</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-实现后端同步函数">2. 实现后端同步函数</h2>
+<p>我们先在 WebSocket 前端实现发送和接收消息的函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MultiPlayerSocket</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">receive</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">data</span>);  <span class="comment">// 将字符串变回JSON</span></span><br><span class="line">            <span class="keyword">let</span> uuid = data.<span class="property">uuid</span>;</span><br><span class="line">            <span class="keyword">if</span> (uuid === outer.<span class="property">uuid</span>) <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 如果是给自己发送消息就直接过滤掉</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> event = data.<span class="property">event</span>;</span><br><span class="line">            <span class="keyword">if</span> (event === <span class="string">&#x27;create_player&#x27;</span>) &#123;  <span class="comment">// create_player路由</span></span><br><span class="line">                outer.<span class="title function_">receive_create_player</span>(uuid, data.<span class="property">username</span>, data.<span class="property">avatar</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event === <span class="string">&#x27;move_to&#x27;</span>) &#123;  <span class="comment">// move_to路由</span></span><br><span class="line">                outer.<span class="title function_">receive_move_to</span>(uuid, data.<span class="property">tx</span>, data.<span class="property">ty</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event === <span class="string">&#x27;shoot_fireball&#x27;</span>) &#123;  <span class="comment">// shoot_fireball路由</span></span><br><span class="line">                outer.<span class="title function_">receive_shoot_fireball</span>(uuid, data.<span class="property">tx</span>, data.<span class="property">ty</span>, data.<span class="property">fireball_uuid</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event === <span class="string">&#x27;attack&#x27;</span>) &#123;  <span class="comment">// attack路由</span></span><br><span class="line">                outer.<span class="title function_">receive_attack</span>(uuid, data.<span class="property">attackee_uuid</span>, data.<span class="property">x</span>, data.<span class="property">y</span>, data.<span class="property">theta</span>, data.<span class="property">damage</span>, data.<span class="property">fireball_uuid</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event === <span class="string">&#x27;blink&#x27;</span>) &#123;  <span class="comment">// blink路由</span></span><br><span class="line">                outer.<span class="title function_">receive_blink</span>(uuid, data.<span class="property">tx</span>, data.<span class="property">ty</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event === <span class="string">&#x27;message&#x27;</span>) &#123;  <span class="comment">// message路由</span></span><br><span class="line">                outer.<span class="title function_">receive_message</span>(data.<span class="property">username</span>, data.<span class="property">text</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">send_message</span>(<span class="params">username, text</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">            <span class="string">&#x27;event&#x27;</span>: <span class="string">&#x27;message&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;uuid&#x27;</span>: outer.<span class="property">uuid</span>,</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span>: username,</span><br><span class="line">            <span class="string">&#x27;text&#x27;</span>: text,</span><br><span class="line">        &#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">receive_message</span>(<span class="params">username, text</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">chat_field</span>.<span class="title function_">add_message</span>(username, text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后实现后端代码：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> channels.generic.websocket <span class="keyword">import</span> AsyncWebsocketConsumer</span><br><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MultiPlayer</span>(<span class="title class_ inherited__">AsyncWebsocketConsumer</span>):</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">message</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="keyword">await</span> self.channel_layer.group_send(</span><br><span class="line">            self.room_name,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;group_send_event&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;event&#x27;</span>: <span class="string">&#x27;message&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;uuid&#x27;</span>: data[<span class="string">&#x27;uuid&#x27;</span>],</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span>: data[<span class="string">&#x27;username&#x27;</span>],</span><br><span class="line">                <span class="string">&#x27;text&#x27;</span>: data[<span class="string">&#x27;text&#x27;</span>],</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">receive</span>(<span class="params">self, text_data</span>):</span><br><span class="line">        data = json.loads(text_data)</span><br><span class="line">        <span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line">        event = data[<span class="string">&#x27;event&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> event == <span class="string">&#x27;create_player&#x27;</span>:  <span class="comment"># 做一个路由</span></span><br><span class="line">            <span class="keyword">await</span> self.create_player(data)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">&#x27;move_to&#x27;</span>:  <span class="comment"># move_to的路由</span></span><br><span class="line">            <span class="keyword">await</span> self.move_to(data)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">&#x27;shoot_fireball&#x27;</span>:  <span class="comment"># shoot_fireball的路由</span></span><br><span class="line">            <span class="keyword">await</span> self.shoot_fireball(data)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">&#x27;attack&#x27;</span>:  <span class="comment"># attack的路由</span></span><br><span class="line">            <span class="keyword">await</span> self.attack(data)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">&#x27;blink&#x27;</span>:  <span class="comment"># blink的路由</span></span><br><span class="line">            <span class="keyword">await</span> self.blink(data)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">&#x27;message&#x27;</span>:  <span class="comment"># message的路由</span></span><br><span class="line">            <span class="keyword">await</span> self.message(data)</span><br></pre></td></tr></table></figure>
+<p>最后在前端的 <code>ChatField</code> 类中调用一下发送消息的函数即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ChatField</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$input</span>.<span class="title function_">keydown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;  <span class="comment">// 输入框也需要监听ESC事件</span></span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">27</span>) &#123;</span><br><span class="line">                outer.<span class="title function_">hide_input</span>();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">13</span>) &#123;  <span class="comment">// 按Enter键时发送消息</span></span><br><span class="line">                <span class="keyword">let</span> username = outer.<span class="property">playground</span>.<span class="property">root</span>.<span class="property">settings</span>.<span class="property">username</span>;</span><br><span class="line">                <span class="keyword">let</span> text = outer.<span class="property">$input</span>.<span class="title function_">val</span>();</span><br><span class="line">                outer.<span class="title function_">hide_input</span>();  <span class="comment">// 发送完消息后关闭输入框</span></span><br><span class="line">                <span class="keyword">if</span> (text) &#123;  <span class="comment">// 信息不为空才渲染出来</span></span><br><span class="line">                    outer.<span class="property">$input</span>.<span class="title function_">val</span>(<span class="string">&#x27;&#x27;</span>);  <span class="comment">// 将输入框清空</span></span><br><span class="line">                    outer.<span class="title function_">add_message</span>(username, text);</span><br><span class="line"></span><br><span class="line">                    outer.<span class="property">playground</span>.<span class="property">mps</span>.<span class="title function_">send_message</span>(username, text);  <span class="comment">// 给其他玩家的窗口发送消息</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上一章：<a href="/posts/60167.html">Django学习笔记-实现联机对战(下)</a>。</p>
+<p>下一章：无。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/54938.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/54938.html";
+            const title         = "「Django学习笔记-实现聊天系统」";
+            const excerpt       = `本节内容是通过 WebSocket 实现多人模式中的在线聊天系统。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Django/" rel="tag">Django</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-12T02:31:37.132Z" itemprop="dateModified">Last edited: 2023-10-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Django、Nginx、uWSGI详解及配置示例" href="/posts/65222.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Django使用SMTP发送邮件教程" href="/posts/60606.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                59
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%9E%E7%8E%B0%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F%E5%89%8D%E7%AB%AF%E7%95%8C%E9%9D%A2"><span class="toc-text">1. 实现聊天系统前端界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E5%90%8E%E7%AB%AF%E5%90%8C%E6%AD%A5%E5%87%BD%E6%95%B0"><span class="toc-text">2. 实现后端同步函数</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

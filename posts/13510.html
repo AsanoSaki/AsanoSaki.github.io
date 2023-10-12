@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Django学习笔记-部署Nginx与对接AcApp | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Django" />
+  
+  <meta name="description" content="Django学习笔记-部署Nginx与对接AcApp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记-部署Nginx与对接AcApp">
+<meta property="og:url" content="https://asanosaki.github.io/posts/13510.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Django学习笔记-部署Nginx与对接AcApp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-06-25T15:10:00.000Z">
+<meta property="article:modified_time" content="2023-10-12T02:27:45.721Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
+                                                                
+                                                                CVTutorials
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
+                                                                
+                                                                OI-Wiki
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/13510.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Django学习笔记-部署Nginx与对接AcApp</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-06-25T15:10:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-06-25</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~7.53K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697077665721"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%A2%9E%E5%8A%A0%E5%AE%B9%E5%99%A8%E7%9A%84%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A380%E4%B8%8E443"><span class="toc-number">1.</span> <span class="toc-text">1. 增加容器的映射端口80与443</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85Nginx"><span class="toc-number">2.</span> <span class="toc-text">2. 安装Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%86%99%E5%85%A5AcWing%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text">3. 写入AcWing配置信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BF%AE%E6%94%B9Django%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">4. 修改Django项目的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AEuWSGI"><span class="toc-number">5.</span> <span class="toc-text">5. 配置uWSGI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%83%A8%E5%88%86BUG%E4%BF%AE%E5%A4%8D"><span class="toc-number">6.</span> <span class="toc-text">6. 部分BUG修复</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本节内容是通过 Nginx 与 uWSGI 将项目部署至 AcWing 平台上，同时修复在 AcApp 小窗口上存在的部分 BUG。</p>
+</blockquote>
+<span id="more"></span>
+<p>现在我们需要将之前在网页上运行的项目部署至 AcWing 上，让其前后端分离，一个后端可以对应多个前端。</p>
+<p>如果要将网站修改为 HTTPS 协议，需要先购买一个域名，然后申请证书，还需要进行备案，非常麻烦。在 AcWing 上线 App 已具备域名和证书。</p>
+<h2 id="1-增加容器的映射端口80与443">1. 增加容器的映射端口80与443</h2>
+<p>由于创建后的容器不方便增加新的端口映射，因此我们先将原容器保存成镜像后再生成一个新的容器。</p>
+<p>首先需要将容器中正在运行的任务全部关闭，然后登录运行容器的<strong>服务器</strong>，执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker commit ubuntu_django ubuntu_django:1.0  # 将容器ubuntu_django打包成镜像ubuntu_django，版本号为1.0</span><br><span class="line">docker images  # 查看现有镜像</span><br><span class="line">docker stop ubuntu_django  # 停止容器</span><br><span class="line">docker rm ubuntu_django  # 删除容器</span><br><span class="line">docker run -p 20000:22 -p 8000:8000 -p 80:80 -p 443:443 --name ubuntu_django -itd ubuntu_django:1.0  # 使用保存的镜像重新创建容器</span><br></pre></td></tr></table></figure>
+<p>此时如果无法远程连接容器可以按照 <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720/article/details/131100688">Django 学习笔记-配置 Docker、Git 环境与项目创建</a>文章创建一个 <code>hosts.allow</code> 文件。</p>
+<p>接着去云服务器的控制台，在安全组配置中开放80和443端口。</p>
+<h2 id="2-安装Nginx">2. 安装Nginx</h2>
+<p>（1）安装依赖包（安装均在根用户 <code>root</code> 下进行）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring</span><br></pre></td></tr></table></figure>
+<p>（2）安装 Nginx：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>（3）查看版本号：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -v</span><br></pre></td></tr></table></figure>
+<p>（4）启动 Nginx 以及查看是否在运行中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br><span class="line">systemctl status nginx</span><br></pre></td></tr></table></figure>
+<p>如果报错：<code>System has not been booted with systemd as init system (PID 1). Can't operate. Failed to connect to bus: Host is down</code>，可以参考这篇文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43685040/article/details/112056242">System has not been booted with systemd as init system (PID 1). Can‘t operate. 问题解决方法</a>，简而言之就是用以下指令代替：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br><span class="line">service nginx status</span><br></pre></td></tr></table></figure>
+<h2 id="3-写入AcWing配置信息">3. 写入AcWing配置信息</h2>
+<p>配置信息在 AcWing 平台上可以查看，按以下步骤将信息复制到项目的配置文件中即可：</p>
+<ul>
+<li>将 <code>nginx.conf</code> 中的内容写入服务器 <code>/etc/nginx/nginx.conf</code> 文件中。如果 Django 项目路径与配置文件中不同，注意修改路径。</li>
+<li>将 <code>acapp.key</code> 中的内容写入服务器 <code>/etc/nginx/cert/acapp.key</code> 文件中（<code>cert</code> 目录需要自己创建）。</li>
+<li>将 <code>acapp.pem</code> 中的内容写入服务器 <code>/etc/nginx/cert/acapp.pem</code> 文件中。</li>
+</ul>
+<p>然后启动 Nginx 服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/nginx start</span><br></pre></td></tr></table></figure>
+<p>如果启动不成功可以重新加载一下 Nginx 的配置文件即可看到错误在哪：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+<h2 id="4-修改Django项目的配置">4. 修改Django项目的配置</h2>
+<ul>
+<li>打开 <code>settings.py</code> 文件：
+<ul>
+<li>将分配的域名添加到 <code>ALLOWED_HOSTS</code> 列表中。注意只需要添加 <code>https://</code> 后面的部分。</li>
+<li>令 <code>DEBUG = False</code>。</li>
+</ul>
+</li>
+<li>归档 <code>static</code> 文件：
+<ul>
+<li>在项目根目录下执行：<code>python3 manage.py collectstatic</code>，执行完后可以看到生成了一份 <code>game</code> 中的 <code>static</code> 目录。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-配置uWSGI">5. 配置uWSGI</h2>
+<p>WSGI（Web Server Gateway Interface）是为 Python 语言定义的 Web 服务器和 Web 应用程序或框架之间的一种简单而通用的接口。网关（Gateway）的作用就是在协议之间进行转换。很多框架都自带了 WSGI Server，比如 Flask、Django 等。当然性能都不好，自带的 Web Server 更多的是测试用途，发布时则使用生产环境的 WSGI Server 或者是联合 Nginx 做 uWSGI。</p>
+<p>uWSGI 是一个 Web 服务器，它实现了 WSGI、uwsgi、HTTP 等协议。Nginx 中 <code>HttpUwsgiModule</code> 的作用是与 uWSGI 服务器进行交换。</p>
+<p>要注意 WSGI、uwsgi、uWSGI 这三个概念的区分：</p>
+<ul>
+<li>WSGI 的内容之前已经讲过了，是一种通信协议。</li>
+<li>uwsgi 同 WSGI 一样是一种通信协议。</li>
+<li>uWSGI 则是实现了 uwsgi 和 WSGI 两种协议的 Web 服务器。</li>
+</ul>
+<p>uwsgi 协议是一个 uWSGI 服务器自有的协议，它用于定义传输信息的类型（type of information），每一个 <code>uwsgi packet</code> 前 <code>4byte</code> 为传输信息类型描述，它与 WSGI 相比是两样东西。</p>
+<p>为什么有了 uWSGI 还需要 Nginx？因为 Nginx 具备优秀的静态内容处理能力，然后将动态内容转发给 uWSGI 服务器，这样可以达到很好的客户端响应。</p>
+<p>现在用户通过80/443端口访问 Nginx，而 Nginx 与 Django 项目之间还需要一个桥梁就是 uWSGI。</p>
+<p>在 Django 项目中添加 uWSGI 的配置文件：<code>scripts/uwsgi.ini</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">socket    = 127.0.0.1:8000</span><br><span class="line">chdir     = /home/asanosaki/djangoapp</span><br><span class="line">wsgi-file = djangoapp/wsgi.py</span><br><span class="line">master    = true</span><br><span class="line">processes = 2</span><br><span class="line">threads   = 5</span><br><span class="line">vacuum    = true</span><br></pre></td></tr></table></figure>
+<p>由于使用 <code>uwsgi</code> 命令启动项目后原来的公网 IP 就无法访问了，因此需要对 <code>web.html</code> 中 CSS、JS 的链接地址进行修改：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;css/jquery-ui.min.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.1.min.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;css/game.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">&quot;margin: 0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;ac_game_1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">import</span> &#123;<span class="title class_">AcGame</span>&#125; <span class="keyword">from</span> <span class="string">&quot;&#123;% static &#x27;js/dist/game.js&#x27; %&#125;&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        $(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> ac_game = <span class="keyword">new</span> <span class="title class_">AcGame</span>(<span class="string">&quot;ac_game_1&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后启动 <code>uwsgi</code> 服务（代替 <code>python3 manage.py runserver 0.0.0.0:8000</code>）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini scripts/uwsgi.ini</span><br></pre></td></tr></table></figure>
+<p>在 AcWing 填写完应用的剩余信息即可发布。</p>
+<h2 id="6-部分BUG修复">6. 部分BUG修复</h2>
+<p>在 AcWing 中打开应用时可以发现鼠标右键点击的位置不对，这是因为之前我们默认游戏的画布在左上角，而开启小窗口后画布就不在左上角了，我们移动小球时用的 <code>e.clientX/Y</code> 表示的是整个屏幕的坐标，而小球的位置坐标本身是画布中的相对坐标。</p>
+<p>Canvas 中的 <code>getBoundingClientRect</code> 函数可以获得当前视窗在浏览器中的位置以及自身占据的空间的大小，<code>left</code> 表示窗口<strong>左侧</strong>边框距离浏览器视窗<strong>左侧</strong>的距离，<code>top</code> 表示窗口<strong>顶侧</strong>边框距离浏览器视窗<strong>顶侧</strong>的距离，<code>right</code> 表示窗口<strong>右侧</strong>边框距离浏览器视窗<strong>左侧</strong>的距离，<code>bottom</code> 表示窗口<strong>底侧</strong>边框距离浏览器视窗<strong>顶侧</strong>的距离：</p>
+<p>因此我们将鼠标点击的坐标分别减去 <code>left</code> 和 <code>top</code> 即可映射到当前视窗内，在 <code>Player</code> 类中进行修改：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Player</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">game_map</span>.<span class="property">$canvas</span>.<span class="title function_">on</span>(<span class="string">&#x27;contextmenu&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;);  <span class="comment">// 取消右键的菜单功能</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">playground</span>.<span class="property">game_map</span>.<span class="property">$canvas</span>.<span class="title function_">mousedown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> rect = outer.<span class="property">ctx</span>.<span class="property">canvas</span>.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">3</span>) &#123;  <span class="comment">// 1表示左键，2表示滚轮，3表示右键</span></span><br><span class="line">                outer.<span class="title function_">move_to</span>(e.<span class="property">clientX</span> - rect.<span class="property">left</span>, e.<span class="property">clientY</span> - rect.<span class="property">top</span>);  <span class="comment">// e.clientX/Y为鼠标点击坐标</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (outer.<span class="property">cur_skill</span> === <span class="string">&#x27;fireball&#x27;</span>) &#123;</span><br><span class="line">                    outer.<span class="title function_">shoot_fireball</span>(e.<span class="property">clientX</span> - rect.<span class="property">left</span>, e.<span class="property">clientY</span> - rect.<span class="property">top</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                outer.<span class="property">cur_skill</span> = <span class="literal">null</span>;  <span class="comment">// 释放完一次技能后还原</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        $(<span class="variable language_">window</span>).<span class="title function_">keydown</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">81</span>) &#123;  <span class="comment">// Q键</span></span><br><span class="line">                outer.<span class="property">cur_skill</span> = <span class="string">&#x27;fireball&#x27;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意现在我们的项目为发行版本，修改完静态文件且打包完后还需要去项目根目录执行：<code>python3 manage.py collectstatic</code>，此时会问你是否要覆盖，输入 <code>yes</code> 即可。我们同样也可以修改之前的打包脚本 <code>compress_game_js.sh</code>，在其后面添加一行：<code>echo yes | python3 manage.py collectstatic</code>。</p>
+<p>由于游戏有菜单界面，应该在从菜单进入游戏后才开始计算窗口大小，因此我们需要把 <code>AcGamePlayground</code> 的初始化放在 <code>show</code> 函数中执行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGamePlayground</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$playground</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&#x27;ac_game_playground&#x27;&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$playground</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">get_random_color</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> colors = [<span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;pink&#x27;</span>, <span class="string">&#x27;grey&#x27;</span>, <span class="string">&#x27;green&#x27;</span>];</span><br><span class="line">        <span class="keyword">return</span> colors[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">5</span>)];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">hide</span>();  <span class="comment">// 初始化时需要先关闭playground界面</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示playground界面</span></span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 将界面的宽高先存下来</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">$playground</span>.<span class="title function_">width</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">$playground</span>.<span class="title function_">height</span>();</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">game_map</span> = <span class="keyword">new</span> <span class="title class_">GameMap</span>(<span class="variable language_">this</span>);  <span class="comment">// 创建游戏画面</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">players</span> = [];  <span class="comment">// 所有玩家</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">players</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">Player</span>(<span class="variable language_">this</span>, <span class="variable language_">this</span>.<span class="property">width</span> / <span class="number">2</span>, <span class="variable language_">this</span>.<span class="property">height</span> / <span class="number">2</span>, <span class="variable language_">this</span>.<span class="property">height</span> * <span class="number">0.05</span>, <span class="string">&#x27;white&#x27;</span>, <span class="variable language_">this</span>.<span class="property">height</span> * <span class="number">0.15</span>, <span class="literal">true</span>));  <span class="comment">// 创建自己</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建敌人</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">players</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">Player</span>(<span class="variable language_">this</span>, <span class="variable language_">this</span>.<span class="property">width</span> / <span class="number">2</span>, <span class="variable language_">this</span>.<span class="property">height</span> / <span class="number">2</span>, <span class="variable language_">this</span>.<span class="property">height</span> * <span class="number">0.05</span>, <span class="variable language_">this</span>.<span class="title function_">get_random_color</span>(), <span class="variable language_">this</span>.<span class="property">height</span> * <span class="number">0.15</span>, <span class="literal">false</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$playground</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭playground界面</span></span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$playground</span>.<span class="title function_">hide</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们需要对菜单页面进行修改，在小窗口中的菜单页面不太美观，需要让其适应窗口大小，应该用小窗口的相对距离来表示，对 <code>game.css</code> 进行修改：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ac_game_menu</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20vw</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">20%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup_bt</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">15vw</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">3vh</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">7vh</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: italic;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">39</span>, <span class="number">21</span>, <span class="number">28</span>, <span class="number">0.6</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">0.5vw</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_menu_btgroup_bt</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ac_game_playground</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上一章：<a href="/posts/4217.html">Django学习笔记-创建游戏界面</a>。</p>
+<p>下一章：<a href="/posts/6653.html">Django学习笔记-用户名密码登录</a>。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/13510.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/13510.html";
+            const title         = "「Django学习笔记-部署Nginx与对接AcApp」";
+            const excerpt       = `本节内容是通过 Nginx 与 uWSGI 将项目部署至 AcWing 平台上，同时修复在 AcApp 小窗口上存在的部分 BUG。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Django/" rel="tag">Django</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-12T02:27:45.721Z" itemprop="dateModified">Last edited: 2023-10-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Django学习笔记-创建游戏界面" href="/posts/4217.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Django学习笔记-用户名密码登录" href="/posts/6653.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                59
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%A2%9E%E5%8A%A0%E5%AE%B9%E5%99%A8%E7%9A%84%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A380%E4%B8%8E443"><span class="toc-text">1. 增加容器的映射端口80与443</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85Nginx"><span class="toc-text">2. 安装Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%86%99%E5%85%A5AcWing%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-text">3. 写入AcWing配置信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BF%AE%E6%94%B9Django%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">4. 修改Django项目的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AEuWSGI"><span class="toc-text">5. 配置uWSGI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%83%A8%E5%88%86BUG%E4%BF%AE%E5%A4%8D"><span class="toc-text">6. 部分BUG修复</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.8em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Django/" style="font-size: 0.77em;">Django</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.63em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
