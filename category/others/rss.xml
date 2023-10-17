@@ -8,8 +8,8 @@
         <pubDate>Fri, 02 Dec 2022 10:58:00 +0800</pubDate>
         <lastBuildDate>Fri, 02 Dec 2022 10:58:00 +0800</lastBuildDate>
         <category>Others</category>
-        <category>AI</category>
         <category>Django</category>
+        <category>AI</category>
         <category>Hexo</category>
         <category>Linux</category>
         <category>MySQL</category>
@@ -361,27 +361,28 @@
 &lt;/blockquote&gt;
 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;一、官网下载及安装NodeJS&#34;&gt;一、官网下载及安装NodeJS&lt;/h2&gt;
-&lt;p&gt;官网下载地址：&lt;a href=&#34;https://nodejs.org/en/download/&#34;&gt;Node.js Download&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;本文的安装路径为：&lt;code&gt;E:\NodeJS&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;官网下载地址：&lt;a href=&#34;https://nodejs.org/en/download/&#34;&gt;NodeJS Download&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;本文的安装路径为：&lt;code&gt;D:\NodeJS&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;安装完成后打开命令行窗口校验版本：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;node -v&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;测试 &lt;code&gt;npm&lt;/code&gt; 是否安装成功，由于新版的NodeJS已经集成了 &lt;code&gt;npm&lt;/code&gt;，所以之前 &lt;code&gt;npm&lt;/code&gt; 也一并安装好了，同样可以使用命令行窗口校验：&lt;/p&gt;
+&lt;p&gt;测试 &lt;code&gt;npm&lt;/code&gt; 是否安装成功，由于新版的 NodeJS 已经集成了 &lt;code&gt;npm&lt;/code&gt;，所以之前 &lt;code&gt;npm&lt;/code&gt; 也一并安装好了，同样可以使用命令行窗口校验：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm -v&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&#34;二、环境变量配置&#34;&gt;二、环境变量配置&lt;/h2&gt;
-&lt;p&gt;在 &lt;code&gt;E:\NodeJS&lt;/code&gt; 目录下新建两个文件夹：&lt;code&gt;node_global&lt;/code&gt; 和 &lt;code&gt;node_cache&lt;/code&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/c781cdc825714e9585c9cfdb05628a38.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;长按 &lt;code&gt;Shift+鼠标右键&lt;/code&gt;，选择打开 PowerShell 窗口或者打开 Git Bash：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/2ad041f533684b389018a91a76ab5c55.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;D:\NodeJS&lt;/code&gt; 目录下新建两个文件夹：&lt;code&gt;node_global&lt;/code&gt; 和 &lt;code&gt;node_cache&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/ca4f5e4d9b5d4acb8480c38e541e7f22.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;长按 &lt;code&gt;Shift + 鼠标右键&lt;/code&gt;，选择打开 PowerShell 窗口或者打开 Git Bash：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/c337aee0a8ad402fba5bcde40151c5fb.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
 &lt;p&gt;输入以下命令：&lt;/p&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm config set prefix &amp;quot;E:\NodeJS\node_global&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm config set cache &amp;quot;E:\NodeJS\node_cache&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;接着配置环境变量，右键&amp;quot;我的电脑&amp;quot;-“属性”-“高级系统设置”，点击&amp;quot;高级&amp;quot;选项卡，选择&amp;quot;环境变量&amp;quot;进行配置。在&amp;quot;系统变量&amp;quot;下点击&amp;quot;新建&amp;quot;，变量名和路径如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/d023c5e811634ab9991e549854c30dde.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在&amp;quot;用户变量&amp;quot;的 &lt;code&gt;Path&lt;/code&gt; 变量上点击&amp;quot;编辑&amp;quot;，更改 &lt;code&gt;npm&lt;/code&gt; 的默认路径，如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/403a8a345cd64379800881204213a3a6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/d619a11d117847db9235b59f085882f3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;配置完成后，在命令行窗口中安装相关环境（若安装出错可用管理员身份打开 &lt;code&gt;cmd&lt;/code&gt; 窗口）&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm config set prefix &amp;quot;D:\\NodeJS\\node_global&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm config set cache &amp;quot;D:\\NodeJS\\node_cache&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;接着配置环境变量，右键&amp;quot;我的电脑&amp;quot;-“属性”-“高级系统设置”，点击&amp;quot;高级&amp;quot;选项卡，选择&amp;quot;环境变量&amp;quot;进行配置。在&amp;quot;系统变量&amp;quot;下点击&amp;quot;新建&amp;quot;，变量名和路径如下图所示（&lt;code&gt;node_modules&lt;/code&gt; 目录直接手打即可）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/4444d45204e14f7a86e1b0e8b94ba16e.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在&amp;quot;用户变量&amp;quot;的 &lt;code&gt;Path&lt;/code&gt; 变量上点击&amp;quot;编辑&amp;quot;，更改 &lt;code&gt;npm&lt;/code&gt; 安装的默认路径，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/147d9a6b91ef4fe9a36dea57ffbdb0a0.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改为：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;D:\NodeJS\node_global&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;配置完成后，尝试在命令行窗口中安装一些环境（若安装出错可用管理员身份打开命令行窗口）：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm install express -g&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm install jade -g&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm install mysql -g&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/735917a5a318431aa197f5747303210a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5p-D5q2M,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/f74a1bdb5d1246f4b4a2aedbff5c6987.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

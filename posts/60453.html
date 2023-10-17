@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-11-18T10:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-13T09:40:45.732Z">
+<meta property="article:modified_time" content="2023-10-14T06:28:20.606Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -287,7 +287,7 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US">
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
                                                                 
                                                                 MDN
                                                             </a>
@@ -301,9 +301,16 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://reactjs.org">
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
                                                                 
                                                                 React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
                                                             </a>
                                                         </li>
                                                     
@@ -311,6 +318,13 @@
                                                             <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
                                                                 
                                                                 Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                                
+                                                                Spring
                                                             </a>
                                                         </li>
                                                     
@@ -346,20 +360,6 @@
                                                             <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
                                                                 
                                                                 D2L
-                                                            </a>
-                                                        </li>
-                                                    
-                                                        <li>
-                                                            <a target="_blank" rel="noopener" href="http://www.cvtutorials.com">
-                                                                
-                                                                CVTutorials
-                                                            </a>
-                                                        </li>
-                                                    
-                                                        <li>
-                                                            <a target="_blank" rel="noopener" href="https://oi-wiki.org">
-                                                                
-                                                                OI-Wiki
                                                             </a>
                                                         </li>
                                                     
@@ -439,7 +439,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~14.59K
+                        ~14.76K
                     
                     words
                 </li>
@@ -450,7 +450,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1694598045732"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697264900606"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -462,11 +462,11 @@
             <hr />
             <div itemprop="articleBody"><blockquote>
 <p>本文记录 React 的学习过程，内容为配置环境、ES6 语法补充、Components。<br>
-React 是一个用于构建用户界面的库。React 不是一个框架，它的应用甚至不局限于 Web 开发，它可以与其他库一起使用以渲染到特定环境。</p>
+React 是一个用于构建用户界面的库。React 不是一个框架，它的应用甚至不局限于 Web 开发，它可以与其他库一起使用以渲染到特定环境。<br>
+React 官网：<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/">React</a>。</p>
 </blockquote>
 <span id="more"></span>
 <h2 id="1-React配置环境">1. React配置环境</h2>
-<p>React 官网：<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/">React</a>。</p>
 <p>React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。使用 React 可以将一些简短、独立的代码片段组合成复杂的 UI 界面，这些代码片段被称作 <code>components</code>。React 能够构建那些数据会随时间改变的大型应用。</p>
 <p>React 特性：</p>
 <ul>
@@ -496,7 +496,7 @@ React 是一个用于构建用户界面的库。React 不是一个框架，它�
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>输入 <code>cc</code> 即可补全出以下内容：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">    state = &#123;  &#125; </span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123; </span><br><span class="line">        <span class="keyword">return</span> ();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Example</span>;</span><br></pre></td></tr></table></figure>
-<p><code>Prettier - Code formatter</code> 为代码格式化插件。</p>
+<p><code>Prettier - Code formatter</code> 为代码格式化插件，安装好后在 JSX 代码中通过 VS Code 一键格式化快捷键：<code>ctrl + k + f</code> 即可配置格式化插件。</p>
 <p>（5）创建 <code>React App</code>：</p>
 <p>在目标目录下右键打开 Git Bash，在终端中执行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app react-app  # react-app是新建项目的名字，可以替换为其他名称</span><br><span class="line">cd react-app</span><br><span class="line">npm start  # 启动应用</span><br></pre></td></tr></table></figure>
@@ -536,6 +536,7 @@ React 是一个用于构建用户界面的库。React 不是一个框架，它�
 <li><code>Default Export</code>：最多 <code>export</code> 一个，<code>import</code> 的时候不需要加大括号，可以直接定义别名。</li>
 </ul>
 <h2 id="3-Components">3. Components</h2>
+<p>React 应用程序是由<strong>组件</strong>（Component）组成的。组件是一段可重用代码，一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观，用于渲染、管理和更新应用中的 UI 元素。组件可以小到一个按钮，也可以大到整个页面。</p>
 <p><strong>（1）创建项目</strong></p>
 <p>首先创建一个新项目 <code>box-app</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app box-app</span><br><span class="line">cd box-app</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
@@ -643,7 +644,8 @@ React 是一个用于构建用户界面的库。React 不是一个框架，它�
             const hostUrl       = "https://asanosaki.github.io/posts/60453.html";
             const title         = "「Web学习笔记-React（配置环境、ES6语法补充、Components）」";
             const excerpt       = `本文记录 React 的学习过程，内容为配置环境、ES6 语法补充、Components。
-React 是一个用于构建用户界面的库。React 不是一个框架，它的应用甚至不局限于 Web 开发，它可以与其他库一起使用以渲染到特定环境。`;
+React 是一个用于构建用户界面的库。React 不是一个框架，它的应用甚至不局限于 Web 开发，它可以与其他库一起使用以渲染到特定环境。
+React 官网：React。`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -665,7 +667,7 @@ React 是一个用于构建用户界面的库。React 不是一个框架，它�
                     <a class="tag-none-link" href="/tags/Web/" rel="tag">Web</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-09-13T09:40:45.732Z" itemprop="dateModified">Last edited: 2023-09-13</time>
+                    <time datetime="2023-10-14T06:28:20.606Z" itemprop="dateModified">Last edited: 2023-10-14</time>
                 </div>
             </div>
         </footer>
