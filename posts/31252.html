@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-11-18T03:45:00.000Z">
-<meta property="article:modified_time" content="2023-10-10T01:57:23.004Z">
+<meta property="article:modified_time" content="2023-10-17T12:45:21.045Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Others">
 <meta name="twitter:card" content="summary">
@@ -439,7 +439,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.53K
+                        ~2.35K
                     
                     words
                 </li>
@@ -450,62 +450,44 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1696903043004"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697546721045"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
             <hr />
             <div itemprop="articleBody"><blockquote>
-<p>Windows 下安装 Git 以及配置与 Github 的远程连接。</p>
+<p>Windows 下安装 Git 以及配置与 Github 的远程连接。<br>
+图文博客前往：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51755720/article/details/127914510">Windows 安装配置 Git 教程（2023.10.06 Git2.42.0）</a>。</p>
 </blockquote>
 <span id="more"></span>
-<p>（1）首先前往 <a target="_blank" rel="noopener" href="https://git-scm.com/">Git 官网</a>，下载安装文件：</p>
-<p><img src="https://img-blog.csdnimg.cn/afd0f15bc1ba472298da6be93fd8aa6b.png" alt="在这里插入图片描述"></p>
-<p>（2）打开安装程序，设置好安装路径，然后点击下一步后在此处可以选用默认设置，也可以勾上 <code>Additional icons</code>（桌面图标） 和 <code>Add a Git Bash Profile to Windows Terminal</code>：</p>
-<p><img src="https://img-blog.csdnimg.cn/fd3ffec317f44439aa7897a568f0e82b.png" alt="在这里插入图片描述"></p>
-<p>（3）直接点击下一步：</p>
-<p><img src="https://img-blog.csdnimg.cn/b5cc490f9ceb4853b84a8c47ce461279.png" alt="在这里插入图片描述"></p>
-<p>（4）此处选择编辑器，一般直接使用 Vim 即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/2492e93d068f4e5e83f98148903a25f6.png" alt="在这里插入图片描述"></p>
-<p>（5）此处是设置 Git 初始化分支的名称，默认为 <code>master</code>，也可以选择自定义：</p>
-<p><img src="https://img-blog.csdnimg.cn/5a5fce6362d346c59b007026c18e9acf.png" alt="在这里插入图片描述"></p>
-<p>（6）此处选择使用 Git 的方式，通常选第二个：</p>
-<p><img src="https://img-blog.csdnimg.cn/4c639a86d5b14c9fa4a354d27e677911.png" alt="在这里插入图片描述"></p>
-<p>（7）选择 SSH，第一个即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/6652e0adbeb84930951c06ef6d148fdb.png" alt="在这里插入图片描述"></p>
-<p>（8）选择 HTTPS 传输后端，第一个选项使用 OpenSSL 库，第二个选项使用本机 Windows 安全通道库，选第一个即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/12f4acbf229240309ee024cc2e9492cb.png" alt="在这里插入图片描述"></p>
-<p>（9）配置结束行转换方式，也就是 Git 处理文本结束行的方式，Windows 选择第一个即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/d5551e096ea2436f87c99829ac1fd929.png" alt="在这里插入图片描述"></p>
-<p>（10）配置终端使用 Git Bash，第一个选项是使用 MinTTY 作为终端模拟器，第二个选项是使用 Windows 的默认控制台，一般选择第一个：</p>
-<p><img src="https://img-blog.csdnimg.cn/babd2fe966c042788b8338f5c851e172.png" alt="在这里插入图片描述"></p>
-<p>（11）选择 <code>git pull</code> 的默认行为，第一个选项是 <code>git pull</code> 的标准行为：尽可能快进当前分支到一个被捕获的分支，否则创建合并提交；第二个选项是将当前分支改为获取的分支。如果没有要重基的本地提交，这相当于快进；第三个选项是仅仅快进，快进到获取的分支，如果不可能，就失败。此处选择第一个选项即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/f0dc4cd54abe46bca86004ae731cfd46.png" alt="在这里插入图片描述"></p>
-<p>（12）选择 Git 凭证助手，选第一个即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/837d3ca0f24549cd858c7502277bd41b.png" alt="在这里插入图片描述"></p>
-<p>（13）配置额外特性，第一个选项是启用文件系统缓存，第二个选项是支持符号链接，勾上第一个即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/69984af63ca54a1da5a9165ccd8cdcf3.png" alt="在这里插入图片描述"></p>
-<p>（14）实验特性，一般不用选，直接安装即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/227b12977a0440819dc7bafd5b77fc30.png" alt="在这里插入图片描述"></p>
-<p>（15）安装好后在任意目录下点击鼠标右键应该能看到 <code>Open Git Bash here</code> 选项，我们可以通过该选项在某一目录中打开 Git Bash，然后我们打开后输入 <code>git -v</code>，即可看到 Git 的版本号：</p>
-<p><img src="https://img-blog.csdnimg.cn/47a50c44ea6442a8b7fd609d69f9f7bc.png" alt="在这里插入图片描述"></p>
-<p>在窗口顶部右键即可打开设置页面（Options），可以调整字体大小与窗口的默认大小：</p>
-<p><img src="https://img-blog.csdnimg.cn/e1123ce8d4864687aee360458543b50c.png" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/1948dcafc99348e29ce03f5dccca6334.png" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/34732de0a41341ba85e04870ce537429.png" alt="在这里插入图片描述"></p>
+<p>（1）首先前往 <a target="_blank" rel="noopener" href="https://git-scm.com/">Git 官网</a>，下载安装文件（<code>64-bit Git for Windows Setup</code>）。</p>
+<p>（2）打开安装程序，设置好安装路径，然后点击下一步进入 <code>Select Components</code> 界面，可以选用默认设置，也可以勾上 <code>Additional icons</code>（桌面图标） 和 <code>Add a Git Bash Profile to Windows Terminal</code>。</p>
+<p>（3）<code>Select Start Menu Folder</code> 页面直接点击下一步。</p>
+<p>（4）<code>Choosing default editor</code> 页面用于选择编辑器，一般直接使用 Vim 即可。</p>
+<p>（5）<code>Adjusting the name of the ...</code> 页面是设置 Git 初始化分支的名称，默认为 <code>master</code>（选择 <code>Let Git decide</code>），也可以选择自定义。</p>
+<p>（6）<code>Adjusting your PATH environment</code> 页面选择使用 Git 的方式，通常选 <code>Git from the command line and also from 3rd-party software</code>，即既可以通过命令行也可以通过第三方软件使用 Git。</p>
+<p>（7）<code>Choosing the SSH executable</code> 页面选择 SSH，第一个 <code>Use bundled OpenSSH</code>即可。</p>
+<p>（8）<code>Choosing HTTPS transport backend</code> 页面选择 HTTPS 传输后端，第一个选项 <code>Use the OpenSSL library</code> 使用 OpenSSL 库，第二个选项使用本机 Windows 安全通道库，选第一个即可。</p>
+<p>（9）<code>Configuring the line ending conversions</code> 页面配置结束行转换方式，也就是 Git 处理文本结束行的方式，Windows 选择第一个 <code>Checkout Windows-style ...</code> 即可。</p>
+<p>（10）<code>Configuring the terminal emulator ...</code> 页面配置终端使用 Git Bash，第一个选项 <code>Use MinTTY</code> 是使用 MinTTY 作为终端模拟器，第二个选项是使用 Windows 的默认控制台，一般选择第一个。</p>
+<p>（11）<code>Choose the default behavior of git pull</code> 页面选择 <code>git pull</code> 的默认行为，第一个选项 <code>Default</code> 是 <code>git pull</code> 的标准行为，尽可能快进当前分支到一个被捕获的分支，否则创建合并提交；第二个选项是将当前分支改为获取的分支。如果没有要重基的本地提交，这相当于快进；第三个选项是仅仅快进，快进到获取的分支，如果不可能，就失败。此处选择第一个选项即可。</p>
+<p>（12）<code>Choose a credential helper</code> 页面选择 Git 凭证助手，选第一个 <code>Git Credential Manager</code> 即可。</p>
+<p>（13）<code>Configuring extra options</code> 页面配置额外特性，第一个选项 <code>Enable file system caching</code> 是启用文件系统缓存，第二个选项是支持符号链接，勾上第一个即可。</p>
+<p>（14）<code>Configuring experimental options</code> 页面设置实验特性，一般不用选，直接安装即可。</p>
+<p>（15）安装好后在任意目录下点击鼠标右键应该能看到 <code>Open Git Bash here</code> 选项，我们可以通过该选项在某一目录中打开 Git Bash，然后我们打开后输入 <code>git -v</code>，即可看到 Git 的版本号。</p>
+<p>在窗口顶部右键即可打开设置页面（Options），可以调整字体大小与窗口的默认大小。</p>
 <p>（16）输入以下命令配置 Git：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Github用户名&quot;</span><br><span class="line">git config --global user.email &quot;Github邮箱&quot;</span><br></pre></td></tr></table></figure>
 <p>例如：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;AsanoSaki&quot;</span><br><span class="line">git config --global user.email &quot;Yujie_Yi@foxmail.com&quot;</span><br></pre></td></tr></table></figure>
 <p>生成公钥：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-<p>将 <code>~/.ssh/id_rsa.pub</code> 中的内容复制到 GitHub 的 SSH Keys 中：</p>
-<p><img src="https://img-blog.csdnimg.cn/0ee1b8da92b34025a146c8e8ee27e5d6.png" alt="在这里插入图片描述"></p>
-<p>测试是否连接上 GitHub：</p>
+<p>将 <code>~/.ssh/id_rsa.pub</code> 中的内容复制到 GitHub 的 SSH Keys 中。</p>
+<p>最后测试是否能连接上 GitHub：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <p>结果如下说明配置成功：</p>
-<p><img src="https://img-blog.csdnimg.cn/093e9bbe95264d6594e40fda280bd519.png" alt="在这里插入图片描述"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi xxx! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
 <p>如果出现报错提示：<code>ssh: connect to host github.com port 22: Connection timed out</code>，说明22端口可能被防火墙屏蔽了，可以尝试连接 GitHub 的443端口，我们将 <code>~/.ssh/config</code> 文件修改成以下内容，这样 SSH 连接 GitHub 的时候就会使用443端口：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName ssh.github.com</span><br><span class="line">    User 你的GitHub用户名</span><br><span class="line">    Port 443</span><br></pre></td></tr></table></figure>
 </div>
@@ -571,7 +553,8 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "https://asanosaki.github.io/posts/31252.html";
             const title         = "「Windows安装配置Git教程」";
-            const excerpt       = `Windows 下安装 Git 以及配置与 Github 的远程连接。`;
+            const excerpt       = `Windows 下安装 Git 以及配置与 Github 的远程连接。
+图文博客前往：Windows 安装配置 Git 教程（2023.10.06 Git2.42.0）。`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -593,7 +576,7 @@
                     <a class="tag-none-link" href="/tags/Others/" rel="tag">Others</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-10T01:57:23.004Z" itemprop="dateModified">Last edited: 2023-10-10</time>
+                    <time datetime="2023-10-17T12:45:21.045Z" itemprop="dateModified">Last edited: 2023-10-17</time>
                 </div>
             </div>
         </footer>

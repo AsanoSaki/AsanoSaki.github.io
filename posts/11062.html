@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2021-10-13T03:38:00.000Z">
-<meta property="article:modified_time" content="2023-10-14T06:02:09.732Z">
+<meta property="article:modified_time" content="2023-10-17T12:15:44.129Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Others">
 <meta name="twitter:card" content="summary">
@@ -439,7 +439,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        849
+                        937
                     
                     words
                 </li>
@@ -450,7 +450,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1697263329732"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697544944129"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -469,21 +469,14 @@
 <p>测试 <code>npm</code> 是否安装成功，由于新版的 NodeJS 已经集成了 <code>npm</code>，所以之前 <code>npm</code> 也一并安装好了，同样可以使用命令行窗口校验：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
 <h2 id="二、环境变量配置">二、环境变量配置</h2>
-<p>在 <code>D:\NodeJS</code> 目录下新建两个文件夹：<code>node_global</code> 和 <code>node_cache</code>：</p>
-<p><img src="https://img-blog.csdnimg.cn/ca4f5e4d9b5d4acb8480c38e541e7f22.png" alt="在这里插入图片描述"></p>
-<p>长按 <code>Shift + 鼠标右键</code>，选择打开 PowerShell 窗口或者打开 Git Bash：</p>
-<p><img src="https://img-blog.csdnimg.cn/c337aee0a8ad402fba5bcde40151c5fb.png" alt="在这里插入图片描述"></p>
-<p>输入以下命令：</p>
+<p>在 <code>D:\NodeJS</code> 目录下新建两个文件夹：<code>node_global</code> 和 <code>node_cache</code>。在该文件夹下然后长按 <code>Shift + 鼠标右键</code>，选择打开 PowerShell 窗口或者打开 Git Bash，输入以下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix &quot;D:\\NodeJS\\node_global&quot;</span><br><span class="line">npm config set cache &quot;D:\\NodeJS\\node_cache&quot;</span><br></pre></td></tr></table></figure>
-<p>接着配置环境变量，右键&quot;我的电脑&quot;-“属性”-“高级系统设置”，点击&quot;高级&quot;选项卡，选择&quot;环境变量&quot;进行配置。在&quot;系统变量&quot;下点击&quot;新建&quot;，变量名和路径如下图所示（<code>node_modules</code> 目录直接手打即可）：</p>
-<p><img src="https://img-blog.csdnimg.cn/4444d45204e14f7a86e1b0e8b94ba16e.png" alt="在这里插入图片描述"></p>
-<p>在&quot;用户变量&quot;的 <code>Path</code> 变量上点击&quot;编辑&quot;，更改 <code>npm</code> 安装的默认路径，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/147d9a6b91ef4fe9a36dea57ffbdb0a0.png" alt="在这里插入图片描述"></p>
-<p>修改为：</p>
+<p>接着配置环境变量，右键&quot;我的电脑&quot;-“属性”-“高级系统设置”，点击&quot;高级&quot;选项卡，选择&quot;环境变量&quot;进行配置。在&quot;系统变量&quot;下点击&quot;新建&quot;，变量名和路径如下（<code>node_modules</code> 目录直接手打即可）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">变量名: NODE_PATH</span><br><span class="line">路径: D:\NodeJS\node_global\node_modules</span><br></pre></td></tr></table></figure>
+<p>在&quot;用户变量&quot;的 <code>Path</code> 变量上点击&quot;编辑&quot;，更改 <code>npm</code> 安装的默认路径（默认是 <code>C:\Users\&lt;用户名&gt;\AppData\Roaming\npm</code>）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\NodeJS\node_global</span><br></pre></td></tr></table></figure>
 <p>配置完成后，尝试在命令行窗口中安装一些环境（若安装出错可用管理员身份打开命令行窗口）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install express -g</span><br><span class="line">npm install jade -g</span><br><span class="line">npm install mysql -g</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/f74a1bdb5d1246f4b4a2aedbff5c6987.png" alt="在这里插入图片描述"></p>
 </div>
         </div>
         
@@ -570,7 +563,7 @@
                     <a class="tag-none-link" href="/tags/Others/" rel="tag">Others</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-14T06:02:09.732Z" itemprop="dateModified">Last edited: 2023-10-14</time>
+                    <time datetime="2023-10-17T12:15:44.129Z" itemprop="dateModified">Last edited: 2023-10-17</time>
                 </div>
             </div>
         </footer>
