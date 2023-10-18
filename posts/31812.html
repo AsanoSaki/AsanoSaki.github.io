@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Python子进程管理与进程信息获取 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Python" />
+  
+  <meta name="description" content="Python子进程管理与进程信息获取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python子进程管理与进程信息获取">
+<meta property="og:url" content="https://asanosaki.github.io/posts/31812.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Python子进程管理与进程信息获取">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-09-18T02:54:00.000Z">
+<meta property="article:modified_time" content="2023-10-18T12:27:09.670Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                                
+                                                                Spring
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/31812.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Python子进程管理与进程信息获取</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-09-18T02:54:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-09-18</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~14.57K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1697632029670"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Python%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9D%97subprocess"><span class="toc-number">1.</span> <span class="toc-text">1. Python子进程模块subprocess</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ThreadPoolExecutor%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">2.</span> <span class="toc-text">2. ThreadPoolExecutor线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E6%A8%A1%E5%9D%97Psutil"><span class="toc-number">3.</span> <span class="toc-text">3. 系统信息获取模块Psutil</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>介绍 Python 中的子进程模块 <code>subprocess</code>、线程池 <code>ThreadPoolExecutor</code> 以及系统信息获取模块 <code>Psutil</code> 的用法。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-Python子进程模块subprocess">1. Python子进程模块subprocess</h2>
+<p><code>subprocess</code> 模块允许我们启动一个新进程，并连接到它们的输入/输出/错误管道，从而获取返回值。</p>
+<p>（1）<code>run</code> 方法</p>
+<p>首先我们来看看 <code>run</code> 方法的使用，该方法的参数如下：</p>
+<ul>
+<li><code>args</code>：表示要执行的命令。必须是一个字符串或字符串参数列表。</li>
+<li><code>stdin</code>、<code>stdout</code> 和 <code>stderr</code>：子进程的标准输入、输出和错误。其值可以是 <code>subprocess.PIPE</code>、<code>subprocess.DEVNULL</code>、一个已经存在的文件描述符、已经打开的文件对象或者 <code>None</code>。<code>subprocess.PIPE</code> 表示为子进程创建新的管道。<code>subprocess.DEVNULL</code> 表示使用 <code>os.devnull</code>。默认使用的是 <code>None</code>，表示什么都不做。另外，<code>stderr</code> 可以合并到 <code>stdout</code> 里一起输出。</li>
+<li><code>timeout</code>：设置命令超时时间。如果命令执行时间超时，子进程将被杀死，并抛出 <code>TimeoutExpired</code> 异常。</li>
+<li><code>check</code>：如果该参数设置为 <code>True</code>，并且进程退出状态码不是 0，则抛出 <code>CalledProcessError</code> 异常。</li>
+<li><code>encoding</code>：如果指定了该参数，则 <code>stdin</code>、<code>stdout</code> 和 <code>stderr</code> 可以接收字符串数据，并以该编码方式编码。否则只接收 <code>bytes</code> 类型的数据。</li>
+<li><code>shell</code>：如果该参数为 <code>True</code>，将通过操作系统的 Shell 执行指定的命令。</li>
+<li><code>capture_output</code>：如果 <code>capture_output = True</code>，则将捕获 <code>stdout</code> 和 <code>stderr</code>，调用时内部的 <code>Popen</code> 对象将自动使用 <code>stdout = PIPE</code> 和 <code>stderr = PIPE</code> 创建标准输出和标准错误对象；传递 <code>stdout</code> 和 <code>stderr</code> 参数时不能同时传递 <code>capture_output</code> 参数。如果希望捕获并将两个 <code>stream</code> 合并为一个，使用 <code>stdout = PIPE</code> 和 <code>stderr = STDOUT</code>。</li>
+</ul>
+<p>下面我们来看一个例子，<code>run</code> 方法调用方式返回 <code>CompletedProcess</code> 实例：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line">args1 = [<span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;src/Python子进程测试程序1.py&#x27;</span>]</span><br><span class="line"></span><br><span class="line">ret = subprocess.run(args=args1, capture_output=<span class="literal">True</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># 相当于在命令行执行：python src/Python子进程测试程序1.py</span></span><br><span class="line"><span class="built_in">print</span>(ret)  <span class="comment"># CompletedProcess(args=[&#x27;python&#x27;, &#x27;src/Python子进程测试程序1.py&#x27;], returncode=0, stdout=&#x27;子进程输出: Hello World!\n&#x27;, stderr=&#x27;&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ret.returncode == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Success, stdout:&#x27;</span>, ret.stdout)  <span class="comment"># Success, stdout: 子进程输出: Hello World!</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Error, stderr:&#x27;</span>, ret.stderr)  <span class="comment"># Error, stderr: python: can&#x27;t open file &#x27;D:\xxx\src\Python子进程测试程序1_Wrong.py&#x27;: [Errno 2] No such file or directory</span></span><br></pre></td></tr></table></figure>
+<p>其中，<code>Python子进程测试程序1.py</code> 内容如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;子进程输出: Hello World!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>（2）<code>Popen</code> 方法</p>
+<p><code>Popen</code> 是 <code>subprocess</code> 的核心，子进程的创建和管理都靠它处理。</p>
+<p><code>Popen</code> 方法的参数如下：</p>
+<ul>
+<li><code>args</code>：Shell 命令，可以是字符串或者序列类型（如：列表、元组）。</li>
+<li><code>bufsize</code>：缓冲区大小。当创建标准流的管道对象时使用，默认为 <code>-1</code>。<code>0</code> 表示不使用缓冲区，<code>1</code> 表示行缓冲，仅当 <code>universal_newlines = True</code> 时可用，也就是文本模式。正数表示缓冲区大小，负数表示使用系统默认的缓冲区大小。</li>
+<li><code>stdin</code>、<code>stdout</code>、<code>stderr</code>：分别表示程序的标准输入、输出、错误句柄。</li>
+<li><code>preexec_fn</code>：只在 Unix 平台下有效，用于指定一个可执行对象（callable object），它将在子进程运行之前被调用。</li>
+<li><code>shell</code>：如果该参数为 <code>True</code>，将通过操作系统的 Shell 执行指定的命令。</li>
+<li><code>cwd</code>：用于设置子进程的当前目录。</li>
+<li><code>env</code>：用于指定子进程的环境变量。如果 <code>env = None</code>，子进程的环境变量将从父进程中继承。</li>
+</ul>
+<p>该方法会创建一个 <code>Popen</code> 对象， <code>Popen</code> 对象有以下几种方法：</p>
+<ul>
+<li><code>poll()</code>：检查进程是否终止，如果终止返回 <code>returncode</code>，否则返回 <code>None</code>。</li>
+<li><code>wait(timeout)</code>：等待子进程终止。</li>
+<li><code>communicate(input=None, timeout=None)</code>：和子进程交互，向子进程发送和读取数据。将 <code>input</code> 指定数据发送到 <code>stdin</code>；从 <code>stdout</code> 和 <code>stderr</code> 读取数据，直到到达文件末尾，等待进程终止。所以，返回值是一个元组：<code>(stdout_data, stderr_data)</code>。如果 <code>timeout</code> 时间内子进程不结束，则会抛出 <code>TimeoutExpired</code> 异常。其中需要注意的是，捕获异常之后，可以再次调用该函数，因为子进程并没有被 KILL。因此，如果超时结束程序的话，需要现正确 KILL 子进程。</li>
+<li><code>send_signal(singnal)</code>：发送信号到子进程。</li>
+<li><code>terminate()</code>：停止子进程，也就是发送 <code>SIGTERM</code> 信号到子进程。</li>
+<li><code>kill()</code>：杀死子进程，发送 <code>SIGKILL</code> 信号到子进程。</li>
+</ul>
+<p><code>Popen</code> 方法的样例如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">args2 = [<span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;src/Python子进程测试程序2.py&#x27;</span>]</span><br><span class="line"></span><br><span class="line">proc = subprocess.Popen(args=args2,</span><br><span class="line">                        stdin=subprocess.PIPE,</span><br><span class="line">                        stdout=subprocess.PIPE,</span><br><span class="line">                        stderr=subprocess.PIPE,</span><br><span class="line">                        encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(proc)  <span class="comment"># &lt;Popen: returncode: None args: [&#x27;python&#x27;, &#x27;src/Python子进程测试程序2.py&#x27;]&gt;</span></span><br><span class="line"></span><br><span class="line">stdout, stderr = proc.communicate(<span class="built_in">input</span>=<span class="string">&#x27;AsanoSaki&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;stdout:&#x27;</span>, stdout)  <span class="comment"># stdout: 子进程输出:  AsanoSaki</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;stderr:&#x27;</span>, stderr)  <span class="comment"># stderr: 空</span></span><br></pre></td></tr></table></figure>
+<p>其中，<code>Python子进程测试程序2.py</code> 内容如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;子进程输出: &#x27;</span>, s)</span><br></pre></td></tr></table></figure>
+<p>现在我们来看一下 <code>communicate</code> 的用法，我们将测试程序修改为运行时间超过一秒：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">args2 = [<span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;src/Python子进程测试程序2.py&#x27;</span>]</span><br><span class="line"></span><br><span class="line">proc = subprocess.Popen(args=args2,</span><br><span class="line">                        stdin=subprocess.PIPE,</span><br><span class="line">                        stdout=subprocess.PIPE,</span><br><span class="line">                        stderr=subprocess.PIPE,</span><br><span class="line">                        encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    stdout, stderr = proc.communicate(<span class="built_in">input</span>=<span class="string">&#x27;AsanoSaki&#x27;</span>, timeout=<span class="number">1</span>)  <span class="comment"># 设置1s超时时间</span></span><br><span class="line"><span class="keyword">except</span> subprocess.TimeoutExpired:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;子进程运行超时&#x27;</span>)</span><br><span class="line">    proc.kill()  <span class="comment"># 需要KILL子进程</span></span><br><span class="line">    stdout, stderr = proc.communicate()  <span class="comment"># 捕获异常之后，可以再次调用该函数</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;stdout:&#x27;</span>, stdout)  <span class="comment"># stdout: 子进程输出:  AsanoSaki</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;stderr:&#x27;</span>, stderr)  <span class="comment"># stderr: 空</span></span><br></pre></td></tr></table></figure>
+<p>现在的 <code>Python子进程测试程序2.py</code> 内容如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;子进程输出: &#x27;</span>, s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>**<span class="number">9</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-ThreadPoolExecutor线程池">2. ThreadPoolExecutor线程池</h2>
+<p><code>concurrent.futures</code> 模块是 Python3.2 中引入的新模块，用于支持<strong>异步执行</strong>，以及在多核 CPU 和网络 I/O 中进行高效的并发编程。线程池的基类是 <code>concurrent.futures</code> 模块中的 <code>Executor</code>，<code>Executor</code> 提供了两个子类，即 <code>ThreadPoolExecutor</code> 和 <code>ProcessPoolExecutor</code> ，简化了跨平台异步编程的实现。其中 <code>ThreadPoolExecutor</code> 用于创建线程池，而 <code>ProcessPoolExecutor</code> 用于创建进程池。如果使用线程池/进程池来管理并发编程，那么只要将相应的 Task 函数提交给线程池/进程池，剩下的事情就由线程池/进程池来搞定。</p>
+<p>首先，让我们先来理解多进程和多线程两种并发编程的方式：</p>
+<ul>
+<li>多进程：当通过多进程来实现并发编程时，程序会将任务分配给多个进程，这些进程可以在<strong>不同</strong>的 CPU 上同时运行。进程之间是<strong>独立</strong>的，各自有自己的内存空间等，可以实现<strong>真正的并行</strong>执行。不过，进程之间的通信比较耗时，需要使用 IPC（进程间通信）机制，而且进程之间的切换比线程之间的切换耗时，所以创建进程的代价较高。</li>
+<li>多线程：当通过多线程来实现并发编程时，程序会将任务分配给多个线程，这些线程可以在<strong>同一个进程中的不同</strong> CPU 核上同时运行。线程之间<strong>共享</strong>进程的内存空间，因此开销比较小。但是需要注意，在 Python 解释器中，线程是无法实现真正的并行执行，因为 Python 有 GIL（全局解释器锁），它确保同时只有一个线程运行 Python 代码。因此，一个 Python 进程中的多个线程并不能并行执行，在使用多线程编程时不能完全利用多核 CPU。</li>
+</ul>
+<p><code>ThreadPoolExecutor</code> 创建一个线程池，任务可以提交到这个线程池中执行。<code>ThreadPoolExecutor</code> 比 <code>ProcessPoolExecutor</code> 更容易使用，且没有像进程那样的开销。它可以让我们在一个 Python 解释器中进行跨线程异步编程，因为它规避了 GIL。</p>
+<p><code>Exectuor</code> 提供了如下常用方法：</p>
+<ul>
+<li><code>submit(fn, *args, **kwargs)</code>：将 <code>fn</code> 函数提交给线程池。<code>*args</code> 代表传给 <code>fn</code> 函数的参数，<code>**kwargs</code> 代表以关键字参数的形式为 <code>fn</code> 函数传入参数。</li>
+<li><code>map(func, *iterables, timeout=None, chunksize=1)</code>：该函数类似于全局函数 <code>map(func, *iterables)</code>，只是该函数将会启动多个线程，以<strong>异步</strong>方式立即对 <code>iterables</code> 执行 <code>map</code> 处理。</li>
+<li><code>shutdown(wait=True)</code>：关闭线程池。</li>
+</ul>
+<p>程序将 <code>fn</code> 函数 <code>submit</code> 给线程池后，<code>submit</code> 方法会返回一个 <code>Future</code> 对象，<code>Future</code> 类主要用于获取线程任务函数的返回值。由于线程任务会在新线程中以异步方式执行，因此，线程执行的函数相当于一个“将来完成”的任务，所以 <code>Python</code> 使用 <code>Future</code> 来代表。</p>
+<p><code>Future</code> 对象提供了如下方法：</p>
+<ul>
+<li><code>cancel()</code>：取消该 <code>Future</code> 代表的线程任务。如果该任务正在执行，不可取消，则该方法返回 <code>False</code>；否则，程序会取消该任务，并返回 <code>True</code>。</li>
+<li><code>cancelled()</code>：返回 <code>Future</code> 代表的线程任务是否被成功取消。</li>
+<li><code>running()</code>：如果该 <code>Future</code> 代表的线程任务正在执行、不可被取消，该方法返回 <code>True</code>。</li>
+<li><code>done()</code>：如果该 <code>Funture</code> 代表的线程任务被成功取消或执行完成，则该方法返回 <code>True</code>。</li>
+<li><code>result(timeout=None)</code>：获取该 <code>Future</code> 代表的线程任务最后返回的结果。如果 <code>Future</code> 代表的线程任务还未完成，该方法将会阻塞当前线程，其中 <code>timeout</code> 参数指定最多阻塞多少秒。</li>
+<li><code>exception(timeout=None)</code>：获取该 <code>Future</code> 代表的线程任务所引发的异常。如果该任务成功完成，没有异常，则该方法返回 <code>None</code>。</li>
+<li><code>add_done_callback(fn)</code>：为该 <code>Future</code> 代表的线程任务注册一个“回调函数”，当该任务成功完成时，程序会自动触发该 <code>fn</code> 函数。</li>
+</ul>
+<p>在用完一个线程池后，应该调用该线程池的 <code>shutdown()</code> 方法，该方法将启动线程池的关闭序列。调用 <code>shutdown()</code> 方法后的线程池不再接收新任务，但会将以前所有的已提交任务执行完成。当线程池中的所有任务都执行完成后，该线程池中的所有线程都会死亡。</p>
+<p>使用线程池来执行线程任务的步骤如下：</p>
+<ol>
+<li>调用 <code>ThreadPoolExecutor</code> 类的构造器创建一个线程池。</li>
+<li>定义一个普通函数作为线程任务。</li>
+<li>调用 <code>ThreadPoolExecutor</code> 对象的 <code>submit()</code> 方法来提交线程任务。</li>
+<li>当不想提交任何任务时，调用 <code>ThreadPoolExecutor</code> 对象的 <code>shutdown()</code> 方法来关闭线程池。</li>
+</ol>
+<p>下面我们来看一个例子：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">thread</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Threads:&#x27;</span>, num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getResult</span>():  <span class="comment"># 有返回结果的函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Get Result&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建ThreadPoolExecutor对象并指定最大的线程数量</span></span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">3</span>) <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="comment"># 提交多个任务到线程池中</span></span><br><span class="line">    executor.submit(thread, <span class="number">1</span>)  <span class="comment"># Threads: 1</span></span><br><span class="line">    executor.submit(thread, <span class="number">2</span>)  <span class="comment"># Threads: 2</span></span><br><span class="line">    t = executor.submit(getResult)</span><br><span class="line">    <span class="built_in">print</span>(t.result())  <span class="comment"># Get Result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者按如下方式实现</span></span><br><span class="line">threadPool = ThreadPoolExecutor(max_workers=<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    threadPool.submit(thread, i)</span><br><span class="line">threadPool.shutdown(wait=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># Threads: 0</span></span><br><span class="line"><span class="comment"># Threads: 1</span></span><br><span class="line"><span class="comment"># Threads: 2</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-系统信息获取模块Psutil">3. 系统信息获取模块Psutil</h2>
+<p>现在可能会有人在想那我们如何获取子进程/线程在运行时的时间开销或者内存占用等信息呢？Python 有一个第三方模块 <code>psutil</code>，专门用来获取操作系统以及硬件相关的信息，比如：CPU、磁盘、网络、内存等等。</p>
+<p>首先我们需要安装 <code>psutil</code>，直接通过 <code>pip</code> 命令安装即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install psutil</span><br></pre></td></tr></table></figure>
+<p>（1）查看 CPU 相关信息：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.cpu_count())  <span class="comment"># CPU的逻辑数量：12</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.cpu_count(logical=<span class="literal">False</span>))  <span class="comment"># CPU的物理核心数量：6</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.cpu_times())  <span class="comment"># CPU的用户/系统/空闲时间</span></span><br><span class="line"><span class="comment"># scputimes(user=26860.4375, system=10963.515624999884, idle=676060.796875, interrupt=740.875, dpc=477.75)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    <span class="comment"># interval表示每隔0.5s刷新一次，percpu表示查看所有的CPU使用率</span></span><br><span class="line">    <span class="built_in">print</span>(psutil.cpu_percent(interval=<span class="number">0.5</span>, percpu=<span class="literal">True</span>))</span><br><span class="line"><span class="comment"># [21.2, 0.0, 32.4, 0.0, 16.1, 0.0, 0.0, 0.0, 3.2, 0.0, 0.0, 0.0]</span></span><br><span class="line"><span class="comment"># [25.8, 0.0, 3.1, 0.0, 0.0, 0.0, 3.1, 3.1, 0.0, 0.0, 0.0, 18.8]</span></span><br><span class="line"><span class="comment"># [32.4, 0.0, 21.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.2, 0.0]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.cpu_stats())  <span class="comment"># CPU的统计信息，包括上下文切换、中断、软中断以及系统调用次数等</span></span><br><span class="line"><span class="comment"># scpustats(ctx_switches=3399680458, interrupts=1365489476, soft_interrupts=0, syscalls=2283205750)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.cpu_freq())  <span class="comment"># CPU的频率</span></span><br><span class="line"><span class="comment"># scpufreq(current=2592.0, min=0.0, max=2592.0)</span></span><br></pre></td></tr></table></figure>
+<p>（2）查看内存及磁盘相关信息：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(psutil.virtual_memory())  <span class="comment"># 内存使用情况，分别为总内存、可用内存、内存占用率、已使用的内存大小、剩余的内存大小</span></span><br><span class="line"><span class="comment"># svmem(total=17022177280, available=7125008384, percent=58.1, used=9897168896, free=7125008384)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.swap_memory())  <span class="comment"># 交换内存信息（专门用来临时存储数据）</span></span><br><span class="line"><span class="comment"># sswap(total=6030352384, used=5409898496, free=620453888, percent=89.7, sin=0, sout=0)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.disk_partitions())  <span class="comment"># 磁盘分区、磁盘使用率和磁盘IO信息</span></span><br><span class="line"><span class="comment"># [sdiskpart(device=&#x27;C:\\&#x27;, mountpoint=&#x27;C:\\&#x27;, fstype=&#x27;NTFS&#x27;, opts=&#x27;rw,fixed&#x27;, maxfile=255, maxpath=260),</span></span><br><span class="line"><span class="comment">#  sdiskpart(device=&#x27;D:\\&#x27;, mountpoint=&#x27;D:\\&#x27;, fstype=&#x27;NTFS&#x27;, opts=&#x27;rw,fixed&#x27;, maxfile=255, maxpath=260),</span></span><br><span class="line"><span class="comment">#  sdiskpart(device=&#x27;E:\\&#x27;, mountpoint=&#x27;E:\\&#x27;, fstype=&#x27;NTFS&#x27;, opts=&#x27;rw,fixed&#x27;, maxfile=255, maxpath=260)]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.disk_usage(<span class="string">&quot;C:\\&quot;</span>))  <span class="comment"># 某个磁盘使用情况</span></span><br><span class="line"><span class="comment"># sdiskusage(total=160253673472, used=101791543296, free=58462130176, percent=63.5)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.disk_io_counters())  <span class="comment"># 磁盘IO统计信息，分别为读次数、写次数、读的字节数、写的字节数、读时间、写时间</span></span><br><span class="line"><span class="comment"># sdiskio(read_count=1833834, write_count=1831471, read_bytes=69098376704, write_bytes=59881958400, read_time=17952, write_time=2323)</span></span><br></pre></td></tr></table></figure>
+<p>（3）查看网络相关信息：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(psutil.net_io_counters())  <span class="comment"># 网卡的网络IO统计信息</span></span><br><span class="line"><span class="comment"># snetio(bytes_sent=629698806, bytes_recv=1756588411, packets_sent=1280472, packets_recv=2023810, errin=0, errout=0, dropin=0, dropout=0)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.net_io_counters(pernic=<span class="literal">True</span>))  <span class="comment"># 列出所有网卡的信息</span></span><br><span class="line"><span class="comment"># &#123;&#x27;Ethernet&#x27;: snetio(bytes_sent=0, bytes_recv=0, packets_sent=0, packets_recv=0, errin=0, errout=0, dropin=0, dropout=0),</span></span><br><span class="line"><span class="comment">#  &#x27;Local Area Connection* 3&#x27;: snetio(bytes_sent=0, bytes_recv=0, packets_sent=0, packets_recv=0, errin=0, errout=0, dropin=0, dropout=0),</span></span><br><span class="line"><span class="comment">#  &#x27;Local Area Connection* 4&#x27;: snetio(bytes_sent=0, bytes_recv=0, packets_sent=0, packets_recv=0, errin=0, errout=0, dropin=0, dropout=0),</span></span><br><span class="line"><span class="comment">#  ......]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.net_if_addrs())  <span class="comment"># 网络接口信息</span></span><br><span class="line"><span class="comment"># &#123;&#x27;Ethernet&#x27;: [snicaddr(family=&lt;AddressFamily.AF_LINK: -1&gt;, address=&#x27;04-D4-C4-74-A4-F0&#x27;, netmask=None, broadcast=None, ptp=None), snicaddr(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&#x27;169.254.216.112&#x27;, netmask=&#x27;255.255.0.0&#x27;, broadcast=None, ptp=None)],</span></span><br><span class="line"><span class="comment">#  &#x27;Local Area Connection* 3&#x27;: [snicaddr(family=&lt;AddressFamily.AF_LINK: -1&gt;, address=&#x27;38-00-25-26-9C-70&#x27;, netmask=None, broadcast=None, ptp=None), snicaddr(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&#x27;169.254.169.242&#x27;, netmask=&#x27;255.255.0.0&#x27;, broadcast=None, ptp=None), snicaddr(family=&lt;AddressFamily.AF_INET6: 23&gt;, address=&#x27;fe80::5e4e:63b6:7416:787b&#x27;, netmask=None, broadcast=None, ptp=None)],</span></span><br><span class="line"><span class="comment">#  ......]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.net_if_stats())  <span class="comment"># 网卡的详细信息，包括是否启动、通信类型、传输速度、mtu</span></span><br><span class="line"><span class="comment"># &#123;&#x27;Ethernet&#x27;: snicstats(isup=False, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: 2&gt;, speed=0, mtu=1500),</span></span><br><span class="line"><span class="comment">#  &#x27;vEthernet (Default Switch)&#x27;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: 2&gt;, speed=4294, mtu=1500),</span></span><br><span class="line"><span class="comment">#  &#x27;Loopback Pseudo-Interface 1&#x27;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: 2&gt;, speed=1073, mtu=1500),</span></span><br><span class="line"><span class="comment">#  ......]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.net_connections())  <span class="comment"># 当前机器的网络连接，里面接受一个参数，默认是&quot;inet&quot;，当然我们也可以指定为其它，比如&quot;tcp&quot;</span></span><br><span class="line"><span class="comment"># [sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketKind.SOCK_DGRAM: 2&gt;, laddr=addr(ip=&#x27;127.0.0.1&#x27;, port=1309), raddr=(), status=&#x27;NONE&#x27;, pid=7516),</span></span><br><span class="line"><span class="comment">#  sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketKind.SOCK_STREAM: 1&gt;, laddr=addr(ip=&#x27;127.0.0.1&#x27;, port=9100), raddr=(), status=&#x27;LISTEN&#x27;, pid=6004),</span></span><br><span class="line"><span class="comment">#  sconn(fd=-1, family=&lt;AddressFamily.AF_INET6: 23&gt;, type=&lt;SocketKind.SOCK_STREAM: 1&gt;, laddr=addr(ip=&#x27;::&#x27;, port=49667), raddr=(), status=&#x27;LISTEN&#x27;, pid=3768),</span></span><br><span class="line"><span class="comment">#  ......]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.users())  <span class="comment"># 当前登录的用户信息</span></span><br><span class="line"><span class="comment"># [suser(name=&#x27;AsanoSaki&#x27;, terminal=None, host=None, started=1694966965.3425539, pid=None)]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="built_in">print</span>(psutil.boot_time())  <span class="comment"># 系统的启动时间：1694912508.6818905</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.fromtimestamp(psutil.boot_time()))  <span class="comment"># 2023-09-17 09:01:48.681890</span></span><br></pre></td></tr></table></figure>
+<p>（4）查看进程相关信息：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(psutil.pids())  <span class="comment"># 当前存在的所有进程的PID</span></span><br><span class="line"><span class="comment"># [0, 4, 8, 140, 212, 584, 756, 1052, 1160, 1188, 1292, 1364, 1384, ...]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.pid_exists(<span class="number">0</span>))  <span class="comment"># 某个进程是否存在</span></span><br><span class="line"><span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.process_iter())  <span class="comment"># 所有进程对象（Process）组成的迭代器</span></span><br><span class="line"><span class="comment"># &lt;generator object process_iter at 0x00000263C4D2AF20&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(psutil.Process(pid=<span class="number">10712</span>))  <span class="comment"># 根据PID获取一个进程对应的Process对象</span></span><br><span class="line"><span class="comment"># psutil.Process(pid=10712, name=&#x27;pycharm64.exe&#x27;, status=&#x27;running&#x27;, started=&#x27;08:56:02&#x27;)</span></span><br><span class="line"></span><br><span class="line">p = psutil.Process(pid=<span class="number">10712</span>)  <span class="comment"># 获取该Process对象</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.name())  <span class="comment"># 进程名称，pycharm64.exe</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.exe())  <span class="comment"># 进程的exe路径：E:\PyCharm 2020.3.3\bin\pycharm64.exe</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.cwd())  <span class="comment"># 进程的工作目录：E:\PyCharm 2020.3.3\jbr\bin</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.cmdline())  <span class="comment"># 进程启动的命令行：[&#x27;E:\\PyCharm 2020.3.3\\bin\\pycharm64.exe&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.status())  <span class="comment"># 进程状态：running</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.username())  <span class="comment"># 进程用户名：LAPTOP-23NEHV3U\AsanoSaki</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.create_time())  <span class="comment"># 进程创建时间，返回时间戳：1694998562.3625667</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.cpu_times())  <span class="comment"># 进程使用的CPU时间</span></span><br><span class="line"><span class="comment"># pcputimes(user=277.09375, system=34.265625, children_user=0.0, children_system=0.0)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.memory_info())  <span class="comment"># 进程所使用的内存</span></span><br><span class="line"><span class="comment"># pmem(rss=1507303424, vms=1790066688, num_page_faults=1466884, peak_wset=1536196608,</span></span><br><span class="line"><span class="comment">#      wset=1507303424, peak_paged_pool=881616, paged_pool=876144, peak_nonpaged_pool=268096,</span></span><br><span class="line"><span class="comment">#      nonpaged_pool=154024, pagefile=1790066688, peak_pagefile=1798070272, private=1790066688)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p.num_threads())  <span class="comment"># 进程内的线程数量，即这个进程开启了多少个线程：68</span></span><br></pre></td></tr></table></figure>
+<p>现在我们使用 <code>psutil</code> 模块实现获取 <code>ThreadPoolExecutor</code> 线程任务运行的时间与内存占用信息：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">args2 = [<span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;src/Python子进程测试程序2.py&#x27;</span>]</span><br><span class="line"></span><br><span class="line">proc = subprocess.Popen(args=args2,</span><br><span class="line">                        stdin=subprocess.PIPE,</span><br><span class="line">                        stdout=subprocess.PIPE,</span><br><span class="line">                        stderr=subprocess.PIPE,</span><br><span class="line">                        encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getProcessInfo</span>(<span class="params">pid</span>):</span><br><span class="line">    p = psutil.Process(pid)  <span class="comment"># 获取pid所代表的子进程</span></span><br><span class="line">    start_time = time.time()</span><br><span class="line">    memory = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            memory = <span class="built_in">max</span>(memory, p.memory_info().rss)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    runtime = (time.time() - start_time) * <span class="number">1000</span></span><br><span class="line">    <span class="keyword">return</span> runtime, memory</span><br><span class="line"></span><br><span class="line">threadPool = ThreadPoolExecutor()</span><br><span class="line">task = threadPool.submit(getProcessInfo, proc.pid)</span><br><span class="line">stdout, stderr = proc.communicate(<span class="built_in">input</span>=<span class="string">&#x27;AsanoSaki&#x27;</span>)</span><br><span class="line">runtime, memory = task.result()</span><br><span class="line"><span class="built_in">print</span>(runtime)  <span class="comment"># 510.7400417327881</span></span><br><span class="line"><span class="built_in">print</span>(memory)  <span class="comment"># 40865792</span></span><br><span class="line"></span><br><span class="line">threadPool.shutdown(wait=<span class="literal">True</span>)</span><br><span class="line">proc.kill()</span><br></pre></td></tr></table></figure>
+<p>其中，<code>Python子进程测试程序2.py</code> 内容如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;子进程输出: &#x27;</span>, s)</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/31812.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/31812.html";
+            const title         = "「Python子进程管理与进程信息获取」";
+            const excerpt       = `介绍 Python 中的子进程模块 subprocess、线程池 ThreadPoolExecutor 以及系统信息获取模块 Psutil 的用法。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-18T12:27:09.670Z" itemprop="dateModified">Last edited: 2023-10-18</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Web学习笔记-React（Redux）" href="/posts/41844.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Django学习笔记-实现联机对战(下)" href="/posts/60167.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                60
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Python%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9D%97subprocess"><span class="toc-text">1. Python子进程模块subprocess</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ThreadPoolExecutor%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-text">2. ThreadPoolExecutor线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E6%A8%A1%E5%9D%97Psutil"><span class="toc-text">3. 系统信息获取模块Psutil</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
