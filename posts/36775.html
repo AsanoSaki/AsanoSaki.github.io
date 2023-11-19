@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Java流（Stream、Optional）详解 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Java" />
+  
+  <meta name="description" content="Java流（Stream、Optional）详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java流（Stream、Optional）详解">
+<meta property="og:url" content="https://asanosaki.github.io/posts/36775.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Java流（Stream、Optional）详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-10-28T09:23:00.000Z">
+<meta property="article:modified_time" content="2023-11-19T09:18:13.024Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
+                                                                
+                                                                SpringBoot
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/36775.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Java流（Stream、Optional）详解</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-10-28T09:23:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-28</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~24.26K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700385493024"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. Java8对流的支持</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 流的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%B5%81"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 随机数流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%95%B4%E5%9E%8B%E7%9A%84%E5%8C%BA%E9%97%B4%E8%8C%83%E5%9B%B4"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 整型的区间范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Stream-generate"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Stream.generate()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Stream-iterate"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 Stream.iterate()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E6%B5%81%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 流生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Arrays"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 Arrays</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 中间操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AF%B9%E6%B5%81%E5%85%83%E7%B4%A0%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 对流元素进行排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 移除元素</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. Optional类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E4%BE%BF%E6%8D%B7%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 便捷函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%88%9B%E5%BB%BAOptional"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 创建Optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Optional%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 Optional对象上的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E7%94%B1Optional%E7%BB%84%E6%88%90%E7%9A%84%E6%B5%81"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 由Optional组成的流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. 终结操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E5%B0%86%E6%B5%81%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 将流转换为一个数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%B5%81%E5%85%83%E7%B4%A0%E4%B8%8A%E5%BA%94%E7%94%A8%E6%9F%90%E4%B8%AA%E7%BB%88%E7%BB%93%E6%93%8D%E4%BD%9C"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 在每个流元素上应用某个终结操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E6%94%B6%E9%9B%86%E6%93%8D%E4%BD%9C"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 收集操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E7%BB%84%E5%90%88%E6%89%80%E6%9C%89%E7%9A%84%E6%B5%81%E5%85%83%E7%B4%A0"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 组合所有的流元素</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文介绍了 Java8 的一个十分强大的功能：流（Stream），能够优化传统实现方式中复杂冗余的代码。</p>
+</blockquote>
+<span id="more"></span>
+<h1>1. Java8对流的支持</h1>
+<p>流是一个与任何特定的存储机制都没有关系的元素序列。不同于在集合中遍历元素，使用流的时候，我们是从一个管道中抽取元素，并对它们逬行操作。这些管道通常会被串联到一起，形成这个流上的一个操作管线。</p>
+<p>流的一个核心优点是，它们能使我们的程序更小，也更好理解。当配合流使用时，Lambda 表达式和方法引用就发挥出其威力了。流大大提升了 Java 8 的吸引力。</p>
+<p>假设我们想按照有序方式显示随机选择的5~20范围内的，不重复的整数，借助流我们只需要说明想做什么即可实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Randoms</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>)</span><br><span class="line">            .ints(<span class="number">5</span>, <span class="number">20</span>)</span><br><span class="line">            .distinct().limit(<span class="number">5</span>)</span><br><span class="line">            .sorted()</span><br><span class="line">            .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 6</span></span><br><span class="line"><span class="comment">         * 10</span></span><br><span class="line"><span class="comment">         * 13</span></span><br><span class="line"><span class="comment">         * 16</span></span><br><span class="line"><span class="comment">         * 18</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们先为 <code>Random</code> 对象设置一个随机种子，<code>ints()</code> 方法会生成一个流，该方法有多个重载版本，其中两个参数的版本可以设置所生成值的上下界。使用中间流操作 <code>distinct()</code> 去掉重复的值，再使用 <code>limit()</code> 选择前5个值，<code>sorted()</code> 表示元素是有序的，最后我们想显示每一个条目，所以使用了 <code>forEach()</code>，它会根据我们传递的函数，在每个流对象上执行一个操作。这里我们传递了一个方法引用 <code>System.out::println</code>，用于将每个条目显示在控制台上。</p>
+<p>使用流实现的代码我们看不到任何显式的迭代机制，因此称为<strong>内部迭代</strong>，这是流编程的一个核心特性。</p>
+<h1>2. 流的创建</h1>
+<p>使用 <code>Stream.of()</code>，可以轻松地将一组条目变成一个流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamOf</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Stream.of(<span class="number">4</span>, <span class="number">1</span>, <span class="number">7</span>).forEach(System.out::println);</span><br><span class="line">        Stream.of(<span class="string">&quot;Hello &quot;</span>, <span class="string">&quot;World &quot;</span>, <span class="string">&quot;AsanoSaki&quot;</span>).forEach(System.out::print);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 4</span></span><br><span class="line"><span class="comment">         * 1</span></span><br><span class="line"><span class="comment">         * 7</span></span><br><span class="line"><span class="comment">         * Hello World AsanoSaki</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此外，每个 <code>Collection</code> 都可以使用 <code>stream()</code> 方法来生成一个流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line"></span><br><span class="line">    A(<span class="type">int</span> x) &#123; <span class="built_in">this</span>.x = x; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CollectionToStream</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;A&gt; listA = Arrays.asList(<span class="keyword">new</span> <span class="title class_">A</span>(<span class="number">1</span>), <span class="keyword">new</span> <span class="title class_">A</span>(<span class="number">2</span>), <span class="keyword">new</span> <span class="title class_">A</span>(<span class="number">3</span>));</span><br><span class="line">        System.out.println(listA.stream().mapToInt(a -&gt; a.x).sum());</span><br><span class="line"></span><br><span class="line">        Set&lt;String&gt; st = <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;(Arrays.asList(<span class="string">&quot;Hello world and java&quot;</span>.split(<span class="string">&quot; &quot;</span>)));</span><br><span class="line">        System.out.println(st.stream().map(String::toUpperCase).collect(Collectors.joining(<span class="string">&quot; &quot;</span>)));</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Double&gt; mp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        mp.put(<span class="string">&quot;PI&quot;</span>, <span class="number">3.14</span>);</span><br><span class="line">        mp.put(<span class="string">&quot;E&quot;</span>, <span class="number">2.718</span>);</span><br><span class="line">        mp.put(<span class="string">&quot;PHI&quot;</span>, <span class="number">1.618</span>);</span><br><span class="line">        mp.entrySet().stream()</span><br><span class="line">            .map(e -&gt; e.getKey() + <span class="string">&quot;: &quot;</span> + e.getValue())</span><br><span class="line">            .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 6</span></span><br><span class="line"><span class="comment">         * HELLO AND JAVA WORLD</span></span><br><span class="line"><span class="comment">         * PHI: 1.618</span></span><br><span class="line"><span class="comment">         * E: 2.718</span></span><br><span class="line"><span class="comment">         * PI: 3.14</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在创建了一个 <code>List&lt;A&gt;</code> 之后，只需要调用一下 <code>stream()</code> 这个所有集合类都有的方法。中间的 <code>map()</code> 操作接受流中的毎个元素，在其上应用一个操作来创建一个新的元素，然后将这个新元素沿着流继续传递下去，这里的 <code>mapToInt()</code> 将一个对象流转变成了一个包含 <code>Integer</code> 的 <code>IntStream</code>。对于 <code>Float</code> 和 <code>Double</code> 也有名字类似的操作。</p>
+<p><code>collect()</code> 操作会根据其参数将所有的流元素组合起来，当我们使用 <code>Collectors.joining()</code> 时，得到的结果是一个 <code>String</code>，每个元素都会以 <code>joining()</code> 的参数分隔，还有其他很多 <code>Collectors</code>，可以生成不同的结果。</p>
+<p>为了从 <code>Map</code> 集合生成一个流，我们首先调用 <code>entrySet()</code> 来生成一个对象流，其中每个对象都包含着一个键和与其关联的值，然后再使用 <code>getKey()</code> 和 <code>getValue()</code> 将其分开。</p>
+<h2 id="2-1-随机数流">2.1 随机数流</h2>
+<p><code>Ramdom</code> 类在 Java 8 引入了流，有一组可以生成流的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RandomGenerators</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(Stream&lt;T&gt; stream)</span> &#123;</span><br><span class="line">        stream.limit(<span class="number">3</span>).map(x -&gt; x + <span class="string">&quot; &quot;</span>).forEach(System.out::print);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Random</span> <span class="variable">rand</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>);</span><br><span class="line">        show(rand.ints().boxed());</span><br><span class="line">        show(rand.doubles().boxed());</span><br><span class="line">        show(rand.ints(<span class="number">10</span>, <span class="number">20</span>).boxed());  <span class="comment">// 设置上下边界</span></span><br><span class="line">        show(rand.ints(<span class="number">2</span>).boxed());  <span class="comment">// 设置流的大小</span></span><br><span class="line">        show(rand.ints(<span class="number">2</span>, <span class="number">10</span>, <span class="number">20</span>).boxed());  <span class="comment">// 设置流的大小与上下边界</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * -1172028779 1717241110 -2014573909</span></span><br><span class="line"><span class="comment">         * 0.053412216308810656 0.5779976127815049 0.4170137422770571</span></span><br><span class="line"><span class="comment">         * 17 18 18</span></span><br><span class="line"><span class="comment">         * 1122537102 491149179</span></span><br><span class="line"><span class="comment">         * 19 18</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为消除冗余代码，上面的示例创建了<strong>泛型</strong>方法 <code>show(Stream&lt;T&gt; stream)</code>，这个特性在之后会讲。类型参数 <code>T</code> 可以是任何东西，所以使用 <code>Integer</code>、<code>Long</code> 和 <code>Double</code> 都可以。然而，<code>Random</code> 类只会生成 <code>int</code>、<code>long</code> 和 <code>double</code> 等基本类型的值。幸运的是，<code>boxed()</code> 流操作会自动将基本类型转换为其对应的包装器类型，使得 <code>show()</code> 能够接受这个流。</p>
+<h2 id="2-2-整型的区间范围">2.2 整型的区间范围</h2>
+<p><code>IntStream</code> 类提供了一个 <code>range()</code> 方法，可以生成一个流（由 <code>int</code> 值组成的序列），在编写循环时非常方便：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.IntStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntStreamRange</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// for-in循环</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i: IntStream.range(<span class="number">1</span>, <span class="number">5</span>).toArray())</span><br><span class="line">            System.out.print(i + <span class="string">&quot; &quot;</span>);  <span class="comment">// 1 2 3 4</span></span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Stream</span></span><br><span class="line">        System.out.println(IntStream.range(<span class="number">1</span>, <span class="number">5</span>).boxed().map(Object::toString).collect(Collectors.joining(<span class="string">&quot; &quot;</span>)));  <span class="comment">// 1 2 3 4</span></span><br><span class="line">        IntStream.range(<span class="number">1</span>, <span class="number">5</span>).boxed().forEach(x -&gt; System.out.print(x + <span class="string">&quot; &quot;</span>));  <span class="comment">// 1 2 3 4</span></span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们编写一个 <code>repeat()</code> 工具函数取代简单的 <code>for</code> 循环：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.stream.IntStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Repeat</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">repeat</span><span class="params">(<span class="type">int</span> n, Runnable action)</span> &#123;</span><br><span class="line">        IntStream.range(<span class="number">0</span>, n).forEach(i -&gt; action.run());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        repeat(<span class="number">3</span>, () -&gt; System.out.println(<span class="string">&quot;Lambda&quot;</span>));</span><br><span class="line">        repeat(<span class="number">2</span>, Repeat::hello);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Lambda</span></span><br><span class="line"><span class="comment">         * Lambda</span></span><br><span class="line"><span class="comment">         * Lambda</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-Stream-generate">2.3 Stream.generate()</h2>
+<p><code>Stream.generate()</code> 可以接受任何的 <code>Supplier&lt;T&gt;</code>（<code>java.util.function</code> 中的接口），并生成一个由 <code>T</code> 类型的对象组成的流。如果想创建一个由完全相同的对象组成的流，只需要将一个生成这些对象的 Lambda 表达式传给 <code>generate()</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Supplier;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Generator</span> <span class="keyword">implements</span> <span class="title class_">Supplier</span>&lt;String&gt; &#123;</span><br><span class="line">    <span class="type">Random</span> <span class="variable">rand</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>);</span><br><span class="line">    <span class="type">char</span>[] letters = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>.toCharArray();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> String.valueOf(letters[rand.nextInt(letters.length)]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> Stream.generate(<span class="keyword">new</span> <span class="title class_">Generator</span>()).limit(<span class="number">10</span>).collect(Collectors.joining());</span><br><span class="line">        System.out.println(str);  <span class="comment">// YNZBRNYGCF</span></span><br><span class="line"></span><br><span class="line">        Stream.generate(() -&gt; <span class="string">&quot;AsanoSaki&quot;</span>).limit(<span class="number">2</span>).forEach(s -&gt; System.out.print(s + <span class="string">&quot; &quot;</span>));  <span class="comment">// AsanoSaki AsanoSaki</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-Stream-iterate">2.4 Stream.iterate()</h2>
+<p><code>Stream.iterate()</code> 从一个种子开始（第一个参数），然后将其传给第二个参数所引用的方法，其结果被添加到这个流上，并且保存下来作为下一次 <code>iterate()</code> 调用的第一个参数，以此类推。我们可以通过迭代生成一个之前实现过的斐波那契数列：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamFibonacci</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    Stream&lt;Integer&gt; <span class="title function_">fib</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Stream.iterate(<span class="number">0</span>, i -&gt; &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> x + i;</span><br><span class="line">            x = i;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">StreamFibonacci</span>().fib().limit(<span class="number">10</span>).forEach(x -&gt; System.out.print(x + <span class="string">&quot; &quot;</span>));</span><br><span class="line">        System.out.println();</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">StreamFibonacci</span>().fib().skip(<span class="number">10</span>).limit(<span class="number">10</span>).forEach(x -&gt; System.out.print(x + <span class="string">&quot; &quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 0 1 1 2 3 5 8 13 21 34</span></span><br><span class="line"><span class="comment">         * 55 89 144 233 377 610 987 1597 2584 4181</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>iterate()</code> 只会记住结果，所以必须使用 <code>x</code> 来记住另一个元素。我们使用了 <code>skip()</code> 操作，这个之前没有介绍过，它会直接丢弃由其参数指定的相应数目的流元素，这里丢弃了前10个。</p>
+<h2 id="2-5-流生成器">2.5 流生成器</h2>
+<p>在<strong>生成器</strong>（Builder）设计模式中，我们创建一个生成器对象，为它提供多段构造信息，最后执行<strong>生成</strong>（build）动作。 <code>Stream</code> 库提供了这样一个 <code>Builder</code>，假设我们实现读取文件的每一行并将其转换为单词流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileToWordsBuilder</span> &#123;</span><br><span class="line">    Stream.Builder&lt;String&gt; builder = Stream.builder();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">FileToWordsBuilder</span><span class="params">(String filePath)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Files.lines(Paths.get(filePath)).forEach(line -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (String s: line.split(<span class="string">&quot;[ .?,!]+&quot;</span>))</span><br><span class="line">                builder.add(s);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> <span class="string">&quot;src/file/FileToWordsBuilder.txt&quot;</span>;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">FileToWordsBuilder</span>(filePath).builder.build()</span><br><span class="line">            .forEach(s -&gt; System.out.print(s + <span class="string">&quot; &quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Hello world Today is Saturday Have a nice day</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中的文本内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello world!</span><br><span class="line">Today is Saturday?</span><br><span class="line">Have a nice day!</span><br></pre></td></tr></table></figure>
+<p>构造器添加了文件中的所有单词，但是它没有调用 <code>build()</code>，这意味着只要不调用 <code>build()</code> 就可以继续向 <code>Builder</code> 对象中添加单词。如果在调用 <code>build()</code> 之后还尝试向 <code>Stream.Builder</code> 中添加单词，则会产生异常。</p>
+<h2 id="2-6-Arrays">2.6 Arrays</h2>
+<p><code>Arrays</code> 类中包含了名为 <code>stream()</code> 的静态方法，可以将数组转换为流。可以是任何对象数组，也可以是 <code>int</code>、<code>long</code> 和 <code>double</code> 基本类型，生成 <code>IntStream</code>、<code>LongStream</code> 和 <code>DoubleStream</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArraysStream</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Arrays.stream(<span class="keyword">new</span> <span class="title class_">String</span>[] &#123; <span class="string">&quot;ABC&quot;</span>, <span class="string">&quot;XYZ&quot;</span>, <span class="string">&quot;YYJ&quot;</span> &#125;)</span><br><span class="line">            .forEach(s -&gt; System.out.print(s + <span class="string">&quot; &quot;</span>));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Arrays.stream(<span class="keyword">new</span> <span class="title class_">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;)</span><br><span class="line">            .forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Arrays.stream(<span class="keyword">new</span> <span class="title class_">double</span>[] &#123; <span class="number">3.14159</span>, <span class="number">2.718</span>, <span class="number">1.618</span> &#125;)</span><br><span class="line">            .forEach(x -&gt; System.out.printf(<span class="string">&quot;%.2f &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Arrays.stream(<span class="keyword">new</span> <span class="title class_">int</span>[] &#123; <span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">5</span> &#125;, <span class="number">1</span>, <span class="number">4</span>)</span><br><span class="line">            .forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * ABC XYZ YYJ</span></span><br><span class="line"><span class="comment">         * 1 2 3</span></span><br><span class="line"><span class="comment">         * 3.14 2.72 1.62</span></span><br><span class="line"><span class="comment">         * 8 7 6</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后一次调用 <code>stream()</code> 时使用了两个额外的参数，第一个表示从数组的哪个位置开始选择元素，第二个表示停止位置（开区间），即在本例中选择数组中 <code>[1, 4)</code> 的元素。</p>
+<h1>3. 中间操作</h1>
+<h2 id="3-1-对流元素进行排序">3.1 对流元素进行排序</h2>
+<p>使用 <code>sorted()</code> 可以进行默认排序（从小到大），该方法也可以接受一个 <code>Comparator</code> 参数，该参数可以传入一个 Lambda 表达式也可以使用预定义好的 <code>Comparator</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamSorted</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">            .sorted(Comparator.reverseOrder())</span><br><span class="line">            .forEach(x -&gt; System.out.print(x + <span class="string">&quot; &quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 3 2 1</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-移除元素">3.2 移除元素</h2>
+<ul>
+<li><code>distinct()</code>：移除流中的重复元素。</li>
+<li><code>filter(Predicate)</code>：过滤只保留符合特定条件的元素，即满足过滤函数 <code>Predicate</code> 为 <code>true</code> 的流元素。</li>
+</ul>
+<p>来看一个筛选素数的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.stream.LongStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Prime</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isPrime</span><span class="params">(<span class="type">long</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> LongStream.rangeClosed(<span class="number">2</span>, (<span class="type">long</span>)Math.sqrt(n)).noneMatch(i -&gt; n % i == <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> LongStream <span class="title function_">getPrime</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> LongStream.iterate(<span class="number">2</span>, i -&gt; i + <span class="number">1</span>).filter(Prime::isPrime);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Prime.getPrime().limit(<span class="number">10</span>).forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 2 3 5 7 11 13 17 19 23 29</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>rangeClosed()</code> 包含了上界值，如果流中的元素没有任何一个取余操作的结果为0，则 <code>noneMatch()</code> 操作返回 <code>true</code>，如果有任何一个计算结果等于0，则返回 <code>false</code>。<code>noneMatch()</code> 会在第一次失败后退出，而不会把后面的所有计算都尝试一遍。</p>
+<h1>4. Optional类型</h1>
+<p>在研究终结操作之前，我们必须考虑一个问题：如果我们向流中请求对象，但是流中什么都没有，这时会发生什么呢？有没有某种我们可以使用的对象，既可以作为流元素来占位，也可以在我们要找的元素不存在时友好地告知我们（也就是说，不会抛出异常）。</p>
+<p>这个想法被实现为 <code>Optional</code> 类型，某些标准的流操作会返回 <code>Optional</code> 对象，因为它们不能确保所要的结果一定存在，这些流操作列举如下：</p>
+<ul>
+<li><code>findFirst()</code>：返回包含第一个元素的 <code>Optional</code>。如果这个流为空，则返回 <code>Optional.empty</code>。</li>
+<li><code>findAny()</code>：返回包含任何元素的 <code>Optional</code>。如果这个流为空，则返回 <code>Optional.empty</code>。</li>
+<li><code>max()</code> 和 <code>min()</code> 分别返回包含流中最大值或最小值的 <code>Optional</code>，如果这个流为空，则返回 <code>Optional.empty</code>。</li>
+<li><code>reduce()</code> 的一个版本，它并不以一个 <code>identity</code> 对象作为其第一个参数（在 <code>reduce()</code> 的其他版本中，<code>identity</code> 对象会成为默认结果，所以不会有结果为空的风险），它会将返回值包在一个 <code>Optional</code> 中。</li>
+<li>对于数值化的流 <code>IntStream</code>、<code>LongStream</code> 和 <code>DoubleStream</code>，<code>average()</code> 操作将其结果包在一个 <code>Optional</code> 中，以防流为空的情况。</li>
+</ul>
+<p>看一下以下代码样例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamOptional</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(Optional&lt;String&gt; stringOptional)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (stringOptional.isPresent())</span><br><span class="line">            System.out.println(stringOptional.get());</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">&quot;Nothing in Optional!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(Stream.&lt;String&gt;empty().findFirst());</span><br><span class="line">        test(Stream.of(<span class="string">&quot;Hello&quot;</span>).findFirst());</span><br><span class="line">        test(Stream.&lt;String&gt;empty().findFirst());</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Optional.empty</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         * Nothing in Optional!</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时不会因为流是空的而抛出异常，而是会得到一个 <code>Optional.empty</code> 对象。<code>Optional</code> 有一个 <code>toString()</code> 方法，可以显示有用的信息。</p>
+<p>注意，空流是通过 <code>Stream.&lt;String&gt;empty()</code> 创建的，如果只用了 <code>Stream.empty()</code> 而没有任何上下文信息，那么 Java 不知道它应该是什么类型的，而这种语法解决了该问题。如果编译器有足够的上下文信息，那么它可以推断出 <code>empty()</code> 调用的类型，就像下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; s = Stream.empty();</span><br></pre></td></tr></table></figure>
+<p>我们接收到一个 <code>Optional</code> 时，首先要调用 <code>isPresent()</code>，看看里面是不是有东西，如果有，再使用 <code>get()</code> 来获取。</p>
+<h2 id="4-1-便捷函数">4.1 便捷函数</h2>
+<p>有很多便捷函数，可用于获取 <code>Optional</code> 中的数据，它们简化了上面先检查再处理所包含对象的过程：</p>
+<ul>
+<li><code>ifPresent(Consumer)</code>：如果对象存在，则用这个对象来调用 <code>Consumer</code>，否则什么都不做。</li>
+<li><code>orElse(otherObject)</code>：如果对象存在，则返回这个对象，否则返回 <code>otherObject</code>。</li>
+<li><code>orElseGet(Supplier)</code>：如果对象存在，则返回这个对象，否则返回使用 <code>Supplier</code> 函数创建的替代<strong>对象</strong>。</li>
+<li><code>orElseThrow(Supplier)</code>：如果对象存在，则返回这个对象，否则抛出一个使用 <code>Supplier</code> 函数创建的<strong>异常</strong>。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OptionalFunctions</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> Optional&lt;String&gt; emptyOptional = Stream.&lt;String&gt;empty().findFirst();</span><br><span class="line">    <span class="keyword">static</span> Optional&lt;String&gt; stringOptional = Stream.of(<span class="string">&quot;Hello&quot;</span>).findFirst();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;---------- ifPresent ----------&quot;</span>);</span><br><span class="line">        emptyOptional.ifPresent(System.out::println);</span><br><span class="line">        stringOptional.ifPresent(System.out::println);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;---------- orElse ----------&quot;</span>);</span><br><span class="line">        System.out.println(emptyOptional.orElse(<span class="string">&quot;Other String&quot;</span>));</span><br><span class="line">        System.out.println(stringOptional.orElse(<span class="string">&quot;Other String&quot;</span>));</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;---------- orElseGet ----------&quot;</span>);</span><br><span class="line">        System.out.println(emptyOptional.orElseGet(() -&gt; <span class="string">&quot;Other Supplier Object&quot;</span>));</span><br><span class="line">        System.out.println(stringOptional.orElseGet(() -&gt; <span class="string">&quot;Other Supplier Object&quot;</span>));</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;---------- orElseThrow ----------&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(stringOptional.orElseThrow(() -&gt; <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;Supplier Exception&quot;</span>)));  <span class="comment">// 先执行非空Optional</span></span><br><span class="line">            System.out.println(emptyOptional.orElseThrow(() -&gt; <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;Supplier Exception&quot;</span>)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Caught&quot;</span> + e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * ---------- ifPresent ----------</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         * ---------- orElse ----------</span></span><br><span class="line"><span class="comment">         * Other String</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         * ---------- orElseGet ----------</span></span><br><span class="line"><span class="comment">         * Other Supplier Object</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         * ---------- orElseThrow ----------</span></span><br><span class="line"><span class="comment">         * Hello</span></span><br><span class="line"><span class="comment">         * Caughtjava.lang.Exception: Supplier Exception</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-创建Optional">4.2 创建Optional</h2>
+<p>当需要自己编写生成 <code>Optional</code> 的代码时，有如下三种可以使用的静态方法：</p>
+<ul>
+<li><code>empty()</code>：返回一个空的 <code>Optional</code>。</li>
+<li><code>of(value)</code>：如果已经知道这个 <code>value</code> 不为 <code>null</code>，可以使用该方法将其包在一个 <code>Optional</code> 中。</li>
+<li><code>ofNullable(value)</code>：如果不知道这个 <code>value</code> 是不是 <code>null</code>，可以使用这个方法，如果 <code>value</code> 为 <code>null</code>，它会自动返回 <code>Optional.empty</code>，否则会将这个 <code>value</code> 包在一个 <code>Optional</code> 中。</li>
+</ul>
+<p>来看一下示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CreatingOptionals</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> Optional&lt;String&gt;</span><br><span class="line">        stringOptional = Optional.of(<span class="string">&quot;Hello&quot;</span>),</span><br><span class="line">        emptyOptional = Optional.empty(),</span><br><span class="line">        nullOptional = Optional.ofNullable(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(stringOptional.orElse(<span class="string">&quot;Empty&quot;</span>));</span><br><span class="line">        System.out.println(emptyOptional.orElse(<span class="string">&quot;Empty&quot;</span>));</span><br><span class="line">        System.out.println(nullOptional.orElse(<span class="string">&quot;Empty&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Hello</span></span><br><span class="line"><span class="comment">     * Empty</span></span><br><span class="line"><span class="comment">     * Empty</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-Optional对象上的操作">4.3 Optional对象上的操作</h2>
+<p>有三种方法支持对 <code>Optional</code> 进行事后处理，所以如果你的流管线生成了一个 <code>Optional</code>，你可以在最后再做一项处理：</p>
+<ul>
+<li><code>filter(Predicate)</code>：将 <code>Predicate</code> 应用于 <code>Optional</code> 的内容，并返回其结果。如果 <code>Optional</code> 与 <code>Predicate</code> 不匹配，则将其转换为 <code>empty</code>。如果 <code>Optional</code> 本身已经是 <code>empty</code>，则直接传回。</li>
+<li><code>map(Function)</code>：如果 <code>Optional</code> 不为 <code>empty</code>，则将 <code>Function</code> 应用于 <code>Optional</code> 中包含的对象，并返回结果，否则传回 <code>Optional.empty</code>。</li>
+<li><code>flatMap(Function)</code>：和 <code>map()</code> 类似，但是所提供的映射函数会将结果包在 <code>Optional</code> 中，这样 <code>flatMap()</code> 最后就不会再做任何包装了。</li>
+</ul>
+<p>数值化的 <code>Optional</code> 上没有提供这些操作。</p>
+<p>我们来看一下 <code>filter</code> 的用法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OptionalFilter</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> String[] elements = &#123; <span class="string">&quot;Dog&quot;</span>, <span class="string">&quot;Cat&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;Bird&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= elements.length; i++)</span><br><span class="line">            System.out.println(</span><br><span class="line">                Arrays.stream(elements)</span><br><span class="line">                    .skip(i)</span><br><span class="line">                    .findFirst()</span><br><span class="line">                    .filter(s -&gt; s.length() == <span class="number">3</span>)</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Optional[Dog]</span></span><br><span class="line"><span class="comment">         * Optional[Cat]</span></span><br><span class="line"><span class="comment">         * Optional.empty</span></span><br><span class="line"><span class="comment">         * Optional.empty</span></span><br><span class="line"><span class="comment">         * Optional.empty</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尽管输出看上去像是一个流，其实每次进入 <code>for</code> 循环，它都会重新获得一个流，并跳过用 <code>for</code> 循环的索引设置的元素数，这就使其看上去像流中的连续元素，然后它执行 <code>findFirst()</code>，获得剩余元素的中的第一个，它会被包在一个 <code>Optional</code> 中返回。</p>
+<p>注意，我们的 <code>for</code> 循环是循环到 <code>i == elements.length</code>，因此最后一个元素会超出这个流。不过这会自动变为 <code>Optional.empty</code>。</p>
+<h2 id="4-4-由Optional组成的流">4.4 由Optional组成的流</h2>
+<p>假设有一个可能会生成 <code>null</code> 值的生成器，如果使用这个生成器创建了一个流，我们自然想将这些元素包在 <code>Optional</code> 中，当使用这个流时，我们必须弄清楚如何获得 <code>Optional</code> 中的对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Signal</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String msg;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">Random</span> <span class="variable">rand</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>);</span><br><span class="line"></span><br><span class="line">    Signal(String msg) &#123; <span class="built_in">this</span>.msg = msg; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Signal(&quot;</span> + msg + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Signal <span class="title function_">getSignal</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (rand.nextInt(<span class="number">4</span>)) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Signal</span>(<span class="string">&quot;Case 1&quot;</span>);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Signal</span>(<span class="string">&quot;Case 2&quot;</span>);</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Stream&lt;Optional&lt;Signal&gt;&gt; <span class="title function_">getSignalOptStream</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Stream.generate(Signal::getSignal).map(Optional::ofNullable);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamOfOptionals</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Signal.getSignalOptStream().limit(<span class="number">5</span>).forEach(System.out::println);</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">        Signal.getSignalOptStream().limit(<span class="number">5</span>)</span><br><span class="line">            .filter(Optional::isPresent)</span><br><span class="line">            .map(Optional::get)</span><br><span class="line">            .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Optional[Signal(Case 2)]</span></span><br><span class="line"><span class="comment">         * Optional[Signal(Case 1)]</span></span><br><span class="line"><span class="comment">         * Optional[Signal(Case 2)]</span></span><br><span class="line"><span class="comment">         * Optional.empty</span></span><br><span class="line"><span class="comment">         * Optional.empty</span></span><br><span class="line"><span class="comment">         * --------------------</span></span><br><span class="line"><span class="comment">         * Signal(Case 2)</span></span><br><span class="line"><span class="comment">         * Signal(Case 1)</span></span><br><span class="line"><span class="comment">         * Signal(Case 2)</span></span><br><span class="line"><span class="comment">         * Signal(Case 2)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我使用了 只保留非 <code>empty</code> 的 <code>Optional</code>，然后通过 <code>map()</code> 调用 <code>get()</code> 来获得包在其中的对象，因为每种情况都需要我们来决定“没有值”的含义，所以我们通常需要针对每种应用采取不同的方法。</p>
+<h1>5. 终结操作</h1>
+<p>这些操作接受一个流，并生成一个最终结果，它们不会再把任何东西发给某个后端的流。因此，终结操作总是我们在一个管线内可以做的最后一件事。</p>
+<h2 id="5-1-将流转换为一个数组">5.1 将流转换为一个数组</h2>
+<ul>
+<li><code>toArray()</code>：将流元素转换到适当类型的数组中。</li>
+<li><code>toArray(generator)</code>：<code>generator</code> 用于在特定情况下分配自己的数组存储。</li>
+</ul>
+<p>直接看样例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RandInts</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] nums = <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>).ints(<span class="number">0</span>, <span class="number">10</span>).limit(<span class="number">10</span>).toArray();</span><br><span class="line">        System.out.println(Arrays.toString(nums));  <span class="comment">// [8, 5, 3, 1, 1, 9, 8, 0, 2, 7]</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-在每个流元素上应用某个终结操作">5.2 在每个流元素上应用某个终结操作</h2>
+<ul>
+<li><code>forEach(Consumer)</code>：这种用法我们已经看到过很多次了，即以 <code>System.out::println</code> 作为 <code>Consumer</code> 函数。</li>
+<li><code>forEachOrdered(Consumer)</code>：这个版本确保 <code>forEach</code> 对元素的操作顺序是原始的流的顺序。</li>
+</ul>
+<p>第一种形式被明确地设计为可以以任何顺序操作元素，这只有在引入 <code>parallel()</code> 操作时才有意义。<code>parallel()</code> 让 Java 尝试在多个处理器上执行操作。它可以做到这一点，正是因为使用了流，它可以将流分割为多个流（通常情况是每个处理器一个流），并在不同的处理器上运行每个流。</p>
+<p>我们在以下示例中引入 <code>parallel()</code> 来了解 <code>forEachOrdered()</code> 的作用和必要性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ForEachOrdered</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] nums = <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>).ints(<span class="number">0</span>, <span class="number">10</span>).limit(<span class="number">10</span>).toArray();  <span class="comment">// 确保每次流元素都相同</span></span><br><span class="line"></span><br><span class="line">        Arrays.stream(nums).forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Arrays.stream(nums).parallel().forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Arrays.stream(nums).parallel().forEachOrdered(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 8 5 3 1 1 9 8 0 2 7</span></span><br><span class="line"><span class="comment">         * 8 9 0 7 2 3 5 1 8 1</span></span><br><span class="line"><span class="comment">         * 8 5 3 1 1 9 8 0 2 7</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在第一个流中，我们没有使用 <code>parallel()</code>，所以结果的显示顺序就是它们从 <code>Arrays.stream(nums)</code> 中出现的顺序。第二个流引入了 <code>parallel()</code>，即便是这么小的一个流，我们也可以看到输出的顺序和之前不一样了。这是因为有多个处理器在处理这个问题，而且如果多次运行这个程序，会发现每次的输出还会有所不同，原因在于多个处理器同时处理这个问题所带来的不确定性因素。</p>
+<p>最后一个流仍然使用了 <code>parallel()</code>，但是又使用 <code>forEachOrdered()</code> 来强制结果回到原始的顺序。因此，对于非 <code>parallel()</code> 的流，使用 <code>forEachOrdered()</code> 不会有任何影响。</p>
+<h2 id="5-3-收集操作">5.3 收集操作</h2>
+<ul>
+<li><code>collect(Collector)</code>：使用这个 <code>Collector</code> 将流元素累加到一个结果集合中。</li>
+<li><code>collect(Supplier, BiConsumer, BiConsumer)</code>：和上面类似，但是 <code>Supplier</code> 会创建一个新的结果集合，第一个 <code>BiConsumer</code> 是用来将下一个元素包含到结果中的函数，第二个 <code>BiConsumer</code> 用于将两个值组合起来。</li>
+</ul>
+<p>我们之前仅仅看到了 <code>Collectors</code> 对象的几个示例，我们可以将流元素收集到任何特定种类的集合中。假设想把我们的条目最终放到一个 <code>TreeSet</code> 中，由此使它们总是有序的。在 <code>Collectors</code> 中没有特定的 <code>toTreeSet()</code> 方法，只有 <code>toSet()</code>，但是可以使用 <code>Collectors.toCollection()</code>，并将任何类型的 <code>Collection</code> 的构造器引用传给它。下面的程序提取文件中的单词放到 <code>TreeSet</code> 中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.TreeSet;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TreeSetOfWords</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> <span class="string">&quot;src/file/FileToWordsBuilder.txt&quot;</span>;</span><br><span class="line">        Set&lt;String&gt; words = Files.lines(Paths.get(filePath))</span><br><span class="line">            .flatMap(line -&gt; Arrays.stream(line.split(<span class="string">&quot;\\W+&quot;</span>)))</span><br><span class="line">            .filter(word -&gt; !word.matches(<span class="string">&quot;\\d+&quot;</span>))</span><br><span class="line">            .map(String::trim)</span><br><span class="line">            .collect(Collectors.toCollection(TreeSet::<span class="keyword">new</span>));</span><br><span class="line">        System.out.println(words);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * [Have, Hello, Saturday, This, Today, a, day, digit, is, nice, world]</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>FileToWordsBuilder.txt</code> 文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hello world!</span><br><span class="line">Today is Saturday?</span><br><span class="line">Have a nice day!</span><br><span class="line">This is digit 666.</span><br></pre></td></tr></table></figure>
+<p><code>Files.lines()</code> 打开 <code>Path</code> 所指向的文件，并将其变为由文本行组成的 <code>Stream</code>。它的下一行代码以一个或多个非单词字符（<code>\\W+</code>）为边界来分割这些文本行，这里生成的数组通过 <code>Arrays.stream()</code> 变为 <code>Stream</code>，然后其结果又被展开映射回一个由单词组成的 <code>Stream</code>。<code>matches(\\d+)</code> 会找到并删除全是数字的 <code>String</code>。接下来使用 <code>String.trim()</code> 去除周围可能存在的任何空白，最后把这些单词放到一个 <code>TreeSet</code> 中。</p>
+<h2 id="5-4-组合所有的流元素">5.4 组合所有的流元素</h2>
+<ul>
+<li><code>reduce(BinaryOperator)</code>：使用 <code>BinaryOperator</code> 来组合所有的流元素，因为这个流可能为空，所以返回的是一个 <code>Optional</code>。</li>
+<li><code>reduce(identity, BinaryOperator)</code>：和上面一样，但是将 <code>identity</code> 用作这个组合的初始值，因此，即使这个流是空的，我们仍然能得到 <code>identity</code> 作为结果。</li>
+<li><code>reduce(identity, BiFunction, BinaryOperator)</code>：这个更复杂（所以我们不会介绍），但是之所以把它列在这里，是因为它可能更高效。可以通过组合显式的 <code>map()</code> 和 <code>reduce()</code> 操作来更简单地表达这种需求。</li>
+</ul>
+<p>来看一下最简单的用法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apple</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> price;</span><br><span class="line"></span><br><span class="line">    Apple(<span class="type">int</span> price) &#123; <span class="built_in">this</span>.price = price; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">getPrice</span><span class="params">()</span> &#123; <span class="keyword">return</span> price; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Apple(&quot;</span> + price + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成器</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">Random</span> <span class="variable">rand</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>(<span class="number">47</span>);</span><br><span class="line">    <span class="keyword">static</span> Apple <span class="title function_">generator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Apple</span>(rand.nextInt(<span class="number">100</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Reduce</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Stream.generate(Apple::generator)</span><br><span class="line">            .limit(<span class="number">5</span>)</span><br><span class="line">            .peek(a -&gt; System.out.println(<span class="string">&quot;Peek: &quot;</span> + a))</span><br><span class="line">            .reduce((a0, a1) -&gt; a0.getPrice() &gt; <span class="number">60</span> ? a0 : a1)</span><br><span class="line">            .ifPresent(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Peek: Apple(58)</span></span><br><span class="line"><span class="comment">         * Peek: Apple(55)</span></span><br><span class="line"><span class="comment">         * Peek: Apple(93)</span></span><br><span class="line"><span class="comment">         * Peek: Apple(61)</span></span><br><span class="line"><span class="comment">         * Peek: Apple(61)</span></span><br><span class="line"><span class="comment">         * Apple(93)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在使用 <code>reduce()</code> 时，没有提供作为<strong>初始值</strong>的第一个参数，这意味着它会生成一个 <code>Optional</code>，只有当结果不是 <code>empty</code> 时，<code>Optional.ifPresent()</code> 方法才会调用 <code>Consumer&lt;Apple&gt;</code>（之所以 <code>System.out::println</code> 能够符合，是因为它可以通过 <code>toString()</code> 方法将 <code>Apple</code> 转化为一个 <code>String</code>）。</p>
+<p>Lambda 表达式中的第一个参数 <code>a0</code> 是上次调用这个 <code>reduce()</code> 时带回的结果，第二个参数 <code>a1</code> 是来自流中的新值。如果 <code>a0</code> 的 <code>price</code> 大于60就接受 <code>a0</code>，否则就接受 <code>a1</code>，也就是序列中的下一个元素。</p>
+<p>作为结果，我们得到的是流中第一个 <code>price</code> 大于60的 <code>Apple</code>，一旦找到了一个这样的对象，它就会抓住不放，哪怕还会出现其他候选。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/36775.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/36775.html";
+            const title         = "「Java流（Stream、Optional）详解」";
+            const excerpt       = `本文介绍了 Java8 的一个十分强大的功能：流（Stream），能够优化传统实现方式中复杂冗余的代码。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-19T09:18:13.024Z" itemprop="dateModified">Last edited: 2023-11-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Java函数式编程（Lambda表达式、方法引用）详解" href="/posts/731.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Java异常（Exception）详解" href="/posts/10258.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                75
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Java8对流的支持</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 流的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%B5%81"><span class="toc-text">2.1 随机数流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%95%B4%E5%9E%8B%E7%9A%84%E5%8C%BA%E9%97%B4%E8%8C%83%E5%9B%B4"><span class="toc-text">2.2 整型的区间范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Stream-generate"><span class="toc-text">2.3 Stream.generate()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Stream-iterate"><span class="toc-text">2.4 Stream.iterate()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E6%B5%81%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-text">2.5 流生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Arrays"><span class="toc-text">2.6 Arrays</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 中间操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AF%B9%E6%B5%81%E5%85%83%E7%B4%A0%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-text">3.1 对流元素进行排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="toc-text">3.2 移除元素</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. Optional类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E4%BE%BF%E6%8D%B7%E5%87%BD%E6%95%B0"><span class="toc-text">4.1 便捷函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%88%9B%E5%BB%BAOptional"><span class="toc-text">4.2 创建Optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Optional%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">4.3 Optional对象上的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E7%94%B1Optional%E7%BB%84%E6%88%90%E7%9A%84%E6%B5%81"><span class="toc-text">4.4 由Optional组成的流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 终结操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E5%B0%86%E6%B5%81%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="toc-text">5.1 将流转换为一个数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%B5%81%E5%85%83%E7%B4%A0%E4%B8%8A%E5%BA%94%E7%94%A8%E6%9F%90%E4%B8%AA%E7%BB%88%E7%BB%93%E6%93%8D%E4%BD%9C"><span class="toc-text">5.2 在每个流元素上应用某个终结操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E6%94%B6%E9%9B%86%E6%93%8D%E4%BD%9C"><span class="toc-text">5.3 收集操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E7%BB%84%E5%90%88%E6%89%80%E6%9C%89%E7%9A%84%E6%B5%81%E5%85%83%E7%B4%A0"><span class="toc-text">5.4 组合所有的流元素</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

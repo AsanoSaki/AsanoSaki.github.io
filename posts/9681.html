@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-05-29T07:52:00.000Z">
-<meta property="article:modified_time" content="2023-05-29T08:01:23.998Z">
+<meta property="article:modified_time" content="2023-10-26T06:43:49.698Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1685347283998"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698302629698"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Rasterio%E4%B8%8ERioxarray%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">2. 使用教程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 使用教程</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,7 +464,7 @@
 <p><code>rasterio</code> 是一个很多模块是基于 <code>GDAL</code> 的 Python 包，可用于处理地理空间栅格数据，例如 GeoTIFF 文件。<code>xarray</code> 是一个为数组提供标签，例如尺寸、坐标和其他特定属性的 Python 包，它使大维数组的工作更加直观。<code>rioxarray</code> 结合了 <code>rasterio</code> 的功能和 <code>xarray</code> 的所有优点。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-Rasterio与Rioxarray安装">1. Rasterio与Rioxarray安装</h2>
+<h1>1. Rasterio与Rioxarray安装</h1>
 <p>首先安装 Rasterio 模块，（本人使用 <code>conda</code> 安装时遇到过报错 <code>ImportError: cannot import name 'CRS' from 'pyproj' (unknown location)</code>，是由于 <code>pyproj</code> 模块安装不全，因此建议采用后面的离线安装方式或者之后遇到问题时删除 <code>pyproj</code> 模块后再离线安装该模块）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install gdal</span><br><span class="line">conda install rasterio</span><br></pre></td></tr></table></figure>
 <p>如果安装失败可以采用离线安装的方式，Rasterio 依赖很多第三方库，所以比较麻烦，按下面的顺序依次安装即可，可以尝试使用 <code>pip</code> 安装或者下载 <code>.whl</code> 文件离线安装（注意对上 Python 版本）：</p>
@@ -474,7 +474,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install E:\GDAL-1.2.10-cp310-cp310-win_amd64.whl</span><br></pre></td></tr></table></figure>
 <p>在 Python 中使用 Anaconda 安装 <code>rioxarray</code> 包时，首先需要安装 <code>GDAL</code> 和 <code>rasterio</code>，然后再安装 <code>rioxarray</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install rioxarray</span><br></pre></td></tr></table></figure>
-<h2 id="2-使用教程">2. 使用教程</h2>
+<h1>2. 使用教程</h1>
 <p>（1）使用 Rioxarray 读取并展示图像：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rasterio</span><br><span class="line"><span class="keyword">import</span> rioxarray</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">img_path = <span class="string">&#x27;../images/tiff_img.tif&#x27;</span></span><br><span class="line"></span><br><span class="line">img = rioxarray.open_rasterio(img_path)</span><br><span class="line"><span class="built_in">print</span>(img.shape)  <span class="comment"># (22, 488, 480)，第一维为通道数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img))  <span class="comment"># &lt;class &#x27;xarray.core.dataarray.DataArray&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img.values))  <span class="comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.flat:</span><br><span class="line">    ax_img = ax.imshow(img[<span class="number">0</span>], cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axes.flat, [<span class="string">&#x27;img1&#x27;</span>, <span class="string">&#x27;img2&#x27;</span>]):</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">fig.colorbar(mappable=ax_img, label=<span class="string">&#x27;FSC&#x27;</span>, orientation=<span class="string">&#x27;horizontal&#x27;</span>, ax=axes, fraction=<span class="number">0.04</span>)  <span class="comment"># 图例，fraction可调整大小</span></span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>也可以用另一种形式展示（注意如果使用 Rasterio 读取图像则无法使用该方式展示图像）：</p>
@@ -570,7 +570,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-05-29T08:01:23.998Z" itemprop="dateModified">Last edited: 2023-05-29</time>
+                    <time datetime="2023-10-26T06:43:49.698Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -621,7 +621,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -629,7 +629,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -637,7 +637,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -653,14 +653,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Rasterio%E4%B8%8ERioxarray%E5%AE%89%E8%A3%85"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">2. 使用教程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 使用教程</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -669,7 +669,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -683,34 +683,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

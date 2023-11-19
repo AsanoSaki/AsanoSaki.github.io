@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Java异常（Exception）详解 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Java" />
+  
+  <meta name="description" content="Java异常（Exception）详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常（Exception）详解">
+<meta property="og:url" content="https://asanosaki.github.io/posts/10258.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Java异常（Exception）详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-10-31T07:51:00.000Z">
+<meta property="article:modified_time" content="2023-11-19T09:18:13.024Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
+                                                                
+                                                                SpringBoot
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/10258.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Java异常（Exception）详解</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-10-31T07:51:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-31</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~18.56K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700385493024"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 异常处理程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 创建异常与日志记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 自定义异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 日志记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 异常说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 捕捉任何异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Exception%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Exception类的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%A4%9A%E9%87%8D%E6%8D%95%E6%8D%89"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 多重捕捉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%A0%88%E8%BD%A8%E8%BF%B9"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 栈轨迹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E9%87%8D%E6%96%B0%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 重新抛出异常</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. 使用finally块执行清理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-finally%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 finally的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E4%B8%8D%E5%90%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%B1%82%E5%8F%8A%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E6%97%B6%E7%9A%84finally%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 不同异常处理层及方法返回时的finally执行机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6. try-with-resources语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 底层细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E6%9E%84%E9%80%A0%E5%99%A8%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 构造器抛出异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-try%E5%9D%97%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 try块抛出异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-close-%E6%96%B9%E6%B3%95%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">6.4.</span> <span class="toc-text">6.4 close()方法抛出异常</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文介绍了 Java 的异常处理机制，Java 使用异常（Exception）提供了一个一致的错误报告模型，从而使组件可以将问题可靠地传达给客户代码。</p>
+</blockquote>
+<span id="more"></span>
+<p>改进错误恢复机制是增加代码稳健性的最强有力的方法之一。捕捉错误的理想时机是在编译时，也就是在你试图运行程序之前。然而，并不是所有的错误都能在编译时发现。其他问题必须在运行时通过某种正规手段来处理，这种手段应该支持这个错误的源头将适当的信息传递给知道如何正确处理该难题的某个接收者。</p>
+<h1>1. 异常处理程序</h1>
+<p>如果我们正处于一个方法之中，并抛出了异常（或者在该方法中调用的另一个方法抛出了异常），该方法将在抛出异常的过程中退出，如果不希望退出，可以在其中设置一个特殊的块来捕捉这个异常。因为要在这里“尝试”各种方法调用，所以它称为 <code>try</code> 块。</p>
+<p>被抛出的异常总是要在某个地方结束，这个地方就是异常处理程序，我们可以为每种异常类型编写一个。异常处理程序紧跟在 <code>try</code> 块之后，用关键字 <code>catch</code> 来表示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 可能会产生异常的代码</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (ExceptionType1 e1) &#123;</span><br><span class="line">    <span class="comment">// 处理ExceptionType1类型的异常</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (ExceptionType2 e2) &#123;</span><br><span class="line">    <span class="comment">// 处理ExceptionType2类型的异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个 <code>catch</code> 子句（异常处理程序）就像一个小方法，接受且只接受一个特定类型的参数。标识符（<code>e1</code>、<code>e2</code> 等）可以在处理程序中使用，就像方法参数一样。有时候我们从不使用这个标识符，因为异常的类型已经为处理该异常提供了足够多的信息，但是这个标识符必须放在这里。</p>
+<p>异常处理程序必须紧跟在 <code>try</code> 块的后面，如果一个异常被抛出，异常处理机制会去查找参数与异常类型相匹配的第一个处理程序，然后进入 <code>catch</code> 子句，我们就认为这个异常被处理了。一旦 <code>catch</code> 子句完成，对异常处理程序的搜索就会停止，只有匹配的 <code>catch</code> 子句才会执行，它不像 <code>switch</code> 语句那样每个 <code>case</code> 之后都需要一个 <code>break</code>，以避免执行其余的 <code>case</code>。</p>
+<h1>2. 创建异常与日志记录</h1>
+<h2 id="2-1-自定义异常">2.1 自定义异常</h2>
+<p>要创建自己的异常类，可以继承现有的异常类，异常类型的基类是 <code>Exception</code>，我们可以直接使用无参构造器，也可以创建一个接受 <code>String</code> 参数的构造器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span> &#123;</span><br><span class="line">    MyException() &#123;&#125;</span><br><span class="line">    MyException(String msg) &#123; <span class="built_in">super</span>(msg); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestMyException</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">throws</span> MyException &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyException</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">g</span><span class="params">()</span> <span class="keyword">throws</span> MyException &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyException</span>(<span class="string">&quot;Exception from g()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            f();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            g();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * exception.MyException</span></span><br><span class="line"><span class="comment">         * exception.MyException: Exception from g()</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-日志记录">2.2 日志记录</h2>
+<p>我们可以使用 <code>java.util.logging</code> 工具将输出记录到日志中，常见的情况是捕捉别人的异常，并将其记录到日志中，所以我们必须在异常处理程序中生成日志信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.StringWriter;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoggingExceptions</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> Logger.getLogger(<span class="string">&quot;LoggingExceptions&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">logException</span><span class="params">(Exception e)</span> &#123;</span><br><span class="line">        <span class="type">StringWriter</span> <span class="variable">trace</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringWriter</span>();</span><br><span class="line">        e.printStackTrace(<span class="keyword">new</span> <span class="title class_">PrintWriter</span>(trace));</span><br><span class="line">        logger.severe(trace.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>(<span class="string">&quot;NullPointerException thrown by main()&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            logException(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 标准错误流输出</span></span><br><span class="line"><span class="comment">         * 十月 31, 2023 1:01:46 下午 exception.LoggingExceptions logException</span></span><br><span class="line"><span class="comment">         * 严重: java.lang.NullPointerException: NullPointerException thrown by main()</span></span><br><span class="line"><span class="comment">         *    at exception.LoggingExceptions.main(LoggingExceptions.java:18)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>3. 异常说明</h1>
+<p>Java 鼓励人们将其方法中可能会抛出的异常告知调用该方法的客户程序员。这就是异常说明（exception specification）。它是方法声明的组成部分，出现在参数列表之后。</p>
+<p>异常规范使用了一个额外的关键字 <code>throws</code>，后面跟着所有可能被抛出的异常的列表，所以我们的方法定义看起来就像下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">throws</span> Exception1, Exception2 &#123; <span class="comment">// ... &#125;</span></span><br></pre></td></tr></table></figure>
+<p>如果没有 <code>throws</code> 参数，意味着这个方法不会抛出异常（除了从 <code>RuntimeException</code> 继承而来的异常，这样的异常可以从任何地方抛出而不需要异常说明，后面会介绍）。</p>
+<p>异常说明必须和实际情况匹配，如果方法中的代码引发了异常，但是这个方法并没有处理，编译器就会检测到并提醒我们：要么处理这个异常，要么用异常说明指出这个异常可能会从该方法中抛出。</p>
+<p>这种在编译时被检查并强制实施的异常叫作<strong>检查型异常</strong>（checked exception）。</p>
+<h1>4. 捕捉任何异常</h1>
+<p>通过捕捉异常类型的基类 <code>Exception</code>，可以创建一个能捕捉任何类型异常的处理程序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这会捕捉任何异常，所以如果使用它的话，请把它放在处理程序列表的<strong>最后</strong>，以避免它抢在其他任何异常处理程序之前捕获了异常。</p>
+<h2 id="4-1-Exception类的方法">4.1 Exception类的方法</h2>
+<p><code>Exception</code> 类是所有对程序员很重要的异常类的基类，所以通过它我们不会得到关于异常的很多具体信息，但是我们可以调用来自其基类 <code>Throwable</code> 的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExceptionMethods</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;My Exception&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;e.getMessage(): &quot;</span> + e.getMessage());</span><br><span class="line">            System.out.println(<span class="string">&quot;e.getLocalizedMessage(): &quot;</span> + e.getLocalizedMessage());</span><br><span class="line">            System.out.println(<span class="string">&quot;e.toString(): &quot;</span> + e);</span><br><span class="line">            System.out.println(<span class="string">&quot;e.printStackTrace(): &quot;</span>);</span><br><span class="line">            e.printStackTrace(System.out);  <span class="comment">// 默认会打印到标准错误流</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * e.getMessage(): My Exception</span></span><br><span class="line"><span class="comment">         * e.getLocalizedMessage(): My Exception</span></span><br><span class="line"><span class="comment">         * e.toString(): java.lang.Exception: My Exception</span></span><br><span class="line"><span class="comment">         * e.printStackTrace(): </span></span><br><span class="line"><span class="comment">         * java.lang.Exception: My Exception</span></span><br><span class="line"><span class="comment">         *    at exception.ExceptionMethods.main(ExceptionMethods.java:6)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现每个方法都比前一个方法提供了更多信息，实际上每个方法都是前一个方法的超集。</p>
+<h2 id="4-2-多重捕捉">4.2 多重捕捉</h2>
+<p>如果我们想以同样的方式处理一组异常，并且它们有一个共同的基类，那么直接捕捉这个基类即可。但是如果它们没有共同的基类，在 Java 7 之前，必须为每一个异常写一个 <code>catch</code> 子句。</p>
+<p>利用 Java 7 提供的多重捕捉（multi-catch）处理程序，我们可以在一个 <code>catch</code> 子句中用 <code>|</code> 操作符把不同类型的异常连接起来：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiCatch</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException | NullPointerException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Catch ArithmeticException or NullPointerException&quot;</span>);</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Catch ArithmeticException or NullPointerException</span></span><br><span class="line"><span class="comment">         * java.lang.NullPointerException</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-栈轨迹">4.3 栈轨迹</h2>
+<p><code>printStackTrace()</code> 提供的信息也可以使用 <code>getStackTrace()</code> 直接访问，这个方法会返回一个由栈轨迹元素组成的数组，每个元素表示一个栈帧。第一个元素是栈顶，即序列中的最后一个方法调用（这个 <code>Throwable</code> 被创建和抛出的位置）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StackTrace</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">g</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        f();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            f();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">for</span> (StackTraceElement s: e.getStackTrace())</span><br><span class="line">                System.out.println(s.getMethodName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            g();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">for</span> (StackTraceElement s: e.getStackTrace())</span><br><span class="line">                System.out.println(s.getMethodName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * f</span></span><br><span class="line"><span class="comment">         * main</span></span><br><span class="line"><span class="comment">         * --------------------</span></span><br><span class="line"><span class="comment">         * f</span></span><br><span class="line"><span class="comment">         * g</span></span><br><span class="line"><span class="comment">         * main</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-4-重新抛出异常">4.4 重新抛出异常</h2>
+<p>有时我们要重新抛出刚捕获的异常，特别是当使用 <code>Exception</code> 来捕捉任何异常的时候我们已经有指向当前异常的引用，所以可以重新抛出它：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果重新抛出当前的异常，在 <code>printStackTrace()</code> 中打印的关于异常的信息，仍将是原来的异常抛出点的信息，而不是重新抛出异常的地方的信息，要加入新的栈轨迹信息可以调用 <code>fillInStackTrace()</code>，它会返回一个 <code>Throwable</code> 对象，这个对象是它通过将当前栈的信息塞到原来的异常对象中而创建的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Rethrowing</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Originating Exception in f()&quot;</span>);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;Thrown from f()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">g</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            f();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside g(), e.printStackTrace():&quot;</span>);</span><br><span class="line">            e.printStackTrace(System.out);</span><br><span class="line">            <span class="keyword">throw</span> (Exception)e.fillInStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            g();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside main(), e.printStackTrace():&quot;</span>);</span><br><span class="line">            e.printStackTrace(System.out);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Inside g(), e.printStackTrace():</span></span><br><span class="line"><span class="comment">         * java.lang.Exception: Thrown from f()</span></span><br><span class="line"><span class="comment">         *     at exception.Rethrowing.f(Rethrowing.java:6)</span></span><br><span class="line"><span class="comment">         *     at exception.Rethrowing.g(Rethrowing.java:11)</span></span><br><span class="line"><span class="comment">         *     at exception.Rethrowing.main(Rethrowing.java:21)</span></span><br><span class="line"><span class="comment">         * Inside main(), e.printStackTrace():</span></span><br><span class="line"><span class="comment">         * java.lang.Exception: Thrown from f()</span></span><br><span class="line"><span class="comment">         *     at exception.Rethrowing.g(Rethrowing.java:15)</span></span><br><span class="line"><span class="comment">         *     at exception.Rethrowing.main(Rethrowing.java:21)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到在 <code>main()</code> 中输出异常的栈轨迹时没有 <code>f()</code> 的信息。<code>fillInStackTrace()</code> 被调用的那一行，成为这个异常的新起点。</p>
+<p>重新抛出一个与所捕获的异常不同的异常也是可以的，这样做会得到与使用 <code>fillInStackTrace()</code> 类似的效果，关于这个异常的原始调用点的信息会丢失，剩下的是与新的 <code>throw</code> 有关的信息。</p>
+<h1>5. 使用finally块执行清理</h1>
+<p>往往会出现这样的情况：不管 <code>try</code> 块中是否抛出异常，都有一段代码必须执行，这通常是内存恢复之外的操作，因为内存恢复操作由垃圾收集器处理。</p>
+<p>我们可以在所有异常处理程序的末尾使用一个 <code>finally</code> 子句，所以异常处理的全貌就是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 被守护区域，可能会抛出异常</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception1 e1) &#123;</span><br><span class="line">    <span class="comment">// 处理Exception1类型的异常</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception2 e2) &#123;</span><br><span class="line">    <span class="comment">// 处理Exception2类型的异常</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// 无论哪种情况都会执行的活动</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们来看一下下面这个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FinallyWorks</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (count++ == <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">                System.out.println(<span class="string">&quot;No Exception&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Caught Exception&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Inside finally&quot;</span>);</span><br><span class="line">                <span class="keyword">if</span> (count == <span class="number">2</span>) <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Caught Exception</span></span><br><span class="line"><span class="comment">         * Inside finally</span></span><br><span class="line"><span class="comment">         * No Exception</span></span><br><span class="line"><span class="comment">         * Inside finally</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从输出可以看出，无论是否抛出异常，<code>finally</code> 子句都执行了。还可以看出另一事实：Java 中的异常不允许我们回退到异常被抛出的地方。</p>
+<h2 id="5-1-finally的作用">5.1 finally的作用</h2>
+<p>在没有垃圾收集并且不会自动调用析构函数的语言中，<code>finally</code> 非常重要，这是因为不管在 <code>try</code> 块中发生了什么，它都使得程序员可以确保内存的释放。但是 Java 提供了垃圾收集器，且无需调用析构函数，那么 <code>finally</code> 在 Java 中什么时候需要用到？</p>
+<p>要清理内存之外的某些东西时，<code>finally</code> 子句是必要的，例如打开的文件或网络连接，画在屏幕上的东西等。</p>
+<h2 id="5-2-不同异常处理层及方法返回时的finally执行机制">5.2 不同异常处理层及方法返回时的finally执行机制</h2>
+<p>即使抛出的异常没有被当前的这组 <code>catch</code> 子句捕获，在异常处理机制向更高一层中继续搜索异常处理程序之前，<code>finally</code> 也会执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlwaysFinally</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside outer try&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Inside inner try&quot;</span>);</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Inside inner finally&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Caught Exception in outer catch&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside outer finally&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Inside outer try</span></span><br><span class="line"><span class="comment">         * Inside inner try</span></span><br><span class="line"><span class="comment">         * Inside inner finally</span></span><br><span class="line"><span class="comment">         * Caught Exception in outer catch</span></span><br><span class="line"><span class="comment">         * Inside outer finally</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为 <code>finally</code> 子句总会执行，所以在一个方法中，我们可以从多个点返回，并且仍然能够确保重要的清理工作得到执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiReturns</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Point 1&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">            System.out.println(<span class="string">&quot;Point 2&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">2</span>) <span class="keyword">return</span>;</span><br><span class="line">            System.out.println(<span class="string">&quot;End&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Do something cleanup&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++)</span><br><span class="line">            f(i);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Point 1</span></span><br><span class="line"><span class="comment">         * Do something cleanup</span></span><br><span class="line"><span class="comment">         * Point 1</span></span><br><span class="line"><span class="comment">         * Point 2</span></span><br><span class="line"><span class="comment">         * Do something cleanup</span></span><br><span class="line"><span class="comment">         * Point 1</span></span><br><span class="line"><span class="comment">         * Point 2</span></span><br><span class="line"><span class="comment">         * End</span></span><br><span class="line"><span class="comment">         * Do something cleanup</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出表明，方法从哪里返回并不重要，<code>finally</code> 子句中的内容总会运行。</p>
+<h1>6. try-with-resources语句</h1>
+<p>有时有些对象会出现如下的情况：</p>
+<ul>
+<li>需要清理；</li>
+<li>需要在特定时刻清理，例如当走出某个作用域的时候（通过正常方式或通过异常）。</li>
+</ul>
+<p>一个常见的例子是 <code>java.io.FileInputStream</code>，传统方式下我们需要编写棘手的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    in = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;Something.txt&quot;</span>));</span><br><span class="line">    <span class="type">int</span> <span class="variable">content</span> <span class="operator">=</span> in.read();</span><br><span class="line">    <span class="comment">// 处理内容</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    <span class="comment">// 处理异常</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (in != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            in.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span>(IOException e) &#123;</span><br><span class="line">            <span class="comment">// 处理close()异常</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Java 7 引入了 <code>try-with-resources</code> 语法，可以很好地简化上述代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;Something.txt&quot;</span>))) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">content</span> <span class="operator">=</span> in.read();</span><br><span class="line">    <span class="comment">// 处理内容</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    <span class="comment">// 处理异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>try</code> 后面可以跟一个括号定义，我们在这里创建了 <code>FileInputstream</code> 对象。括号中的内容叫作<strong>资源说明头</strong>（resource specification header）。现在对象 <code>in</code> 在这个 <code>try</code> 块的其余部分都是可用的。更重要的是，不管如何退出 <code>try</code> 块（无论是正常方式还是通过异常），都会执行与上一个示例中的 <code>finally</code> 子句等同的操作，无需编写复杂棘手的代码了。</p>
+<p>它是如何工作的呢？在 <code>try-with-resources</code> 定义子句中（也就是括号内）创建的对象必须实现 <code>java.lang.AutoCloseable</code> 接口，该接口只有一个方法：<code>close()</code>。</p>
+<p>资源说明头可以包含多个定义，用分号隔开，在这个头部定义的每个对象都将在 <code>try</code> 块的末尾调用其 <code>close()</code>。</p>
+<h2 id="6-1-底层细节">6.1 底层细节</h2>
+<p>为了研究 <code>try-with-resources</code> 的底层机制，可以创建自己的实现了 <code>AutoCloseable</code> 接口的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Reporter</span> <span class="keyword">implements</span> <span class="title class_">AutoCloseable</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> getClass().getSimpleName();</span><br><span class="line"></span><br><span class="line">    Reporter() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Creating &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Closing &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FirstReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SecondReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoCloseableDetails</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">FirstReporter</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FirstReporter</span>();</span><br><span class="line">             <span class="type">SecondReporter</span> <span class="variable">sr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecondReporter</span>()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside try&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Creating FirstReporter</span></span><br><span class="line"><span class="comment">         * Creating SecondReporter</span></span><br><span class="line"><span class="comment">         * Inside try</span></span><br><span class="line"><span class="comment">         * Closing SecondReporter</span></span><br><span class="line"><span class="comment">         * Closing FirstReporter</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在退出 <code>try</code> 块时会调用两个对象的 <code>close()</code> 方法，而且会以与创建顺序相反的顺序关闭他们。这个顺序很重要，因为在这种配置情况下，<code>SecondReporter</code> 对象有可能会依赖 <code>FirstReporter</code> 对象。</p>
+<h2 id="6-2-构造器抛出异常">6.2 构造器抛出异常</h2>
+<p>如果在资源说明头创建某个对象时其构造器抛出异常，结果会怎样？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Reporter</span> <span class="keyword">implements</span> <span class="title class_">AutoCloseable</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> getClass().getSimpleName();</span><br><span class="line"></span><br><span class="line">    Reporter() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Creating &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Closing &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FirstReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SecondReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExcepReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;</span><br><span class="line">    ExcepReporter() <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoCloseableDetails</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">FirstReporter</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FirstReporter</span>();</span><br><span class="line">             <span class="type">ExcepReporter</span> <span class="variable">er</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExcepReporter</span>();</span><br><span class="line">             <span class="type">SecondReporter</span> <span class="variable">sr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecondReporter</span>()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside try&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Caught Exception&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Creating FirstReporter</span></span><br><span class="line"><span class="comment">         * Creating ExcepReporter</span></span><br><span class="line"><span class="comment">         * Closing FirstReporter</span></span><br><span class="line"><span class="comment">         * Caught Exception</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在资源说明头定义了三个对象，中间的对象抛出了一个异常，正因为如此，编译器强制我们提供一个 <code>catch</code> 子句来捕捉构造器的异常，这意味着资源说明头实际上是被这个 <code>try</code> 块包围的。</p>
+<p>不出所料，<code>FirstReporter</code> 顺利创建，而 <code>ExcepReporter</code> 在创建过程中抛出了一个异常。清注意 <code>ExcepReporter</code> 的 <code>close()</code> 方法没有被调用，这是因为如果构造器失败了，我们不能假定可以在这个对象上安全地执行任何操作，包括关闭它在内。因为 <code>ExcepReporter</code> 抛出了异常，所以 <code>SecondReporter</code> 对象从未被创建，也不会被清理。</p>
+<h2 id="6-3-try块抛出异常">6.3 try块抛出异常</h2>
+<p>如果构造器都不会抛出异常，但是在 <code>try</code> 块中可能抛出异常，编译器又会强制我们提供一个 <code>catch</code> 子句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Reporter</span> <span class="keyword">implements</span> <span class="title class_">AutoCloseable</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> getClass().getSimpleName();</span><br><span class="line"></span><br><span class="line">    Reporter() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Creating &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Closing &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FirstReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SecondReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExcepReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;</span><br><span class="line">    ExcepReporter() <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoCloseableDetails</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">FirstReporter</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FirstReporter</span>()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside try&quot;</span>);</span><br><span class="line">            <span class="type">SecondReporter</span> <span class="variable">sr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecondReporter</span>();</span><br><span class="line">            <span class="type">ExcepReporter</span> <span class="variable">er</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExcepReporter</span>();</span><br><span class="line">            System.out.println(<span class="string">&quot;End of try&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Caught Exception&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Creating FirstReporter</span></span><br><span class="line"><span class="comment">         * Inside try</span></span><br><span class="line"><span class="comment">         * Creating SecondReporter</span></span><br><span class="line"><span class="comment">         * Creating ExcepReporter</span></span><br><span class="line"><span class="comment">         * Closing FirstReporter</span></span><br><span class="line"><span class="comment">         * Caught Exception</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，<code>SecondReporter</code> 对象永远不会得到清理，这是因为它不是在资源说明头中创建的，所以它的清理得不到保证。这一点很重要，因为 Java 在这里没有以警告或错误的形式给出提示，所以像这样的错误很容易被漏掉。</p>
+<h2 id="6-4-close-方法抛出异常">6.4 close()方法抛出异常</h2>
+<p>最后，让我们看看在 <code>close()</code> 方法中抛出异常的情况：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Reporter</span> <span class="keyword">implements</span> <span class="title class_">AutoCloseable</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> getClass().getSimpleName();</span><br><span class="line"></span><br><span class="line">    Reporter() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Creating &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Closing &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FirstReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SecondReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExcepReporter</span> <span class="keyword">extends</span> <span class="title class_">Reporter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="built_in">super</span>.close();</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoCloseableDetails</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">FirstReporter</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FirstReporter</span>();</span><br><span class="line">             <span class="type">ExcepReporter</span> <span class="variable">er</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExcepReporter</span>();</span><br><span class="line">             <span class="type">SecondReporter</span> <span class="variable">sr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecondReporter</span>()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Inside try&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Caught Exception&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Creating FirstReporter</span></span><br><span class="line"><span class="comment">         * Creating ExcepReporter</span></span><br><span class="line"><span class="comment">         * Creating SecondReporter</span></span><br><span class="line"><span class="comment">         * Inside try</span></span><br><span class="line"><span class="comment">         * Closing SecondReporter</span></span><br><span class="line"><span class="comment">         * Closing ExcepReporter</span></span><br><span class="line"><span class="comment">         * Closing FirstReporter</span></span><br><span class="line"><span class="comment">         * Caught Exception</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>请注意，因为这三个对象都被创建出来了，所以它们又都以相反的顺序被关闭了，即使 <code>ExcepReporter.close()</code> 抛出了异常。当我们考虑到这一点时，这就是我们希望发生的事情，但是如果必须自己编程实现所有的逻辑，代码可能会出现漏洞，从而导致出错。因此我们应该尽可能地使用 <code>try-with-resources</code>，这个特性还能使生成的代码更干净且更容易理解。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/10258.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/10258.html";
+            const title         = "「Java异常（Exception）详解」";
+            const excerpt       = `本文介绍了 Java 的异常处理机制，Java 使用异常（Exception）提供了一个一致的错误报告模型，从而使组件可以将问题可靠地传达给客户代码。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-19T09:18:13.024Z" itemprop="dateModified">Last edited: 2023-11-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Java流（Stream、Optional）详解" href="/posts/36775.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Java文件操作详解" href="/posts/29756.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                75
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 异常处理程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 创建异常与日志记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="toc-text">2.1 自定义异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95"><span class="toc-text">2.2 日志记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 异常说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 捕捉任何异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Exception%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">4.1 Exception类的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%A4%9A%E9%87%8D%E6%8D%95%E6%8D%89"><span class="toc-text">4.2 多重捕捉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%A0%88%E8%BD%A8%E8%BF%B9"><span class="toc-text">4.3 栈轨迹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E9%87%8D%E6%96%B0%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-text">4.4 重新抛出异常</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 使用finally块执行清理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-finally%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">5.1 finally的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E4%B8%8D%E5%90%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%B1%82%E5%8F%8A%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E6%97%B6%E7%9A%84finally%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-text">5.2 不同异常处理层及方法返回时的finally执行机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6. try-with-resources语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82"><span class="toc-text">6.1 底层细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E6%9E%84%E9%80%A0%E5%99%A8%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-text">6.2 构造器抛出异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-try%E5%9D%97%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-text">6.3 try块抛出异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-close-%E6%96%B9%E6%B3%95%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-text">6.4 close()方法抛出异常</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

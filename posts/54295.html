@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>SpringBoot学习笔记-创建菜单与游戏页面（上） | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Java" />
+  
+  <meta name="description" content="SpringBoot学习笔记-创建菜单与游戏页面（上）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot学习笔记-创建菜单与游戏页面（上）">
+<meta property="og:url" content="https://asanosaki.github.io/posts/54295.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="SpringBoot学习笔记-创建菜单与游戏页面（上）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-11-11T11:19:00.000Z">
+<meta property="article:modified_time" content="2023-11-19T09:18:13.024Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
+                                                                
+                                                                SpringBoot
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/54295.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">SpringBoot学习笔记-创建菜单与游戏页面（上）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-11-11T11:19:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-11-11</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~16.82K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700385493024"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 页面创建与导航栏实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 导航栏高亮功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 运动目标基类实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 游戏地图随机生成</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本节内容为实现游戏界面的导航栏功能以及游戏地图的随机生成功能。</p>
+</blockquote>
+<span id="more"></span>
+<h1>1. 页面创建与导航栏实现</h1>
+<p>首先我们解除一下 Vue 的文件驼峰命名检查，在前端的根目录 <code>web</code> 下的 <code>package.json</code> 文件的 <code>rules</code> 中添加一行代码，然后重启前端项目：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;vue/multi-word-component-names&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span></span><br></pre></td></tr></table></figure>
+<p>我们先在 <code>src/views</code> 目录下创建每个页面的组件存放的目录：<code>pk</code>、<code>record</code>、<code>ranklist</code>、<code>user/mybots</code>、<code>error</code>，分别表示对战页面、对战记录页面、排行榜页面、我的 Bots 页面、报错页面。然后在这些目录中分别创建对应的索引页面组件：<code>PKIndexView.vue</code>、<code>RecordIndexView.vue</code>、<code>RanklistIndexView.vue</code>、<code>MyBotsIndexView.vue</code>、<code>NotFoundView.vue</code>（之后组件称呼也可能不带 <code>.vue</code> 后缀），每个页面参照以下代码先初始化：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Card</span>&gt;</span></span><br><span class="line">    对战</span><br><span class="line">  <span class="tag">&lt;/<span class="name">Card</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">Card</span> <span class="keyword">from</span> <span class="string">&quot;@/components/Card.vue&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title class_">Card</span>,</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>Card</code> 组件我们创建在 <code>src/components</code> 目录下，实现的效果是将内容包裹在一个卡片中，内容如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-body&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">margin-top</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下来我们需要设置路由，即根据不同的 URL 渲染不同的组件，Vue 的路由在 <code>src/router</code> 目录下的 <code>index.js</code> 文件中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">PKIndexView</span> <span class="keyword">from</span> <span class="string">&quot;@/views/pk/PKIndexView&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">RecordIndexView</span> <span class="keyword">from</span> <span class="string">&quot;@/views/record/RecordIndexView&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">RanklistIndexView</span> <span class="keyword">from</span> <span class="string">&quot;@/views/ranklist/RanklistIndexView&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyBotsIndexView</span> <span class="keyword">from</span> <span class="string">&quot;@/views/user/mybots/MyBotsIndexView&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NotFoundView</span> <span class="keyword">from</span> <span class="string">&quot;@/views/error/NotFoundView&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;home&quot;</span>,</span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&quot;/pk/&quot;</span>,  <span class="comment">// 如果是根路径则重定向到对战页面</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/pk/&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;pk_index&quot;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">PKIndexView</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/record/&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;record_index&quot;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">RecordIndexView</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/ranklist/&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;ranklist_index&quot;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">RanklistIndexView</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/user/mybots/&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;user_mybots_index&quot;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">MyBotsIndexView</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/404/&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;404&quot;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">NotFoundView</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/:catchAll(.*)&quot;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;others&quot;</span>,</span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&quot;/404/&quot;</span>,  <span class="comment">// 如果不是以上路径之一说明不合法，重定向到404页面</span></span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="title function_">createRouter</span>(&#123;</span><br><span class="line">  <span class="attr">history</span>: <span class="title function_">createWebHistory</span>(),</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
+<p>在 <code>src/components</code> 目录下创建导航栏组件 <code>NavBar</code>，然后可以通过 Bootstrap 快速构建一个导航栏。</p>
+<p>首先在根 JS 文件 <code>src/main.js</code> 中引入 Bootstrap：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&quot;./App.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&quot;./router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&quot;./store&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;bootstrap/dist/css/bootstrap.css&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;bootstrap/dist/js/bootstrap&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">createApp</span>(<span class="title class_">App</span>).<span class="title function_">use</span>(store).<span class="title function_">use</span>(router).<span class="title function_">mount</span>(<span class="string">&quot;#app&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>这时候会报错，提示我们没有找到模块 <code>@popperjs/core</code>，这时我们需要去项目管理页面的依赖页面中安装 <code>@popperjs/core</code> 依赖。</p>
+<p>然后我们实现导航栏 <code>NavBar</code>，其中我们使用 <code>&lt;router-link&gt;</code> 标签替代 <code>&lt;a&gt;</code> 标签可以将后端渲染改成前端渲染：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;navbar navbar-expand-lg navbar-dark bg-dark&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">&quot;navbar-brand&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;home&#x27; &#125;&quot;</span>&gt;</span>King of Bots<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;collapse navbar-collapse&quot;</span> <span class="attr">id</span>=<span class="string">&quot;navbarText&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">&quot;nav-link&quot;</span> <span class="attr">aria-current</span>=<span class="string">&quot;page&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;pk_index&#x27; &#125;&quot;</span>&gt;</span>对战<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">&quot;nav-link&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;record_index&#x27; &#125;&quot;</span>&gt;</span>对局列表<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">&quot;nav-link&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;ranklist_index&#x27; &#125;&quot;</span>&gt;</span>排行榜<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;navbar-nav&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item dropdown&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;nav-link dropdown-toggle&quot;</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">role</span>=<span class="string">&quot;button&quot;</span> <span class="attr">data-bs-toggle</span>=<span class="string">&quot;dropdown&quot;</span> <span class="attr">aria-expanded</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">              AsanoSaki</span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;dropdown-menu&quot;</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">&quot;dropdown-item&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;user_mybots_index&#x27; &#125;&quot;</span>&gt;</span>My Bots<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">hr</span> <span class="attr">class</span>=<span class="string">&quot;dropdown-divider&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;dropdown-item&quot;</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>退出<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1>2. 导航栏高亮功能</h1>
+<p>我们可以判断当前在哪个页面，将对应的导航栏图标高亮，高亮的实现是在对应的标签中添加 <code>active</code> 类。因此我们需要取得当前页面，可以用 <code>vue-router</code> 中的 <code>useRoute</code> 实现，然后通过 <code>computed</code> 实时计算其 <code>name</code> 是什么。在 HTML 标签中如果我们想让某个属性的值是一个表达式可以加一个 <code>:</code>，例如将 <code>class</code> 改成 <code>:class</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;navbar navbar-expand-lg navbar-dark bg-dark&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">&quot;navbar-brand&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;home&#x27; &#125;&quot;</span>&gt;</span>King of Bots<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;collapse navbar-collapse&quot;</span> <span class="attr">id</span>=<span class="string">&quot;navbarText&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:class</span>=<span class="string">&quot;route_name == &#x27;pk_index&#x27; ? &#x27;nav-link active&#x27; : &#x27;nav-link&#x27;&quot;</span> <span class="attr">aria-current</span>=<span class="string">&quot;page&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;pk_index&#x27; &#125;&quot;</span>&gt;</span>对战<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:class</span>=<span class="string">&quot;route_name == &#x27;record_index&#x27; ? &#x27;nav-link active&#x27; : &#x27;nav-link&#x27;&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;record_index&#x27; &#125;&quot;</span>&gt;</span>对局列表<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:class</span>=<span class="string">&quot;route_name == &#x27;ranklist_index&#x27; ? &#x27;nav-link active&#x27; : &#x27;nav-link&#x27;&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;&#123; name: &#x27;ranklist_index&#x27; &#125;&quot;</span>&gt;</span>排行榜<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; useRoute &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> route = <span class="title function_">useRoute</span>();</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> route_name = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> route.<span class="property">name</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      route_name,</span></span><br><span class="line"><span class="language-javascript">    &#125;;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1>3. 运动目标基类实现</h1>
+<p>看过 Django 或者 Web 笔记应该对这个概念不陌生了，游戏中运动的目标实现原理是利用浏览器每秒的刷新机制绘制若干帧图片，假设浏览器每秒钟刷新60次也就是60帧，那么 JS 的 <code>requestAnimationFrame(func)</code> 函数会在浏览器渲染下一帧前执行一遍 <code>func</code> 函数，然后我们在 <code>func</code> 函数内递归调用 <code>requestAnimationFrame</code> 函数即可实现每一帧执行一遍。</p>
+<p>我们在 <code>src/assets</code> 目录下创建 <code>scripts</code> 目录存放脚本文件，然后在该目录下创建 <code>AcGameObject.js</code> 文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">AC_GAME_OBJECTS</span> = []; <span class="comment">// 存储所有运动对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AcGameObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable constant_">AC_GAME_OBJECTS</span>.<span class="title function_">push</span>(<span class="variable language_">this</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timedelta</span> = <span class="number">0</span>;  <span class="comment">// 当前帧距离上一帧的时间间隔，浏览器每一帧时间间隔可能有误差不一样因此需要记录</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">has_called_start</span> = <span class="literal">false</span>;  <span class="comment">// 是否执行过start函数</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">start</span>(<span class="params"></span>) &#123;  <span class="comment">// 只在对象创建时执行一次</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;  <span class="comment">// 除了第一帧外每一帧执行一次</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">on_destroy</span>(<span class="params"></span>) &#123;  <span class="comment">// 在删除对象之前可能需要执行的某些操作</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">destroy</span>(<span class="params"></span>) &#123;  <span class="comment">// 将当前对象删除，即从AC_GAME_OBJECTS中移除</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">on_destroy</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> <span class="variable constant_">AC_GAME_OBJECTS</span>) &#123;  <span class="comment">// 用in遍历下标</span></span><br><span class="line">      <span class="keyword">const</span> obj = <span class="variable constant_">AC_GAME_OBJECTS</span>[i];</span><br><span class="line">      <span class="keyword">if</span> (obj == <span class="variable language_">this</span>) &#123;</span><br><span class="line">        <span class="variable constant_">AC_GAME_OBJECTS</span>.<span class="title function_">splice</span>(i);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> last_timestamp;  <span class="comment">// 上一帧执行的时刻</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">step</span> = (<span class="params">timestamp</span>) =&gt; &#123;  <span class="comment">// 每次调用会传入当前时刻</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> obj <span class="keyword">of</span> <span class="variable constant_">AC_GAME_OBJECTS</span>) &#123;  <span class="comment">// 用of遍历值</span></span><br><span class="line">    <span class="keyword">if</span> (!obj.<span class="property">has_called_start</span>) &#123;</span><br><span class="line">      obj.<span class="title function_">start</span>();</span><br><span class="line">      obj.<span class="property">has_called_start</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      obj.<span class="property">timedelta</span> = timestamp - last_timestamp;</span><br><span class="line">      obj.<span class="title function_">update</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  last_timestamp = timestamp;</span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(step);  <span class="comment">// 递归调用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">requestAnimationFrame</span>(step);</span><br></pre></td></tr></table></figure>
+<h1>4. 游戏地图随机生成</h1>
+<p>我们设置一个正方形的游戏地图，最外围一圈为障碍物，中间的区域随机生成几个障碍物，因为需要具备公平性因此障碍物需要对称设计，左下角和右上角为两名玩家的起始位置。</p>
+<p>地图和障碍物每帧都需要渲染（render）一遍，首先在 <code>scripts</code> 目录下创建 <code>GameMap.js</code> 表示游戏地图的对象，我们在设计的时候需要用相对距离，要能够根据网页的变化动态调整画布的大小，假设我们的地图是13*13个单位的大小，可以用 <code>L</code> 表示一个单位的长度：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AcGameObject</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./AcGameObject&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">GameMap</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">ctx, parent</span>) &#123;  <span class="comment">// ctx表示画布，parent表示画布的父元素</span></span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span> = ctx;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parent</span> = parent;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">L</span> = <span class="number">0</span>;  <span class="comment">// 一个单位的绝对长度</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">start</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">render</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>PKIndexView</code> 中需要存一个东西叫做游戏区域，我们也可以将其写成一个组件，在 <code>components</code> 目录下创建 <code>PlayGround</code> 组件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;playground&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">GameMap</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">GameMap</span> <span class="keyword">from</span> <span class="string">&quot;@/components/GameMap.vue&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title class_">GameMap</span>,</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-tag">div</span><span class="selector-class">.playground</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">width</span>: <span class="number">60vw</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">height</span>: <span class="number">70vh</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">margin</span>: <span class="number">40px</span> auto;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于游戏区域可能不仅只有地图，还可能有记分板之类的组件，因此我们再创建一个单独的地图组件 <code>GameMap</code>，地图是绘制在 Canvas 上的，可以使用 HTML 标签 <code>&lt;canvas&gt;</code> 实现，然后我们要引入之前创建的 <code>GameMap.js</code> 中的对象，在标签中使用 <code>ref</code> 属性可以让标签和我们定义的对象关联在一起，组件挂载完后我们需要创建游戏地图对象，可以用 <code>onMounted</code> 实现，表示组件挂载完后需要执行的操作：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&quot;parent&quot;</span> <span class="attr">class</span>=<span class="string">&quot;gamemap&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">ref</span>=<span class="string">&quot;canvas&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; ref, onMounted &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; <span class="title class_">GameMap</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@/assets/scripts/GameMap&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> parent = <span class="title function_">ref</span>(<span class="literal">null</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> canvas = <span class="title function_">ref</span>(<span class="literal">null</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">new</span> <span class="title class_">GameMap</span>(canvas.<span class="property">value</span>.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>), parent.<span class="property">value</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      parent,</span></span><br><span class="line"><span class="language-javascript">      canvas,</span></span><br><span class="line"><span class="language-javascript">    &#125;;</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-tag">div</span><span class="selector-class">.gamemap</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">justify-content</span>: center;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">align-items</span>: center;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样在 <code>GameMap.js</code> 中我们就可以动态计算画布区域的大小了，我们需要求出 <code>PlayGround</code> 组件的区域中面积最大的正方形区域（该组件的长宽会随浏览器大小的变化而变化）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AcGameObject</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./AcGameObject&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">GameMap</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">ctx, parent</span>) &#123;  <span class="comment">// ctx表示画布，parent表示画布的父元素</span></span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span> = ctx;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parent</span> = parent;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">L</span> = <span class="number">0</span>;  <span class="comment">// 一个单位的绝对长度</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rows</span> = <span class="number">13</span>;  <span class="comment">// 地图的行数</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cols</span> = <span class="number">13</span>;  <span class="comment">// 地图的列数</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">start</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update_size</span>(<span class="params"></span>) &#123;  <span class="comment">// 每一帧更新地图大小</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">L</span> = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="variable language_">this</span>.<span class="property">parent</span>.<span class="property">clientWidth</span> / <span class="variable language_">this</span>.<span class="property">cols</span>, <span class="variable language_">this</span>.<span class="property">parent</span>.<span class="property">clientHeight</span> / <span class="variable language_">this</span>.<span class="property">rows</span>));</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">canvas</span>.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">L</span> * <span class="variable language_">this</span>.<span class="property">cols</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">canvas</span>.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">L</span> * <span class="variable language_">this</span>.<span class="property">rows</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">update_size</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">render</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">fillStyle</span> = <span class="string">&quot;green&quot;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">canvas</span>.<span class="property">width</span>, <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">canvas</span>.<span class="property">height</span>);  <span class="comment">// 参数分别表示左上角横纵坐标和边长</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们要绘制地图的每一个格子，相邻的格子采用深浅不一样的绿色绘制，可以判断格子的横纵坐标相加的奇偶来区分：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AcGameObject</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./AcGameObject&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">GameMap</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">ctx, parent</span>) &#123;  <span class="comment">// ctx表示画布，parent表示画布的父元素</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">start</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update_size</span>(<span class="params"></span>) &#123;  <span class="comment">// 每一帧更新地图大小</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> color_even = <span class="string">&quot;#AAD752&quot;</span>, color_odd = <span class="string">&quot;#A2D048&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> r = <span class="number">0</span>; r &lt; <span class="variable language_">this</span>.<span class="property">rows</span>; r++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> c = <span class="number">0</span>; c &lt; <span class="variable language_">this</span>.<span class="property">cols</span>; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((r + c) % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">fillStyle</span> = color_even;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">fillStyle</span> = color_odd;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// canvas坐标系横轴是x，纵轴是y，与数组坐标系不同</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">fillRect</span>(c * <span class="variable language_">this</span>.<span class="property">L</span>, r * <span class="variable language_">this</span>.<span class="property">L</span>, <span class="variable language_">this</span>.<span class="property">L</span>, <span class="variable language_">this</span>.<span class="property">L</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们创建障碍物对象，在 <code>scripts</code> 目录下创建 <code>Wall.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AcGameObject</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./AcGameObject&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Wall</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">r, c, gamemap</span>) &#123;  <span class="comment">// 需要传入第几行第几列以及GameMap</span></span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">r</span> = r;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">c</span> = c;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">gamemap</span> = gamemap;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = <span class="string">&quot;#B47226&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">render</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> L = <span class="variable language_">this</span>.<span class="property">gamemap</span>.<span class="property">L</span>, ctx = <span class="variable language_">this</span>.<span class="property">gamemap</span>.<span class="property">ctx</span>;</span><br><span class="line">    ctx.<span class="property">fillStyle</span> = <span class="variable language_">this</span>.<span class="property">color</span>;</span><br><span class="line">    ctx.<span class="title function_">fillRect</span>(<span class="variable language_">this</span>.<span class="property">c</span> * L, <span class="variable language_">this</span>.<span class="property">r</span> * L, L, L);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着我们在 <code>GameMap.js</code> 中即可将障碍物绘制出来，我们创建 <code>Wall</code> 对象是在创建完 <code>GameMap</code> 对象之后进行的，根据 <code>AcGameObject</code> 的定义，<code>Wall</code> 每次会在 <code>GameMap</code> 之后刷新，因此会覆盖 <code>GameMap</code>。此处我们还需要判断两名玩家的出生地即左下角和右上角不能被障碍物覆盖，且两名玩家必须要连通：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AcGameObject</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./AcGameObject&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Wall</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./Wall&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">GameMap</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AcGameObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">ctx, parent</span>) &#123;  <span class="comment">// ctx表示画布，parent表示画布的父元素</span></span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">inner_walls_count</span> = <span class="number">20</span>;  <span class="comment">// 地图内部的随机障碍物数量，需要是偶数</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">walls</span> = [];  <span class="comment">// 所有的障碍物</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">check_connectivity</span>(<span class="params">g, sx, sy, tx, ty</span>) &#123;  <span class="comment">// 用flood fill算法判断两名玩家是否连通</span></span><br><span class="line">    <span class="keyword">if</span> (sx == tx &amp;&amp; sy == ty) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    g[sx][sy] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> dx = [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>], dy = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">let</span> nx = sx + dx[i], ny = sy + dy[i];</span><br><span class="line">      <span class="keyword">if</span> (!g[nx][ny] &amp;&amp; <span class="variable language_">this</span>.<span class="title function_">check_connectivity</span>(g, nx, ny, tx, ty))  <span class="comment">// 地图已经有边界标记了因此无需判断越界</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">create_walls</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> g = [];  <span class="comment">// 表示每个位置是否是障碍物</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化障碍物标记数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> r = <span class="number">0</span>; r &lt; <span class="variable language_">this</span>.<span class="property">rows</span>; r++) &#123;</span><br><span class="line">      g[r] = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> c = <span class="number">0</span>; c &lt; <span class="variable language_">this</span>.<span class="property">cols</span>; c++) &#123;</span><br><span class="line">        g[r][c] = <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给地图四周加上障碍物</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> r = <span class="number">0</span>; r &lt; <span class="variable language_">this</span>.<span class="property">rows</span>; r++) &#123;</span><br><span class="line">      g[r][<span class="number">0</span>] = g[r][<span class="variable language_">this</span>.<span class="property">cols</span> - <span class="number">1</span>] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> c = <span class="number">0</span>; c &lt; <span class="variable language_">this</span>.<span class="property">cols</span>; c++) &#123;</span><br><span class="line">      g[<span class="number">0</span>][c] = g[<span class="variable language_">this</span>.<span class="property">rows</span> - <span class="number">1</span>][c] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加地图内部的随机障碍物，需要有对称性因此枚举一半即可，另一半对称生成</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">inner_walls_count</span> / <span class="number">2</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">10000</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">let</span> r = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="variable language_">this</span>.<span class="property">rows</span>);</span><br><span class="line">        <span class="keyword">let</span> c = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="variable language_">this</span>.<span class="property">cols</span>);</span><br><span class="line">        <span class="keyword">if</span> (g[r][c] || g[c][r]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (r == <span class="variable language_">this</span>.<span class="property">rows</span> - <span class="number">2</span> &amp;&amp; c == <span class="number">1</span> || r == <span class="number">1</span> &amp;&amp; c == <span class="variable language_">this</span>.<span class="property">cols</span> - <span class="number">2</span>) <span class="keyword">continue</span>;  <span class="comment">// 判断是否覆盖到出生地</span></span><br><span class="line">        g[r][c] = g[c][r] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> g_copy = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(g));  <span class="comment">// 复制一份g，可以先转换成json再转回来就是一份新的了</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">check_connectivity</span>(g_copy, <span class="variable language_">this</span>.<span class="property">rows</span> - <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="variable language_">this</span>.<span class="property">cols</span> - <span class="number">2</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建障碍物</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> r = <span class="number">0</span>; r &lt; <span class="variable language_">this</span>.<span class="property">rows</span>; r++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> c = <span class="number">0</span>; c &lt; <span class="variable language_">this</span>.<span class="property">cols</span>; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (g[r][c]) &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">walls</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">Wall</span>(r, c, <span class="variable language_">this</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;  <span class="comment">// 暴力枚举直至生成合法的地图</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">create_walls</span>())</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update_size</span>(<span class="params"></span>) &#123;  <span class="comment">// 每一帧更新地图大小</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们将网页的图标替换一下，将 LOGO 图标命名为 <code>favicon.ico</code> 然后替换掉 <code>public</code> 目录下的 <code>favicon.ico</code> 即可。然后修改一下网页的标题，如果 <code>public</code> 目录下的 <code>index.html</code> 中的标题为 <code>&lt;title&gt;&lt;%= htmlWebpackPlugin.options.title %&gt;&lt;/title&gt;</code>，那么可以通过修改根目录的 <code>vue.config.js</code> 来修改标题，添加 <code>chainWebpack</code> 配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; defineConfig &#125; = <span class="built_in">require</span>(<span class="string">&#x27;@vue/cli-service&#x27;</span>)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="attr">transpileDependencies</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">chainWebpack</span>: <span class="function"><span class="params">config</span> =&gt;</span>&#123;</span><br><span class="line">    config.<span class="title function_">plugin</span>(<span class="string">&#x27;html&#x27;</span>)</span><br><span class="line">      .<span class="title function_">tap</span>(<span class="function"><span class="params">args</span> =&gt;</span> &#123;</span><br><span class="line">        args[<span class="number">0</span>].<span class="property">title</span> = <span class="string">&quot;King of Bots&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> args;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>修改后重启一下 Vue 即可。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/54295.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/54295.html";
+            const title         = "「SpringBoot学习笔记-创建菜单与游戏页面（上）」";
+            const excerpt       = `本节内容为实现游戏界面的导航栏功能以及游戏地图的随机生成功能。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-19T09:18:13.024Z" itemprop="dateModified">Last edited: 2023-11-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" SpringBoot学习笔记-项目初始化" href="/posts/34589.html">&lt; Previous</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                75
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 页面创建与导航栏实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 导航栏高亮功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 运动目标基类实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 游戏地图随机生成</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

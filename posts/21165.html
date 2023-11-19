@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="/images/favicon.ico">
   
-  <title>动手学深度学习笔记(李沐)-现代卷积神经网络 | AsanoSaki</title>
+  <title>D2L学习笔记-现代卷积神经网络 | AsanoSaki</title>
   <meta name="author" content="AsanoSaki" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -16,16 +16,16 @@
   
     <meta name="keywords" content="AI" />
   
-  <meta name="description" content="动手学深度学习笔记(李沐)-现代卷积神经网络">
+  <meta name="description" content="D2L学习笔记-现代卷积神经网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动手学深度学习笔记(李沐)-现代卷积神经网络">
+<meta property="og:title" content="D2L学习笔记-现代卷积神经网络">
 <meta property="og:url" content="https://asanosaki.github.io/posts/21165.html">
 <meta property="og:site_name" content="AsanoSaki">
-<meta property="og:description" content="动手学深度学习笔记(李沐)-现代卷积神经网络">
+<meta property="og:description" content="D2L学习笔记-现代卷积神经网络">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-03-03T01:57:00.000Z">
-<meta property="article:modified_time" content="2023-06-03T12:46:15.810Z">
+<meta property="article:modified_time" content="2023-11-19T08:10:03.540Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -427,7 +427,7 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">动手学深度学习笔记(李沐)-现代卷积神经网络</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">D2L学习笔记-现代卷积神经网络</h1>
             
             
             <ul class="kratos-post-meta text-center">
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1685796375810"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700381403540"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88AlexNet%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">1. 深度卷积神经网络（AlexNet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E5%9D%97%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%88VGG%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">2. 使用块的网络（VGG）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%88NiN%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3. 网络中的网络（NiN）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%90%AB%E5%B9%B6%E8%A1%8C%E8%BF%9E%E7%BB%93%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%88GoogLeNet%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4. 含并行连结的网络（GoogLeNet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%89%B9%E9%87%8F%E8%A7%84%E8%8C%83%E5%8C%96%EF%BC%88BN%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">5. 批量规范化（BN）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C%EF%BC%88ResNet%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">6. 残差网络（ResNet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%A8%A0%E5%AF%86%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C%EF%BC%88DenseNet%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">7. 稠密连接网络（DenseNet）</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 深度卷积神经网络（AlexNet）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 使用块的网络（VGG）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 网络中的网络（NiN）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 含并行连结的网络（GoogLeNet）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. 批量规范化（BN）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6. 残差网络（ResNet）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">7. 稠密连接网络（DenseNet）</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,7 +464,7 @@
 <p>李沐动手学深度学习（PyTorch）课程学习笔记第六章：现代卷积神经网络。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-深度卷积神经网络（AlexNet）">1. 深度卷积神经网络（AlexNet）</h2>
+<h1>1. 深度卷积神经网络（AlexNet）</h1>
 <p>AlexNet 和 LeNet 的设计理念非常相似，但也存在显著差异：</p>
 <ul>
 <li>AlexNet 比相对较小的 LeNet5 要深得多。AlexNet 由八层组成：五个卷积层、两个全连接隐藏层和一个全连接输出层。</li>
@@ -473,7 +473,7 @@
 <p>此外，AlexNet 将 Sigmoid 激活函数改为更简单的 ReLU 激活函数。一方面，ReLU 激活函数的计算更简单，它不需要如 Sigmoid 激活函数那般复杂的求幂运算。另一方面，当使用不同的参数初始化方法时，ReLU 激活函数使训练模型更加容易。当 Sigmoid 激活函数的输出非常接近于0或1时，这些区域的梯度几乎为0，因此反向传播无法继续更新一些模型参数。相反，ReLU 激活函数在正区间的梯度总是1。因此，如果模型参数没有正确初始化，Sigmoid 函数可能在正区间内得到几乎为0的梯度，从而使模型无法得到有效的训练。</p>
 <p>尽管原文中 AlexNet 是在 ImageNet 上进行训练的，但本文在这里使用的是 Fashion-MNIST 数据集。因为即使在现代 GPU 上，训练 ImageNet 模型，同时使其收敛可能需要数小时或数天的时间。将 AlexNet 直接应用于 Fashion-MNIST 的一个问题是 Fashion-MNIST 图像的分辨率（28×28像素）低于 ImageNet 图像。为了解决这个问题，我们将它们增加到224×224像素（通常来讲这不是一个明智的做法，但在这里这样做是为了有效使用 AlexNet 架构）。</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">from</span> torch.utils <span class="keyword">import</span> data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">from</span> util.functions <span class="keyword">import</span> train_classifier</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    <span class="comment"># 这里使用11*11的更大窗口来捕捉对象，同时步幅为4，以减少输出的高度和宽度，此外输出通道的数目远大于LeNet</span></span><br><span class="line">    nn.Conv2d(<span class="number">1</span>, <span class="number">96</span>, kernel_size=<span class="number">11</span>, stride=<span class="number">4</span>, padding=<span class="number">1</span>), nn.ReLU(),  <span class="comment"># (96, 54, 54)</span></span><br><span class="line">    nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>),  <span class="comment"># (96, 26, 26)</span></span><br><span class="line">    <span class="comment"># 减小卷积窗口，使用填充为2来使得输入与输出的高和宽一致，且增大输出通道数</span></span><br><span class="line">    nn.Conv2d(<span class="number">96</span>, <span class="number">256</span>, kernel_size=<span class="number">5</span>, padding=<span class="number">2</span>), nn.ReLU(),  <span class="comment"># (256, 26, 26)</span></span><br><span class="line">    nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>),  <span class="comment"># (256, 12, 12)</span></span><br><span class="line">    <span class="comment"># 使用三个连续的卷积层和较小的卷积窗口，除了最后的卷积层，输出通道的数量进一步增加</span></span><br><span class="line">    <span class="comment"># 在前两个卷积层之后，汇聚层不用于减少输入的高度和宽度</span></span><br><span class="line">    nn.Conv2d(<span class="number">256</span>, <span class="number">384</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>), nn.ReLU(),  <span class="comment"># (384, 12, 12)</span></span><br><span class="line">    nn.Conv2d(<span class="number">384</span>, <span class="number">384</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>), nn.ReLU(),  <span class="comment"># (384, 12, 12)</span></span><br><span class="line">    nn.Conv2d(<span class="number">384</span>, <span class="number">256</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>), nn.ReLU(),  <span class="comment"># (256, 12, 12)</span></span><br><span class="line">    nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>),  <span class="comment"># (256, 5, 5)</span></span><br><span class="line">    nn.Flatten(),</span><br><span class="line">    <span class="comment"># 这里全连接层的输出数量是LeNet中的好几倍，因此使用Dropout层来减轻过拟合</span></span><br><span class="line">    nn.Linear(<span class="number">6400</span>, <span class="number">4096</span>), nn.ReLU(),</span><br><span class="line">    nn.Dropout(p=<span class="number">0.5</span>),</span><br><span class="line">    nn.Linear(<span class="number">4096</span>, <span class="number">4096</span>), nn.ReLU(),</span><br><span class="line">    nn.Dropout(p=<span class="number">0.5</span>),</span><br><span class="line">    <span class="comment"># 最后是输出层，由于这里使用Fashion-MNIST，所以用类别数为10，而非论文中的1000</span></span><br><span class="line">    nn.Linear(<span class="number">4096</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line">trans = transforms.Compose([transforms.Resize((<span class="number">224</span>, <span class="number">224</span>)), transforms.ToTensor()])</span><br><span class="line">mnist_train = torchvision.datasets.FashionMNIST(root=<span class="string">&quot;../data&quot;</span>, train=<span class="literal">True</span>, transform=trans, download=<span class="literal">True</span>)</span><br><span class="line">mnist_test = torchvision.datasets.FashionMNIST(root=<span class="string">&quot;../data&quot;</span>, train=<span class="literal">False</span>, transform=trans, download=<span class="literal">True</span>)</span><br><span class="line">train_iter = data.DataLoader(mnist_train, batch_size, shuffle=<span class="literal">True</span>, num_workers=<span class="number">0</span>)</span><br><span class="line">test_iter = data.DataLoader(mnist_test, batch_size, shuffle=<span class="literal">True</span>, num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">device = torch.device(<span class="string">&#x27;cuda&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">lr, num_epochs = <span class="number">0.01</span>, <span class="number">50</span></span><br><span class="line"></span><br><span class="line">train_classifier(net, train_iter, test_iter, num_epochs, lr, device, <span class="string">&#x27;../logs/AlexNet_train_log&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="2-使用块的网络（VGG）">2. 使用块的网络（VGG）</h2>
+<h1>2. 使用块的网络（VGG）</h1>
 <p>虽然 AlexNet 证明深层神经网络卓有成效，但它没有提供一个通用的模板来指导后续的研究人员设计新的网络。</p>
 <p>经典卷积神经网络的基本组成部分是下面的这个序列：</p>
 <ul>
@@ -491,14 +491,14 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conv_arch = ((<span class="number">1</span>, <span class="number">16</span>), (<span class="number">1</span>, <span class="number">32</span>), (<span class="number">2</span>, <span class="number">64</span>), (<span class="number">2</span>, <span class="number">128</span>), (<span class="number">2</span>, <span class="number">128</span>))</span><br><span class="line">net = vgg(conv_arch)</span><br></pre></td></tr></table></figure>
 <p>最后我们读取数据集并进行训练，超参数设置：<code>lr, num_epochs = 0.02, 15</code>，训练过程与第一节内容一样，因此不再放出代码。</p>
 <p>PS：如果显存不够可以减小 <code>batch_size</code>，从128改为64或32。</p>
-<h2 id="3-网络中的网络（NiN）">3. 网络中的网络（NiN）</h2>
+<h1>3. 网络中的网络（NiN）</h1>
 <p>回想一下，卷积层的输入和输出由四维张量组成，张量的每个轴分别对应样本、通道、高度和宽度。另外，全连接层的输入和输出通常是分别对应于样本和特征的二维张量。NiN 的想法是<strong>在每个像素位置（针对每个高度和宽度）应用一个全连接层</strong>。如果我们将权重连接到每个空间位置，我们可以将其视为1×1卷积层（如第五章第四节 PS 中所述），或作为在每个像素位置上独立作用的全连接层。从另一个角度看，即将空间维度中的每个像素视为单个样本，将通道维度视为不同特征（feature）。</p>
 <p>NiN 块以一个普通卷积层开始，后面是两个1×1的卷积层。这两个1×1卷积层充当带有 ReLU 激活函数的逐像素全连接层，对每个像素增加了非线性特性：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">nin_block</span>(<span class="params">in_channels, out_channels, kernel_size, strides, padding</span>):</span><br><span class="line">    <span class="keyword">return</span> nn.Sequential(</span><br><span class="line">        nn.Conv2d(in_channels, out_channels, kernel_size, strides, padding), nn.ReLU(),</span><br><span class="line">        nn.Conv2d(out_channels, out_channels, kernel_size=<span class="number">1</span>), nn.ReLU(),</span><br><span class="line">        nn.Conv2d(out_channels, out_channels, kernel_size=<span class="number">1</span>), nn.ReLU())</span><br></pre></td></tr></table></figure>
 <p>NiN 和 AlexNet 之间的一个显著区别是 NiN 完全取消了全连接层。相反，NiN 使用一个 NiN 块，其输出通道数等于标签类别的数量。最后放一个全局平均汇聚层（global average pooling layer），生成一个对数几率（logits）。NiN 设计的一个优点是，它显著减少了模型所需参数的数量。然而，在实践中，这种设计有时会增加训练模型的时间。</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">    nin_block(<span class="number">1</span>, <span class="number">96</span>, kernel_size=<span class="number">11</span>, strides=<span class="number">4</span>, padding=<span class="number">0</span>),</span><br><span class="line">    nn.MaxPool2d(<span class="number">3</span>, stride=<span class="number">2</span>),</span><br><span class="line">    nin_block(<span class="number">96</span>, <span class="number">256</span>, kernel_size=<span class="number">5</span>, strides=<span class="number">1</span>, padding=<span class="number">2</span>),</span><br><span class="line">    nn.MaxPool2d(<span class="number">3</span>, stride=<span class="number">2</span>),</span><br><span class="line">    nin_block(<span class="number">256</span>, <span class="number">384</span>, kernel_size=<span class="number">3</span>, strides=<span class="number">1</span>, padding=<span class="number">1</span>),</span><br><span class="line">    nn.MaxPool2d(<span class="number">3</span>, stride=<span class="number">2</span>),</span><br><span class="line">    nn.Dropout(<span class="number">0.5</span>),</span><br><span class="line">    nin_block(<span class="number">384</span>, <span class="number">10</span>, kernel_size=<span class="number">3</span>, strides=<span class="number">1</span>, padding=<span class="number">1</span>),  <span class="comment"># 标签类别数是10</span></span><br><span class="line">    nn.AdaptiveAvgPool2d((<span class="number">1</span>, <span class="number">1</span>)),  <span class="comment"># 将四维的输出转成二维的输出，其形状为(批量大小,10)</span></span><br><span class="line">    nn.Flatten())</span><br></pre></td></tr></table></figure>
 <p>最后我们读取数据集并进行训练，超参数设置：<code>lr, num_epochs = 0.1, 15</code>，训练过程与第一节内容一样，因此不再放出代码。</p>
-<h2 id="4-含并行连结的网络（GoogLeNet）">4. 含并行连结的网络（GoogLeNet）</h2>
+<h1>4. 含并行连结的网络（GoogLeNet）</h1>
 <p>在 GoogLeNet 中，基本的卷积块被称为 Inception 块（Inception block）。Inception 块由四条并行路径组成。前三条路径使用窗口大小为1×1、3×3和5×5的卷积层，从不同空间大小中提取信息。中间的两条路径在输入上执行1×1卷积，以减少通道数，从而降低模型的复杂性。第四条路径使用3×3最大汇聚层，然后使用1×1卷积层来改变通道数。这四条路径都使用合适的填充来使<strong>输入与输出的高和宽一致</strong>，最后我们将每条线路的输出在<strong>通道维度</strong>上连结，并构成 Inception 块的输出。在 Inception 块中，通常调整的超参数是每层输出通道数。</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Inception</span>(nn.Module):</span><br><span class="line">    <span class="comment"># c1-c4是每条路径的输出通道数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, c1, c2, c3, c4, **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>(Inception, self).__init__(**kwargs)</span><br><span class="line">        <span class="comment"># 线路1，单1x1卷积层</span></span><br><span class="line">        self.p1_1 = nn.Conv2d(in_channels, c1, kernel_size=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 线路2，1x1卷积层后接3x3卷积层</span></span><br><span class="line">        self.p2_1 = nn.Conv2d(in_channels, c2[<span class="number">0</span>], kernel_size=<span class="number">1</span>)</span><br><span class="line">        self.p2_2 = nn.Conv2d(c2[<span class="number">0</span>], c2[<span class="number">1</span>], kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 线路3，1x1卷积层后接5x5卷积层</span></span><br><span class="line">        self.p3_1 = nn.Conv2d(in_channels, c3[<span class="number">0</span>], kernel_size=<span class="number">1</span>)</span><br><span class="line">        self.p3_2 = nn.Conv2d(c3[<span class="number">0</span>], c3[<span class="number">1</span>], kernel_size=<span class="number">5</span>, padding=<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 线路4，3x3最大汇聚层后接1x1卷积层</span></span><br><span class="line">        self.p4_1 = nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>)</span><br><span class="line">        self.p4_2 = nn.Conv2d(in_channels, c4, kernel_size=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        p1 = F.relu(self.p1_1(x))</span><br><span class="line">        p2 = F.relu(self.p2_2(F.relu(self.p2_1(x))))</span><br><span class="line">        p3 = F.relu(self.p3_2(F.relu(self.p3_1(x))))</span><br><span class="line">        p4 = F.relu(self.p4_2(self.p4_1(x)))</span><br><span class="line">        <span class="comment"># 在通道维度（第一维）上连结输出</span></span><br><span class="line">        <span class="keyword">return</span> torch.cat((p1, p2, p3, p4), dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>GoogLeNet 一共使用9个 Inception 块和全局平均汇聚层的堆叠来生成其估计值。Inception 块之间的最大汇聚层可降低维度。第一个模块类似于 AlexNet 和 LeNet，Inception 块的组合从 VGG 继承，全局平均汇聚层避免了在最后使用全连接层。</p>
@@ -513,7 +513,7 @@
 <p>第五模块包含输出通道数为 <code>256 + 320 + 128 + 128 = 832</code> 和 <code>384 + 384 + 128 + 128 = 1024</code> 的两个 Inception 块。需要注意的是，第五模块的后面紧跟输出层，该模块同 NiN 一样使用全局平均汇聚层，将每个通道的高和宽变成1。最后我们将输出变成二维数组，再接上一个输出个数为标签类别数的全连接层：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">b5 = nn.Sequential(Inception(<span class="number">832</span>, <span class="number">256</span>, (<span class="number">160</span>, <span class="number">320</span>), (<span class="number">32</span>, <span class="number">128</span>), <span class="number">128</span>),</span><br><span class="line">                   Inception(<span class="number">832</span>, <span class="number">384</span>, (<span class="number">192</span>, <span class="number">384</span>), (<span class="number">48</span>, <span class="number">128</span>), <span class="number">128</span>),</span><br><span class="line">                   nn.AdaptiveAvgPool2d((<span class="number">1</span>, <span class="number">1</span>)),</span><br><span class="line">                   nn.Flatten())</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(b1, b2, b3, b4, b5, nn.Linear(<span class="number">1024</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
 <p>最后我们读取数据集并进行训练，超参数设置：<code>lr, num_epochs = 0.1, 15</code>，训练过程与第一节内容一样，因此不再放出代码。</p>
-<h2 id="5-批量规范化（BN）">5. 批量规范化（BN）</h2>
+<h1>5. 批量规范化（BN）</h1>
 <p>批量规范化（Batch Normalization）是一种流行且有效的技术，可持续加速深层网络的收敛速度。</p>
 <p>使用真实数据时，我们的第一步是标准化输入特征，使其平均值为0，方差为1。直观地说，这种标准化可以很好地与我们的优化器配合使用，因为它可以将参数的量级进行统一。</p>
 <p>第二，对于典型的多层感知机或卷积神经网络。当我们训练时，中间层中的变量（例如，多层感知机中的仿射变换输出）可能具有更广的变化范围：不论是沿着从输入到输出的层，跨同一层中的单元，或是随着时间的推移，模型参数随着训练更新的变幻莫测。批量规范化的发明者非正式地假设，这些变量分布中的这种偏移可能会阻碍网络的收敛。直观地说，我们可能会猜想，如果一个层的可变值是另一层的100倍，这可能需要对学习率进行补偿调整。</p>
@@ -528,7 +528,7 @@
 <p>为了更好理解如何应用 BatchNorm，下面我们将其应用于 LeNet 模型：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, kernel_size=<span class="number">5</span>, padding=<span class="number">2</span>), BatchNorm(<span class="number">6</span>, num_dims=<span class="number">4</span>), nn.Sigmoid(),</span><br><span class="line">    nn.AvgPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>),</span><br><span class="line">    nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, kernel_size=<span class="number">5</span>), BatchNorm(<span class="number">16</span>, num_dims=<span class="number">4</span>), nn.Sigmoid(),</span><br><span class="line">    nn.AvgPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>), nn.Flatten(),</span><br><span class="line">    nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>), BatchNorm(<span class="number">120</span>, num_dims=<span class="number">2</span>), nn.Sigmoid(),</span><br><span class="line">    nn.Linear(<span class="number">120</span>, <span class="number">84</span>), BatchNorm(<span class="number">84</span>, num_dims=<span class="number">2</span>), nn.Sigmoid(),</span><br><span class="line">    nn.Linear(<span class="number">84</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
 <p>最后我们读取数据集并进行训练，超参数设置：<code>lr, num_epochs = 1, 15</code>，由于网络模型类似 LeNet，因此无需对输入图像进行 Resize 操作，训练过程与第一节内容一样，因此不再放出代码。</p>
-<h2 id="6-残差网络（ResNet）">6. 残差网络（ResNet）</h2>
+<h1>6. 残差网络（ResNet）</h1>
 <p>只有当较复杂的函数类包含较小的函数类时，我们才能确保提高它们的性能。对于深度神经网络，如果我们能将新添加的层训练成恒等映射（identity function）：<code>f(x) = x</code>，新模型和原模型将同样有效。同时，由于新模型可能得出更优的解来拟合训练数据集，因此添加层似乎更容易降低训练误差。</p>
 <p>残差网络的核心思想是：每个附加层都应该更容易地<strong>包含原始函数</strong>作为其元素之一。</p>
 <p>ResNet 沿用了 VGG 完整的卷积层设计。残差块里首先有2个有相同输出通道数的卷积层。每个卷积层后接一个批量规范化层和 ReLU 激活函数。然后我们通过跨层数据通路，跳过这2个卷积运算，将输入直接加在最后的 ReLU 激活函数前。这样的设计要求2个卷积层的输出与输入形状一样，从而使它们可以相加。如果想改变通道数，就需要引入一个额外的1×1卷积层来将输入变换成需要的形状后再做相加运算。残差块的实现如下：</p>
@@ -551,7 +551,7 @@
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/085f4c8256f1">ResNet18、50网络结构以及 PyTorch 实现代码</a>。</li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/New_WR/article/details/121777644">ResNet50网络结构搭建（PyTorch）</a>。</li>
 </ul>
-<h2 id="7-稠密连接网络（DenseNet）">7. 稠密连接网络（DenseNet）</h2>
+<h1>7. 稠密连接网络（DenseNet）</h1>
 <p>ResNet 和 DenseNet 的关键区别在于，DenseNet 输出是连接（用 <code>[.]</code> 表示）而不是如 ResNet 的简单相加。</p>
 <p>稠密网络主要由2部分构成：稠密块（dense block）和过渡层（transition layer）。前者定义如何连接输入和输出，而后者则控制通道数量，使其不会太复杂。</p>
 <p>DenseNet 使用了 ResNet 改良版的“批量规范化、激活和卷积”架构。我们首先实现一下这个架构：</p>
@@ -635,7 +635,7 @@
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "https://asanosaki.github.io/posts/21165.html";
-            const title         = "「动手学深度学习笔记(李沐)-现代卷积神经网络」";
+            const title         = "「D2L学习笔记-现代卷积神经网络」";
             const excerpt       = `李沐动手学深度学习（PyTorch）课程学习笔记第六章：现代卷积神经网络。`;
             let _URL;
             switch (dest) {
@@ -658,7 +658,7 @@
                     <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-06-03T12:46:15.810Z" itemprop="dateModified">Last edited: 2023-06-03</time>
+                    <time datetime="2023-11-19T08:10:03.540Z" itemprop="dateModified">Last edited: 2023-11-19</time>
                 </div>
             </div>
         </footer>
@@ -667,12 +667,12 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-卷积神经网络" href="/posts/25122.html">&lt; Previous</a>
+                <a title=" D2L学习笔记-卷积神经网络" href="/posts/25122.html">&lt; Previous</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-计算机视觉" href="/posts/24840.html">Next &gt;</a>
+                <a title=" D2L学习笔记-计算机视觉" href="/posts/24840.html">Next &gt;</a>
             </div>
             
         </nav>
@@ -709,7 +709,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -717,7 +717,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -725,7 +725,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -741,14 +741,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88AlexNet%EF%BC%89"><span class="toc-text">1. 深度卷积神经网络（AlexNet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E5%9D%97%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%88VGG%EF%BC%89"><span class="toc-text">2. 使用块的网络（VGG）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%88NiN%EF%BC%89"><span class="toc-text">3. 网络中的网络（NiN）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%90%AB%E5%B9%B6%E8%A1%8C%E8%BF%9E%E7%BB%93%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%88GoogLeNet%EF%BC%89"><span class="toc-text">4. 含并行连结的网络（GoogLeNet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%89%B9%E9%87%8F%E8%A7%84%E8%8C%83%E5%8C%96%EF%BC%88BN%EF%BC%89"><span class="toc-text">5. 批量规范化（BN）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C%EF%BC%88ResNet%EF%BC%89"><span class="toc-text">6. 残差网络（ResNet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%A8%A0%E5%AF%86%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C%EF%BC%88DenseNet%EF%BC%89"><span class="toc-text">7. 稠密连接网络（DenseNet）</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 深度卷积神经网络（AlexNet）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 使用块的网络（VGG）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 网络中的网络（NiN）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 含并行连结的网络（GoogLeNet）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 批量规范化（BN）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6. 残差网络（ResNet）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">7. 稠密连接网络（DenseNet）</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -757,7 +757,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -771,34 +771,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

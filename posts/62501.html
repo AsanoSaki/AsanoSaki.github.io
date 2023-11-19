@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Java字符串与输入输出详解 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Java" />
+  
+  <meta name="description" content="Java字符串与输入输出详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java字符串与输入输出详解">
+<meta property="og:url" content="https://asanosaki.github.io/posts/62501.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Java字符串与输入输出详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-11-04T09:14:00.000Z">
+<meta property="article:modified_time" content="2023-11-19T09:18:13.024Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
+                                                                
+                                                                SpringBoot
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/62501.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Java字符串与输入输出详解</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-11-04T09:14:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-11-04</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~13.65K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700385493024"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 为什么需要反射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. Class对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%B1%BB%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 类字面量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B3%9B%E5%9E%8B%E7%B1%BB%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 泛型类的引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-cast-%E6%96%B9%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 cast()方法</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文介绍了 Java 的反射机制，反射使我们摆脱了只能在编译时执行面向类型操作的限制，并且让我们能够编写一些非常强大的程序。</p>
+</blockquote>
+<span id="more"></span>
+<p>本文将讨论 Java 是如何在<strong>运行时</strong>发现对象和类的信息的，这通常有两种形式：简单反射，它假定你在编译时就已经知道了所有可用的类型；以及更复杂的反射，它允许我们在运行时发现和使用类的信息。</p>
+<h1>1. 为什么需要反射</h1>
+<p>面向对象编程的一个基本目标就是，让编写的代码只操纵<strong>基类</strong>的引用。我们来看下面这个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span> + <span class="string">&quot;.draw()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title function_">toString</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;Circle&quot;</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Square</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;Square&quot;</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Triangle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;Triangle&quot;</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Shapes</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Stream.of(<span class="keyword">new</span> <span class="title class_">Circle</span>(), <span class="keyword">new</span> <span class="title class_">Square</span>(), <span class="keyword">new</span> <span class="title class_">Triangle</span>()).forEach(Shape::draw);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Circle.draw()</span></span><br><span class="line"><span class="comment">         * Square.draw()</span></span><br><span class="line"><span class="comment">         * Triangle.draw()</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Shape</code> 接口中的方法 <code>draw()</code> 是可以<strong>动态绑定</strong>的，因此客户程序员可以通过泛化的 <code>Shape</code> 引用来调用具体的 <code>draw()</code> 方法。在所有子类中，<code>draw()</code> 都被重写，并且因为它是一个动态绑定的方法，即使通过泛化的 <code>Shape</code> 引用来调用它，也会产生正确的行为，这就是多态。</p>
+<p>基类里包含一个 <code>draw()</code> 方法，它通过将 <code>this</code> 传递给 <code>System.out.println()</code>，间接地使用了 <code>toString()</code> 方法来显示类的标识符（<code>toString()</code> 方法被声明为 <code>abstract</code> 的，这样就可以强制子类重写该方法，并防止没什么内容的 <code>Shape</code> 类被实例化）。</p>
+<p>在此示例中，将一个 <code>Shape</code> 的子类对象放入 <code>Stream&lt;Shape&gt;</code> 时，会发生隐式的向上转型，在向上转型为 <code>Shape</code> 时，这个对象的确切类型信息就丢失了，对于流来说，它们只是 <code>Shape</code> 类的对象。</p>
+<p>从技术上讲，<code>Stream&lt;Shape&gt;</code> 实际上将所有内容都当作 <code>Object</code> 保存。当一个元素被取出时，它会自动转回 <code>Shape</code>，这是反射最基本的形式，在运行时检查了所有的类型转换是否正确，这就是反射的意思：在运行时，确定对象的类型。</p>
+<p>在这里，反射类型转换并不彻底：<code>Object</code> 只是被转换成了 <code>Shape</code>，而没有转换为最终的 <code>Circle</code>、<code>Square</code> 或 <code>Triangle</code>。这是因为我们所能得到的信息就是，<code>Stream&lt;Shape&gt;</code> 里保存的都是 <code>Shape</code>，在编译时，这是由 <code>Stream</code> 和 Java 泛型系统强制保证的，而在运行时，类型转换操作会确保这一点。</p>
+<p>接下来就该多态上场了，<code>Shape</code> 对象实际上执行的代码，取决于引用是属于<code>Circle</code>、<code>Square</code> 还是 <code>Triangle</code>。一般来说，这是合理的：你希望自己的代码尽可能少地知道对象的确切类型信息，而只和这类对象的通用表示（在本例中为<code>Shape</code>）打交道。这样的话我们的代码就更易于编写、阅读和维护，并且设计也更易于实现、理解和更改。所以多态是面向对象编程的一个基本目标。</p>
+<h1>2. Class对象</h1>
+<p>要想了解 Java 中的反射是如何工作的，就必须先了解类型信息在运行时是如何表示的。这项工作是通过叫作 <code>Class</code> 对象的特殊对象来完成的，它包含了与类相关的信息。事实上，<code>Class</code> 对象被用来创建类的所有“常规”对象，Java 使用 <code>Class</code> 对象执行反射，即使是类型转换这样的操作也一样。<code>Class</code> 类还有许多其他使用反射的方式。</p>
+<p>程序中的每个类都有一个 <code>Class</code> 对象，也就是说，每次编写并编译一个新类时，都会生成一个 <code>Class</code> 对象（并被相应地存储在同名的 <code>.class</code> 文件中）。为了生成这个对象，Java 虚拟机（JVM）使用被称为<strong>类加载器</strong>（class loader）的子系统。</p>
+<p>类加载器子系统实际上可以包含一条类加载器链，但里面只会有一个原始类加载器，它是 JVM 实现的一部分。原始类加载器通常从本地磁盘加载所谓的可信类，包括 Java API 类。</p>
+<p>类在<strong>首次使用</strong>时才会被<strong>动态加载</strong>到 JVM 中。当程序第一次引用该类的<strong>静态成员</strong>时，就会触发这个类的加载（构造器是类的一个静态方法，尽管没有明确使用 <code>static</code> 关键字）。因此，使用 <code>new</code> 操作符创建类的新对象也算作对该类静态成员的引用，构造器的初次使用会导致该类的加载。</p>
+<p>所以，Java 程序在运行前并不会被完全加载，而是在必要时加载对应的部分，这与许多传统语言不同，这种动态加载能力使得 Java 可以支持很多行为。</p>
+<p>类加载器首先检查是否加载了该类型的 <code>Class</code> 对象，如果没有，默认的类加载器会定位到具有该名称的 <code>.class</code> 文件（例如，某个附加类加载器可能会在数据库中查找对应的字节码）。当该类的字节数据被加载时，它们会被<strong>验证</strong>，以确保没有被损坏，并且不包含恶意的 Java 代码（这是 Java 的众多安全防线里的一条）。</p>
+<p>一旦该类型的 <code>Class</code> 对象加载到内存中，它就会用于创建该类型的所有对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cookie</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Loading Cookie&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Gum</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Loading Gum&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Candy</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Loading Candy&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SweetShop</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Inside main&quot;</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Cookie</span>();</span><br><span class="line">        System.out.println(<span class="string">&quot;After creating Cookie&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class&lt;?&gt; c = Class.forName(<span class="string">&quot;reflection.Gum&quot;</span>);  <span class="comment">// 一定要完整类名，即包名+类名</span></span><br><span class="line">            System.out.println(<span class="string">&quot;c.getName(): &quot;</span> + c.getName());</span><br><span class="line">            System.out.println(<span class="string">&quot;After Class.forName(reflection.Gum)&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Candy</span>();</span><br><span class="line">        System.out.println(<span class="string">&quot;After creating Candy&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Inside main</span></span><br><span class="line"><span class="comment">         * Loading Cookie</span></span><br><span class="line"><span class="comment">         * After creating Cookie</span></span><br><span class="line"><span class="comment">         * Loading Gum</span></span><br><span class="line"><span class="comment">         * c.getName(): reflection.Gum</span></span><br><span class="line"><span class="comment">         * After Class.forName(reflection.Gum)</span></span><br><span class="line"><span class="comment">         * Loading Candy</span></span><br><span class="line"><span class="comment">         * After creating Candy</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们创建了三个具有静态代码块的类，该静态代码块会在第一次加载类时执行，输出的信息会告诉我们这个类是什么时候加载的。输出结果显示了 <code>Class</code> 对象仅在需要时才加载，并且静态代码块的初始化是在类加载时执行的。</p>
+<p>所有的 <code>Class</code> 对象都属于 <code>Class</code> 类，<code>Class</code> 对象和其他对象一样，因此你可以获取并操作它的引用（这也是加载器所做的）。静态的 <code>forName()</code> 方法可以获得 <code>Class</code> 对象的引用，该方法接收了一个包含所需类的文本名称（注意拼写和大小写，且需要是类的完全限定名称，即包括包名称）的字符串，并返回了一个 <code>Class</code> 引用。</p>
+<p>不管什么时候，只要在运行时用到类型信息，就必须首先获得相应的 <code>Class</code> 对象的引用，这时 <code>Class.forName()</code> 方法用起来就很方便了，因为不需要对应类型的对象就能获取 <code>Class</code> 引用。但是，如果已经有了一个你想要的类型的对象，就可以通过 <code>getClass()</code> 方法来获取 <code>Class</code> 引用，这个方法属于 <code>Object</code> 根类，它返回的 <code>Class</code> 引用表示了这个对象的实际类型。</p>
+<p><code>Class</code> 类有很多方法，下面是其中的一部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Waterproof</span> &#123;&#125;</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Shoots</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Toy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Toy</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Creating Toy&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Toy</span><span class="params">(<span class="type">int</span> i)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FancyToy</span> <span class="keyword">extends</span> <span class="title class_">Toy</span> <span class="keyword">implements</span> <span class="title class_">Waterproof</span>, Shoots &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">FancyToy</span><span class="params">()</span> &#123; <span class="built_in">super</span>(<span class="number">1</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassMethods</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printInfo</span><span class="params">(Class c)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;getName(): &quot;</span> + c.getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;isInterface(): &quot;</span> + c.isInterface());</span><br><span class="line">        System.out.println(<span class="string">&quot;getSimpleName(): &quot;</span> + c.getSimpleName());</span><br><span class="line">        System.out.println(<span class="string">&quot;getCanonicalName(): &quot;</span> + c.getCanonicalName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Class&lt;?&gt; c = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            c = Class.forName(<span class="string">&quot;reflection.FancyToy&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">            System.exit(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printInfo(c);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Class iface: c.getInterfaces()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">            printInfo(iface);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Class</span> <span class="variable">sc</span> <span class="operator">=</span> c.getSuperclass();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            obj = sc.newInstance();  <span class="comment">// 对应类要有public的无参构造器</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;Can&#x27;t instantiate&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printInfo(obj.getClass());  <span class="comment">// obj.getClass()即为sc</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * getName(): reflection.FancyToy</span></span><br><span class="line"><span class="comment">         * isInterface(): false</span></span><br><span class="line"><span class="comment">         * getSimpleName(): FancyToy</span></span><br><span class="line"><span class="comment">         * getCanonicalName(): reflection.FancyToy</span></span><br><span class="line"><span class="comment">         * --------------------</span></span><br><span class="line"><span class="comment">         * getName(): reflection.Waterproof</span></span><br><span class="line"><span class="comment">         * isInterface(): true</span></span><br><span class="line"><span class="comment">         * getSimpleName(): Waterproof</span></span><br><span class="line"><span class="comment">         * getCanonicalName(): reflection.Waterproof</span></span><br><span class="line"><span class="comment">         * --------------------</span></span><br><span class="line"><span class="comment">         * getName(): reflection.Shoots</span></span><br><span class="line"><span class="comment">         * isInterface(): true</span></span><br><span class="line"><span class="comment">         * getSimpleName(): Shoots</span></span><br><span class="line"><span class="comment">         * getCanonicalName(): reflection.Shoots</span></span><br><span class="line"><span class="comment">         * --------------------</span></span><br><span class="line"><span class="comment">         * Creating Toy</span></span><br><span class="line"><span class="comment">         * getName(): reflection.Toy</span></span><br><span class="line"><span class="comment">         * isInterface(): false</span></span><br><span class="line"><span class="comment">         * getSimpleName(): Toy</span></span><br><span class="line"><span class="comment">         * getCanonicalName(): reflection.Toy</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>printInfo()</code> 方法使用 <code>getName()</code> 来生成完全限定的类名，使用 <code>getSimpleName()</code> 和 <code>getCanonicalName()</code> 分别生成不带包的名称和完全限定的名称，<code>isInterface()</code> 可以告诉你这个 <code>Class</code> 对象是否表示一个接口，<code>getInterfaces()</code> 方法返回了一个 <code>Class</code> 对象数组，它们表示所调用的 <code>Class</code> 对象的所有接口。还可以使用 <code>getSuperclass()</code> 来查询 <code>Class</code> 对象的直接基类，它将返回一个 <code>Class</code> 引用，而你可以对它做进一步查询。</p>
+<p><code>Class</code> 的 <code>newInstance()</code> 方法是实现<strong>虚拟构造器</strong>的一种途径，这相当于声明：我不知道你的确切类型，但无论如何你都要正确地创建自己。<code>sc</code> 只是一个 <code>Class</code> 引用，它在编译时没有更多的类型信息，当创建一个新实例时，你会得到一个 <code>Object</code> 引用，但该引用指向了一个 <code>Toy</code> 对象，你可以给它发送 <code>Object</code> 能接收的消息，但如果想要发送除此之外的其他消息，就必须进一步了解它，并进行某种类型转换。此外，使用 <code>Class.newInstance()</code> 创建的类必须有一个无参构造器。</p>
+<p>注意，此示例中的 <code>newInstance()</code> 在 Java 8 中还是正常的，但在更高版本中已被弃用，Java 推荐使用 <code>Constructor.newInstance()</code> 来代替。</p>
+<h2 id="2-1-类字面量">2.1 类字面量</h2>
+<p>Java 还提供了另一种方式来生成 <code>Class</code> 对象的引用：类字面量。它看起来像这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FancyToy.class</span><br></pre></td></tr></table></figure>
+<p>这更简单也更安全，因为它会进行编译时检查（因此不必放在 <code>try</code> 块中），另外它还消除了对 <code>forName()</code> 方法的调用，所以效率也更高。</p>
+<p>注意，使用 <code>.class</code> 的形式创建 <code>Class</code> 对象的引用时，该 <code>Class</code> 对象不会自动初始化。实际上，在使用一个类之前，需要先执行以下三个步骤：</p>
+<ul>
+<li>加载：这是由类加载器执行的，该步骤会先找到字节码（通常在类路径中的磁盘上，但也不一定），然后从这些字节码中创建一个 <code>Class</code> 对象。</li>
+<li>链接：链接阶段会验证类中的字节码，为静态字段分配存储空间，并在必要时解析该类对其他类的所有引用。</li>
+<li>初始化：如果有基类的话，会先初始化基类，执行静态初始化器和静态初始化块。</li>
+</ul>
+<p>其中，初始化会被延迟到首次引用<strong>静态方法</strong>（构造器是隐式静态的）或<strong>非常量静态字段</strong>时：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">STATIC_FINAL</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Initializing A&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Initializing B&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassInitialization</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Inside main&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Class</span> <span class="variable">a</span> <span class="operator">=</span> A.class;  <span class="comment">// 不会初始化</span></span><br><span class="line">        System.out.println(<span class="string">&quot;After creating A ref&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;A.STATIC_FINAL: &quot;</span> + A.STATIC_FINAL);  <span class="comment">// 还是不会初始化</span></span><br><span class="line">        System.out.println(<span class="string">&quot;A.x: &quot;</span> + A.x);  <span class="comment">// 初始化</span></span><br><span class="line"></span><br><span class="line">        <span class="type">Class</span> <span class="variable">b</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;reflection.B&quot;</span>);  <span class="comment">// 初始化</span></span><br><span class="line">        System.out.println(<span class="string">&quot;After creating B ref&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Inside main</span></span><br><span class="line"><span class="comment">         * After creating A ref</span></span><br><span class="line"><span class="comment">         * A.STATIC_FINAL: 1</span></span><br><span class="line"><span class="comment">         * Initializing A</span></span><br><span class="line"><span class="comment">         * A.x: 2</span></span><br><span class="line"><span class="comment">         * Initializing B</span></span><br><span class="line"><span class="comment">         * After creating B ref</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仅使用 <code>.class</code> 语法来获取对类的引用不会导致初始化，而 <code>Class.forName()</code> 会立即初始化类以产生 <code>Class</code> 引用。如果一个 <code>static final</code> 字段的值是<strong>编译时常量</strong>，比如 <code>A.STATIC_FINAL</code>，那么这个值不需要初始化 <code>A</code> 类就能读取。</p>
+<h2 id="2-2-泛型类的引用">2.2 泛型类的引用</h2>
+<p><code>Class</code> 引用指向的是一个 <code>Class</code> 对象，该对象可以生成类的实例，并包含了这些实例所有方法的代码，它还包含该类的静态字段和静态方法，所以一个 <code>Class</code> 引用表示的就是它所指向的确切类型：<code>Class</code> 类的一个对象。</p>
+<p>我们可以使用泛型语法来限制 <code>Class</code> 引用的类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericClassReferences</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c1</span> <span class="operator">=</span> <span class="type">int</span>.class;</span><br><span class="line">        c1 = <span class="type">double</span>.class;  <span class="comment">// 合法</span></span><br><span class="line"></span><br><span class="line">        Class&lt;Integer&gt; c2 = <span class="type">int</span>.class;</span><br><span class="line">        c2 = Integer.class;  <span class="comment">// 合法</span></span><br><span class="line">        c2 = Double.class;  <span class="comment">// 不合法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>泛化的类引用 <code>c2</code> 只能分配给其声明的类型，通过使用泛型语法，可以让编译器强制执行额外的类型检查。</p>
+<p>如果想放松使用泛化的 <code>Class</code> 引用时的限制，需要使用通配符 <code>?</code>，它是 Java 泛型的一部分，表示任何事物：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericClassReferences</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Class&lt;?&gt; c = Integer.class;</span><br><span class="line">        c = Double.class;  <span class="comment">// 合法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们不能这么写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;Number&gt; c = Integer.class;</span><br></pre></td></tr></table></figure>
+<p>即使 <code>Integer</code> 继承自 <code>Number</code>，但是 <code>Integer</code> 的 <code>Class</code> 对象不是 <code>Number</code> 的 <code>Class</code> 对象的子类。</p>
+<p>如果想创建一个 <code>Class</code>引用，并将其限制为某个类型或<strong>任意子类型</strong>，可以将通配符与 <code>extends</code> 关键字组合来创建一个<strong>界限</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericClassReferences</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Class&lt;? <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; c = Integer.class;</span><br><span class="line">        c = Double.class;  <span class="comment">// 合法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将泛型语法添加到 <code>Class</code> 引用的一个原因是提供<strong>编译时的类型检查</strong>，这样的话，如果你做错了什么，那么很快就能发现。</p>
+<p>下面是一个使用了泛型类语法的示例，它存储了一个类引用，然后使用 <code>newInstance()</code> 来生成对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.function.Supplier;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">long</span> counter;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">id</span> <span class="operator">=</span> counter++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">()</span> &#123;&#125;  <span class="comment">// 需要有public的无参构造器才能调用newInstance()</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;People &quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicSupplier</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Supplier</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> Class&lt;T&gt; c;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DynamicSupplier</span><span class="params">(Class&lt;T&gt; c)</span> &#123; <span class="built_in">this</span>.c = c; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> c.getConstructor().newInstance();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Stream.generate(<span class="keyword">new</span> <span class="title class_">DynamicSupplier</span>&lt;&gt;(People.class))</span><br><span class="line">            .skip(<span class="number">5</span>)</span><br><span class="line">            .limit(<span class="number">5</span>)</span><br><span class="line">            .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * People 5</span></span><br><span class="line"><span class="comment">         * People 6</span></span><br><span class="line"><span class="comment">         * People 7</span></span><br><span class="line"><span class="comment">         * People 8</span></span><br><span class="line"><span class="comment">         * People 9</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>DynamicSupplier</code> 会强制要求它使用的任何类型都有一个 <code>public</code> 的无参构造器，如果不符合条件，就会抛出一个异常。在上面的例子中，<code>People</code> 类自动生成的无参构造器不是 <code>public</code> 的，因为 <code>People</code> 类不是 <code>public</code> 的，所以我们必须显式定义它。</p>
+<p>对 <code>Class</code> 对象使用泛型语法时，<code>newInstance()</code> 会返回对象的<strong>确切类型</strong>，而不仅仅是简单的 <code>Object</code>，但它也会受到一些限制：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Cat</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Kitty</span> <span class="keyword">extends</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Kitty</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericCat</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Class&lt;Kitty&gt; kittyClass = Kitty.class;</span><br><span class="line">        <span class="type">Kitty</span> <span class="variable">kitty</span> <span class="operator">=</span> kittyClass.getConstructor().newInstance();</span><br><span class="line">        System.out.println(kitty.getClass().getName());  <span class="comment">// reflection.Kitty</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        Class&lt;Cat&gt; kittySuper = kittyClass.getSuperclass();  // 不合法</span></span><br><span class="line">        Class&lt;? <span class="built_in">super</span> Kitty&gt; kittySuper = kittyClass.getSuperclass();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> kittySuper.getConstructor().newInstance();</span><br><span class="line">        System.out.println(obj.getClass().getName());  <span class="comment">// reflection.Cat</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你得到了 <code>Kitty</code> 的基类，那么编译器只允许你声明这个基类引用是 <code>Kitty</code> 的<strong>某个</strong>基类，即 <code>Class&lt;? super Kitty&gt;</code>，而不能被声明成 <code>Class&lt;Cat&gt;</code>，因为 <code>getSuperclass()</code> 返回了基类（不是接口），而编译器在编译时就知道这个基类是什么，在这里就是 <code>Cat.class</code>，而不仅仅是 <code>Kitty</code> 的某个基类。因为存在这种模糊性，所以 <code>kittySuper.getConstructor().newInstance()</code> 的返回值不是一个确切的类型，而只是一个 <code>Object</code>。</p>
+<h2 id="2-3-cast-方法">2.3 cast()方法</h2>
+<p><code>cast()</code> 方法是用于 <code>Class</code> 引用的类型转换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">House</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BigHouse</span> <span class="keyword">extends</span> <span class="title class_">House</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassCast</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">House</span> <span class="variable">h</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigHouse</span>();</span><br><span class="line">        Class&lt;BigHouse&gt; bigHouseClass = BigHouse.class;</span><br><span class="line">        <span class="type">BigHouse</span> <span class="variable">bh</span> <span class="operator">=</span> bigHouseClass.cast(h);</span><br><span class="line"><span class="comment">//        BigHouse bh = (BigHouse)h;  // 这种方式更简洁</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>cast()</code> 方法接收参数对象并将其转换为 <code>Class</code> 引用的类型，在你不能使用普通类型转换（最后一行）的情况下很有用，如果你正在编写泛型代码并且存储了一个用于转型的 <code>Class</code> 引用，就可能会遇到这种情况，不过这很罕见。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/62501.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/62501.html";
+            const title         = "「Java字符串与输入输出详解」";
+            const excerpt       = `本文介绍了 Java 的反射机制，反射使我们摆脱了只能在编译时执行面向类型操作的限制，并且让我们能够编写一些非常强大的程序。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-19T09:18:13.024Z" itemprop="dateModified">Last edited: 2023-11-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Java字符串与输入输出详解" href="/posts/62502.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Web学习笔记-Vue3（环境配置、概念、整体布局设计）" href="/posts/54619.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                75
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 为什么需要反射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. Class对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%B1%BB%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="toc-text">2.1 类字面量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B3%9B%E5%9E%8B%E7%B1%BB%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-text">2.2 泛型类的引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-cast-%E6%96%B9%E6%B3%95"><span class="toc-text">2.3 cast()方法</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

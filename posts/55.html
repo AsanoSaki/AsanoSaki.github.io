@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-03-31T02:47:00.000Z">
-<meta property="article:modified_time" content="2023-05-28T09:55:19.665Z">
+<meta property="article:modified_time" content="2023-10-26T06:43:41.124Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1685267719665"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698302621124"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B7%AF%E5%BE%84%E8%8E%B7%E5%8F%96"><span class="toc-number">1.</span> <span class="toc-text">1. 路径获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B7%AF%E5%BE%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">2.</span> <span class="toc-text">2. 路径组成部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AD%90%E8%B7%AF%E5%BE%84%E6%89%AB%E6%8F%8F"><span class="toc-number">3.</span> <span class="toc-text">3. 子路径扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">4. 路径拼接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%88%E5%88%A4%E6%96%AD%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">5. 路径测试（判断）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">6.</span> <span class="toc-text">6. 文件操作</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 路径获取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 路径组成部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 子路径扫描</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 路径拼接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. 路径测试（判断）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6. 文件操作</span></a></li></ol>
                 </div>
             
             <hr />
@@ -471,7 +471,7 @@
 <li>老用法主要是函数形式，返回的数据类型通常是字符串。但是路径和字符串并不等价，所以在使用 <code>os</code> 操作路径的时候常常还要引入其他类库协助操作。新用法是面向对象，处理起来更灵活方便。</li>
 <li><code>pathlib</code> 简化了很多操作，用起来更轻松。</li>
 </ul>
-<h2 id="1-路径获取">1. 路径获取</h2>
+<h1>1. 路径获取</h1>
 <p><strong>（1）获取当前工作目录</strong></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(pathlib.Path.cwd())  <span class="comment"># D:\Dive into Deep Learning\src</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(pathlib.Path.cwd()))  <span class="comment"># D:\Dive into Deep Learning\src</span></span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -489,7 +489,7 @@
 <p><strong>（6）获取文件属性</strong></p>
 <p>文件属性比如文件大小、创建时间、修改时间等。</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(file_path.stat())  <span class="comment"># os.stat_result(st_mode=33206, st_ino=281474978388098, st_dev=80873957, st_nlink=1, st_uid=0, st_gid=0, st_size=53081, st_atime=1680229254, st_mtime=1670460384, st_ctime=1680228818)</span></span><br><span class="line"><span class="built_in">print</span>(file_path.stat().st_size)  <span class="comment"># 53081</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-路径组成部分">2. 路径组成部分</h2>
+<h1>2. 路径组成部分</h1>
 <p>获取路径的组成部分非常方便：</p>
 <ul>
 <li><code>.name</code>：文件名，包含后缀名，如果是目录则获取目录名。</li>
@@ -499,19 +499,19 @@
 <li><code>.anchor</code>：锚，目录前面的部分 <code>C:\</code> 或者 <code>/</code>。</li>
 </ul>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(file_path.name)  <span class="comment"># cat1.jpg</span></span><br><span class="line"><span class="built_in">print</span>(file_path.stem)  <span class="comment"># cat1</span></span><br><span class="line"><span class="built_in">print</span>(file_path.suffix)  <span class="comment"># .jpg</span></span><br><span class="line"><span class="built_in">print</span>(file_path.parent)  <span class="comment"># ..\images</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-子路径扫描">3. 子路径扫描</h2>
+<h1>3. 子路径扫描</h1>
 <p><strong>（1）扫描某个目录下的所有路径</strong></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">all_path = [<span class="built_in">str</span>(p) <span class="keyword">for</span> p <span class="keyword">in</span> dir_path.iterdir() <span class="keyword">if</span> dir_path.is_dir()]</span><br><span class="line"><span class="built_in">print</span>(all_path)  <span class="comment"># [&#x27;..\\images\\cat1.jpg&#x27;, &#x27;..\\images\\cat2.jpg&#x27;, &#x27;..\\images\\cat3.jpg&#x27;, &#x27;..\\images\\catdog.jpg&#x27;]</span></span><br></pre></td></tr></table></figure>
 <p><strong>（2）使用模式匹配（正则表达式）查找目录下的指定文件</strong></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">all_jpg = <span class="built_in">list</span>(dir_path.glob(<span class="string">&#x27;*.jpg&#x27;</span>))</span><br><span class="line">all_jpg_strpath = [<span class="built_in">str</span>(p) <span class="keyword">for</span> p <span class="keyword">in</span> all_jpg]</span><br><span class="line"><span class="built_in">print</span>(all_jpg)  <span class="comment"># [WindowsPath(&#x27;../images/cat1.jpg&#x27;), WindowsPath(&#x27;../images/cat2.jpg&#x27;), WindowsPath(&#x27;../images/cat3.jpg&#x27;), WindowsPath(&#x27;../images/catdog.jpg&#x27;)]</span></span><br><span class="line"><span class="built_in">print</span>(all_jpg_strpath)  <span class="comment"># [&#x27;..\\images\\cat1.jpg&#x27;, &#x27;..\\images\\cat2.jpg&#x27;, &#x27;..\\images\\cat3.jpg&#x27;, &#x27;..\\images\\catdog.jpg&#x27;]</span></span><br></pre></td></tr></table></figure>
 <p><strong>（3）检查路径是否符合规则</strong></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(file_path.<span class="keyword">match</span>(<span class="string">&#x27;*.jpg&#x27;</span>))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-路径拼接">4. 路径拼接</h2>
+<h1>4. 路径拼接</h1>
 <p><code>pathlib</code> 支持用 <code>/</code> 拼接路径，如果用不惯 <code>/</code>，也可以用类似 <code>os.path.join</code> 的方法：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(dir_path / <span class="string">&#x27;dir1&#x27;</span> / <span class="string">&#x27;file1.txt&#x27;</span>)  <span class="comment"># ..\images\dir1\file1.txt</span></span><br><span class="line"><span class="built_in">print</span>(dir_path.joinpath(<span class="string">&#x27;dir1&#x27;</span>, <span class="string">&#x27;file1.txt&#x27;</span>))  <span class="comment"># ..\images\dir1\file1.txt</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-路径测试（判断）">5. 路径测试（判断）</h2>
+<h1>5. 路径测试（判断）</h1>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(dir_path.is_file())  <span class="comment"># 是否为文件，False</span></span><br><span class="line"><span class="built_in">print</span>(dir_path.is_dir())  <span class="comment"># 是否为文件夹，True</span></span><br><span class="line"><span class="built_in">print</span>(dir_path.exists())  <span class="comment"># 是否存在，True</span></span><br></pre></td></tr></table></figure>
-<h2 id="6-文件操作">6. 文件操作</h2>
+<h1>6. 文件操作</h1>
 <p><strong>（1）创建文件</strong></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new_file = pathlib.Path(<span class="string">&#x27;../images/readme.txt&#x27;</span>)</span><br><span class="line">new_file.touch(exist_ok=<span class="literal">True</span>)</span><br><span class="line">new_file.touch(exist_ok=<span class="literal">False</span>)  <span class="comment"># FileExistsError: [Errno 17] File exists: &#x27;..\\images\\readme.txt&#x27;</span></span><br></pre></td></tr></table></figure>
 <p><code>exist_ok</code> 表示当文件已经存在时，程序的反应。如果为 <code>True</code>，文件存在时，不进行任何操作；如果为 <code>False</code>，则会报 <code>FileExistsError</code> 错误。</p>
@@ -608,7 +608,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-05-28T09:55:19.665Z" itemprop="dateModified">Last edited: 2023-05-28</time>
+                    <time datetime="2023-10-26T06:43:41.124Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -617,12 +617,12 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-计算机视觉" href="/posts/24840.html">&lt; Previous</a>
+                <a title=" D2L学习笔记-计算机视觉" href="/posts/24840.html">&lt; Previous</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-循环神经网络" href="/posts/11559.html">Next &gt;</a>
+                <a title=" D2L学习笔记-循环神经网络" href="/posts/11559.html">Next &gt;</a>
             </div>
             
         </nav>
@@ -659,7 +659,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -667,7 +667,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -675,7 +675,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -691,14 +691,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B7%AF%E5%BE%84%E8%8E%B7%E5%8F%96"><span class="toc-text">1. 路径获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B7%AF%E5%BE%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">2. 路径组成部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AD%90%E8%B7%AF%E5%BE%84%E6%89%AB%E6%8F%8F"><span class="toc-text">3. 子路径扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5"><span class="toc-text">4. 路径拼接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%88%E5%88%A4%E6%96%AD%EF%BC%89"><span class="toc-text">5. 路径测试（判断）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-text">6. 文件操作</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 路径获取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 路径组成部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 子路径扫描</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 路径拼接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 路径测试（判断）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6. 文件操作</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -707,7 +707,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -721,34 +721,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

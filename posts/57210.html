@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-08-26T11:59:00.000Z">
-<meta property="article:modified_time" content="2023-10-18T12:03:41.228Z">
+<meta property="article:modified_time" content="2023-11-19T08:01:26.343Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,7 +450,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1697630621228"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700380886343"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -486,7 +486,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Settings</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">platform</span> = <span class="string">&#x27;WEB&#x27;</span>;  <span class="comment">// 默认为Web前端</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">acwingos</span>) <span class="variable language_">this</span>.<span class="property">platform</span> = <span class="string">&#x27;ACAPP&#x27;</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">username</span> = <span class="string">&#x27;&#x27;</span>;  <span class="comment">// 初始用户信息为空</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">avatar</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            ...</span></span><br><span class="line"><span class="string">        `</span>);</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;  <span class="comment">// 在初始化时需要从服务器端获取用户信息</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">platform</span> === <span class="string">&#x27;WEB&#x27;</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">getinfo_web</span>();</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">add_listening_events</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">getinfo_acapp</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;  <span class="comment">// 绑定监听函数</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events_login</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events_register</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">login_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上登录</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">register_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上注册</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">acwing_login</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">register</span>(<span class="params"></span>) &#123;  <span class="comment">// 打开注册界面</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">login</span>(<span class="params"></span>) &#123;  <span class="comment">// 打开登录界面</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getinfo_web</span>(<span class="params"></span>) &#123;  <span class="comment">// 此处将之前的getinfo函数名进行了修改用来区分</span></span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;https://app4007.acapp.acwing.com.cn/settings/getinfo/&#x27;</span>,  <span class="comment">// 用AcWing部署</span></span><br><span class="line">            <span class="comment">// url: &#x27;http://8.130.54.44:8000/settings/getinfo/&#x27;,  // 用云服务器部署</span></span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">platform</span>: outer.<span class="property">platform</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;  <span class="comment">// 调用成功的回调函数，返回的Json字典会传给resp</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);  <span class="comment">// 控制台输出查看结果</span></span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                    outer.<span class="property">username</span> = resp.<span class="property">username</span>;</span><br><span class="line">                    outer.<span class="property">avatar</span> = resp.<span class="property">avatar</span>;</span><br><span class="line">                    outer.<span class="title function_">hide</span>();</span><br><span class="line">                    outer.<span class="property">root</span>.<span class="property">menu</span>.<span class="title function_">show</span>();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 如果未登录则需要弹出登录界面</span></span><br><span class="line">                    outer.<span class="title function_">login</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">acapp_login</span>(<span class="params">appid, redirect_uri, scope, state</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="comment">// resp是redirect_uri的返回值，此处为用户名和头像</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">acwingos</span>.<span class="property">api</span>.<span class="property">oauth2</span>.<span class="title function_">authorize</span>(appid, redirect_uri, scope, state, <span class="keyword">function</span>(<span class="params">resp</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);</span><br><span class="line">            <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                outer.<span class="property">username</span> = resp.<span class="property">username</span>;</span><br><span class="line">                outer.<span class="property">avatar</span> = resp.<span class="property">avatar</span>;</span><br><span class="line">                outer.<span class="title function_">hide</span>();</span><br><span class="line">                outer.<span class="property">root</span>.<span class="property">menu</span>.<span class="title function_">show</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getinfo_acapp</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;https://app4007.acapp.acwing.com.cn/settings/acwing/acapp/apply_code/&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                    outer.<span class="title function_">acapp_login</span>(resp.<span class="property">appid</span>, resp.<span class="property">redirect_uri</span>, resp.<span class="property">scope</span>, resp.<span class="property">state</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">hide</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$settings</span>.<span class="title function_">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意，如果遇到跨域问题：<code>Access to XMLHttpRequest at 'XXX'</code>，大概率是某个文件的内容写错了，可以检查 uWSGI 启动后的报错内容修改代码。</p>
 <p>上一章：<a href="/posts/56617.html">Django学习笔记-VS Code本地运行项目</a>。</p>
-<p>下一章：<a href="/posts/31494.html">Django学习笔记-实现联机对战(上)</a>。</p>
+<p>下一章：<a href="/posts/31494.html">Django学习笔记-实现联机对战（上）</a>。</p>
 </div>
         </div>
         
@@ -573,7 +573,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-18T12:03:41.228Z" itemprop="dateModified">Last edited: 2023-10-18</time>
+                    <time datetime="2023-11-19T08:01:26.343Z" itemprop="dateModified">Last edited: 2023-11-19</time>
                 </div>
             </div>
         </footer>
@@ -587,7 +587,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
             
             
             <div class="nav-next clearfix">
-                <a title=" Django学习笔记-实现联机对战(上)" href="/posts/31494.html">Next &gt;</a>
+                <a title=" Django学习笔记-实现联机对战（上）" href="/posts/31494.html">Next &gt;</a>
             </div>
             
         </nav>
@@ -624,7 +624,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -632,7 +632,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -640,7 +640,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -651,7 +651,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -660,7 +660,7 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -674,34 +674,64 @@ AcApp 端使用 AcWing 一键授权登录的流程与之前网页端的流程一
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

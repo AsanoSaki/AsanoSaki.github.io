@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-10-08T07:37:00.000Z">
-<meta property="article:modified_time" content="2023-10-18T12:03:45.082Z">
+<meta property="article:modified_time" content="2023-10-26T06:31:47.218Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1697630625082"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698301907218"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SMTP%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1. SMTP介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7%E9%82%AE%E7%AE%B1%E6%8E%88%E6%9D%83%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">2. 申请邮箱授权码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Django%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">3. Django发送邮件</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. SMTP介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 申请邮箱授权码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. Django发送邮件</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,12 +464,12 @@
 <p>介绍 Django 中如何使用 SMTP 协议发送邮件。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-SMTP介绍">1. SMTP介绍</h2>
+<h1>1. SMTP介绍</h1>
 <p>SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议，它是一组用于由源地址到目的地址传送邮件的规则，由它来控制信件的中转方式。SMTP 协议属于 TCP/IP 协议簇，它帮助每台计算机在发送或中转信件时找到下一个目的地。通过 SMTP 协议所指定的服务器，就可以把 E-mail 寄到收信人的服务器上了，整个过程只要几分钟。SMTP 服务器则是遵循 SMTP 协议的发送邮件服务器，用来发送或中转发出的电子邮件。</p>
 <p>一个 SMTP 服务器总是有一个独特的地址，和一个用于发送邮件的特定端口，在大多数情况下是587。本文以使用 QQ 邮箱为例，因此我们将使用的地址是 <code>smtp.qq.com</code>，端口号是587。</p>
-<h2 id="2-申请邮箱授权码">2. 申请邮箱授权码</h2>
+<h1>2. 申请邮箱授权码</h1>
 <p>首先我们需要启用 QQ 邮箱的 SMTP 服务，并申请一个授权码，打开邮箱网页，然后在“设置-账号”选项卡中找到 SMTP 服务部分，点击开启服务，然后完成相关的身份验证后会收到一串授权码。</p>
-<h2 id="3-Django发送邮件">3. Django发送邮件</h2>
+<h1>3. Django发送邮件</h1>
 <p>首先在项目的 <code>settings.py</code> 文件中添加配置信息：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EMAIL_BACKEND = <span class="string">&#x27;django.core.mail.backends.smtp.EmailBackend&#x27;</span></span><br><span class="line">EMAIL_HOST = <span class="string">&#x27;smtp.qq.com&#x27;</span></span><br><span class="line">EMAIL_PORT = <span class="number">587</span></span><br><span class="line">EMAIL_USE_TLS = <span class="literal">True</span></span><br><span class="line">EMAIL_HOST_USER = <span class="string">&#x27;******@qq.com&#x27;</span></span><br><span class="line">EMAIL_HOST_PASSWORD = <span class="string">&#x27;******&#x27;</span></span><br><span class="line"></span><br><span class="line">RECIPIENT_ADDRESS = [<span class="string">&#x27;******@qq.com&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>配置参数说明如下：</p>
@@ -571,7 +571,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-18T12:03:45.082Z" itemprop="dateModified">Last edited: 2023-10-18</time>
+                    <time datetime="2023-10-26T06:31:47.218Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -622,7 +622,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -630,7 +630,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -638,7 +638,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -654,14 +654,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SMTP%E4%BB%8B%E7%BB%8D"><span class="toc-text">1. SMTP介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7%E9%82%AE%E7%AE%B1%E6%8E%88%E6%9D%83%E7%A0%81"><span class="toc-text">2. 申请邮箱授权码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Django%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="toc-text">3. Django发送邮件</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. SMTP介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 申请邮箱授权码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. Django发送邮件</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -670,7 +670,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -684,34 +684,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-11-19T16:11:00.000Z">
-<meta property="article:modified_time" content="2023-06-29T04:44:14.271Z">
+<meta property="article:modified_time" content="2023-10-26T06:33:43.033Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1688013854271"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698302023033"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">1. 环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">2. 本地博客搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2%E8%87%B3Github"><span class="toc-number">3.</span> <span class="toc-text">3. 部署至Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">4. 博客主题设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD"><span class="toc-number">5.</span> <span class="toc-text">5. 博客备份</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 环境配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 本地博客搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 部署至Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 博客主题设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. 博客备份</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,7 +464,7 @@
 <p>使用 Hexo 搭建我的 Github 个人网站：<a href="https://asanosaki.github.io/">My Github Blog</a>。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-环境配置">1. 环境配置</h2>
+<h1>1. 环境配置</h1>
 <p>（1）安装 Git Bash：<a href="/posts/31252.html">Windows 安装配置 Git 教程</a>。</p>
 <p>（2）安装 NodeJS：<a href="/posts/11062.html">NodeJS 的安装及配置</a>。</p>
 <p>（3）修改 <code>npm</code> 镜像源：</p>
@@ -474,14 +474,14 @@
 <p>（5）安装部署插件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 <p>此处如果出现 <code>npm ERR! Error: EPERM: operation not permitted, mkdir 'E:\NodeJS\node_modules\.corepack-xTCBGLKh</code> 之类的错误需要以管理员身份打开 <code>cmd</code>，然后在 <code>cmd</code> 中安装。</p>
-<h2 id="2-本地博客搭建">2. 本地博客搭建</h2>
+<h1>2. 本地博客搭建</h1>
 <p>首先创建文件夹 <code>Hexo</code>，然后进入该文件夹，创建文件夹 <code>blog</code>，使用管理员身份打开 <code>cmd</code>，进入 <code>blog</code> 文件夹，初始化 Hexo 博客：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
 <p>然后在本地启动一下看看效果：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 <p>然后打开链接：<code>http://localhost:4000/</code> 查看一下页面内容，之后我们进行页面调试都是在这个本地链接进行的。</p>
 <p>使用 VS Code 打开 <code>blog</code> 文件夹，其中，<code>source/_posts</code> 文件夹下存放我们写的文章，<code>themes</code> 文件夹存放博客的主题，<code>_config.yml</code> 是博客的全局配置文件，<code>_config.landscape.yml</code> 是博客的主题配置文件。</p>
-<h2 id="3-部署至Github">3. 部署至Github</h2>
+<h1>3. 部署至Github</h1>
 <p>在 Github 创建一个名为 <code>用户名.github.io</code> 的仓库，例如：<code>AsanoSaki.github.io</code></p>
 <p>在 VS Code 中打开 <code>blog</code> 文件夹，找到 <code>_config.yml</code> 文件，找到 <code>deploy</code>，按照以下格式进行修改：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:你的用户名/你的用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
@@ -490,12 +490,12 @@
 <p>在部署的时候如果出现警告：<code>LF will be replaced by CRLF the next time Git touches it</code>，可以用以下指令禁用将 LF 自动转换为 CRLF：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf false</span><br></pre></td></tr></table></figure>
 <p>然后访问域名：<code>https://用户名.github.io/</code> 即可进入自己的博客啦。</p>
-<h2 id="4-博客主题设置">4. 博客主题设置</h2>
+<h1>4. 博客主题设置</h1>
 <p>Hexo 主题官网：<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo Themes</a>。</p>
 <p>将下载好的主题放到 <code>blog/themes</code> 文件夹中，然后将根目录下的 <code>_config.yml</code> 中的主题修改为下载的主题即可，例如：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">shoka</span></span><br></pre></td></tr></table></figure>
 <p>然后进入主题的文件夹，该文件夹下也有一个 <code>_config.yml</code> 文件，修改这个文件的内容即可修改当前博客主页的样式。</p>
-<h2 id="5-博客备份">5. 博客备份</h2>
+<h1>5. 博客备份</h1>
 <p>在 Github 新建一个名为 <code>blog</code> 的私有仓库，然后在 <code>Hexo/blog</code> 目录下打开 Git Bash，执行以下命令：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git init  <span class="comment"># 初始化仓库</span></span><br><span class="line">git add .  <span class="comment"># 添加文件到暂存区</span></span><br><span class="line">git commit -m <span class="string">&quot;initial blog&quot;</span>  <span class="comment"># 将暂存区内容添加到仓库</span></span><br><span class="line">git branch -M main  <span class="comment"># 重命名分支为main，和博客的分支master区分开</span></span><br><span class="line">git remote add origin git@github.com:你的ID/blog.git  <span class="comment"># 添加到远程版本库</span></span><br><span class="line">git push -u origin main  <span class="comment"># 提交到Github，注意只有第一次提交需要用这个指令</span></span><br><span class="line">git push  <span class="comment"># 之后提交用这个指令</span></span><br></pre></td></tr></table></figure>
 <p>如果在执行 <code>git add .</code> 时出现警告：<code>You've added another git repository inside your current repository.</code>，可以将 <code>blog</code> 目录中的 <code>.deploy_git</code> 文件夹删除。</p>
@@ -584,7 +584,7 @@
                     <a class="tag-none-link" href="/tags/Hexo/" rel="tag">Hexo</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-06-29T04:44:14.271Z" itemprop="dateModified">Last edited: 2023-06-29</time>
+                    <time datetime="2023-10-26T06:33:43.033Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -635,7 +635,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -643,7 +643,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -651,7 +651,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -667,14 +667,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">1. 环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">2. 本地博客搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2%E8%87%B3Github"><span class="toc-text">3. 部署至Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="toc-text">4. 博客主题设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD"><span class="toc-text">5. 博客备份</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 环境配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 本地博客搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 部署至Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 博客主题设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 博客备份</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -683,7 +683,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -697,34 +697,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

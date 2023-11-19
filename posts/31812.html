@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-09-18T02:54:00.000Z">
-<meta property="article:modified_time" content="2023-10-18T12:27:09.670Z">
+<meta property="article:modified_time" content="2023-10-26T06:43:33.912Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,21 +450,21 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1697632029670"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698302613912"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Python%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9D%97subprocess"><span class="toc-number">1.</span> <span class="toc-text">1. Python子进程模块subprocess</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ThreadPoolExecutor%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">2.</span> <span class="toc-text">2. ThreadPoolExecutor线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E6%A8%A1%E5%9D%97Psutil"><span class="toc-number">3.</span> <span class="toc-text">3. 系统信息获取模块Psutil</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. Python子进程模块subprocess</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. ThreadPoolExecutor线程池</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 系统信息获取模块Psutil</span></a></li></ol>
                 </div>
             
             <hr />
             <div itemprop="articleBody"><blockquote>
-<p>介绍 Python 中的子进程模块 <code>subprocess</code>、线程池 <code>ThreadPoolExecutor</code> 以及系统信息获取模块 <code>Psutil</code> 的用法。</p>
+<p>介绍 Python 中的子进程模块 <code>subprocess</code>、线程池模块 <code>ThreadPoolExecutor</code> 以及系统信息获取模块 <code>Psutil</code> 的用法。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-Python子进程模块subprocess">1. Python子进程模块subprocess</h2>
+<h1>1. Python子进程模块subprocess</h1>
 <p><code>subprocess</code> 模块允许我们启动一个新进程，并连接到它们的输入/输出/错误管道，从而获取返回值。</p>
 <p>（1）<code>run</code> 方法</p>
 <p>首先我们来看看 <code>run</code> 方法的使用，该方法的参数如下：</p>
@@ -510,7 +510,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">args2 = [<span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;src/Python子进程测试程序2.py&#x27;</span>]</span><br><span class="line"></span><br><span class="line">proc = subprocess.Popen(args=args2,</span><br><span class="line">                        stdin=subprocess.PIPE,</span><br><span class="line">                        stdout=subprocess.PIPE,</span><br><span class="line">                        stderr=subprocess.PIPE,</span><br><span class="line">                        encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    stdout, stderr = proc.communicate(<span class="built_in">input</span>=<span class="string">&#x27;AsanoSaki&#x27;</span>, timeout=<span class="number">1</span>)  <span class="comment"># 设置1s超时时间</span></span><br><span class="line"><span class="keyword">except</span> subprocess.TimeoutExpired:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;子进程运行超时&#x27;</span>)</span><br><span class="line">    proc.kill()  <span class="comment"># 需要KILL子进程</span></span><br><span class="line">    stdout, stderr = proc.communicate()  <span class="comment"># 捕获异常之后，可以再次调用该函数</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;stdout:&#x27;</span>, stdout)  <span class="comment"># stdout: 子进程输出:  AsanoSaki</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;stderr:&#x27;</span>, stderr)  <span class="comment"># stderr: 空</span></span><br></pre></td></tr></table></figure>
 <p>现在的 <code>Python子进程测试程序2.py</code> 内容如下：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;子进程输出: &#x27;</span>, s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>**<span class="number">9</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-ThreadPoolExecutor线程池">2. ThreadPoolExecutor线程池</h2>
+<h1>2. ThreadPoolExecutor线程池</h1>
 <p><code>concurrent.futures</code> 模块是 Python3.2 中引入的新模块，用于支持<strong>异步执行</strong>，以及在多核 CPU 和网络 I/O 中进行高效的并发编程。线程池的基类是 <code>concurrent.futures</code> 模块中的 <code>Executor</code>，<code>Executor</code> 提供了两个子类，即 <code>ThreadPoolExecutor</code> 和 <code>ProcessPoolExecutor</code> ，简化了跨平台异步编程的实现。其中 <code>ThreadPoolExecutor</code> 用于创建线程池，而 <code>ProcessPoolExecutor</code> 用于创建进程池。如果使用线程池/进程池来管理并发编程，那么只要将相应的 Task 函数提交给线程池/进程池，剩下的事情就由线程池/进程池来搞定。</p>
 <p>首先，让我们先来理解多进程和多线程两种并发编程的方式：</p>
 <ul>
@@ -545,7 +545,7 @@
 </ol>
 <p>下面我们来看一个例子：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">thread</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Threads:&#x27;</span>, num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getResult</span>():  <span class="comment"># 有返回结果的函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Get Result&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建ThreadPoolExecutor对象并指定最大的线程数量</span></span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">3</span>) <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="comment"># 提交多个任务到线程池中</span></span><br><span class="line">    executor.submit(thread, <span class="number">1</span>)  <span class="comment"># Threads: 1</span></span><br><span class="line">    executor.submit(thread, <span class="number">2</span>)  <span class="comment"># Threads: 2</span></span><br><span class="line">    t = executor.submit(getResult)</span><br><span class="line">    <span class="built_in">print</span>(t.result())  <span class="comment"># Get Result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者按如下方式实现</span></span><br><span class="line">threadPool = ThreadPoolExecutor(max_workers=<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    threadPool.submit(thread, i)</span><br><span class="line">threadPool.shutdown(wait=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># Threads: 0</span></span><br><span class="line"><span class="comment"># Threads: 1</span></span><br><span class="line"><span class="comment"># Threads: 2</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-系统信息获取模块Psutil">3. 系统信息获取模块Psutil</h2>
+<h1>3. 系统信息获取模块Psutil</h1>
 <p>现在可能会有人在想那我们如何获取子进程/线程在运行时的时间开销或者内存占用等信息呢？Python 有一个第三方模块 <code>psutil</code>，专门用来获取操作系统以及硬件相关的信息，比如：CPU、磁盘、网络、内存等等。</p>
 <p>首先我们需要安装 <code>psutil</code>，直接通过 <code>pip</code> 命令安装即可：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install psutil</span><br></pre></td></tr></table></figure>
@@ -624,7 +624,7 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "https://asanosaki.github.io/posts/31812.html";
             const title         = "「Python子进程管理与进程信息获取」";
-            const excerpt       = `介绍 Python 中的子进程模块 subprocess、线程池 ThreadPoolExecutor 以及系统信息获取模块 Psutil 的用法。`;
+            const excerpt       = `介绍 Python 中的子进程模块 subprocess、线程池模块 ThreadPoolExecutor 以及系统信息获取模块 Psutil 的用法。`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -646,7 +646,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-18T12:27:09.670Z" itemprop="dateModified">Last edited: 2023-10-18</time>
+                    <time datetime="2023-10-26T06:43:33.912Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -660,7 +660,7 @@
             
             
             <div class="nav-next clearfix">
-                <a title=" Django学习笔记-实现联机对战(下)" href="/posts/60167.html">Next &gt;</a>
+                <a title=" Django学习笔记-实现联机对战（下）" href="/posts/60167.html">Next &gt;</a>
             </div>
             
         </nav>
@@ -697,7 +697,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -705,7 +705,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -713,7 +713,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -729,14 +729,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Python%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9D%97subprocess"><span class="toc-text">1. Python子进程模块subprocess</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ThreadPoolExecutor%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-text">2. ThreadPoolExecutor线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E6%A8%A1%E5%9D%97Psutil"><span class="toc-text">3. 系统信息获取模块Psutil</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Python子进程模块subprocess</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. ThreadPoolExecutor线程池</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 系统信息获取模块Psutil</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -745,7 +745,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -759,34 +759,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

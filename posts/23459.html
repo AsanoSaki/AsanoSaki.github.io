@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>算法竞赛Java数据结构与算法类详解 | AsanoSaki</title>
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Java" />
+  
+  <meta name="description" content="算法竞赛Java数据结构与算法类详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法竞赛Java数据结构与算法类详解">
+<meta property="og:url" content="https://asanosaki.github.io/posts/23459.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="算法竞赛Java数据结构与算法类详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-10-20T08:39:00.000Z">
+<meta property="article:modified_time" content="2023-11-19T09:18:13.039Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('https://z4a.net/images/2023/02/23/background03.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('https://z4a.net/images/2023/02/23/background02.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AsanoSaki" type="application/atom+xml">
+</head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                Home
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                Archives
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-paw"></i>
+                                                
+                                                Friends
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://angels-d.github.io">
+                                                                
+                                                                Angels-D
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://syh521.cn">
+                                                                
+                                                                SYH
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-link"></i>
+                                                
+                                                Links
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">
+                                                                
+                                                                GitHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">
+                                                                
+                                                                Gitee
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">
+                                                                
+                                                                AcGit
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a href="https://asanosaki.github.io">
+                                                                
+                                                                BLOG
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">
+                                                                
+                                                                CSDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">
+                                                                
+                                                                AcWing
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">
+                                                                
+                                                                LuoGu
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">
+                                                                
+                                                                CodeForces
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">
+                                                                
+                                                                LeetCode
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">
+                                                                
+                                                                Bilibili
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsanoSaki0417">
+                                                                
+                                                                YouTube
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a>
+                                            
+                                                
+                                                    <i class="fa fa-heart"></i>
+                                                
+                                                Favorite
+                                            </a>
+                                            
+                                                <ul class="sub-menu">
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.cnki.net">
+                                                                
+                                                                CNKI
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.runoob.com">
+                                                                
+                                                                Runoob
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://wallhaven.cc">
+                                                                
+                                                                Wallhaven
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="http://www.flysheep6.com">
+                                                                
+                                                                Flysheep
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://thrift.apache.org">
+                                                                
+                                                                Thrift
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">
+                                                                
+                                                                MDN
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://v5.bootcss.com">
+                                                                
+                                                                Bootstrap
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-hans.react.dev">
+                                                                
+                                                                React
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.nextjs.cn">
+                                                                
+                                                                Next.js
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">
+                                                                
+                                                                Django
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
+                                                                
+                                                                SpringBoot
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://hub.docker.com">
+                                                                
+                                                                DockerHub
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://fontawesome.com.cn">
+                                                                
+                                                                FontAwesome
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://www.online-convert.com">
+                                                                
+                                                                File-Convert
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://pytorch.org">
+                                                                
+                                                                PyTorch
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">
+                                                                
+                                                                D2L
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://board.xcpcio.com">
+                                                                
+                                                                XCPC-Board
+                                                            </a>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">
+                                                                
+                                                                Kratos-MNL
+                                                            </a>
+                                                        </li>
+                                                    
+                                                </ul>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/23459.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">算法竞赛Java数据结构与算法类详解</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-10-20T08:39:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-20</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~14.11K
+                    
+                    words
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700385493039"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. String&#x2F;StringBuffer&#x2F;StringBuilder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. Arrays</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. ArrayList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. LinkedList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. HashSet&#x2F;TreeSet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6. HashMap&#x2F;TreeMap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">7. Stack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">8. Queue&#x2F;PriorityQueue</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">9. 深入Iterator与Collection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">10. 自定义对象数组排序</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本文介绍了 Java 中常用的数据结构与算法类。</p>
+</blockquote>
+<span id="more"></span>
+<h1>1. String/StringBuffer/StringBuilder</h1>
+<p><code>String</code> 类即字符串，在 Java 中 <code>String</code> 类是<strong>不可改变</strong>的，如果修改 <code>String</code> 对象，那么其实是开一个新的空间保存，而原空间中的字符串还存在于内存中。<code>String</code> 类的用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span>[] charArray = &#123; <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span> &#125;;</span><br><span class="line"><span class="type">String</span> <span class="variable">strFromChar</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(charArray);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; str.length(); i++)</span><br><span class="line">    System.out.print(str.charAt(i));</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">char</span> c: str.toCharArray())  <span class="comment">// toCharArray将String转为字符数组</span></span><br><span class="line">    System.out.print(c);</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">str.charAt(<span class="number">0</span>);  <span class="comment">// H，返回第0个字符</span></span><br><span class="line">str.compareTo(<span class="string">&quot;G&quot;</span>);  <span class="comment">// 1，比较字符串，如果大于返回1，小于返回-1，否则返回0</span></span><br><span class="line">str.equals(<span class="string">&quot;Hello World!&quot;</span>);  <span class="comment">// true，Java中比较两个字符串值是否相等必须用equals</span></span><br><span class="line">str.startsWith(<span class="string">&quot;He&quot;</span>);  <span class="comment">// true，判断是否以&quot;He&quot;开头</span></span><br><span class="line">str.endsWith(<span class="string">&quot;d!&quot;</span>);  <span class="comment">// true，判断是否以&quot;d!&quot;结尾</span></span><br><span class="line">str.indexOf(<span class="string">&#x27;o&#x27;</span>);  <span class="comment">// 4，返回&#x27;o&#x27;第一次出现的位置，若不存在返回-1</span></span><br><span class="line">str.indexOf(<span class="string">&#x27;o&#x27;</span>, <span class="number">5</span>);  <span class="comment">// 7，返回&#x27;o&#x27;从下标5开始第一次出现的位置，若不存在返回-1</span></span><br><span class="line">str.lastIndexOf(<span class="string">&#x27;o&#x27;</span>);  <span class="comment">// 7，返回&#x27;o&#x27;最后出现的位置，若不存在返回-1</span></span><br><span class="line">str.lastIndexOf(<span class="string">&#x27;o&#x27;</span>, <span class="number">6</span>);  <span class="comment">// 4，返回&#x27;o&#x27;在下标6之前的字符串中最后出现的位置，若不存在返回-1</span></span><br><span class="line">str.replace(<span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;x&#x27;</span>);  <span class="comment">// Hellx Wxrld!，将&#x27;o&#x27;替换成&#x27;x&#x27;</span></span><br><span class="line">str.split(<span class="string">&quot; &quot;</span>);  <span class="comment">// [Hello, World!]，以&quot; &quot;进行分割，返回分割后的数组，支持正则表达式</span></span><br><span class="line">str.substring(<span class="number">6</span>, <span class="number">9</span>);  <span class="comment">// Wor，返回[6, 9)的字串，如果不指定第二个下标默认为末尾</span></span><br><span class="line">str.toLowerCase();  <span class="comment">// hello world!，将所有字母转为小写后返回</span></span><br><span class="line">str.toUpperCase();  <span class="comment">// HELLO WORLD!，将所有字母转为大写后返回</span></span><br></pre></td></tr></table></figure>
+<p>当需要对字符串进行频繁修改时，要用 <code>StringBuffer</code> 或 <code>StringBuilder</code> 类。这两个类的对象能够被多次修改，并且不产生新的未使用对象。</p>
+<p><code>StringBuffer</code> 和 <code>StringBuilder</code> 之间最大的不同在于 <code>StringBuilder</code> 的方法不是线程安全的（不能同步访问）。但是 <code>StringBuilder</code> 相较于 <code>StringBuffer</code> 有速度优势，所以多数情况下建议使用 <code>StringBuilder</code> 类。以 <code>StringBuilder</code> 为例，用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="type">StringBuilder</span> <span class="variable">strBuilder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(str);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; strBuilder.length(); i++)</span><br><span class="line">    System.out.print(strBuilder.charAt(i));</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">strBuilder.append(<span class="string">&quot;A&quot;</span>);  <span class="comment">// 在末尾追加字符串/字符/数字</span></span><br><span class="line">strBuilder.reverse();  <span class="comment">// 翻转字符串</span></span><br><span class="line">strBuilder.delete(<span class="number">0</span>, <span class="number">1</span>);  <span class="comment">// 删除[0, 1)中的字符串</span></span><br><span class="line">strBuilder.insert(<span class="number">6</span>, <span class="string">&quot;A&quot;</span>);  <span class="comment">// 在下标6的位置插入字符串/字符/数字</span></span><br><span class="line">strBuilder.replace(<span class="number">0</span>, <span class="number">7</span>, <span class="string">&quot;Hello&quot;</span>);  <span class="comment">// 将[0, 7)中的字符串替换为&quot;Hello&quot;</span></span><br><span class="line">strBuilder.toString();  <span class="comment">// 转换回String</span></span><br></pre></td></tr></table></figure>
+<h1>2. Arrays</h1>
+<p><code>Arrays</code> 类定义在 <code>java.util</code> 包中，该类能够方便地操作数组，用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="type">int</span>[] arr = &#123; <span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span> &#125;;</span><br><span class="line"><span class="type">int</span>[][] arr2d = &#123;&#123; <span class="number">1</span>, <span class="number">2</span> &#125;, &#123; <span class="number">3</span>, <span class="number">4</span> &#125;&#125;;</span><br><span class="line">Integer[] arrInteger = &#123; <span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++)</span><br><span class="line">    System.out.print(arr[i] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x: arr)</span><br><span class="line">    System.out.print(x + <span class="string">&quot; &quot;</span>);</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">Arrays.sort(arr);  <span class="comment">// 从小到大排序</span></span><br><span class="line">Arrays.sort(arrInteger, (x, y) -&gt; y - x);  <span class="comment">// 从大到小排序，必须用Integer对象</span></span><br><span class="line">Arrays.binarySearch(arr, <span class="number">3</span>);  <span class="comment">// 返回2，对排好序的数组二分查找</span></span><br><span class="line">Arrays.equals(arr, arr);  <span class="comment">// 返回true，判断两个数组是否相等</span></span><br><span class="line">Arrays.fill(arr, <span class="number">0</span>);  <span class="comment">// 用0填充数组所有元素</span></span><br><span class="line">Arrays.toString(arr);  <span class="comment">// 返回[0, 0, 0, 0, 0]，将数组的第一维转换成字符串形式</span></span><br><span class="line">Arrays.deepToString(arr2d);  <span class="comment">// 返回[[1, 2], [3, 4]]，递归转换数组的每一维，可用于二维及以上的数组</span></span><br></pre></td></tr></table></figure>
+<h1>3. ArrayList</h1>
+<p>Java 的集合框架主要包括两种类型的容器：</p>
+<ul>
+<li>集合（Collection）：存储一个元素集合。</li>
+<li>图（Map）：存储键/值对映射。</li>
+</ul>
+<p>其中，<code>Collection</code> 接口又包含了 <code>List</code> 接口和 <code>Set</code> 接口两大分支，前者为允许存在重复元素的有序集合，后者为不允许存在重复元素的无序集合；<code>Map</code> 是一个映射接口，其中的每一个元素包含一个 <code>key</code> 和对应的 <code>value</code>。</p>
+<p><code>ArrayList</code> 类实现了 <code>List</code> 接口，继承自 <code>AbstractList</code> 类，位于 <code>java.util</code> 包中（迭代器也位于该包中），可以用于<strong>动态</strong>地调整存储在其中的元素的大小。<code>ArrayList</code> 类是基于数组的数据结构，它提供了一组用于操作元素的方法，包括添加、删除、插入、搜索和排序等。</p>
+<p><code>ArrayList</code> 用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">ArrayList&lt;Integer&gt; v = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();  <span class="comment">// &lt;&gt;中只能为引用数据类型</span></span><br><span class="line">ArrayList&lt;Integer&gt; v = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>));  <span class="comment">// 初始化时赋值，当前为[1, 2, 3]</span></span><br><span class="line">List&lt;Integer&gt; v = Arrays.stream(<span class="keyword">new</span> <span class="title class_">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;).boxed().collect(Collectors.toList());  <span class="comment">// int[]转List，注意只能为List，不能用ArrayList</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; v.size(); i++)  <span class="comment">// 传统for循环</span></span><br><span class="line">    System.out.printf(<span class="string">&quot;%d &quot;</span>, v.get(i));</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x: v)  <span class="comment">// forEach循环，推荐这种写法</span></span><br><span class="line">    System.out.printf(<span class="string">&quot;%d &quot;</span>, x);</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Iterator&lt;Integer&gt; it = v.iterator(); it.hasNext();)  <span class="comment">// 迭代器</span></span><br><span class="line">    System.out.printf(<span class="string">&quot;%d &quot;</span>, it.next());</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (ListIterator&lt;Integer&gt; it = v.listIterator(); it.hasNext();)  <span class="comment">// 列表迭代器</span></span><br><span class="line">    System.out.printf(<span class="string">&quot;%d &quot;</span>, it.next());</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line">v.stream().forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));  <span class="comment">// Java8的Stream API和Lambda表达式</span></span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">v.add(<span class="number">4</span>);  <span class="comment">// 在尾部添加4，当前为[1, 2, 3, 4]</span></span><br><span class="line">v.add(<span class="number">1</span>, <span class="number">5</span>);  <span class="comment">// 在下标1处添加5，当前为[1, 5, 2, 3, 4]</span></span><br><span class="line">v.remove(<span class="number">4</span>);  <span class="comment">// 删除下标4处的元素，当前为[1, 5, 2, 3]</span></span><br><span class="line">v.set(<span class="number">0</span>, <span class="number">4</span>);  <span class="comment">// 将下标0处的元素置为4，当前为[4, 5, 2, 3]</span></span><br><span class="line">v.subList(<span class="number">0</span>, <span class="number">2</span>);  <span class="comment">// 返回[4, 5]，截取[0, 2)的子列表</span></span><br><span class="line">v.indexOf(<span class="number">5</span>);  <span class="comment">// 返回1，获取元素5第一次出现的下标，若不存在返回-1</span></span><br><span class="line">v.isEmpty();  <span class="comment">// 返回false，判断是否为空</span></span><br><span class="line">v.contains(<span class="number">2</span>);  <span class="comment">// 返回true，判断是否含有元素2</span></span><br><span class="line">v.sort(Comparator.naturalOrder());  <span class="comment">// 从小到大排序，当前为[2, 3, 4, 5]</span></span><br><span class="line">v.sort(Comparator.reverseOrder());  <span class="comment">// 从大到小排序，当前为[5, 4, 3, 2]</span></span><br><span class="line">v.addAll(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>));  <span class="comment">// 添加另一个Collection对象，当前为[5, 4, 3, 2, 1, 2]</span></span><br><span class="line">Collections.addAll(v, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>);  <span class="comment">// 添加任意数量的元素，当前为[5, 4, 3, 2, 1, 2, 7, 8, 9]</span></span><br><span class="line">Collections.reverse(v);  <span class="comment">// 翻转List，当前为[9, 8, 7, 2, 1, 2, 3, 4, 5]</span></span><br><span class="line">ArrayList&lt;Integer&gt; t = (ArrayList&lt;Integer&gt;)v.clone();  <span class="comment">// 复制一份，和原ArrayList不是同一份</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// List转换为数组</span></span><br><span class="line">Integer[] a = <span class="keyword">new</span> <span class="title class_">Integer</span>[v.size()];  <span class="comment">// 必须为包装类</span></span><br><span class="line">v.toArray(a);</span><br><span class="line"></span><br><span class="line">Integer[] b = v.toArray(<span class="keyword">new</span> <span class="title class_">Integer</span>[<span class="number">0</span>]);  <span class="comment">// 效果同上</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[] c = v.stream().mapToInt(Integer::valueOf).toArray();  <span class="comment">// 必须为基本类型，mapToInt()将Stream&lt;Integer&gt;转换成IntStream</span></span><br></pre></td></tr></table></figure>
+<h1>4. LinkedList</h1>
+<p>Java 的 <code>LinkedList</code> 类是一个实现了 <code>List</code> 接口和 <code>Deque</code> 接口的<strong>双向链表</strong>。它也可以被当作堆栈、队列或双端队列进行操作。</p>
+<p>与 <code>ArrayList</code> 相比，<code>LinkedList</code> 的增加和删除的操作效率更高，而查找和修改的操作效率较低。因此需要频繁访问列表中的某一个元素且只需要在列表末尾进行添加和删除元素操作推荐使用 <code>ArrayList</code>，而需要频繁的在列表开头、中间、末尾等位置进行添加和删除元素操作推荐使用 <code>LinkedList</code>。</p>
+<p><code>LinkedList</code> 的定义与遍历方式与 <code>ArrayList</code> 相同，且上述的 <code>ArrayList</code> 常用方法在 <code>LinkedList</code> 中均可使用，额外添加的部分方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">LinkedList&lt;Integer&gt; v = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">v.addLast(<span class="number">4</span>);  <span class="comment">// 在尾部添加4，当前为[1, 2, 3, 4]</span></span><br><span class="line">v.addFirst(<span class="number">5</span>);  <span class="comment">// 在首部添加5，当前为[5, 1, 2, 3, 4]</span></span><br><span class="line">v.removeLast();  <span class="comment">// 删除并返回尾部元素，当前为[5, 1, 2, 3]</span></span><br><span class="line">v.removeFirst();  <span class="comment">// 删除并返回首部元素，当前为[1, 2, 3]</span></span><br><span class="line">v.getFirst();  <span class="comment">// 返回首部元素1</span></span><br><span class="line">v.getLast();  <span class="comment">// 返回尾部元素3</span></span><br></pre></td></tr></table></figure>
+<h1>5. HashSet/TreeSet</h1>
+<p>Java 的 <code>HashSet</code> 类是一个实现了 <code>Set</code> 接口的集合类，它使用 <code>HashMap</code> 作为基础，因此其特性和 <code>HashMap</code> 类似：</p>
+<ul>
+<li>不重复：是一个没有重复元素的集合。</li>
+<li>无序：它不保证元素的顺序。</li>
+<li>允许 <code>null</code>：允许使用 <code>null</code> 元素。</li>
+<li>非同步：即不是线程安全的，如果多个线程尝试同时修改 <code>HashSet</code>，则最终结果是不确定的。 必须在多线程访问时显式同步对 <code>HashSet</code> 的并发访问。</li>
+</ul>
+<p><code>HashSet</code> 用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">HashSet&lt;Integer&gt; st = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">HashSet&lt;Integer&gt; st = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x: st)  <span class="comment">// forEach循环，推荐这种写法</span></span><br><span class="line">    System.out.printf(<span class="string">&quot;%d &quot;</span>, x);</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Iterator&lt;Integer&gt; it = st.iterator(); it.hasNext();)  <span class="comment">// 迭代器</span></span><br><span class="line">    System.out.printf(<span class="string">&quot;%d &quot;</span>, it.next());</span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line">st.stream().forEach(x -&gt; System.out.printf(<span class="string">&quot;%d &quot;</span>, x));  <span class="comment">// Java8的Stream API和Lambda表达式</span></span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">st.add(<span class="number">4</span>);  <span class="comment">// 添加元素，当前为&#123;1, 2, 3, 4&#125;</span></span><br><span class="line">st.remove(<span class="number">3</span>);  <span class="comment">// 删除元素，当前为&#123;1, 2, 4&#125;</span></span><br><span class="line">st.contains(<span class="number">3</span>);  <span class="comment">// 返回false，判断是否存在3</span></span><br><span class="line">st.size();  <span class="comment">// 返回3，获取集合的元素数量</span></span><br><span class="line">st.isEmpty();  <span class="comment">// 返回false，判断是否为空</span></span><br><span class="line">st.clear();  <span class="comment">// 清空元素</span></span><br></pre></td></tr></table></figure>
+<p><code>TreeSet</code> 与 <code>HashSet</code> 的用法基本一致，区别在于 <code>TreeSet</code> 中的元素是<strong>有序</strong>的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">TreeSet&lt;Integer&gt; st = <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;();</span><br><span class="line">TreeSet&lt;Integer&gt; st = <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;(Arrays.asList(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">st.ceiling(<span class="number">3</span>);  <span class="comment">// 返回3，查找大于等于3的最小的数，不存在则返回null</span></span><br><span class="line">st.floor(<span class="number">3</span>);  <span class="comment">// 返回3，查找小于等于3的最大的数，不存在则返回null</span></span><br><span class="line">...其余同HashSet</span><br></pre></td></tr></table></figure>
+<h1>6. HashMap/TreeMap</h1>
+<p>Java 的 <code>HashMap</code> 是一个实现了 <code>Map</code> 接口的哈希表，它存储的内容是键值对（key-value）映射。<code>HashMap</code> 的特性如下：</p>
+<ul>
+<li>键值对存储：<code>HashMap</code> 是以 <code>key-value</code> 存储形式存在，主要用来存放键值对。</li>
+<li>非同步：<code>HashMap</code> 的实现不是同步的，这意味着它不是线程安全的。</li>
+<li>允许 <code>null</code>：它的 <code>key</code>、<code>value</code> 都可以为 <code>null</code>。</li>
+<li>无序：此外，<code>HashMap</code> 中的映射不是有序的。</li>
+</ul>
+<p><code>HashMap</code> 的底层数据结构为：</p>
+<ul>
+<li>Java8 之前：<code>HashMap</code> 由数组+链表组成，数组是 <code>HashMap</code> 的主体，链表则主要用于解决<strong>哈希碰撞</strong>。</li>
+<li>Java8 之后：在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）并且当前数组的长度大于64时，此时此索引位置上的所有数据改为使用<strong>红黑树</strong>存储。</li>
+</ul>
+<p><code>HashMap</code> 的保存顺序与插入顺序不同，这是因为 <code>HashMap</code> 使用了一种非常快速的算法，该算法会控制顺序。<code>LinkedHashMap</code> 则是按照插入顺序来保存键值对，同时保留了 <code>HashMap</code> 的查找速度。</p>
+<p><code>HashMap</code> 用法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">HashMap&lt;String, Integer&gt; mp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">HashMap&lt;String, Integer&gt; mp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;() &#123;&#123;  <span class="comment">// 可能会导致一些未预期的副作用，因为它实际上创建了一个匿名子类</span></span><br><span class="line">    put(<span class="string">&quot;ABC&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    put(<span class="string">&quot;DEF&quot;</span>, <span class="number">2</span>);</span><br><span class="line">&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">for</span> (String k: mp.keySet())  <span class="comment">// 遍历key</span></span><br><span class="line">    System.out.println(k);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> v: mp.values())  <span class="comment">// 遍历value</span></span><br><span class="line">    System.out.println(v);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; e: mp.entrySet())  <span class="comment">// 遍历key-value，推荐这种写法</span></span><br><span class="line">    System.out.println(e.getKey() + <span class="string">&quot; &quot;</span> + e.getValue());</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> mp.entrySet().iterator(); it.hasNext();) &#123;  <span class="comment">// 迭代器</span></span><br><span class="line">    Map.<span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> (Map.Entry)it.next();</span><br><span class="line">    System.out.println(e.getKey() + <span class="string">&quot; &quot;</span> + e.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">mp.put(<span class="string">&quot;YYJ&quot;</span>, <span class="number">666</span>);  <span class="comment">// 添加键值对，如果键已经存在，就替换原来的值，当前为&#123;ABC=2, DEF=1, YYJ=666&#125;</span></span><br><span class="line">mp.get(<span class="string">&quot;YYJ&quot;</span>);  <span class="comment">// 返回666，获取某个key对应的value，如果key不存在返回null</span></span><br><span class="line">mp.remove(<span class="string">&quot;YYJ&quot;</span>);  <span class="comment">// 删除指定的key及其对应的value，如果key不存在返回null，当前为&#123;ABC=2, DEF=1&#125;</span></span><br><span class="line">mp.containsKey(<span class="string">&quot;YYJ&quot;</span>);  <span class="comment">// 返回false，判断是否包含指定的key</span></span><br><span class="line">mp.containsValue(<span class="number">1</span>);  <span class="comment">// 返回true，判断是否包含指定的value</span></span><br><span class="line">mp.size();  <span class="comment">// 返回2，获取键值对的数量</span></span><br><span class="line">mp.clear();  <span class="comment">// 清空键值对</span></span><br><span class="line">mp.isEmpty();  <span class="comment">// 返回true，判断是否为空</span></span><br></pre></td></tr></table></figure>
+<p>与 <code>Set</code> 同理，<code>TreeMap</code> 与 <code>HashMap</code> 的用法基本一致，区别在于 <code>TreeMap</code> 中的元素是根据键的升序排好序的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">TreeMap&lt;String, Integer&gt; mp = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">TreeMap&lt;String, Integer&gt; mp = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;String, Integer&gt;() &#123;&#123;  <span class="comment">// 可能会导致一些未预期的副作用，因为它实际上创建了一个匿名子类</span></span><br><span class="line">    put(<span class="string">&quot;DEF&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    put(<span class="string">&quot;ABC&quot;</span>, <span class="number">2</span>);</span><br><span class="line">&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用方法</span></span><br><span class="line">Map.Entry&lt;String, Integer&gt; ceiling = mp.ceilingEntry(<span class="string">&quot;AAA&quot;</span>);  <span class="comment">// 查找键大于等于&quot;AAA&quot;的最小的键值对，不存在则返回null</span></span><br><span class="line">System.out.println(ceiling.getKey() + <span class="string">&quot;: &quot;</span> + ceiling.getValue());  <span class="comment">// ABC: 2</span></span><br><span class="line">Map.Entry&lt;String, Integer&gt; floor = mp.floorEntry(<span class="string">&quot;DEG&quot;</span>);  <span class="comment">// 查找键小于等于&quot;DEG&quot;的最大的键值对，不存在则返回null</span></span><br><span class="line">System.out.println(floor.getKey() + <span class="string">&quot;: &quot;</span> + floor.getValue());  <span class="comment">// DEF: 1</span></span><br><span class="line">mp.ceilingKey(<span class="string">&quot;A&quot;</span>);  <span class="comment">// 返回ABC，查找键大于等于&quot;A&quot;的最小的键，不存在则返回null</span></span><br><span class="line">mp.floorKey(<span class="string">&quot;A&quot;</span>);  <span class="comment">// 返回null，查找键小于等于&quot;A&quot;的最大的键，不存在则返回null</span></span><br><span class="line">...其余同HashMap</span><br></pre></td></tr></table></figure>
+<h1>7. Stack</h1>
+<p>栈（Stack）是一个<strong>后进先出</strong>（LIFO）的集合，它有时被称作<strong>下推栈</strong>，因为不管我们最后压入的是什么，它都会第一个弹出。</p>
+<p>Java 1.0 就提供了 <code>Stack</code> 类，结果这个类的设计非常糟糕，不过因为要向后兼容，所以我们永远也无法摆脱 Java 过去的设计错误了。Java 6 加入了 <code>ArrayDeque</code>，提供了直接实现栈功能的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Deque&lt;String&gt; stk = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String s: <span class="string">&quot;This is stack&quot;</span>.split(<span class="string">&quot; &quot;</span>))</span><br><span class="line">    stk.push(s);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (!stk.isEmpty())</span><br><span class="line">    System.out.print(stk.pop() + <span class="string">&quot; &quot;</span>);  <span class="comment">// stack is This</span></span><br></pre></td></tr></table></figure>
+<h1>8. Queue/PriorityQueue</h1>
+<p>队列（Queue）是一个典型的先进先岀（FIFO）的集合。换言之，我们在一端放入在另一端拿出来，放入的顺序和取出的顺序是一样的。队列常用来将对象从程序的一个区域可靠地转移到另一个区域，队列在<strong>并发编程</strong>中特别重要，因为它们可以安全地将对象从一个任务转移到另一个任务。</p>
+<p><code>LinkedList</code> 实现了 <code>Queue</code> 接口，提供了支持队列行为的方法，因此 <code>LinkedList</code> 可以作为 <code>Queue</code> 的一种实现来使用，通过将 <code>LinkedList</code> 向上转型为 <code>Queue</code>，下面这个示例使用了 <code>Queue</code> 接口特有的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; Q = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">    Q.offer(i);</span><br><span class="line"></span><br><span class="line">System.out.println(Q);  <span class="comment">// [0, 1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (Q.peek() != <span class="literal">null</span>)</span><br><span class="line">    System.out.print(Q.remove() + <span class="string">&quot; &quot;</span>);  <span class="comment">// 0 1 2 3 4</span></span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>offer()</code> 是 <code>Queue</code> 特有的方法之一，负责在队列尾部插入一个元素，如果无法插入则返回 <code>false</code>。</li>
+<li><code>peek()</code> 和 <code>element()</code> 都会返回队头元素，不会将其删除，但是如果队列为空，<code>peek()</code> 返回 <code>null</code>，而 <code>element()</code> 抛出 <code>NoSuchElementException</code> 异常。</li>
+<li><code>poll()</code> 和 <code>remove()</code> 会将队头元素删除，同时返回该元素，但是如果队列为空，<code>poll()</code> 返回 <code>null</code>，而 <code>remove()</code> 抛出 <code>NoSuchElementException</code> 异常。</li>
+</ul>
+<p><strong>优先级队列</strong>（Priority Queue）是指下一个要拿出的元素是需求最强烈的元素（最高优先级）。Java 5 中添加了 <code>PriorityQueue</code>，为这种行为提供了一个自动化的实现。</p>
+<p><code>PriorityQueue</code> 默认的排序方法使用的是对象在队列中的自然顺序，但我们可以通过提供自己的 <code>Comparator</code> 来修改顺序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue&lt;Integer&gt; Q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;();  <span class="comment">// 默认是升序</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">5</span>; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">    Q.offer(i);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (Q.peek() != <span class="literal">null</span>)</span><br><span class="line">    System.out.print(Q.remove() + <span class="string">&quot; &quot;</span>);  <span class="comment">// 1 2 3 4 5</span></span><br><span class="line">System.out.println();</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; nums = Arrays.asList(<span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>);</span><br><span class="line">PriorityQueue&lt;Integer&gt; RQ = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(Collections.reverseOrder());  <span class="comment">// 逆序</span></span><br><span class="line">RQ.addAll(nums);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (RQ.peek() != <span class="literal">null</span>)</span><br><span class="line">    System.out.print(RQ.remove() + <span class="string">&quot; &quot;</span>);  <span class="comment">// 7 5 3 2 1</span></span><br><span class="line">System.out.println();</span><br></pre></td></tr></table></figure>
+<h1>9. 深入Iterator与Collection</h1>
+<p><code>Collection</code> 是所有序列集合共同的根接口，可以认为它是一个为表示其他接口之间的共性而出现的<strong>附属接口</strong>。支持使用这样一个接口的理由是，它可以创建更通用的代码，通过面向接口而不是面向实现来编写代码，我们的代码可以应用于更多对象类型。因此，如果我们编写一个以 <code>Collection</code> 为参数的方法，那么该方法可以应用于任何实现了 <code>Collection</code> 的类型。</p>
+<p>在 Java 中，看上去遵循 C++ 的方式比较明智，即使用迭代器而非 <code>Collection</code> 来表示集合之间的共性。但是，因为在 Java 中实现 <code>Collection</code> 也就意味着提供了 <code>iterator()</code> 方法，所以这两种方式其实是绑在一起了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yyj;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; numsList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">        Set&lt;Integer&gt; numsSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">        display(numsList.iterator());  <span class="comment">// 1 2 3 3</span></span><br><span class="line">        display(numsSet.iterator());  <span class="comment">// 1 2 3</span></span><br><span class="line">        display(numsList);  <span class="comment">// 1 2 3 3</span></span><br><span class="line">        display(numsSet);  <span class="comment">// 1 2 3</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(Iterator&lt;Integer&gt; it)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext())</span><br><span class="line">            System.out.print(it.next() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(Collection&lt;Integer&gt; nums)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Integer x: nums)</span><br><span class="line">            System.out.print(x + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>10. 自定义对象数组排序</h1>
+<p>我们需要让进行排序的类实现 <code>Comparable</code> 接口，重写其中的 <code>compareTo()</code> 方法，在其中定义排序规则，那么就可以直接调用 <code>java.util.Arrays.sort()</code> 来排序对象数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Data&gt; &#123;  <span class="comment">// 实现Comparable&lt;T&gt;接口</span></span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    String s;</span><br><span class="line"></span><br><span class="line">    Data(<span class="type">int</span> x, String s) &#123;</span><br><span class="line">        <span class="built_in">this</span>.x = x;</span><br><span class="line">        <span class="built_in">this</span>.s = s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Data t)</span> &#123;  <span class="comment">// 重写compareTo(T obj)方法</span></span><br><span class="line">        <span class="keyword">return</span> t.x - x;  <span class="comment">// 若t.x比当前对象的x小则返回-1，表示根据x从大到小排序</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(<span class="string">&quot;[%d, %s]&quot;</span>, x, s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SortObjectArrays</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Data[] datas = &#123; <span class="keyword">new</span> <span class="title class_">Data</span>(<span class="number">4</span>, <span class="string">&quot;Hello&quot;</span>), <span class="keyword">new</span> <span class="title class_">Data</span>(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>), <span class="keyword">new</span> <span class="title class_">Data</span>(<span class="number">6</span>, <span class="string">&quot;C++&quot;</span>) &#125;;</span><br><span class="line">        Arrays.sort(datas);</span><br><span class="line">        Arrays.stream(datas).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * [6, C++]</span></span><br><span class="line"><span class="comment">         * [4, Hello]</span></span><br><span class="line"><span class="comment">         * [1, Java]</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/23459.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/23459.html";
+            const title         = "「算法竞赛Java数据结构与算法类详解」";
+            const excerpt       = `本文介绍了 Java 中常用的数据结构与算法类。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-19T09:18:13.039Z" itemprop="dateModified">Last edited: 2023-11-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Django Channels、WS协议及同步与异步详解" href="/posts/45720.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Java对象的相等判定问题与equals方法详解" href="/posts/43228.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                75
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. String&#x2F;StringBuffer&#x2F;StringBuilder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. Arrays</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. ArrayList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. LinkedList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. HashSet&#x2F;TreeSet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6. HashMap&#x2F;TreeMap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">7. Stack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">8. Queue&#x2F;PriorityQueue</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">9. 深入Iterator与Collection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">10. 自定义对象数组排序</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

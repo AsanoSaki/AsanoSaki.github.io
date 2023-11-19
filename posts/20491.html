@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-04-30T05:56:00.000Z">
-<meta property="article:modified_time" content="2023-09-13T09:46:51.056Z">
+<meta property="article:modified_time" content="2023-10-26T06:42:22.197Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1694598411056"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698302542197"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SSH"><span class="toc-number">1.</span> <span class="toc-text">1. SSH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-SSH%E7%99%BB%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 SSH登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-SCP%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">1.2 SCP远程拷贝文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Git"><span class="toc-number">3.</span> <span class="toc-text">2. Git</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Git%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 Git基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 Git常用命令</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. SSH</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-SSH%E7%99%BB%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 SSH登录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">1.2 SCP远程拷贝文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">2. Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Git%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 Git基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 Git常用命令</span></a></li></ol></li></ol>
                 </div>
             
             <hr />
@@ -464,8 +464,8 @@
 <p>本文记录 Linux 的学习过程，内容为 SSH 与 Git。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-SSH">1. SSH</h2>
-<h3 id="1-1-SSH登录">1.1 SSH登录</h3>
+<h1>1. SSH</h1>
+<h2 id="1-1-SSH登录">1.1 SSH登录</h2>
 <p>（1）基本用法：</p>
 <p>远程登录服务器：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh user@hostname</span><br><span class="line"></span><br><span class="line">user: 用户名</span><br><span class="line">hostname: IP地址或域名</span><br></pre></td></tr></table></figure>
@@ -499,7 +499,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">单引号中的<span class="variable">$i</span>可以求值</span></span><br><span class="line">ssh myserver &#x27;for ((i = 0; i &lt; 10; i ++ )) do echo $i; done&#x27;</span><br></pre></td></tr></table></figure>
 <p>或者：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">双引号中的<span class="variable">$i</span>不可以求值</span></span><br><span class="line">ssh myserver &quot;for ((i = 0; i &lt; 10; i ++ )) do echo $i; done&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-SCP远程拷贝文件">1.2 SCP远程拷贝文件</h2>
+<h1>1.2 SCP远程拷贝文件</h1>
 <p>命令格式：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp source destination</span><br></pre></td></tr></table></figure>
 <p>功能：将 <code>source</code> 路径下的文件复制到 <code>destination</code> 中。</p>
@@ -516,15 +516,15 @@
 <p>注意：<code>scp</code> 的 <code>-r -P</code> 等参数尽量加在 <code>source</code> 和 <code>destination</code> 之前。</p>
 <p>使用 <code>scp</code> 配置其他服务器的 <code>vim</code> 和 <code>tmux</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.vimrc ~/.tmux.conf myserver:</span><br></pre></td></tr></table></figure>
-<h2 id="2-Git">2. Git</h2>
-<h3 id="2-1-Git基本概念">2.1 Git基本概念</h3>
+<h1>2. Git</h1>
+<h2 id="2-1-Git基本概念">2.1 Git基本概念</h2>
 <ul>
 <li>工作区：仓库的目录。工作区是独立于各个分支的。</li>
 <li>暂存区：数据暂时存放的区域，类似于工作区写入版本库前的缓存区。暂存区是独立于各个分支的。</li>
 <li>版本库：存放所有已经提交到本地仓库的代码版本</li>
 <li>版本结构：树结构，树中每个节点代表一个代码版本。</li>
 </ul>
-<h3 id="2-2-Git常用命令">2.2 Git常用命令</h3>
+<h2 id="2-2-Git常用命令">2.2 Git常用命令</h2>
 <ul>
 <li><code>git config --global user.name xxx</code>：设置全局用户名，信息记录在 <code>~/.gitconfig</code> 文件中。</li>
 <li><code>git config --global user.email xxx@xxx.com</code>：设置全局邮箱地址，信息记录在 <code>~/.gitconfig</code> 文件中。</li>
@@ -670,7 +670,7 @@
                     <a class="tag-none-link" href="/tags/Linux/" rel="tag">Linux</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-09-13T09:46:51.056Z" itemprop="dateModified">Last edited: 2023-09-13</time>
+                    <time datetime="2023-10-26T06:42:22.197Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -721,7 +721,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -729,7 +729,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -737,7 +737,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -753,14 +753,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SSH"><span class="toc-text">1. SSH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-SSH%E7%99%BB%E5%BD%95"><span class="toc-text">1.1 SSH登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-SCP%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D%E6%96%87%E4%BB%B6"><span class="toc-text">1.2 SCP远程拷贝文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Git"><span class="toc-text">2. Git</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Git%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">2.1 Git基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">2.2 Git常用命令</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. SSH</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-SSH%E7%99%BB%E5%BD%95"><span class="toc-text">1.1 SSH登录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1.2 SCP远程拷贝文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Git%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">2.1 Git基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">2.2 Git常用命令</span></a></li></ol></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -769,7 +769,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -783,34 +783,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

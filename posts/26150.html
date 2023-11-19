@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-06-08T09:16:00.000Z">
-<meta property="article:modified_time" content="2023-10-18T12:03:04.679Z">
+<meta property="article:modified_time" content="2023-10-26T06:33:16.936Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1697630584679"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698301996936"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Django%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. Django概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">2. 开发环境介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEDocker%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">3. 配置Docker环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Django%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="toc-number">4.</span> <span class="toc-text">4. Django项目创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Django-App%E5%88%9B%E5%BB%BA"><span class="toc-number">5.</span> <span class="toc-text">5. Django App创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%9B%B4%E6%94%B9Django%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0"><span class="toc-number">6.</span> <span class="toc-text">6. 更改Django项目名称</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. Django概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 开发环境介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 配置Docker环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. Django项目创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. Django App创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6. 更改Django项目名称</span></a></li></ol>
                 </div>
             
             <hr />
@@ -466,7 +466,7 @@ Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djang
 本节内容是 Django 框架的介绍以及本次开发的小游戏项目的环境配置与初始化。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-Django概述">1. Django概述</h2>
+<h1>1. Django概述</h1>
 <p>Django 是后起之秀，近些年越来越流行，Youtube（月活20亿+）、Instagram（月活10亿+）等公司采用了 Django 框架。可以作为 Web、App、小程序、AcWing 云端 App（AC APP）等各种项目的后端。</p>
 <p>Django 优势：</p>
 <ul>
@@ -481,7 +481,7 @@ Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djang
 </li>
 <li>既适合大公司，也适合个人开发者，平均开发一个 Web/AC App 只需要半个月至一个月。</li>
 </ul>
-<h2 id="2-开发环境介绍">2. 开发环境介绍</h2>
+<h1>2. 开发环境介绍</h1>
 <ul>
 <li>完全无需配置本地环境。利用 AC Terminal 直接在云端开发，使用工具：<code>vim</code>、<code>tmux</code> 等。不推荐在本地开发。
 <ul>
@@ -507,7 +507,7 @@ Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djang
 </ul>
 </li>
 </ul>
-<h2 id="3-配置Docker环境">3. 配置Docker环境</h2>
+<h1>3. 配置Docker环境</h1>
 <p>首先拉取一个 Ubuntu 镜像：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ubuntu:20.04</span><br></pre></td></tr></table></figure>
 <p>创建容器后进入容器配置基本环境并创建用户：</p>
@@ -522,7 +522,7 @@ Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djang
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install python3</span><br><span class="line">apt-get install python3-pip</span><br><span class="line">apt-get install git</span><br><span class="line">pip install Django</span><br><span class="line">pip install uwsgi</span><br><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
 <p>在命令行查看 Django 版本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin --version</span><br></pre></td></tr></table></figure>
-<h2 id="4-Django项目创建">4. Django项目创建</h2>
+<h1>4. Django项目创建</h1>
 <p>通过以下命令创建一个 Django 项目：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject djangoapp</span><br></pre></td></tr></table></figure>
 <p>将项目上传至 Git（注意需要先在容器中生成公钥，并在 Git 中添加公钥）：</p>
@@ -538,7 +538,7 @@ Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djang
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**/__pycache__</span><br><span class="line">*.swp  # 过滤掉swap文件</span><br></pre></td></tr></table></figure>
 <p>最后上传至 Git：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;modify ALLOWED_HOSTS&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-<h2 id="5-Django-App创建">5. Django App创建</h2>
+<h1>5. Django App创建</h1>
 <p>在上一节中启动的页面为 Django 的默认页面，我们在开发时需要创建一个新的 App 写自己的页面，首先通过以下指令创建一个名为 <code>game</code> 的 App，创建好后当前目录下会生成一个名为 <code>game</code> 的目录：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py startapp game</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;init app game&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 <p>此时启动 <code>runserver</code> 指令时会发现出现了报错：<code>You have 18 unapplied migration(s). Your project may not work properly ......</code>，原因是有一部分的数据库修改还没有同步到数据库里，运行以下指令同步数据库的修改：</p>
@@ -556,7 +556,7 @@ Django 官方文档：<a target="_blank" rel="noopener" href="https://docs.djang
 <p>然后我们需要更新一下总 URL 文件（<code>~/djangoapp/djangoapp/urls.py</code>）：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;game/&#x27;</span>, include(<span class="string">&#x27;game.urls&#x27;</span>)),</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>此时我们在项目根目录下启动项目：<code>python3 manage.py runserver 0.0.0.0:8000</code>，然后打开网址 <code>http://&lt;公网IP&gt;:8000/game/</code> 即可看到我们的网页，最后更新一下 Git 即可。</p>
-<h2 id="6-更改Django项目名称">6. 更改Django项目名称</h2>
+<h1>6. 更改Django项目名称</h1>
 <p>我们以 <code>settings.py</code> 文件为例，假设项目的目录结构为：<code>OLD_NAME/OLD_NAME/settings.py</code>，项目根目录的名称可以随意改变，即我们可以先改为 <code>NEW_NAME/OLD_NAME/...</code>，然后我们再将第二级 <code>OLD_NAME</code> 目录改为 <code>NEW_NAME</code>，修改完第二级目录的名字后我们还需要改以下几个文件：</p>
 <ul>
 <li><code>settings.py</code></li>
@@ -663,7 +663,7 @@ Django 官方文档：Django Web Docs。
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-18T12:03:04.679Z" itemprop="dateModified">Last edited: 2023-10-18</time>
+                    <time datetime="2023-10-26T06:33:16.936Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -714,7 +714,7 @@ Django 官方文档：Django Web Docs。
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -722,7 +722,7 @@ Django 官方文档：Django Web Docs。
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -730,7 +730,7 @@ Django 官方文档：Django Web Docs。
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -746,14 +746,14 @@ Django 官方文档：Django Web Docs。
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Django%E6%A6%82%E8%BF%B0"><span class="toc-text">1. Django概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="toc-text">2. 开发环境介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEDocker%E7%8E%AF%E5%A2%83"><span class="toc-text">3. 配置Docker环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Django%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="toc-text">4. Django项目创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Django-App%E5%88%9B%E5%BB%BA"><span class="toc-text">5. Django App创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%9B%B4%E6%94%B9Django%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0"><span class="toc-text">6. 更改Django项目名称</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Django概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 开发环境介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 配置Docker环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. Django项目创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. Django App创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6. 更改Django项目名称</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -762,7 +762,7 @@ Django 官方文档：Django Web Docs。
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -776,34 +776,64 @@ Django 官方文档：Django Web Docs。
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

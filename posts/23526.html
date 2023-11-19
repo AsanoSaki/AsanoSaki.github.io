@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="/images/favicon.ico">
   
-  <title>动手学深度学习笔记(李沐)-PyTorch神经网络基础 | AsanoSaki</title>
+  <title>D2L学习笔记-PyTorch神经网络基础 | AsanoSaki</title>
   <meta name="author" content="AsanoSaki" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -16,16 +16,16 @@
   
     <meta name="keywords" content="AI" />
   
-  <meta name="description" content="动手学深度学习笔记(李沐)-PyTorch神经网络基础">
+  <meta name="description" content="D2L学习笔记-PyTorch神经网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动手学深度学习笔记(李沐)-PyTorch神经网络基础">
+<meta property="og:title" content="D2L学习笔记-PyTorch神经网络基础">
 <meta property="og:url" content="https://asanosaki.github.io/posts/23526.html">
 <meta property="og:site_name" content="AsanoSaki">
-<meta property="og:description" content="动手学深度学习笔记(李沐)-PyTorch神经网络基础">
+<meta property="og:description" content="D2L学习笔记-PyTorch神经网络基础">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-02-28T02:34:00.000Z">
-<meta property="article:modified_time" content="2023-06-02T06:45:16.578Z">
+<meta property="article:modified_time" content="2023-11-19T08:08:49.610Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -427,7 +427,7 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">动手学深度学习笔记(李沐)-PyTorch神经网络基础</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">D2L学习笔记-PyTorch神经网络基础</h1>
             
             
             <ul class="kratos-post-meta text-center">
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1685688316578"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700381329610"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B1%82%E5%92%8C%E5%9D%97"><span class="toc-number">1.</span> <span class="toc-text">1. 层和块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%82%E6%95%B0%E7%AE%A1%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2. 参数管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">3. 自定义层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">4. 读写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-GPU"><span class="toc-number">5.</span> <span class="toc-text">5. GPU</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 层和块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 参数管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 自定义层</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 读写文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. GPU</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,7 +464,7 @@
 <p>李沐动手学深度学习（PyTorch）课程学习笔记第四章：PyTorch 神经网络基础。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-层和块">1. 层和块</h2>
+<h1>1. 层和块</h1>
 <p>在构造自定义块之前，我们先回顾一下多层感知机（第三章第二节）的代码，下面的代码生成一个网络，其中包含一个具有256个单元和 ReLU 激活函数的全连接隐藏层，然后是一个具有10个隐藏单元且不带激活函数的全连接输出层：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Linear(<span class="number">20</span>, <span class="number">256</span>), nn.ReLU(), nn.Linear(<span class="number">256</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">X = torch.rand(<span class="number">2</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(net(X).shape)  <span class="comment"># torch.Size([2, 10])</span></span><br></pre></td></tr></table></figure>
 <p>在这个例子中，我们通过实例化 <code>nn.Sequential</code> 来构建我们的模型，层的执行顺序是作为参数传递的。简而言之，<code>nn.Sequential</code> 定义了一种特殊的 <code>Module</code>，即在 PyTorch 中表示一个块的类，它维护了一个由 <code>Module</code> 组成的<strong>有序列表</strong>。注意，两个全连接层都是 <code>Linear</code> 类的实例，<code>Linear</code> 类本身就是 <code>Module</code> 的子类。另外，到目前为止，我们一直在通过 <code>net(X)</code> 调用我们的模型来获得模型的输出。这实际上是 <code>net.__call__(X)</code> 的简写。这个前向传播函数非常简单：它将列表中的每个块连接在一起，将每个块的输出作为下一个块的输入。</p>
@@ -483,7 +483,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FixedHiddenMLP</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="comment"># 不计算梯度的随机权重参数，因此其在训练期间保持不变</span></span><br><span class="line">        self.rand_weight = torch.rand((<span class="number">20</span>, <span class="number">20</span>), requires_grad=<span class="literal">False</span>)</span><br><span class="line">        self.linear = nn.Linear(<span class="number">20</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X</span>):</span><br><span class="line">        X = self.linear(X)</span><br><span class="line">        <span class="comment"># 使用创建的常量参数以及relu和mm函数</span></span><br><span class="line">        X = F.relu(torch.mm(X, self.rand_weight) + <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 复用全连接层，这相当于两个全连接层共享参数</span></span><br><span class="line">        X = self.linear(X)</span><br><span class="line">        <span class="comment"># 控制流</span></span><br><span class="line">        <span class="keyword">while</span> X.<span class="built_in">abs</span>().<span class="built_in">sum</span>() &gt; <span class="number">1</span>:</span><br><span class="line">            X /= <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> X.<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
 <p>我们可以混合搭配各种组合块的方法。在下面的例子中，我们以一些想到的方法嵌套块：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NestMLP</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.net = nn.Sequential(nn.Linear(<span class="number">20</span>, <span class="number">64</span>), nn.ReLU(), nn.Linear(<span class="number">64</span>, <span class="number">32</span>), nn.ReLU())</span><br><span class="line">        self.linear = nn.Linear(<span class="number">32</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X</span>):</span><br><span class="line">        <span class="keyword">return</span> self.linear(self.net(X))</span><br><span class="line"></span><br><span class="line">chimera = nn.Sequential(NestMLP(), nn.Linear(<span class="number">16</span>, <span class="number">20</span>), FixedHiddenMLP())</span><br><span class="line"><span class="built_in">print</span>(chimera(X))  <span class="comment"># tensor(-0.2911, grad_fn=&lt;SumBackward0&gt;)</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-参数管理">2. 参数管理</h2>
+<h1>2. 参数管理</h1>
 <p>我们首先看一下具有单隐藏层的多层感知机：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Linear(<span class="number">4</span>, <span class="number">8</span>), nn.ReLU(), nn.Linear(<span class="number">8</span>, <span class="number">1</span>))</span><br><span class="line">X = torch.rand(size=(<span class="number">2</span>, <span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(net(X).shape)  <span class="comment"># torch.Size([2, 1])</span></span><br></pre></td></tr></table></figure>
 <p>我们从已有模型中访问参数。当通过 <code>Sequential</code> 类定义模型时，我们可以通过索引来访问模型的任意层。这就像模型是一个列表一样，每层的参数都在其属性中。如下所示，我们可以检查第二个全连接层的参数：</p>
@@ -512,12 +512,12 @@
 <p>有时我们希望在多个层间共享参数：我们可以定义一个稠密层，然后使用它的参数来设置另一个层的参数：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shared = nn.Linear(<span class="number">8</span>, <span class="number">8</span>)  <span class="comment"># 我们需要给共享层一个名称，以便可以引用它的参数</span></span><br><span class="line">net = nn.Sequential(nn.Linear(<span class="number">4</span>, <span class="number">8</span>), nn.ReLU(), shared, nn.ReLU(),</span><br><span class="line">                    shared, nn.ReLU(), nn.Linear(<span class="number">8</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 检查参数是否相同</span></span><br><span class="line"><span class="built_in">print</span>(net[<span class="number">2</span>].weight.data[<span class="number">0</span>] == net[<span class="number">4</span>].weight.data[<span class="number">0</span>])  <span class="comment"># tensor([True, True, True, True, True, True, True, True])</span></span><br><span class="line">net[<span class="number">2</span>].weight.data[<span class="number">0</span>, <span class="number">0</span>] = <span class="number">100</span></span><br><span class="line"><span class="comment"># 确保它们实际上是同一个对象，而不只是有相同的值</span></span><br><span class="line"><span class="built_in">print</span>(net[<span class="number">2</span>].weight.data[<span class="number">0</span>] == net[<span class="number">4</span>].weight.data[<span class="number">0</span>])  <span class="comment"># tensor([True, True, True, True, True, True, True, True])</span></span><br></pre></td></tr></table></figure>
 <p>这个例子表明第三个和第五个神经网络层的参数是绑定的。它们不仅值相等，而且由相同的张量表示。因此，如果我们改变其中一个参数，另一个参数也会改变。这里有一个问题：当参数绑定时，梯度会发生什么情况？答案是由于模型参数包含梯度，因此在反向传播期间第二个隐藏层（即第三个神经网络层）和第三个隐藏层（即第五个神经网络层）的梯度会加在一起。</p>
-<h2 id="3-自定义层">3. 自定义层</h2>
+<h1>3. 自定义层</h1>
 <p>我们构造一个没有任何参数的自定义层，下面的 <code>CenteredLayer</code> 类要从其输入中减去均值。要构建它，我们只需继承基础层类并实现前向传播功能：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CenteredLayer</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X</span>):</span><br><span class="line">        <span class="keyword">return</span> X - X.mean()</span><br><span class="line"></span><br><span class="line">layer = CenteredLayer()</span><br><span class="line"><span class="built_in">print</span>(layer(torch.FloatTensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])))  <span class="comment"># tensor([-2., -1.,  0.,  1.,  2.])</span></span><br></pre></td></tr></table></figure>
 <p>下面我们继续定义具有参数的层，这些参数可以通过训练进行调整。让我们实现自定义版本的全连接层。回想一下，该层需要两个参数，一个用于表示权重，另一个用于表示偏置项。在此实现中，我们使用 ReLU 作为激活函数。该层需要输入参数：<code>in_units</code> 和 <code>units</code>，分别表示输入数和输出数：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinear</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_units, units</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.weight = nn.Parameter(torch.randn(in_units, units))</span><br><span class="line">        self.bias = nn.Parameter(torch.randn(units,))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X</span>):</span><br><span class="line">        linear = torch.matmul(X, self.weight.data) + self.bias.data</span><br><span class="line">        <span class="keyword">return</span> F.relu(linear)</span><br><span class="line"></span><br><span class="line">linear = MyLinear(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(linear.weight.shape)  <span class="comment"># torch.Size([5, 3])</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-读写文件">4. 读写文件</h2>
+<h1>4. 读写文件</h1>
 <p>加载和保存张量：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">4</span>)</span><br><span class="line">torch.save(x, <span class="string">&#x27;../save/x-file&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>将存储在文件中的数据读回内存：</p>
@@ -528,7 +528,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mydict = &#123;<span class="string">&#x27;x&#x27;</span>: x, <span class="string">&#x27;y&#x27;</span>: y&#125;</span><br><span class="line">torch.save(mydict, <span class="string">&#x27;../save/mydict&#x27;</span>)</span><br><span class="line">mydict2 = torch.load(<span class="string">&#x27;../save/mydict&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(mydict2)  <span class="comment"># &#123;&#x27;x&#x27;: tensor([0, 1, 2, 3]), &#x27;y&#x27;: tensor([0., 0., 0., 0.])&#125;</span></span><br></pre></td></tr></table></figure>
 <p>深度学习框架提供了内置函数来保存和加载整个网络。需要注意的一个重要细节是，这将<strong>保存模型的参数</strong>而不是保存整个模型：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MLP</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.hidden = nn.Linear(<span class="number">20</span>, <span class="number">256</span>)</span><br><span class="line">        self.output = nn.Linear(<span class="number">256</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> self.output(F.relu(self.hidden(x)))</span><br><span class="line"></span><br><span class="line">net = MLP()</span><br><span class="line">X = torch.randn(size=(<span class="number">2</span>, <span class="number">20</span>))</span><br><span class="line">Y = net(X)</span><br><span class="line"></span><br><span class="line">torch.save(net.state_dict(), <span class="string">&#x27;../save/mlp.params&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为了恢复模型，我们实例化了原始多层感知机模型的一个备份。这里我们不需要随机初始化模型参数，而是直接读取文件中存储的参数</span></span><br><span class="line">clone = MLP()</span><br><span class="line">clone.load_state_dict(torch.load(<span class="string">&#x27;../save/mlp.params&#x27;</span>))</span><br><span class="line">clone.<span class="built_in">eval</span>()</span><br><span class="line">Y_clone = clone(X)</span><br><span class="line"><span class="built_in">print</span>(Y_clone == Y)</span><br><span class="line"><span class="comment"># tensor([[True, True, True, True, True, True, True, True, True, True],</span></span><br><span class="line"><span class="comment">#         [True, True, True, True, True, True, True, True, True, True]])</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-GPU">5. GPU</h2>
+<h1>5. GPU</h1>
 <p>CUDA 的安装配置教程：<a href="/posts/15428.html">Anaconda与PyTorch安装教程</a></p>
 <p>在 PyTorch 中，CPU 和 GPU 可以用 <code>torch.device('cpu')</code> 和 <code>torch.device('cuda')</code> 表示：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(torch.device(<span class="string">&#x27;cpu&#x27;</span>), torch.device(<span class="string">&#x27;cuda&#x27;</span>), torch.device(<span class="string">&#x27;cuda:0&#x27;</span>))  <span class="comment"># cpu cuda cuda:0</span></span><br></pre></td></tr></table></figure>
@@ -607,7 +607,7 @@
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "https://asanosaki.github.io/posts/23526.html";
-            const title         = "「动手学深度学习笔记(李沐)-PyTorch神经网络基础」";
+            const title         = "「D2L学习笔记-PyTorch神经网络基础」";
             const excerpt       = `李沐动手学深度学习（PyTorch）课程学习笔记第四章：PyTorch 神经网络基础。`;
             let _URL;
             switch (dest) {
@@ -630,7 +630,7 @@
                     <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-06-02T06:45:16.578Z" itemprop="dateModified">Last edited: 2023-06-02</time>
+                    <time datetime="2023-11-19T08:08:49.610Z" itemprop="dateModified">Last edited: 2023-11-19</time>
                 </div>
             </div>
         </footer>
@@ -639,12 +639,12 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-多层感知机" href="/posts/46068.html">&lt; Previous</a>
+                <a title=" D2L学习笔记-多层感知机" href="/posts/46068.html">&lt; Previous</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-卷积神经网络" href="/posts/25122.html">Next &gt;</a>
+                <a title=" D2L学习笔记-卷积神经网络" href="/posts/25122.html">Next &gt;</a>
             </div>
             
         </nav>
@@ -681,7 +681,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -689,7 +689,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -697,7 +697,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -713,14 +713,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B1%82%E5%92%8C%E5%9D%97"><span class="toc-text">1. 层和块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%82%E6%95%B0%E7%AE%A1%E7%90%86"><span class="toc-text">2. 参数管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%82"><span class="toc-text">3. 自定义层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-text">4. 读写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-GPU"><span class="toc-text">5. GPU</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 层和块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 参数管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 自定义层</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 读写文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. GPU</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -729,7 +729,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -743,34 +743,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="/images/favicon.ico">
   
-  <title>动手学深度学习笔记(李沐)-预备知识 | AsanoSaki</title>
+  <title>D2L学习笔记-预备知识 | AsanoSaki</title>
   <meta name="author" content="AsanoSaki" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -16,16 +16,16 @@
   
     <meta name="keywords" content="AI" />
   
-  <meta name="description" content="动手学深度学习笔记(李沐)-预备知识">
+  <meta name="description" content="D2L学习笔记-预备知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动手学深度学习笔记(李沐)-预备知识">
+<meta property="og:title" content="D2L学习笔记-预备知识">
 <meta property="og:url" content="https://asanosaki.github.io/posts/15604.html">
 <meta property="og:site_name" content="AsanoSaki">
-<meta property="og:description" content="动手学深度学习笔记(李沐)-预备知识">
+<meta property="og:description" content="D2L学习笔记-预备知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-01-18T08:37:00.000Z">
-<meta property="article:modified_time" content="2023-06-02T06:43:31.821Z">
+<meta property="article:modified_time" content="2023-11-19T08:11:34.427Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -427,7 +427,7 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">动手学深度学习笔记(李沐)-预备知识</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">D2L学习笔记-预备知识</h1>
             
             
             <ul class="kratos-post-meta text-center">
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1685688211821"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700381494427"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. 环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2. 数据操作与数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3. 线性代数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text">4. 自动微分</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 环境安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 数据操作与数据预处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 线性代数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 自动微分</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,11 +464,11 @@
 <p>李沐动手学深度学习（PyTorch）课程学习笔记第一章：预备知识。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-环境安装">1. 环境安装</h2>
+<h1>1. 环境安装</h1>
 <p>首先安装好 PyTorch 环境：<a href="/posts/15428.html">Anaconda与PyTorch安装教程</a>。</p>
 <p>安装需要的包：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install d2l</span><br></pre></td></tr></table></figure>
-<h2 id="2-数据操作与数据预处理">2. 数据操作与数据预处理</h2>
+<h1>2. 数据操作与数据预处理</h1>
 <p>张量表示一个数值组成的数组，这个数组可能有多个维度：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">12</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])</span></span><br></pre></td></tr></table></figure>
 <p>我们可以通过张量的 <code>shape</code> 属性来访问张量的形状和张量中元素的总数：</p>
@@ -503,7 +503,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inputs = pd.get_dummies(inputs, dummy_na=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br><span class="line"><span class="comment">#    NumRooms  Alley_Pave  Alley_nan</span></span><br><span class="line"><span class="comment"># 0       3.0           1          0</span></span><br><span class="line"><span class="comment"># 1       2.0           0          1</span></span><br><span class="line"><span class="comment"># 2       4.0           0          1</span></span><br><span class="line"><span class="comment"># 3       3.0           0          1</span></span><br></pre></td></tr></table></figure>
 <p>现在 <code>inputs</code> 和 <code>outputs</code> 中的所有条目都是数值类型，它们可以转换为张量格式：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x, y = torch.tensor(inputs.values), torch.tensor(outputs.values)</span><br><span class="line"><span class="built_in">print</span>(x, y)</span><br><span class="line"><span class="comment"># tensor([[3., 1., 0.],</span></span><br><span class="line"><span class="comment">#         [2., 0., 1.],</span></span><br><span class="line"><span class="comment">#         [4., 0., 1.],</span></span><br><span class="line"><span class="comment">#         [3., 0., 1.]], dtype=torch.float64) tensor([127500, 106000, 178100, 140000])</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-线性代数">3. 线性代数</h2>
+<h1>3. 线性代数</h1>
 <p>标量由只有一个元素的张量表示，你可以将向量视为标量值组成的列表：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.tensor(<span class="number">3.0</span>)</span><br><span class="line">y = torch.tensor(<span class="number">2.0</span>)</span><br><span class="line"><span class="built_in">print</span>(x + y, x * y)  <span class="comment"># tensor(5.) tensor(6.)</span></span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([0, 1, 2, 3])</span></span><br></pre></td></tr></table></figure>
 <p>访问张量的长度和形状：</p>
@@ -526,7 +526,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">abs</span>(x).<span class="built_in">sum</span>())  <span class="comment"># tensor(7.)</span></span><br><span class="line"><span class="built_in">print</span>(torch.norm(x, <span class="number">1</span>))  <span class="comment"># tensor(7.)</span></span><br></pre></td></tr></table></figure>
 <p>F 范数（弗罗贝尼乌斯范数）是矩阵所有元素的平方和的平方根：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(torch.norm(torch.ones((<span class="number">4</span>, <span class="number">9</span>))))  <span class="comment"># tensor(6.)</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-自动微分">4. 自动微分</h2>
+<h1>4. 自动微分</h1>
 <p>先举一个简单的例子：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.arange(<span class="number">4.0</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># tensor([0., 1., 2., 3.])</span></span><br><span class="line"></span><br><span class="line">x.requires_grad_(<span class="literal">True</span>)  <span class="comment"># 等价于x = torch.arange(4.0, requires_grad=True)</span></span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># 默认值是None</span></span><br><span class="line"></span><br><span class="line">y = <span class="number">2</span> * torch.dot(x, x)  <span class="comment"># 计算y，注意一个标量函数关于向量x的梯度是向量，并且与x具有相同的形状</span></span><br><span class="line"><span class="built_in">print</span>(y)  <span class="comment"># tensor(28., grad_fn=&lt;MulBackward0&gt;)，隐式构造了计算图，所以有一个求梯度的函数</span></span><br><span class="line"></span><br><span class="line">y.backward()  <span class="comment"># 通过调用反向传播函数来自动计算y关于x每个分量的梯度</span></span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># tensor([ 0.,  4.,  8., 12.])，y=2*x*x的导数为4x</span></span><br><span class="line"><span class="built_in">print</span>(x.grad == <span class="number">4</span> * x)  <span class="comment"># tensor([True, True, True, True])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在计算x的另一个函数</span></span><br><span class="line"><span class="comment"># 在默认情况下，PyTorch会累积梯度，我们需要清除之前的值</span></span><br><span class="line">x.grad.zero_()</span><br><span class="line">y = x.<span class="built_in">sum</span>()</span><br><span class="line">y.backward()</span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># tensor([1., 1., 1., 1.])</span></span><br></pre></td></tr></table></figure>
 <p>当 <code>y</code> 不是标量时，向量 <code>y</code> 关于向量 <code>x</code> 的导数的最自然解释是一个矩阵。对于高阶和高维的 <code>y</code> 和 <code>x</code>，求导的结果可以是一个高阶张量。</p>
@@ -600,7 +600,7 @@
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "https://asanosaki.github.io/posts/15604.html";
-            const title         = "「动手学深度学习笔记(李沐)-预备知识」";
+            const title         = "「D2L学习笔记-预备知识」";
             const excerpt       = `李沐动手学深度学习（PyTorch）课程学习笔记第一章：预备知识。`;
             let _URL;
             switch (dest) {
@@ -623,7 +623,7 @@
                     <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-06-02T06:43:31.821Z" itemprop="dateModified">Last edited: 2023-06-02</time>
+                    <time datetime="2023-11-19T08:11:34.427Z" itemprop="dateModified">Last edited: 2023-11-19</time>
                 </div>
             </div>
         </footer>
@@ -632,12 +632,12 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 实用机器学习课程笔记(Stanford)" href="/posts/33687.html">&lt; Previous</a>
+                <a title=" 实用机器学习课程笔记（Stanford）" href="/posts/33687.html">&lt; Previous</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" 动手学深度学习笔记(李沐)-线性神经网络" href="/posts/19931.html">Next &gt;</a>
+                <a title=" D2L学习笔记-线性神经网络" href="/posts/19931.html">Next &gt;</a>
             </div>
             
         </nav>
@@ -674,7 +674,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -682,7 +682,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -690,7 +690,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -706,14 +706,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-text">1. 环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">2. 数据操作与数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-text">3. 线性代数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86"><span class="toc-text">4. 自动微分</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 环境安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 数据操作与数据预处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 线性代数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 自动微分</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -722,7 +722,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -736,34 +736,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           

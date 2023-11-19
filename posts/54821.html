@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-06-27T15:19:00.000Z">
-<meta property="article:modified_time" content="2023-10-18T12:03:27.110Z">
+<meta property="article:modified_time" content="2023-10-26T06:32:14.341Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -322,9 +322,9 @@
                                                         </li>
                                                     
                                                         <li>
-                                                            <a target="_blank" rel="noopener" href="https://springdoc.cn/docs">
+                                                            <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">
                                                                 
-                                                                Spring
+                                                                SpringBoot
                                                             </a>
                                                         </li>
                                                     
@@ -450,13 +450,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1697630607110"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1698301934341"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9C%A8Django%E4%B8%AD%E9%9B%86%E6%88%90Redis"><span class="toc-number">1.</span> <span class="toc-text">1. 在Django中集成Redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7%E6%8E%88%E6%9D%83%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">2. 申请授权码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%B3%E8%AF%B7%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%E5%92%8C%E7%94%A8%E6%88%B7ID"><span class="toc-number">3.</span> <span class="toc-text">3. 申请授权令牌和用户ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%94%B3%E8%AF%B7%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">4.</span> <span class="toc-text">4. 申请用户信息</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 在Django中集成Redis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 申请授权码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 申请授权令牌和用户ID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 申请用户信息</span></a></li></ol>
                 </div>
             
             <hr />
@@ -464,7 +464,7 @@
 <p>本节内容是通过 OAuth2 实现网页端的 AcWing 一键登录功能。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="1-在Django中集成Redis">1. 在Django中集成Redis</h2>
+<h1>1. 在Django中集成Redis</h1>
 <p>Redis 为内存数据库，目前我们使用的是 Django 自带的数据库 SQLite，且能够很容易地迁移到 MySQL，这些数据库的效率不如 Redis，其特点为：</p>
 <ul>
 <li>Redis 存的内容为 <code>key, value</code> 对，而其它数据库存的是若干张表，每张表为若干条目；</li>
@@ -479,7 +479,7 @@
 <p>此时在项目根目录执行 <code>python3 manage.py shell</code> 进入 IPython 交互界面，输入以下代码测试一下 Redis：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: cache.keys(<span class="string">&#x27;*&#x27;</span>)  <span class="comment"># 查找当前数据库的所有关键字，支持正则匹配</span></span><br><span class="line">Out[<span class="number">2</span>]: []</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: cache.<span class="built_in">set</span>(<span class="string">&#x27;yyj&#x27;</span>, <span class="number">1</span>, <span class="number">5</span>)  <span class="comment"># 设置关键字，第三个参数表示多长时间过期，单位是秒，None表示不会过期</span></span><br><span class="line">Out[<span class="number">3</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: cache.<span class="built_in">set</span>(<span class="string">&#x27;abc&#x27;</span>, <span class="number">2</span>, <span class="literal">None</span>)</span><br><span class="line">Out[<span class="number">4</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: cache.has_key(<span class="string">&#x27;abc&#x27;</span>)  <span class="comment"># 查询某个键是否存在</span></span><br><span class="line">Out[<span class="number">5</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: cache.has_key(<span class="string">&#x27;yyj&#x27;</span>)</span><br><span class="line">Out[<span class="number">6</span>]: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: cache.get(<span class="string">&#x27;abc&#x27;</span>)  <span class="comment"># 查询某个键的值</span></span><br><span class="line">Out[<span class="number">7</span>]: <span class="number">2</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: cache.delete(<span class="string">&#x27;abc&#x27;</span>)  <span class="comment"># 删除某个关键字</span></span><br><span class="line">Out[<span class="number">8</span>]: <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 <p>注意如果出现报错：<code>ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.</code> 说明 <code>redis-server</code> 没有启动。</p>
-<h2 id="2-申请授权码">2. 申请授权码</h2>
+<h1>2. 申请授权码</h1>
 <p>一键授权登录的流程是用户点击一键登录后弹出确认授权的页面，用户确认后就自动创建一个新的账号，且登录到网站里。</p>
 <p>具体交互流程为：用户点击按钮后向网站服务器端（Web）发起申请，请求用 AcWing 账号登录，然后 Web 将自己的 <code>AppID</code> 报给 AcWing，AcWing 给用户返回一个页面询问用户是否要授权给刚刚的网站，如果用户同意，那么 AcWing 会将一个授权码 <code>code</code>（两小时有效期）发给 Web，Web 接到授权码后再加上自己的身份信息 <code>AppSecret</code> 以及 <code>AppID</code> 向 AcWing 申请一个授权令牌 <code>access-token</code>（两小时有效期）和用户的 <code>openid</code>（唯一辨别用户），Web 拿到令牌和用户 ID 后即可向 AcWing 申请用户的用户名和头像。</p>
 <p>由于我们需要记录每个用户的 <code>openid</code>，因此我们需要在数据库（<code>game/models/player/</code>）的 <code>Player</code> 类中添加一个信息：</p>
@@ -515,7 +515,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> JsonResponse</span><br><span class="line"><span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_state</span>():  <span class="comment"># 获得8位长度的随机数</span></span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">        res += <span class="built_in">str</span>(randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">apply_code</span>(<span class="params">request</span>):</span><br><span class="line">    appid = <span class="string">&#x27;4007&#x27;</span></span><br><span class="line">    redirect_uri = quote(<span class="string">&#x27;https://app4007.acapp.acwing.com.cn/settings/acwing/web/receive_code/&#x27;</span>)</span><br><span class="line">    scope = <span class="string">&#x27;userinfo&#x27;</span></span><br><span class="line">    state = get_state()</span><br><span class="line">    cache.<span class="built_in">set</span>(state, <span class="literal">True</span>, <span class="number">7200</span>)  <span class="comment"># 有效期2小时</span></span><br><span class="line">    apply_code_url = <span class="string">&#x27;https://www.acwing.com/third_party/api/oauth2/web/authorize/&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> JsonResponse(&#123;</span><br><span class="line">        <span class="string">&#x27;result&#x27;</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;apply_code_url&#x27;</span>: apply_code_url + <span class="string">&#x27;?appid=%s&amp;redirect_uri=%s&amp;scope=%s&amp;state=%s&#x27;</span> % (appid, redirect_uri, scope, state)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 <p>然后修改一下前端代码（<code>Settings</code> 类）：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Settings</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$acwingoption</span> = <span class="variable language_">this</span>.<span class="property">$login</span>.<span class="title function_">find</span>(<span class="string">&#x27;.ac_game_settings_acwingoption img&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>) &#123;  <span class="comment">// 在初始化时需要从服务器端获取用户信息</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events</span>(<span class="params"></span>) &#123;  <span class="comment">// 绑定监听函数</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events_login</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">add_listening_events_register</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events_login</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> outer = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_register</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">register</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$login_submit</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">login_on_remote</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$acwingoption</span>.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            outer.<span class="title function_">acwing_login</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add_listening_events_register</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">login_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上登录</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">register_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上注册</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">logout_on_remote</span>(<span class="params"></span>) &#123;  <span class="comment">// 在远程服务器上登出</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">acwing_login</span>(<span class="params"></span>) &#123;</span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;https://app4007.acapp.acwing.com.cn/settings/acwing/web/apply_code/&#x27;</span>,</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">resp</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(resp);</span><br><span class="line">                <span class="keyword">if</span> (resp.<span class="property">result</span> === <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">                    <span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">replace</span>(resp.<span class="property">apply_code_url</span>);  <span class="comment">// 将当前页面重定向</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">register</span>(<span class="params"></span>) &#123;  <span class="comment">// 打开注册界面</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">login</span>(<span class="params"></span>) &#123;  <span class="comment">// 打开登录界面</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getinfo</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-申请授权令牌和用户ID">3. 申请授权令牌和用户ID</h2>
+<h1>3. 申请授权令牌和用户ID</h1>
 <p>请求地址：<code>https://www.acwing.com/third_party/api/oauth2/access_token/</code>。</p>
 <p>请求方法为 <code>GET</code>，参考示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.acwing.com/third_party/api/oauth2/access_token/?appid=APPID&amp;secret=APPSECRET&amp;code=CODE</span><br></pre></td></tr></table></figure>
@@ -540,7 +540,7 @@
 <p>现在我们点击 AcWing 一键登录按钮即可跳出请求授权的页面，AcWing 会向 <code>receive_code</code> 函数发送 <code>code</code> 以及 <code>state</code>，现在我们完善 <code>receive_code.py</code> 接到授权后的操作：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> redirect</span><br><span class="line"><span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">receive_code</span>(<span class="params">request</span>):</span><br><span class="line">    data = request.GET</span><br><span class="line">    code = data.get(<span class="string">&#x27;code&#x27;</span>)</span><br><span class="line">    state = data.get(<span class="string">&#x27;state&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cache.has_key(state):</span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">&#x27;index&#x27;</span>)</span><br><span class="line">    cache.delete(state)</span><br><span class="line"></span><br><span class="line">    apply_access_token_url = <span class="string">&#x27;https://www.acwing.com/third_party/api/oauth2/access_token/&#x27;</span></span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">&#x27;appid&#x27;</span>: <span class="string">&#x27;4007&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;secret&#x27;</span>: <span class="string">&#x27;0edf233ee876407ea3542220e2a8d83e&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;code&#x27;</span>: code</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    access_token_res = requests.get(apply_access_token_url, params=params).json()  <span class="comment"># 申请授权令牌</span></span><br><span class="line">    <span class="built_in">print</span>(access_token_res)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">&#x27;index&#x27;</span>)  <span class="comment"># 重定向回index</span></span><br></pre></td></tr></table></figure>
 <p>现在我们点击一键登录按钮即可在后台看到接收到的授权令牌内容。</p>
-<h2 id="4-申请用户信息">4. 申请用户信息</h2>
+<h1>4. 申请用户信息</h1>
 <p>请求地址：<code>https://www.acwing.com/third_party/api/meta/identity/getinfo/</code>。</p>
 <p>请求方法为 <code>GET</code>，参考示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.acwing.com/third_party/api/meta/identity/getinfo/?access_token=ACCESS_TOKEN&amp;openid=OPENID</span><br></pre></td></tr></table></figure>
@@ -643,7 +643,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-18T12:03:27.110Z" itemprop="dateModified">Last edited: 2023-10-18</time>
+                    <time datetime="2023-10-26T06:32:14.341Z" itemprop="dateModified">Last edited: 2023-10-26</time>
                 </div>
             </div>
         </footer>
@@ -694,7 +694,7 @@
                 Articles
             </span>
             <span class="count">
-                60
+                75
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -702,7 +702,7 @@
                 Classifications
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -710,7 +710,7 @@
                 Tags
             </span>
             <span class="count">
-                10
+                11
             </span>
         </a>
     </div>
@@ -726,14 +726,14 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9C%A8Django%E4%B8%AD%E9%9B%86%E6%88%90Redis"><span class="toc-text">1. 在Django中集成Redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7%E6%8E%88%E6%9D%83%E7%A0%81"><span class="toc-text">2. 申请授权码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%B3%E8%AF%B7%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%E5%92%8C%E7%94%A8%E6%88%B7ID"><span class="toc-text">3. 申请授权令牌和用户ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%94%B3%E8%AF%B7%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-text">4. 申请用户信息</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 在Django中集成Redis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 申请授权码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 申请授权令牌和用户ID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 申请用户信息</span></a></li></ol>
     </div>
 </aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -742,7 +742,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.74em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.8em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -756,34 +756,64 @@
         
           
           
-            <a class="list-group-item" href="/posts/45720.html"><i class="fa  fa-book"></i> Django Channels、WS协议及同步与异步详解</a>
+            <a class="list-group-item" href="/posts/54295.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建菜单与游戏页面（上）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60606.html"><i class="fa  fa-book"></i> Django使用SMTP发送邮件教程</a>
+            <a class="list-group-item" href="/posts/34589.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-项目初始化</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/54938.html"><i class="fa  fa-book"></i> Django学习笔记-实现聊天系统</a>
+            <a class="list-group-item" href="/posts/55162.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（用户动态页面设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/65222.html"><i class="fa  fa-book"></i> Django、Nginx、uWSGI详解及配置示例</a>
+            <a class="list-group-item" href="/posts/54619.html"><i class="fa  fa-book"></i> Web学习笔记-Vue3（环境配置、概念、整体布局设计）</a>
             
           
         
           
           
-            <a class="list-group-item" href="/posts/60167.html"><i class="fa  fa-book"></i> Django学习笔记-实现联机对战(下)</a>
+            <a class="list-group-item" href="/posts/62501.html"><i class="fa  fa-book"></i> Java字符串与输入输出详解</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           
