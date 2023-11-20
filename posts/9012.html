@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-12-01T04:30:00.000Z">
-<meta property="article:modified_time" content="2023-11-20T00:57:50.835Z">
+<meta property="article:modified_time" content="2023-11-20T01:31:41.093Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@
                                     
                                         
                                             <li>
-                                                <a><i class="fa fa-link"></i>Links</a>
+                                                <a><i class="fa fa-link"></i>My Links</a>
                                                 <ul class="sub-menu">
                                                     
                                                         
@@ -210,19 +210,19 @@
                                                         
                                                     
                                                         
-                                                            <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">SpringBoot</a></li>
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">Spring Boot</a></li>
                                                         
                                                     
                                                         
-                                                            <li><a target="_blank" rel="noopener" href="https://hub.docker.com">DockerHub</a></li>
+                                                            <li><a target="_blank" rel="noopener" href="https://hub.docker.com">Docker Hub</a></li>
                                                         
                                                     
                                                         
-                                                            <li><a target="_blank" rel="noopener" href="https://fontawesome.com.cn">FontAwesome</a></li>
+                                                            <li><a target="_blank" rel="noopener" href="https://fontawesome.com.cn">Font Awesome</a></li>
                                                         
                                                     
                                                         
-                                                            <li><a target="_blank" rel="noopener" href="https://www.online-convert.com">File-Convert</a></li>
+                                                            <li><a target="_blank" rel="noopener" href="https://www.online-convert.com">File Convert</a></li>
                                                         
                                                     
                                                         
@@ -234,11 +234,11 @@
                                                         
                                                     
                                                         
-                                                            <li><a target="_blank" rel="noopener" href="https://board.xcpcio.com">XCPC-Board</a></li>
+                                                            <li><a target="_blank" rel="noopener" href="https://board.xcpcio.com">XCPC Board</a></li>
                                                         
                                                     
                                                         
-                                                            <li><a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">Kratos-MNL</a></li>
+                                                            <li><a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">Kratos MNL</a></li>
                                                         
                                                     
                                                 </ul>
@@ -304,7 +304,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~1.69K
+                            ~2.42K
                         
                         words
                     </li>
@@ -316,7 +316,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1700441870835"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700443901093"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -343,9 +343,15 @@
 <p>找到 <code>@media (min-width:1200px)</code>，其后的 <code>.container&#123;width:xx&#125;</code> 即为主体部分宽度，改成以下内容：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>:<span class="number">1200px</span>)&#123;<span class="selector-class">.container</span>&#123;<span class="attribute">width</span>:<span class="number">1340px</span>&#125;<span class="selector-class">.visible-lg</span>&#123;<span class="attribute">display</span>:block<span class="meta">!important</span>&#125;<span class="selector-class">.hidden-lg</span>&#123;<span class="attribute">display</span>:none<span class="meta">!important</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 <h1>3. 导航栏</h1>
-<h2 id="3-1-下拉子菜单文字宽度">3.1 下拉子菜单文字宽度</h2>
+<h2 id="3-1-导航栏选项宽度固定">3.1 导航栏选项宽度固定</h2>
+<p>找到 <code>#kratos-menu-wrap .sf-menu a</code>，将导航栏中的选项卡宽度固定，并让文字居中：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#kratos-menu-wrap</span> <span class="selector-class">.sf-menu</span> <span class="selector-tag">a</span>&#123;<span class="attribute">border</span>:none;<span class="attribute">color</span>:<span class="number">#fff</span>;<span class="attribute">display</span>:block;<span class="attribute">font-size</span>:<span class="number">15px</span>;<span class="attribute">font-weight</span>:<span class="number">400</span>;<span class="attribute">padding</span>:<span class="number">7px</span> <span class="number">14px</span>;<span class="attribute">position</span>:relative;<span class="attribute">width</span>:<span class="number">135px</span>;<span class="attribute">text-align</span>:center;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-下拉子菜单偏移位置修改">3.2 下拉子菜单偏移位置修改</h2>
+<p>找到 <code>#kratos-desktop-topnav .sf-menu&gt;li&gt;ul.sub-menu</code> 将下拉菜单的偏移量 <code>left:-18px;</code> 删去：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#kratos-desktop-topnav</span> <span class="selector-class">.sf-menu</span>&gt;<span class="selector-tag">li</span>&gt;<span class="selector-tag">ul</span><span class="selector-class">.sub-menu</span>&#123;<span class="attribute">background</span>:<span class="built_in">hsla</span>(<span class="number">0</span>,<span class="number">0%</span>,<span class="number">100%</span>,.<span class="number">933</span>);<span class="attribute">border-radius</span>:<span class="number">5px</span>;-webkit-<span class="attribute">box-shadow</span>:<span class="number">0</span> <span class="number">5px</span> <span class="number">15px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">15</span>);<span class="attribute">box-shadow</span>:<span class="number">0</span> <span class="number">5px</span> <span class="number">15px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">15</span>);<span class="attribute">margin-top</span>:<span class="number">6px</span>;<span class="attribute">opacity</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">10px</span> <span class="number">5px</span>;<span class="attribute">position</span>:absolute;<span class="attribute">top</span>:<span class="built_in">calc</span>(<span class="number">100%</span> + <span class="number">6px</span>);-webkit-<span class="attribute">transition</span>:all .<span class="number">3s</span> ease-in-out;<span class="attribute">transition</span>:all .<span class="number">3s</span> ease-in-out;<span class="attribute">visibility</span>:hidden;<span class="attribute">width</span>:<span class="number">135px</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-下拉子菜单文字宽度">3.3 下拉子菜单文字宽度</h2>
 <p>找到 <code>#kratos-desktop-topnav .sf-menu&gt;li&gt;ul.sub-menu a</code>，改成以下内容：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#kratos-desktop-topnav</span> <span class="selector-class">.sf-menu</span>&gt;<span class="selector-tag">li</span>&gt;<span class="selector-tag">ul</span><span class="selector-class">.sub-menu</span> <span class="selector-tag">a</span>&#123;<span class="attribute">color</span>:<span class="number">#848484</span>;<span class="attribute">letter-spacing</span>:<span class="number">0</span>;<span class="attribute">line-height</span>:<span class="number">20px</span>;<span class="attribute">padding</span>:<span class="number">7px</span> <span class="number">2px</span><span class="meta">!important</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#kratos-desktop-topnav</span> <span class="selector-class">.sf-menu</span>&gt;<span class="selector-tag">li</span>&gt;<span class="selector-tag">ul</span><span class="selector-class">.sub-menu</span> <span class="selector-tag">a</span>&#123;<span class="attribute">color</span>:<span class="number">#848484</span>;<span class="attribute">letter-spacing</span>:<span class="number">0</span>;<span class="attribute">line-height</span>:<span class="number">20px</span>;<span class="attribute">width</span>:<span class="number">100%</span>;<span class="attribute">padding</span>:<span class="number">7px</span> <span class="number">2px</span><span class="meta">!important</span>&#125;</span><br></pre></td></tr></table></figure>
 <h1>4. 代码块</h1>
 <p>在主题目录中的 <code>source/css/highlight/light.min.css</code> 文件中找到 <code>figure.highlight&#123;</code>，将代码块顶部横条部分背景改成以下内容：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>:<span class="number">#ececec</span>;</span><br></pre></td></tr></table></figure>
@@ -438,7 +444,7 @@
                     <a class="tag-none-link" href="/tags/Hexo/" rel="tag">Hexo</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-11-20T00:57:50.835Z" itemprop="dateModified">Last edited: 2023-11-20</time>
+                    <time datetime="2023-11-20T01:31:41.093Z" itemprop="dateModified">Last edited: 2023-11-20</time>
                 </div>
             </div>
         </footer>
