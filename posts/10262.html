@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-11-12T14:25:00.000Z">
-<meta property="article:modified_time" content="2023-11-19T11:15:49.365Z">
+<meta property="article:modified_time" content="2023-11-20T02:27:05.334Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -268,7 +268,7 @@
                 <div class="desc desc2 animate-box">
                     <a href="/">
                         <h2>AsanoSaki</h2> <br />
-                        <span>In summer, the sea breeze tastes like ice cream.</span>
+                        <span>夏天的海边有冰淇淋口味的海风~</span>
                     </a>
                 </div>
             </div>
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1700392549365"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700447225334"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. 地图优化改进</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 绘制玩家的起始位置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. 实现玩家移动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4. 优化蛇的身体效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5. 碰撞检测实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6. 绘制蛇的眼睛</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 地图优化改进</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 绘制玩家的起始位置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 实现玩家移动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 优化蛇的身体效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 碰撞检测实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6. 绘制蛇的眼睛</span></a></li></ol>
                 </div>
             
             <hr />
@@ -334,7 +334,7 @@
 <p>之前我们设计的地图尺寸是13×13，两名玩家的起点横纵坐标之和均为偶数，因此可能在同一时刻走到同一个格子上，为了避免这种情况，可以将地图改为13×14的大小（即将 <code>GameMap.js</code> 中的 <code>this.cols</code> 改为14），这样两名玩家就不会在同一时刻走到同一个格子上。这样修改完之后就不能用轴对称了，需要改为中心对称：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加地图内部的随机障碍物，需要有对称性因此枚举一半即可，另一半对称生成</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">inner_walls_count</span> / <span class="number">2</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">10000</span>; j++) &#123;</span><br><span class="line">    <span class="keyword">let</span> r = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="variable language_">this</span>.<span class="property">rows</span>);</span><br><span class="line">    <span class="keyword">let</span> c = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="variable language_">this</span>.<span class="property">cols</span>);</span><br><span class="line">    <span class="keyword">if</span> (g[r][c] || g[<span class="variable language_">this</span>.<span class="property">rows</span> - <span class="number">1</span> - r][<span class="variable language_">this</span>.<span class="property">cols</span> - <span class="number">1</span> - c]) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">if</span> (r == <span class="variable language_">this</span>.<span class="property">rows</span> - <span class="number">2</span> &amp;&amp; c == <span class="number">1</span> || r == <span class="number">1</span> &amp;&amp; c == <span class="variable language_">this</span>.<span class="property">cols</span> - <span class="number">2</span>) <span class="keyword">continue</span>;  <span class="comment">// 判断是否覆盖到出生地</span></span><br><span class="line">    g[r][c] = g[<span class="variable language_">this</span>.<span class="property">rows</span> - <span class="number">1</span> - r][<span class="variable language_">this</span>.<span class="property">cols</span> - <span class="number">1</span> - c] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1>2. 绘制玩家的起始位置</h1>
-<p>刚开始玩家占一个格子，我们可以规定一下前十步的每一步将蛇的长度加一，之后改为每三步长度加一。每条蛇其实就是一堆格子的序列，我们可以将一个格子定义成一个 <code>Cell</code> 对象，在 <code>scripts</code> 目录下创建 <code>Cell.js</code> 记录格子的坐标。</p>
+<p>刚开始玩家占一个格子，我们可以规定一下前七步的每一步将蛇的长度加一，之后改为每三步长度加一。每条蛇其实就是一堆格子的序列，我们可以将一个格子定义成一个 <code>Cell</code> 对象，在 <code>scripts</code> 目录下创建 <code>Cell.js</code> 记录格子的坐标。</p>
 <p>我们在每个格子中绘制的是一个圆，若格子的左上角坐标为 <code>(x, y)</code> 则圆的圆心坐标应该是 <code>(x + 0.5, y + 0.5)</code>，<code>Cell.js</code> 如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Cell</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">r, c</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">r</span> = r;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">c</span> = c;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = c + <span class="number">0.5</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> = r + <span class="number">0.5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此外每条蛇也可以定义成一个对象 <code>Snake.js</code>：</p>
@@ -452,7 +452,7 @@
                     <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-11-19T11:15:49.365Z" itemprop="dateModified">Last edited: 2023-11-19</time>
+                    <time datetime="2023-11-20T02:27:05.334Z" itemprop="dateModified">Last edited: 2023-11-20</time>
                 </div>
             </div>
         </footer>
