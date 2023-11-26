@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-12-01T04:30:00.000Z">
-<meta property="article:modified_time" content="2023-11-21T09:08:39.108Z">
+<meta property="article:modified_time" content="2023-11-21T10:04:25.129Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -316,7 +316,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1700557719108"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700561065129"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -340,7 +340,7 @@
 <p>找到 <code>.kratos-entry-title</code>，改成以下内容：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.kratos-entry-title</span>&#123;<span class="attribute">font-size</span>:<span class="number">30px</span>;<span class="attribute">margin</span>:<span class="number">0</span> <span class="number">0</span> <span class="number">15px</span>;<span class="attribute">font-family</span>:KaiTi;&#125;</span><br></pre></td></tr></table></figure>
 <h1>2. 内容宽度</h1>
-<h1>2.1 主体宽度</h1>
+<h2 id="2-1-主体宽度">2.1 主体宽度</h2>
 <p>主体宽度是指文章区域与右侧目录标签区域整体的宽度，找到 <code>@media (min-width:1200px)</code>，其后的 <code>.container&#123;width:xx&#125;</code> 即为主体部分宽度，改成以下内容：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>:<span class="number">1320px</span>)&#123;<span class="selector-class">.container</span>&#123;<span class="attribute">width</span>:<span class="number">1300px</span>&#125;<span class="selector-class">.visible-lg</span>&#123;<span class="attribute">display</span>:block<span class="meta">!important</span>&#125;<span class="selector-class">.hidden-lg</span>&#123;<span class="attribute">display</span>:none<span class="meta">!important</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 <p>找到 <code>@media (min-width:992px)</code>，改成以下内容：</p>
@@ -349,7 +349,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>:<span class="number">1078px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>:<span class="number">1319px</span>)</span><br></pre></td></tr></table></figure>
 <p>找到 <code>@media (min-width:768px) and (max-width:991px)</code>，改成以下内容：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>:<span class="number">768px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>:<span class="number">1077px</span>)</span><br></pre></td></tr></table></figure>
-<h1>2.2 文章与目录区域宽度占比</h1>
+<h2 id="2-2-文章与目录区域宽度占比">2.2 文章与目录区域宽度占比</h2>
 <p>可以看到之前在 <code>@media (min-width:992px)</code> 中有 <code>col-md-x</code> 的类，其中 <code>col-md-4</code> 是右侧目录区域宽度占比，<code>col-md-8</code> 是文章区域宽度占比，在页面宽度超过 <code>1320px</code> 后我们将文章区域的宽度占比从66%改为70%：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>:<span class="number">1320px</span>)&#123;<span class="selector-class">.container</span>&#123;<span class="attribute">width</span>:<span class="number">1300px</span>&#125;<span class="selector-class">.col-md-4</span>&#123;<span class="attribute">width</span>:<span class="number">30%</span>&#125;<span class="selector-class">.col-md-8</span>&#123;<span class="attribute">width</span>:<span class="number">70%</span>&#125;<span class="selector-class">.visible-lg</span>&#123;<span class="attribute">display</span>:block<span class="meta">!important</span>&#125;<span class="selector-class">.hidden-lg</span>&#123;<span class="attribute">display</span>:none<span class="meta">!important</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 <h1>3. 导航栏</h1>
@@ -454,7 +454,7 @@
                     <a class="tag-none-link" href="/tags/Hexo/" rel="tag">Hexo</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-11-21T09:08:39.108Z" itemprop="dateModified">Last edited: 2023-11-21</time>
+                    <time datetime="2023-11-21T10:04:25.129Z" itemprop="dateModified">Last edited: 2023-11-21</time>
                 </div>
             </div>
         </footer>
@@ -505,7 +505,7 @@
                 Articles
             </span>
             <span class="count">
-                82
+                85
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -513,7 +513,7 @@
                 Classifications
             </span>
             <span class="count">
-                11
+                10
             </span>
         </a>
         <a class="meta-item" href="/tags/">
@@ -521,7 +521,7 @@
                 Tags
             </span>
             <span class="count">
-                11
+                10
             </span>
         </a>
     </div>
@@ -532,7 +532,7 @@
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
   </aside>
 
 
@@ -541,7 +541,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
       <div class="tag-clouds">
-        <a href="/tags/AI/" style="font-size: 0.74em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Java/" style="font-size: 0.8em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.6em;">MySQL</a> <a href="/tags/Network/" style="font-size: 0.6em;">Network</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.77em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+        <a href="/tags/AI/" style="font-size: 0.74em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Interview/" style="font-size: 0.66em;">Interview</a> <a href="/tags/Java/" style="font-size: 0.8em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.77em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
       </div>
   </aside>
 
@@ -552,6 +552,24 @@
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/posts/2329.html"><i class="fa  fa-book"></i> Spring面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/53737.html"><i class="fa  fa-book"></i> Java进阶面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/36915.html"><i class="fa  fa-book"></i> Java基础面试题总结</a>
+            
+          
         
           
           
@@ -566,23 +584,11 @@
           
         
           
-          
-            <a class="list-group-item" href="/posts/42841.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-配置MySQL与实现注册登录模块（下）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/posts/61266.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-配置MySQL与实现注册登录模块（中）</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/posts/23384.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-配置MySQL与实现注册登录模块（上）</a>
             
-          
-        
           
             
           

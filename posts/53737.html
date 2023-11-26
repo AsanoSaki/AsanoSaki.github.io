@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Java进阶面试题总结 | AsanoSaki</title>
+  
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Interview" />
+  
+  <meta name="description" content="Java进阶面试题总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java进阶面试题总结">
+<meta property="og:url" content="https://asanosaki.github.io/posts/53737.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Java进阶面试题总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-11-24T02:32:00.000Z">
+<meta property="article:modified_time" content="2023-11-24T09:11:44.829Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Interview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                        
+                                            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                                        
+                                    
+                                        
+                                            <li><a href="/archives/"><i class="fa fa-file"></i>Archives</a></li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-paw"></i>Friends</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://angels-d.github.io">Angels-D</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="http://syh521.cn">SYH</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-link"></i>My Links</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">GitHub</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">Gitee</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">AcGit</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a href="https://asanosaki.github.io">BLOG</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">CSDN</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">AcWing</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">LuoGu</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">CodeForces</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">LeetCode</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">Bilibili</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-heart"></i>Favorite</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.runoob.com">Runoob</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://wallhaven.cc">Wallhaven</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="http://www.flysheep6.com">Flysheep</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://thrift.apache.org">Thrift</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">MDN</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://v5.bootcss.com">Bootstrap</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://zh-hans.react.dev">React</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.nextjs.cn">Next.js</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://cn.vuejs.org">Vue.js</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">Django</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">Spring Boot</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://hub.docker.com">Docker Hub</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://fontawesome.com.cn">Font Awesome</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.online-convert.com">File Convert</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://pytorch.org">PyTorch</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">D2L</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://board.xcpcio.com">XCPC Board</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">Kratos MNL</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>夏天的海边有冰淇淋口味的海风~</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/53737.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Java进阶面试题总结</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-11-24T02:32:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-11-24</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.69K
+                        
+                        words
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700817104829"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Java%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.1 Java中常见的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.2 线程安全的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">1.3 ArrayList和LinkedList的异同点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-ArrayList%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 ArrayList的扩容机制是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.5 HashMap的底层数据结构是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%A7%A3%E5%86%B3Hash%E5%86%B2%E7%AA%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E6%98%AF%E5%85%88%E7%94%A8%E9%93%BE%E8%A1%A8%EF%BC%8C%E5%86%8D%E8%BD%AC%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="toc-text">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E9%BB%98%E8%AE%A4%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA0-75%EF%BC%9F"><span class="toc-text">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>Java 进阶面试题总结，涉及集合、JVM、并发等内容，文章将不断更新。</p>
+</blockquote>
+<span id="more"></span>
+<h1>1. Java集合</h1>
+<h2 id="1-1-Java中常见的集合有哪些？">1.1 Java中常见的集合有哪些？</h2>
+<p>Java 中的集合主要可以分为四个部分：<code>List</code>、<code>Set</code>、<code>Map</code> 和工具类（如 <code>Iterator</code> 迭代器、<code>Enumeration</code> 枚举类、<code>Arrays</code> 和 <code>Collections</code>）。这些集合类主要由两个接口派生而来，即 <code>Collection</code>（包含 <code>List</code>、<code>Set</code>、<code>Queue</code>）和 <code>Map</code>，它们是集合框架的根接口。</p>
+<ul>
+<li><code>List</code>：一种有序列表的集合，例如，按索引排列的元素的 <code>List</code>。常见的实现类有 <code>ArrayList</code>、<code>LinkedList</code> 和 <code>Vector</code>。</li>
+<li><code>Set</code>：一种保证没有重复元素的集合。常见的实现类有 <code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code>。</li>
+<li><code>Map</code>：一种通过键值（Key-Value）查找的映射表集合。常见的实现类有 <code>HashMap</code> 和 <code>TreeMap</code>。</li>
+</ul>
+<h2 id="1-2-线程安全的集合有哪些？">1.2 线程安全的集合有哪些？</h2>
+<p>Java 中的线程安全集合主要包括以下几种：</p>
+<ul>
+<li><code>Vector</code>：这是一个线程安全的动态数组，它提供了与 <code>ArrayList</code> 类似的功能，但每个方法都是同步的，这意味着在多线程环境下，它的性能会比 <code>ArrayList</code> 差。</li>
+<li><code>Hashtable</code>：这是一个线程安全的哈希表实现，类似于 <code>HashMap</code>，但是 <code>Hashtable</code> 的方法都是同步的。</li>
+<li><code>Stack</code>：这是一个线程安全的栈实现，它继承自 <code>Vector</code>。</li>
+<li><code>ConcurrentLinkedQueue</code>：这是一个线程安全的队列实现，使用了非阻塞算法。</li>
+<li><code>BlockingQueue</code> 接口的实现类，如 <code>ArrayBlockingQueue</code>，<code>LinkedBlockingQueue</code> 等。</li>
+<li><code>CopyOnWriteArrayList</code> 和 <code>CopyOnWriteArraySet</code>：这是两个线程安全的集合，它们会在修改操作时复制一份数据，避免了修改时的并发问题。</li>
+<li><code>ConcurrentHashMap</code>：这是一个线程安全的 <code>HashMap</code>，它通过将数据分段，从而达到并发控制，性能要优于 <code>Hashtable</code>。</li>
+<li><code>ConcurrentSkipListMap</code>：线程安全且排序的哈希表。</li>
+</ul>
+<p>值得注意的是，为了保证集合是线程安全的，相应的效率也比较低；线程不安全的集合效率相对会高一些。如果你的代码只在一个线程中运行，或者多个线程只是读取集合而不修改集合，那么你可以选择线程不安全的集合，因为它们的性能通常会更好。</p>
+<h2 id="1-3-ArrayList和LinkedList的异同点？">1.3 ArrayList和LinkedList的异同点？</h2>
+<p><code>ArrayList</code> 和 <code>LinkedList</code> 都是 Java 中常用的 <code>List</code> 实现类，它们有一些共同点，也有一些不同点。</p>
+<p>共同点：</p>
+<ul>
+<li><code>ArrayList</code> 和 <code>LinkedList</code> 都是单列集合中 <code>List</code> 接口的实现类，它们都是存取允许重复，且有序的元素。</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>内部实现：<code>ArrayList</code> 是基于动态数组实现的，底层使用数组来存储元素。而 <code>LinkedList</code> 是基于链表实现的，底层使用双向链表来存储元素。</li>
+<li>随机访问：对于随机访问 <code>get</code> 和 <code>set</code> 方法，<code>ArrayList</code> 的速度通常优于 <code>LinkedList</code>，因为 <code>ArrayList</code> 可以根据下标以 <code>O(1)</code> 的时间复杂度对元素进行随机访问，而 <code>LinkedList</code> 的每一个元素都依靠地址指针和它后一个元素连接在一起，查找某个元素的时间复杂度是 <code>O(n)</code>。</li>
+<li>插入和删除操作：对于插入和删除操作，<code>LinkedList</code> 的速度通常优于 <code>ArrayList</code>，因为当元素被添加到 <code>LinkedList</code> 任意位置的时候，不需要像 <code>ArrayList</code> 那样重新计算大小或者是更新索引。</li>
+<li>内存占用：<code>LinkedList</code> 比 <code>ArrayList</code> 更占内存，因为 <code>LinkedList</code> 的节点除了存储数据，还存储了两个引用，一个指向前一个元素，一个指向后一个元素。而 <code>ArrayList</code> 使用数组来存储元素，因此插入和删除元素时需要移动其他元素占用内存，所以在频繁进行插入和删除操作时，<code>ArrayList</code> 的性能会比较低，且可能会造成内存浪费。</li>
+</ul>
+<h2 id="1-4-ArrayList的扩容机制是什么？">1.4 ArrayList的扩容机制是什么？</h2>
+<p><code>ArrayList</code> 的扩容机制是其核心特性之一。在 <code>ArrayList</code> 中添加元素时，如果当前的数组已经满了，那么 <code>ArrayList</code> 会创建一个新的、更大的数组，并将原有数组的元素复制到新的数组中，这个过程就叫做扩容。</p>
+<p>具体来说，<code>ArrayList</code> 的扩容机制如下：</p>
+<ol>
+<li>当向 <code>ArrayList</code> 中添加元素时，首先会检查 <code>ArrayList</code> 的当前大小（也就是它内部的数组大小）是否能够容纳新的元素。如果可以，那么新元素就直接被添加到 <code>ArrayList</code> 中。</li>
+<li>如果 <code>ArrayList</code> 的当前大小不足以容纳新的元素，那么 <code>ArrayList</code> 就需要进行扩容操作。在扩容操作中，<code>ArrayList</code> 会创建一个新的数组，新数组的大小是原数组大小的1.5倍，这个值是在 JDK 的源码中定义的。</li>
+<li>接着，<code>ArrayList</code> 会使用 <code>System.arraycopy</code> 方法，将原有数组中的所有元素复制到新的数组中。</li>
+<li>最后，新的数组会替代原有的数组，成为 <code>ArrayList</code> 的内部数组。</li>
+</ol>
+<p>值得注意的是，<code>ArrayList</code> 的扩容操作需要重新分配内存空间，并将原来的元素复制到新的数组中，这可能会导致性能问题。因此，在实例化 <code>ArrayList</code> 时设置足够的初始容量，并且尽可能减少数组扩容的次数，可以帮助提高性能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="1-5-HashMap的底层数据结构是什么？">1.5 HashMap的底层数据结构是什么？</h2>
+<p><code>HashMap</code> 的底层数据结构主要包括哈希表（数组）、链表和红黑树。</p>
+<ul>
+<li>哈希表（数组）：<code>HashMap</code> 主要依赖于哈希表来存储数据。哈希表中的每个元素被称为 <code>bucket</code>。数组的每个位置都可以存放一个元素（键值对），数组的索引是通过<strong>键的哈希码</strong>经过<strong>哈希函数</strong>计算得来的。这样我们就可以通过键快速定位到数组的某个位置，取出相应的值，这就是 <code>HashMap</code> 快速获取数据的原理。</li>
+<li>链表：在理想的情况下，哈希函数将每个键均匀地散列到哈希表的各个位置。但在实际中，我们可能会遇到两个不同的键计算出相同的哈希值，这就是所谓的<strong>哈希冲突</strong>。<code>HashMap</code> 通过使用链表来解决这个问题。当哈希冲突发生时，<code>HashMap</code> 会在冲突的 <code>bucket</code> 位置增加一个链表，新的元素会被添加到链表的末尾。每个链表中的元素都包含了相同哈希值的键值对。</li>
+<li>红黑树：从 Java 8 开始，如果链表的长度超过一定的阈值（默认为8），那么链表会被转换为红黑树。红黑树是一种自平衡的二叉查找树，通过保持树的平衡，可以提高查找效率。</li>
+</ul>
+<h2 id="1-6-为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</h2>
+<p>在解决 Hash 冲突的时候，<code>HashMap</code> 在链表长度大于8的时候才会将链表转换为红黑树，而不是直接使用红黑树，这主要有以下几个原因：</p>
+<ul>
+<li>查询效率：红黑树的平均查找长度是 <code>log(n)</code>，当链表长度为8时，查找长度为 <code>log(8) = 3</code>，而链表的平均查找长度为 <code>n/2</code>，当长度为8时，平均查找长度为 <code>8 / 2 = 4</code>。因此，当链表长度小于等于8时，使用链表的查询效率其实并不比红黑树差。</li>
+<li>插入效率和空间效率：链表的插入操作比红黑树快，且链表的空间占用也比红黑树小。因此，在元素数量较少时，使用链表比红黑树更高效1。</li>
+<li>防止频繁转换：如果链表长度在8左右徘徊，且频繁地进行插入和删除操作，可能会导致链表和红黑树之间频繁地转换，这会降低效率。因此，<code>HashMap</code> 设计了两个阈值，链表长度超过8时转为红黑树，少于6时转回链表，这样可以减少转换的频率。</li>
+</ul>
+<p>总的来说，这种设计是为了在保证查询效率的同时，尽可能地提高插入效率和空间效率，以及减少因频繁转换而带来的开销。</p>
+<h2 id="1-7-什么是负载因子？为什么HashMap的默认负载因子为0-75？">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</h2>
+<p>负载因子是用于表示哈希表中元素填满的程度的一个参数。在哈希表（如 Java 的 <code>HashMap</code>）中，负载因子是和扩容机制有关的，当哈希表中的元素个数超过了容量乘以负载因子时，就会进行扩容。例如，如果当前的容器容量是16，负载因子是0.75，<code>16 * 0.75 = 12</code>，也就是说，当容量达到了12的时候就会进行扩容操作。</p>
+<p>负载因子的大小对哈希表的性能有重要影响。如果负载因子过大，那么哈希表中的冲突会更频繁，导致<strong>查找效率降低</strong>。反之，如果负载因子过小，那么哈希表的空间利用率就会降低，导致<strong>内存浪费</strong>。因此，选择一个合适的负载因子，可以在时间效率和空间效率之间达到一个平衡。在 Java 的 <code>HashMap</code> 中，负载因子的默认值是0.75，这是一个在时间和空间效率之间的折衷选择。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/53737.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/53737.html";
+            const title         = "「Java进阶面试题总结」";
+            const excerpt       = `Java 进阶面试题总结，涉及集合、JVM、并发等内容，文章将不断更新。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Interview/" rel="tag">Interview</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-24T09:11:44.829Z" itemprop="dateModified">Last edited: 2023-11-24</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Java基础面试题总结" href="/posts/36915.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Spring面试题总结" href="/posts/2329.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                85
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Java%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.1 Java中常见的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.2 线程安全的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">1.3 ArrayList和LinkedList的异同点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-ArrayList%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 ArrayList的扩容机制是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.5 HashMap的底层数据结构是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%A7%A3%E5%86%B3Hash%E5%86%B2%E7%AA%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E6%98%AF%E5%85%88%E7%94%A8%E9%93%BE%E8%A1%A8%EF%BC%8C%E5%86%8D%E8%BD%AC%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="toc-text">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E9%BB%98%E8%AE%A4%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA0-75%EF%BC%9F"><span class="toc-text">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.74em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Interview/" style="font-size: 0.66em;">Interview</a> <a href="/tags/Java/" style="font-size: 0.8em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.66em;">Linux</a> <a href="/tags/Others/" style="font-size: 0.69em;">Others</a> <a href="/tags/Python/" style="font-size: 0.77em;">Python</a> <a href="/tags/Web/" style="font-size: 0.71em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/2329.html"><i class="fa  fa-book"></i> Spring面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/53737.html"><i class="fa  fa-book"></i> Java进阶面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/36915.html"><i class="fa  fa-book"></i> Java基础面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/39458.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建个人中心页面（下）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/26147.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-创建个人中心页面（上）</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

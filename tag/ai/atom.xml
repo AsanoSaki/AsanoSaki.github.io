@@ -4,17 +4,16 @@
     <title>AsanoSaki • Posts by &#34;ai&#34; tag</title>
     <link href="https://asanosaki.github.io" />
     <updated>2023-08-19T07:49:00.000Z</updated>
-    <category term="Others" />
     <category term="AI" />
+    <category term="Others" />
     <category term="Python" />
-    <category term="Hexo" />
     <category term="Java" />
+    <category term="Hexo" />
+    <category term="Interview" />
     <category term="Linux" />
-    <category term="MySQL" />
     <category term="Web" />
     <category term="Essay" />
     <category term="C++" />
-    <category term="Network" />
     <entry>
         <id>https://asanosaki.github.io/posts/21781.html</id>
         <title>DeepLabV3Plus核心代码详解</title>
