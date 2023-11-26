@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-07-06T05:19:00.000Z">
-<meta property="article:modified_time" content="2023-10-26T06:32:03.573Z">
+<meta property="article:modified_time" content="2023-11-26T08:24:07.797Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698301923573"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700987047797"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 将项目传到本地</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 虚拟环境配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 修改项目相关文件</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B0%86%E9%A1%B9%E7%9B%AE%E4%BC%A0%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-text">1. 将项目传到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 虚拟环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="toc-text">3. 修改项目相关文件</span></a></li></ol>
                 </div>
             
             <hr />
@@ -330,10 +330,10 @@
 <p>截止到上一章节，我们的项目一直是部署在云服务器上，包括编写代码以及调试运行也是在云服务器上，现在我们尝试将其放回 Windows 本地环境运行。</p>
 </blockquote>
 <span id="more"></span>
-<h1>1. 将项目传到本地</h1>
+<h2 id="1-将项目传到本地">1. 将项目传到本地</h2>
 <p>这一步可以使用 Git 也可以使用 SCP，由于之前项目上传在 AcGit 上，只能在 AC Terminal 中拉取，因此使用 SCP 远程传输：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 20000 asanosaki@&lt;公网IP&gt;:djangoapp .  # 在要存放项目的目录执行该指令</span><br></pre></td></tr></table></figure>
-<h1>2. 虚拟环境配置</h1>
+<h2 id="2-虚拟环境配置">2. 虚拟环境配置</h2>
 <p>我们需要先配置一个和云服务上相同的虚拟环境，首先在 VS Code 中打开该项目并且打开终端，在项目根目录下创建虚拟环境：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv venv</span><br></pre></td></tr></table></figure>
 <p>虚拟环境创建成功之后，一般不会自动启用，所以需要启用它，进入 <code>venv/Scripts</code> 目录运行脚本 <code>Activate.ps1</code>：</p>
@@ -341,7 +341,7 @@
 <p>此时在 VS Code 中可以看到命令行首部多了 <code>(venv)</code>，说明已进入虚拟环境，然后在右下角选择虚拟环境中的解释器即可。</p>
 <p>现在我们在虚拟环境中安装所需的环境：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django</span><br></pre></td></tr></table></figure>
-<h1>3. 修改项目相关文件</h1>
+<h2 id="3-修改项目相关文件">3. 修改项目相关文件</h2>
 <p>首先修改一下我们的打包脚本 <code>compress_game_js.sh</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">JS_PATH=../game/static/js/</span><br><span class="line">JS_PATH_DIST=$&#123;JS_PATH&#125;dist/</span><br><span class="line">JS_PATH_SRC=$&#123;JS_PATH&#125;src/</span><br><span class="line"></span><br><span class="line">find $&#123;JS_PATH_SRC&#125; -type f -name &#x27;*.js&#x27; | sort | xargs cat &gt; $&#123;JS_PATH_DIST&#125;game.js</span><br></pre></td></tr></table></figure>
 <p>然后打开 Git Bash，进入 <code>scripts</code> 文件夹即可运行脚本：</p>
@@ -450,7 +450,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-26T06:32:03.573Z" itemprop="dateModified">Last edited: 2023-10-26</time>
+                    <time datetime="2023-11-26T08:24:07.797Z" itemprop="dateModified">Last edited: 2023-11-26</time>
                 </div>
             </div>
         </footer>
@@ -533,7 +533,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 将项目传到本地</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 虚拟环境配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 修改项目相关文件</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B0%86%E9%A1%B9%E7%9B%AE%E4%BC%A0%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-text">1. 将项目传到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 虚拟环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="toc-text">3. 修改项目相关文件</span></a></li></ol>
     </div>
 </aside>
                 

@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-05-29T07:52:00.000Z">
-<meta property="article:modified_time" content="2023-10-26T06:43:49.698Z">
+<meta property="article:modified_time" content="2023-11-26T08:44:28.580Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698302629698"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700988268580"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 使用教程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Rasterio%E4%B8%8ERioxarray%E5%AE%89%E8%A3%85"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">2. 使用教程</span></a></li></ol>
                 </div>
             
             <hr />
@@ -330,7 +330,7 @@
 <p><code>rasterio</code> 是一个很多模块是基于 <code>GDAL</code> 的 Python 包，可用于处理地理空间栅格数据，例如 GeoTIFF 文件。<code>xarray</code> 是一个为数组提供标签，例如尺寸、坐标和其他特定属性的 Python 包，它使大维数组的工作更加直观。<code>rioxarray</code> 结合了 <code>rasterio</code> 的功能和 <code>xarray</code> 的所有优点。</p>
 </blockquote>
 <span id="more"></span>
-<h1>1. Rasterio与Rioxarray安装</h1>
+<h2 id="1-Rasterio与Rioxarray安装">1. Rasterio与Rioxarray安装</h2>
 <p>首先安装 Rasterio 模块，（本人使用 <code>conda</code> 安装时遇到过报错 <code>ImportError: cannot import name 'CRS' from 'pyproj' (unknown location)</code>，是由于 <code>pyproj</code> 模块安装不全，因此建议采用后面的离线安装方式或者之后遇到问题时删除 <code>pyproj</code> 模块后再离线安装该模块）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install gdal</span><br><span class="line">conda install rasterio</span><br></pre></td></tr></table></figure>
 <p>如果安装失败可以采用离线安装的方式，Rasterio 依赖很多第三方库，所以比较麻烦，按下面的顺序依次安装即可，可以尝试使用 <code>pip</code> 安装或者下载 <code>.whl</code> 文件离线安装（注意对上 Python 版本）：</p>
@@ -340,7 +340,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install E:\GDAL-1.2.10-cp310-cp310-win_amd64.whl</span><br></pre></td></tr></table></figure>
 <p>在 Python 中使用 Anaconda 安装 <code>rioxarray</code> 包时，首先需要安装 <code>GDAL</code> 和 <code>rasterio</code>，然后再安装 <code>rioxarray</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install rioxarray</span><br></pre></td></tr></table></figure>
-<h1>2. 使用教程</h1>
+<h2 id="2-使用教程">2. 使用教程</h2>
 <p>（1）使用 Rioxarray 读取并展示图像：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rasterio</span><br><span class="line"><span class="keyword">import</span> rioxarray</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">img_path = <span class="string">&#x27;../images/tiff_img.tif&#x27;</span></span><br><span class="line"></span><br><span class="line">img = rioxarray.open_rasterio(img_path)</span><br><span class="line"><span class="built_in">print</span>(img.shape)  <span class="comment"># (22, 488, 480)，第一维为通道数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img))  <span class="comment"># &lt;class &#x27;xarray.core.dataarray.DataArray&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img.values))  <span class="comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.flat:</span><br><span class="line">    ax_img = ax.imshow(img[<span class="number">0</span>], cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axes.flat, [<span class="string">&#x27;img1&#x27;</span>, <span class="string">&#x27;img2&#x27;</span>]):</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">fig.colorbar(mappable=ax_img, label=<span class="string">&#x27;FSC&#x27;</span>, orientation=<span class="string">&#x27;horizontal&#x27;</span>, ax=axes, fraction=<span class="number">0.04</span>)  <span class="comment"># 图例，fraction可调整大小</span></span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>也可以用另一种形式展示（注意如果使用 Rasterio 读取图像则无法使用该方式展示图像）：</p>
@@ -436,7 +436,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-26T06:43:49.698Z" itemprop="dateModified">Last edited: 2023-10-26</time>
+                    <time datetime="2023-11-26T08:44:28.580Z" itemprop="dateModified">Last edited: 2023-11-26</time>
                 </div>
             </div>
         </footer>
@@ -519,7 +519,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 使用教程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Rasterio%E4%B8%8ERioxarray%E5%AE%89%E8%A3%85"><span class="toc-text">1. Rasterio与Rioxarray安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">2. 使用教程</span></a></li></ol>
     </div>
 </aside>
                 

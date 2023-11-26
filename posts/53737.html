@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-11-24T02:32:00.000Z">
-<meta property="article:modified_time" content="2023-11-24T09:11:44.829Z">
+<meta property="article:modified_time" content="2023-11-26T08:36:20.979Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Interview">
 <meta name="twitter:card" content="summary">
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1700817104829"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700987780979"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Java%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.1 Java中常见的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.2 线程安全的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">1.3 ArrayList和LinkedList的异同点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-ArrayList%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 ArrayList的扩容机制是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.5 HashMap的底层数据结构是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%A7%A3%E5%86%B3Hash%E5%86%B2%E7%AA%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E6%98%AF%E5%85%88%E7%94%A8%E9%93%BE%E8%A1%A8%EF%BC%8C%E5%86%8D%E8%BD%AC%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="toc-text">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E9%BB%98%E8%AE%A4%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA0-75%EF%BC%9F"><span class="toc-text">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Java%E9%9B%86%E5%90%88"><span class="toc-text">1. Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Java%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.1 Java中常见的集合有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.2 线程安全的集合有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">1.3 ArrayList和LinkedList的异同点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-ArrayList%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 ArrayList的扩容机制是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.5 HashMap的底层数据结构是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%A7%A3%E5%86%B3Hash%E5%86%B2%E7%AA%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E6%98%AF%E5%85%88%E7%94%A8%E9%93%BE%E8%A1%A8%EF%BC%8C%E5%86%8D%E8%BD%AC%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="toc-text">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E9%BB%98%E8%AE%A4%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA0-75%EF%BC%9F"><span class="toc-text">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</span></a></li></ol></li></ol>
                 </div>
             
             <hr />
@@ -330,15 +330,15 @@
 <p>Java 进阶面试题总结，涉及集合、JVM、并发等内容，文章将不断更新。</p>
 </blockquote>
 <span id="more"></span>
-<h1>1. Java集合</h1>
-<h2 id="1-1-Java中常见的集合有哪些？">1.1 Java中常见的集合有哪些？</h2>
+<h2 id="1-Java集合">1. Java集合</h2>
+<h3 id="1-1-Java中常见的集合有哪些？">1.1 Java中常见的集合有哪些？</h3>
 <p>Java 中的集合主要可以分为四个部分：<code>List</code>、<code>Set</code>、<code>Map</code> 和工具类（如 <code>Iterator</code> 迭代器、<code>Enumeration</code> 枚举类、<code>Arrays</code> 和 <code>Collections</code>）。这些集合类主要由两个接口派生而来，即 <code>Collection</code>（包含 <code>List</code>、<code>Set</code>、<code>Queue</code>）和 <code>Map</code>，它们是集合框架的根接口。</p>
 <ul>
 <li><code>List</code>：一种有序列表的集合，例如，按索引排列的元素的 <code>List</code>。常见的实现类有 <code>ArrayList</code>、<code>LinkedList</code> 和 <code>Vector</code>。</li>
 <li><code>Set</code>：一种保证没有重复元素的集合。常见的实现类有 <code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code>。</li>
 <li><code>Map</code>：一种通过键值（Key-Value）查找的映射表集合。常见的实现类有 <code>HashMap</code> 和 <code>TreeMap</code>。</li>
 </ul>
-<h2 id="1-2-线程安全的集合有哪些？">1.2 线程安全的集合有哪些？</h2>
+<h3 id="1-2-线程安全的集合有哪些？">1.2 线程安全的集合有哪些？</h3>
 <p>Java 中的线程安全集合主要包括以下几种：</p>
 <ul>
 <li><code>Vector</code>：这是一个线程安全的动态数组，它提供了与 <code>ArrayList</code> 类似的功能，但每个方法都是同步的，这意味着在多线程环境下，它的性能会比 <code>ArrayList</code> 差。</li>
@@ -351,7 +351,7 @@
 <li><code>ConcurrentSkipListMap</code>：线程安全且排序的哈希表。</li>
 </ul>
 <p>值得注意的是，为了保证集合是线程安全的，相应的效率也比较低；线程不安全的集合效率相对会高一些。如果你的代码只在一个线程中运行，或者多个线程只是读取集合而不修改集合，那么你可以选择线程不安全的集合，因为它们的性能通常会更好。</p>
-<h2 id="1-3-ArrayList和LinkedList的异同点？">1.3 ArrayList和LinkedList的异同点？</h2>
+<h3 id="1-3-ArrayList和LinkedList的异同点？">1.3 ArrayList和LinkedList的异同点？</h3>
 <p><code>ArrayList</code> 和 <code>LinkedList</code> 都是 Java 中常用的 <code>List</code> 实现类，它们有一些共同点，也有一些不同点。</p>
 <p>共同点：</p>
 <ul>
@@ -364,7 +364,7 @@
 <li>插入和删除操作：对于插入和删除操作，<code>LinkedList</code> 的速度通常优于 <code>ArrayList</code>，因为当元素被添加到 <code>LinkedList</code> 任意位置的时候，不需要像 <code>ArrayList</code> 那样重新计算大小或者是更新索引。</li>
 <li>内存占用：<code>LinkedList</code> 比 <code>ArrayList</code> 更占内存，因为 <code>LinkedList</code> 的节点除了存储数据，还存储了两个引用，一个指向前一个元素，一个指向后一个元素。而 <code>ArrayList</code> 使用数组来存储元素，因此插入和删除元素时需要移动其他元素占用内存，所以在频繁进行插入和删除操作时，<code>ArrayList</code> 的性能会比较低，且可能会造成内存浪费。</li>
 </ul>
-<h2 id="1-4-ArrayList的扩容机制是什么？">1.4 ArrayList的扩容机制是什么？</h2>
+<h3 id="1-4-ArrayList的扩容机制是什么？">1.4 ArrayList的扩容机制是什么？</h3>
 <p><code>ArrayList</code> 的扩容机制是其核心特性之一。在 <code>ArrayList</code> 中添加元素时，如果当前的数组已经满了，那么 <code>ArrayList</code> 会创建一个新的、更大的数组，并将原有数组的元素复制到新的数组中，这个过程就叫做扩容。</p>
 <p>具体来说，<code>ArrayList</code> 的扩容机制如下：</p>
 <ol>
@@ -375,14 +375,14 @@
 </ol>
 <p>值得注意的是，<code>ArrayList</code> 的扩容操作需要重新分配内存空间，并将原来的元素复制到新的数组中，这可能会导致性能问题。因此，在实例化 <code>ArrayList</code> 时设置足够的初始容量，并且尽可能减少数组扩容的次数，可以帮助提高性能：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="1-5-HashMap的底层数据结构是什么？">1.5 HashMap的底层数据结构是什么？</h2>
+<h3 id="1-5-HashMap的底层数据结构是什么？">1.5 HashMap的底层数据结构是什么？</h3>
 <p><code>HashMap</code> 的底层数据结构主要包括哈希表（数组）、链表和红黑树。</p>
 <ul>
 <li>哈希表（数组）：<code>HashMap</code> 主要依赖于哈希表来存储数据。哈希表中的每个元素被称为 <code>bucket</code>。数组的每个位置都可以存放一个元素（键值对），数组的索引是通过<strong>键的哈希码</strong>经过<strong>哈希函数</strong>计算得来的。这样我们就可以通过键快速定位到数组的某个位置，取出相应的值，这就是 <code>HashMap</code> 快速获取数据的原理。</li>
 <li>链表：在理想的情况下，哈希函数将每个键均匀地散列到哈希表的各个位置。但在实际中，我们可能会遇到两个不同的键计算出相同的哈希值，这就是所谓的<strong>哈希冲突</strong>。<code>HashMap</code> 通过使用链表来解决这个问题。当哈希冲突发生时，<code>HashMap</code> 会在冲突的 <code>bucket</code> 位置增加一个链表，新的元素会被添加到链表的末尾。每个链表中的元素都包含了相同哈希值的键值对。</li>
 <li>红黑树：从 Java 8 开始，如果链表的长度超过一定的阈值（默认为8），那么链表会被转换为红黑树。红黑树是一种自平衡的二叉查找树，通过保持树的平衡，可以提高查找效率。</li>
 </ul>
-<h2 id="1-6-为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</h2>
+<h3 id="1-6-为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</h3>
 <p>在解决 Hash 冲突的时候，<code>HashMap</code> 在链表长度大于8的时候才会将链表转换为红黑树，而不是直接使用红黑树，这主要有以下几个原因：</p>
 <ul>
 <li>查询效率：红黑树的平均查找长度是 <code>log(n)</code>，当链表长度为8时，查找长度为 <code>log(8) = 3</code>，而链表的平均查找长度为 <code>n/2</code>，当长度为8时，平均查找长度为 <code>8 / 2 = 4</code>。因此，当链表长度小于等于8时，使用链表的查询效率其实并不比红黑树差。</li>
@@ -390,7 +390,7 @@
 <li>防止频繁转换：如果链表长度在8左右徘徊，且频繁地进行插入和删除操作，可能会导致链表和红黑树之间频繁地转换，这会降低效率。因此，<code>HashMap</code> 设计了两个阈值，链表长度超过8时转为红黑树，少于6时转回链表，这样可以减少转换的频率。</li>
 </ul>
 <p>总的来说，这种设计是为了在保证查询效率的同时，尽可能地提高插入效率和空间效率，以及减少因频繁转换而带来的开销。</p>
-<h2 id="1-7-什么是负载因子？为什么HashMap的默认负载因子为0-75？">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</h2>
+<h3 id="1-7-什么是负载因子？为什么HashMap的默认负载因子为0-75？">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</h3>
 <p>负载因子是用于表示哈希表中元素填满的程度的一个参数。在哈希表（如 Java 的 <code>HashMap</code>）中，负载因子是和扩容机制有关的，当哈希表中的元素个数超过了容量乘以负载因子时，就会进行扩容。例如，如果当前的容器容量是16，负载因子是0.75，<code>16 * 0.75 = 12</code>，也就是说，当容量达到了12的时候就会进行扩容操作。</p>
 <p>负载因子的大小对哈希表的性能有重要影响。如果负载因子过大，那么哈希表中的冲突会更频繁，导致<strong>查找效率降低</strong>。反之，如果负载因子过小，那么哈希表的空间利用率就会降低，导致<strong>内存浪费</strong>。因此，选择一个合适的负载因子，可以在时间效率和空间效率之间达到一个平衡。在 Java 的 <code>HashMap</code> 中，负载因子的默认值是0.75，这是一个在时间和空间效率之间的折衷选择。</p>
 </div>
@@ -478,7 +478,7 @@
                     <a class="tag-none-link" href="/tags/Interview/" rel="tag">Interview</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-11-24T09:11:44.829Z" itemprop="dateModified">Last edited: 2023-11-24</time>
+                    <time datetime="2023-11-26T08:36:20.979Z" itemprop="dateModified">Last edited: 2023-11-26</time>
                 </div>
             </div>
         </footer>
@@ -561,7 +561,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Java%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.1 Java中常见的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.2 线程安全的集合有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">1.3 ArrayList和LinkedList的异同点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-ArrayList%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 ArrayList的扩容机制是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.5 HashMap的底层数据结构是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%A7%A3%E5%86%B3Hash%E5%86%B2%E7%AA%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E6%98%AF%E5%85%88%E7%94%A8%E9%93%BE%E8%A1%A8%EF%BC%8C%E5%86%8D%E8%BD%AC%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="toc-text">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E9%BB%98%E8%AE%A4%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA0-75%EF%BC%9F"><span class="toc-text">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Java%E9%9B%86%E5%90%88"><span class="toc-text">1. Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Java%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.1 Java中常见的集合有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">1.2 线程安全的集合有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">1.3 ArrayList和LinkedList的异同点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-ArrayList%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 ArrayList的扩容机制是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.5 HashMap的底层数据结构是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%A7%A3%E5%86%B3Hash%E5%86%B2%E7%AA%81%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E6%98%AF%E5%85%88%E7%94%A8%E9%93%BE%E8%A1%A8%EF%BC%8C%E5%86%8D%E8%BD%AC%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="toc-text">1.6 为什么在解决Hash冲突的时候，不直接用红黑树，而是先用链表，再转红黑树？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E9%BB%98%E8%AE%A4%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E4%B8%BA0-75%EF%BC%9F"><span class="toc-text">1.7 什么是负载因子？为什么HashMap的默认负载因子为0.75？</span></a></li></ol></li></ol>
     </div>
 </aside>
                 

@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2023-06-10T12:04:00.000Z">
-<meta property="article:modified_time" content="2023-10-26T06:32:41.220Z">
+<meta property="article:modified_time" content="2023-11-26T08:26:55.816Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698301961220"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700987215816"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 项目总体设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 全局设置与项目结构创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 创建HTML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 创建Views与更新URL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 创建菜单</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="toc-text">1. 项目总体设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%E4%B8%8E%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%88%9B%E5%BB%BA"><span class="toc-text">2. 全局设置与项目结构创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAHTML"><span class="toc-text">3. 创建HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BAViews%E4%B8%8E%E6%9B%B4%E6%96%B0URL"><span class="toc-text">4. 创建Views与更新URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%9B%E5%BB%BA%E8%8F%9C%E5%8D%95"><span class="toc-text">5. 创建菜单</span></a></li></ol>
                 </div>
             
             <hr />
@@ -330,7 +330,7 @@
 <p>本节内容是项目结构的划分与游戏菜单界面的设计。</p>
 </blockquote>
 <span id="more"></span>
-<h1>1. 项目总体设计</h1>
+<h2 id="1-项目总体设计">1. 项目总体设计</h2>
 <p>（1）系统设计</p>
 <ul>
 <li><code>menu</code>：菜单页面；</li>
@@ -369,7 +369,7 @@
 </ul>
 </li>
 </ul>
-<h1>2. 全局设置与项目结构创建</h1>
+<h2 id="2-全局设置与项目结构创建">2. 全局设置与项目结构创建</h2>
 <p>为了后期方便项目的维护管理，首先先将 <code>game</code> 中的 <code>urls.py</code>、<code>models.py</code>、<code>views.py</code> 删除，将其创建为一个目录，并在这三个目录下创建好 <code>__init__.py</code> 文件，注释掉上一节中在总 URL 文件中的配置信息，然后创建好 <code>static</code> 目录。</p>
 <p>接着进行一些项目的全局设置，首先设置一下项目的时区，打开 <code>~/djangoapp/djangoapp/settings.py</code>，修改 <code>TIME_ZONE</code> 和 <code>USE_TZ</code>：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TIME_ZONE = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line">USE_TZ = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
@@ -387,14 +387,14 @@
 <p>我们执行一下该脚本：<code>./compress_game_js.sh</code>，可以看到 <code>~/djangoapp/game/static/js/dist/</code> 中多了一个 <code>game.js</code> 文件。</p>
 <p>此时我们先将代码上传至 Git：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/djangoapp/</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#x27;create project structure&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-<h1>3. 创建HTML</h1>
+<h2 id="3-创建HTML">3. 创建HTML</h2>
 <p>我们先在 <code>templates</code> 目录下创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>。由于项目是前后端分离的，最后可以放在多种不同的终端上运行，因此我们再建一个 <code>multiends</code> 目录。</p>
 <p>在 <code>static/src</code> 目录下也创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>，然后再创建一个文件 <code>zbase.js</code>，表示总文件，由于打包工具是按照字典序打包的，该文件中为总的 Class，会调用前面三个目录中的 Class，JS 在调用之前必须定义好，因此在打包时需要保证前面三个目录中的文件在 <code>zbase.js</code> 之前被打包，因此加一个字典序最大的字母在首部。</p>
 <p>在 <code>zbase.js</code> 中定义好总类：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGame</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">id</span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在 <code>templates/multiends/</code> 中创建 <code>web.html</code>，文件内容如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://&lt;公网IP&gt;:8000/static/css/jquery-ui.min.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://&lt;公网IP&gt;:8000/static/js/jquery-3.6.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;css/game.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/dist/game.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">&quot;margin: 0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;ac_game_1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        $(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> ac_game = <span class="keyword">new</span> <span class="title class_">AcGame</span>(<span class="string">&quot;ac_game_1&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1>4. 创建Views与更新URL</h1>
+<h2 id="4-创建Views与更新URL">4. 创建Views与更新URL</h2>
 <p>我们先在 <code>views</code> 目录下创建三个目录：<code>menu</code>、<code>playground</code>、<code>settings</code>，这三个目录都是存放 Python 文件的，因此每个目录下都需要一个 <code>__init__.py</code> 文件。</p>
 <p>然后再在 <code>views</code> 目录下创建一个 <code>index.py</code> 作为总函数，该函数只会在 Web 端被调用，主要作用是用来返回上一节中的 HTML 文件的：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;multiends/web.html&#x27;</span>)  <span class="comment"># 从templates目录之后开始写路径，因为Django默认会从templates开始找HTML</span></span><br></pre></td></tr></table></figure>
@@ -410,7 +410,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SECURE_CROSS_ORIGIN_OPENER_POLICY = <span class="string">&#x27;None&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>最后将代码上传至 Git：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;modify html &amp; js &amp; views &amp; urls&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-<h1>5. 创建菜单</h1>
+<h2 id="5-创建菜单">5. 创建菜单</h2>
 <p>我们需要创建一个菜单对象，首先在 <code>static/js/src/menu/</code> 目录中创建一个 <code>zbase.js</code> 文件，内容如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AcGameMenu</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">root</span>) &#123;  <span class="comment">// root用来传AcGame对象</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span> = root;</span><br><span class="line">        <span class="comment">// 如果是HTML对象通常会加一个&#x27;$&#x27;符号</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$menu</span> = $(<span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div class=&#x27;ac_game_menu&#x27;&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">root</span>.<span class="property">$ac_game</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">$menu</span>);  <span class="comment">// 将this.$menu添加到主类的div中</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在 <code>game.css</code> 中定义相应的样式：</p>
@@ -519,7 +519,7 @@
                     <a class="tag-none-link" href="/tags/Python/" rel="tag">Python</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-26T06:32:41.220Z" itemprop="dateModified">Last edited: 2023-10-26</time>
+                    <time datetime="2023-11-26T08:26:55.816Z" itemprop="dateModified">Last edited: 2023-11-26</time>
                 </div>
             </div>
         </footer>
@@ -602,7 +602,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 项目总体设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. 全局设置与项目结构创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. 创建HTML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4. 创建Views与更新URL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5. 创建菜单</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="toc-text">1. 项目总体设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%E4%B8%8E%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%88%9B%E5%BB%BA"><span class="toc-text">2. 全局设置与项目结构创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAHTML"><span class="toc-text">3. 创建HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BAViews%E4%B8%8E%E6%9B%B4%E6%96%B0URL"><span class="toc-text">4. 创建Views与更新URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%9B%E5%BB%BA%E8%8F%9C%E5%8D%95"><span class="toc-text">5. 创建菜单</span></a></li></ol>
     </div>
 </aside>
                 

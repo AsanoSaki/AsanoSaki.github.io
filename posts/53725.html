@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-03-15T10:06:00.000Z">
-<meta property="article:modified_time" content="2023-10-26T06:42:42.013Z">
+<meta property="article:modified_time" content="2023-11-26T08:41:22.199Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698302562013"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700988082199"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">1.1 常用文件管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1.2 其它常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. Tmux与Vim</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Tmux"><span class="toc-text">2.1 Tmux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Vim"><span class="toc-text">2.2 Vim</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">1.1 常用文件管理命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1.2 其它常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tmux%E4%B8%8EVim"><span class="toc-text">2. Tmux与Vim</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Tmux"><span class="toc-text">2.1 Tmux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Vim"><span class="toc-text">2.2 Vim</span></a></li></ol></li></ol>
                 </div>
             
             <hr />
@@ -330,7 +330,7 @@
 <p>本文记录 Linux 的学习过程，内容为 Linux 常用文件管理命令、Tmux、Vim。</p>
 </blockquote>
 <span id="more"></span>
-<h1>1. 常用命令</h1>
+<h2 id="1-常用命令">1. 常用命令</h2>
 <p>Linux 中描述路径有两种方式（假设当前用户的目录为 <code>AsanoSaki</code>）：</p>
 <ol>
 <li>绝对路径：从根目录（即 <code>/</code>）开始描述，例如：<code>/home/AsanoSaki/main.cpp</code>。</li>
@@ -341,7 +341,7 @@
 <li><code>.</code> 表示当前目录，<code>..</code> 表示上一目录，假如当前在 <code>AsanoSaki</code> 目录下，则路径 <code>../AsanoSaki/./../AsanoSaki</code> 表示同一路径。</li>
 <li><code>~/</code> 表示家目录，等价于 <code>/home/AsanoSaki</code>。</li>
 </ul>
-<h2 id="1-1-常用文件管理命令">1.1 常用文件管理命令</h2>
+<h3 id="1-1-常用文件管理命令">1.1 常用文件管理命令</h3>
 <ul>
 <li><code>ctrl+c</code>：取消命令，并且换行。如当前有一个程序正在运行且一直无法停止，则可以使用该操作将当前正在运行的程序中止。另一个作用是中断当前正在输入的这一行，直接跳到下一行重新输入。</li>
 <li><code>ctrl+u</code>：清空本行命令。</li>
@@ -356,7 +356,7 @@
 <li><code>touch XXX</code>：创建一个文件。</li>
 <li><code>cat XXX</code>：展示文件 <code>XXX</code> 中的内容。</li>
 </ul>
-<h2 id="1-2-其它常用命令">1.2 其它常用命令</h2>
+<h3 id="1-2-其它常用命令">1.2 其它常用命令</h3>
 <p>（1）系统状况</p>
 <ul>
 <li><code>top</code>：查看所有进程的信息（Linux 的任务管理器）。
@@ -493,8 +493,8 @@
 <li><code>apt-get install xxx</code>：安装软件。</li>
 <li><code>pip install xxx --user --upgrade</code>：安装 Python 包。</li>
 </ul>
-<h1>2. Tmux与Vim</h1>
-<h2 id="2-1-Tmux">2.1 Tmux</h2>
+<h2 id="2-Tmux与Vim">2. Tmux与Vim</h2>
+<h3 id="2-1-Tmux">2.1 Tmux</h3>
 <p>（1）功能</p>
 <ul>
 <li>分屏。</li>
@@ -538,7 +538,7 @@
 </li>
 </ul>
 <p>注意：Tmux 的配置文件为 <code>~/.tmux.conf</code>，默认 Tmux 前缀快捷键是 <code>Ctrl + b</code>！本文是已经修改过了配置文件后的操作说明，不过基本上操作逻辑都是一样的。</p>
-<h2 id="2-2-Vim">2.2 Vim</h2>
+<h3 id="2-2-Vim">2.2 Vim</h3>
 <p>（1）功能</p>
 <ul>
 <li>命令行模式下的文本编辑器。</li>
@@ -712,7 +712,7 @@
                     <a class="tag-none-link" href="/tags/Linux/" rel="tag">Linux</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-26T06:42:42.013Z" itemprop="dateModified">Last edited: 2023-10-26</time>
+                    <time datetime="2023-11-26T08:41:22.199Z" itemprop="dateModified">Last edited: 2023-11-26</time>
                 </div>
             </div>
         </footer>
@@ -795,7 +795,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">1.1 常用文件管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1.2 其它常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. Tmux与Vim</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Tmux"><span class="toc-text">2.1 Tmux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Vim"><span class="toc-text">2.2 Vim</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">1.1 常用文件管理命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">1.2 其它常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tmux%E4%B8%8EVim"><span class="toc-text">2. Tmux与Vim</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Tmux"><span class="toc-text">2.1 Tmux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Vim"><span class="toc-text">2.2 Vim</span></a></li></ol></li></ol>
     </div>
 </aside>
                 

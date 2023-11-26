@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
 <meta property="article:published_time" content="2022-11-18T10:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-26T06:45:07.579Z">
+<meta property="article:modified_time" content="2023-11-26T08:50:06.020Z">
 <meta property="article:author" content="AsanoSaki">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -316,13 +316,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1698302707579"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1700988606020"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. React配置环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. ES6语法补充</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. Components</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-React%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-text">1. React配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ES6%E8%AF%AD%E6%B3%95%E8%A1%A5%E5%85%85"><span class="toc-text">2. ES6语法补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Components"><span class="toc-text">3. Components</span></a></li></ol>
                 </div>
             
             <hr />
@@ -332,7 +332,7 @@ React 是一个用于构建用户界面的库。React 不是一个框架，它�
 React 官网：<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/">React</a>。</p>
 </blockquote>
 <span id="more"></span>
-<h1>1. React配置环境</h1>
+<h2 id="1-React配置环境">1. React配置环境</h2>
 <p>React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。使用 React 可以将一些简短、独立的代码片段组合成复杂的 UI 界面，这些代码片段被称作 <code>components</code>。React 能够构建那些数据会随时间改变的大型应用。</p>
 <p>React 特性：</p>
 <ul>
@@ -373,7 +373,7 @@ React 官网：<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.o
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">&#x27;./logo.svg&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./App.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">header</span> <span class="attr">className</span>=<span class="string">&quot;App-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#123;logo&#125;</span> <span class="attr">className</span>=<span class="string">&quot;App-logo&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;logo&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          Edit <span class="tag">&lt;<span class="name">code</span>&gt;</span>src/App.js<span class="tag">&lt;/<span class="name">code</span>&gt;</span> and save to reload.</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">a</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">className</span>=<span class="string">&quot;App-link&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">href</span>=<span class="string">&quot;https://reactjs.org&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">rel</span>=<span class="string">&quot;noopener noreferrer&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        &gt;</span></span></span><br><span class="line"><span class="language-xml">          Learn React</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
 <p>该 <code>App</code> 组件就定义了页面的具体内容，且我们能够发现该 JS 文件中有 HTML 代码，因此该文件即为 JSX 文件，能够在 JavaScript 的基础上支持 XML（可扩展标记语言），HTML 也是一种特殊的 XML。</p>
 <p>JSX 是 React 中的一种语言，会被 <a target="_blank" rel="noopener" href="https://babeljs.io/repl/#?browsers=defaults,%20not%20ie%2011,%20not%20ie_mob%2011&amp;build=&amp;builtIns=false&amp;corejs=3.21&amp;spec=false&amp;loose=false&amp;code_lz=MYewdgzgLgBApgGzgWzmWBeGAeAFgRgD4AJRBEAGhgHcQAnBAEwEJsB6AwgbgChRJY_KAEMAlmDh0YWRiGABXVOgB0AczhQAokiVQAQgE8AkowAUAcjogQUcwEpeAJTjDgUACIB5ALLK6aRklTRBQ0KCohMQk6Bx4gA&amp;debug=false&amp;forceAllTransforms=false&amp;shippedProposals=false&amp;circleciRepo=&amp;evaluate=false&amp;fileSize=false&amp;timeTravel=false&amp;sourceType=module&amp;lineWrap=true&amp;presets=react&amp;prettier=false&amp;targets=&amp;version=7.20.4&amp;externalPlugins=&amp;assumptions=%7B%7D">Babel</a> 编译成标准的 JavaScript。</p>
-<h1>2. ES6语法补充</h1>
+<h2 id="2-ES6语法补充">2. ES6语法补充</h2>
 <p>ES6，全称 ECMAScript 6.0，是 JavaScript 的版本标准。此处添加一些 React 中常用的语法糖。</p>
 <p><strong>（1）使用 <code>bind()</code> 函数绑定 <code>this</code> 取值</strong></p>
 <p>在 JavaScript 中，函数里的 <code>this</code> 指向的是执行时的调用者，而非定义时所在的对象。例如：</p>
@@ -401,7 +401,7 @@ React 官网：<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.o
 <li><code>Named Export</code>：可以 <code>export</code> 多个，<code>import</code> 的时候需要加大括号，名称需要匹配，即之前使用的方式。</li>
 <li><code>Default Export</code>：最多 <code>export</code> 一个，<code>import</code> 的时候不需要加大括号，可以直接定义别名。</li>
 </ul>
-<h1>3. Components</h1>
+<h2 id="3-Components">3. Components</h2>
 <p>React 应用程序是由<strong>组件</strong>（Component）组成的。组件是一段可重用代码，一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观，用于渲染、管理和更新应用中的 UI 元素。组件可以小到一个按钮，也可以大到整个页面。</p>
 <p><strong>（1）创建项目</strong></p>
 <p>首先创建一个新项目 <code>box-app</code>：</p>
@@ -533,7 +533,7 @@ React 官网：React。`;
                     <a class="tag-none-link" href="/tags/Web/" rel="tag">Web</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-26T06:45:07.579Z" itemprop="dateModified">Last edited: 2023-10-26</time>
+                    <time datetime="2023-11-26T08:50:06.020Z" itemprop="dateModified">Last edited: 2023-11-26</time>
                 </div>
             </div>
         </footer>
@@ -616,7 +616,7 @@ React 官网：React。`;
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1. React配置环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2. ES6语法补充</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3. Components</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-React%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-text">1. React配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ES6%E8%AF%AD%E6%B3%95%E8%A1%A5%E5%85%85"><span class="toc-text">2. ES6语法补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Components"><span class="toc-text">3. Components</span></a></li></ol>
     </div>
 </aside>
                 
