@@ -7,15 +7,14 @@
         <language>zh-CN</language>
         <pubDate>Fri, 24 Nov 2023 17:09:00 +0800</pubDate>
         <lastBuildDate>Fri, 24 Nov 2023 17:09:00 +0800</lastBuildDate>
-        <category>Others</category>
         <category>AI</category>
+        <category>Others</category>
         <category>Python</category>
-        <category>Hexo</category>
         <category>Java</category>
+        <category>Hexo</category>
         <category>Interview</category>
         <category>Linux</category>
         <category>Web</category>
-        <category>Essay</category>
         <category>C++</category>
         <item>
             <guid isPermalink="true">https://asanosaki.github.io/posts/2329.html</guid>
@@ -260,6 +259,18 @@
 &lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Configuration&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;AppConfig&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; MyBean &lt;span class=&#34;title function_&#34;&gt;myBean&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;title class_&#34;&gt;MyBean&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;在这个例子中，&lt;code&gt;myBean()&lt;/code&gt; 方法被注解为 &lt;code&gt;@Bean&lt;/code&gt;，所以它会返回一个新的 &lt;code&gt;MyBean&lt;/code&gt; 实例，这个实例将被注册为 Spring 应用上下文中的 Bean。&lt;/p&gt;
 &lt;p&gt;总的来说，你不需要在 Spring Boot 中手动配置 Bean，你只需要使用 &lt;code&gt;@Bean&lt;/code&gt; 注解，Spring Boot 就会自动为你创建和管理 Bean。&lt;/p&gt;
+&lt;h3 id=&#34;4-7-RESTful是什么？&#34;&gt;4.7 RESTful是什么？&lt;/h3&gt;
+&lt;p&gt;RESTful 是一种软件架构风格，它主要用于客户端和服务器交互类的软件。在 RESTful 风格中，用户发起请求的发送方式有 GET、POST、DELETE、PUT 等方式对请求的处理方法进行区分。这样可以在前后端分离式的开发中使得前端开发人员不会对请求的资源地址产生混淆和大量的检查方法名的麻烦，形成一个统一的接口，使得 Web 服务变得更加简洁、有层次，易于实现缓存等机制。&lt;/p&gt;
+&lt;p&gt;在 Spring Boot 中，开发 RESTful 接口非常简单，通过不同的注解来支持前端的请求，除了经常使用的 &lt;code&gt;@RestController&lt;/code&gt; 注解外，Spring Boot 还提供了一些组合注解。这些注解来帮助简化常用的 HTTP 方法的映射，并更好地表达被注解方法的语义。&lt;/p&gt;
+&lt;p&gt;例如，Spring Boot 提供了与 REST 操作方式（GET、POST、PUT、DELETE）对应的注解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@GetMapping&lt;/code&gt;：处理 GET 请求。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@PostMapping&lt;/code&gt;：处理 POST 请求。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@PutMapping&lt;/code&gt;：用于更新资源。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@DeleteMapping&lt;/code&gt;：处理删除请求。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@PatchMapping&lt;/code&gt;：用于更新部分资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些注解就是我们使用的 &lt;code&gt;@RequestMapping&lt;/code&gt; 的简写版本：&lt;code&gt;@GetMapping&lt;/code&gt; 其实就等于 &lt;code&gt;@RequestMapping(value = &amp;quot;/xxx&amp;quot;, method = RequestMethod.GET)&lt;/code&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;5-Spring-Cloud&#34;&gt;5. Spring Cloud&lt;/h2&gt;
 &lt;h3 id=&#34;5-1-什么是Spring-Cloud？&#34;&gt;5.1 什么是Spring Cloud？&lt;/h3&gt;
 &lt;p&gt;Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发便利性巧妙地简化了分布式系统基础设施的开发。Spring Cloud 为开发人员提供了快速构建分布式系统中一些常见模式的工具（例如配置管理、服务发现、断路器、智能路由、微代理、控制总线）。分布式系统的协调导致了样板模式，使用 Spring Cloud 开发人员可以快速地支持实现这些模式的服务和应用程序。&lt;/p&gt;
