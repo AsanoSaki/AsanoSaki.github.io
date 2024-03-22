@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>Determined AI部署与使用教程 | AsanoSaki</title>
+  
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="AI" />
+  
+  <meta name="description" content="Determined AI部署与使用教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Determined AI部署与使用教程">
+<meta property="og:url" content="https://asanosaki.github.io/posts/32409.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="Determined AI部署与使用教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2024-03-22T13:14:00.000Z">
+<meta property="article:modified_time" content="2024-03-22T14:08:32.837Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/opacity.png');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                        
+                                            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                                        
+                                    
+                                        
+                                            <li><a href="/archives/"><i class="fa fa-file"></i>Archives</a></li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-paw"></i>Friends</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://angels-d.github.io">Angels-D</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="http://syh521.cn">SYH</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-link"></i>My Links</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">GitHub</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">Gitee</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">AcGit</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a href="https://asanosaki.github.io">BLOG</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">CSDN</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">AcWing</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">LuoGu</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">CodeForces</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">LeetCode</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">Bilibili</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-heart"></i>Favorite</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.runoob.com">Runoob</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://wallhaven.cc">Wallhaven</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="http://www.flysheep6.com">Flysheep</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://thrift.apache.org">Thrift</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">MDN</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://v5.bootcss.com">Bootstrap</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://zh-hans.react.dev">React</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.nextjs.cn">Next.js</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://cn.vuejs.org">Vue.js</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">Django</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">Spring Boot</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://hub.docker.com">Docker Hub</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://fontawesome.com.cn">Font Awesome</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.online-convert.com">File Convert</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://pytorch.org">PyTorch</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">D2L</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://board.xcpcio.com">XCPC Board</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">Kratos MNL</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>夏天的海边有冰淇淋口味的海风~</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/32409.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Determined AI部署与使用教程</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2024-03-22T13:14:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-03-22</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~9.47K
+                        
+                        words
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1711116512837"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="toc-text">1. 概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AFDetermined%EF%BC%9F"><span class="toc-text">1.1 什么是Determined？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Determined%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84Master%E5%92%8CAgent%E5%88%86%E5%88%AB%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-text">1.2 Determined集群中的Master和Agent分别表示什么意思？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%83%A8%E7%BD%B2%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 部署与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9C%A8%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2"><span class="toc-text">2.1 在本地部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83"><span class="toc-text">2.2 配置参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%91%BD%E4%BB%A4%E8%A1%8C%E3%80%81Notebook%E3%80%81Shell%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">2.3 命令行、Notebook、Shell的使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%AA%8C"><span class="toc-text">2.4 创建实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E9%80%9A%E8%BF%87VSCode-SSH%E8%BF%9E%E6%8E%A5"><span class="toc-text">2.5 通过VSCode SSH连接</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>GPU 算力池管理工具 Determined AI 使用教程，适用于实验室、企业的服务器 GPU 管理。<br>
+官方文档：<a target="_blank" rel="noopener" href="https://docs.determined.ai/latest/">Determined AI</a>。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-概念">1. 概念</h2>
+<h3 id="1-1-什么是Determined？">1.1 什么是Determined？</h3>
+<p>Determined AI 是一个全功能的深度学习平台，兼容 PyTorch 和 TensorFlow。它主要负责以下几个方面：</p>
+<ul>
+<li>分布式训练：Determined AI 可以将训练工作负载分布在多个 GPU（可能在多台计算机上）上，而无需更改代码。无论是在一台计算机上利用2个 GPU 还是在多台计算机上利用16个 GPU，都只需更改配置即可。</li>
+<li>超参数调优：Determined AI 提供了自动超参数搜索功能，可以帮助你找到最优的模型参数。</li>
+<li>资源管理：Determined AI 可以有效地管理和调度计算资源，以降低云 GPU 的成本。</li>
+<li>实验跟踪：Determined AI 可以跟踪和记录实验的过程，方便你分析结果和复现实验。</li>
+</ul>
+<p>Determined AI 的主要组件之一是命令行接口（CLI），它提供了一种高效的方式来管理和控制系统的各个方面。例如，你可以使用 CLI 来创建、列出和管理实验，以及访问重要的实验指标和日志。CLI 还可以帮助你管理作业队列，监控正在进行的任务的进度，甚至根据需要优先处理或取消作业。</p>
+<p>此外，Determined AI 还支持自由形式的任务，如命令和 Shell。命令和 Shell 使开发人员可以在不必编写符合试验 API 的代码的情况下，使用 Determined 集群和其 GPU。</p>
+<h3 id="1-2-Determined集群中的Master和Agent分别表示什么意思？">1.2 Determined集群中的Master和Agent分别表示什么意思？</h3>
+<p>在 Determined 集群中，Master 和 Agent 有特定的角色和功能。</p>
+<ul>
+<li>Master：Master 是 Determined 集群的核心，它负责管理和调度所有的任务。Master 接收来自用户（通过网页、CLI 等方式）的请求，并将这些请求发送到 Agent 进行处理。Master 的行为可以通过设置配置变量来控制，这可以通过使用配置文件、环境变量或命令行选项来完成。</li>
+<li>Agent：Agent 是执行任务的节点，它们在 Master 的调度下运行任务。每个 Agent 都有一个唯一的 ID（默认为当前机器的主机名），并且在一个集群中必须是唯一的。Agent 节点通常是配备 GPU 的服务器，用于运行计算密集型的深度学习任务。</li>
+</ul>
+<p>总的来说，Master 负责管理和调度任务，而 Agent 负责执行这些任务。</p>
+<h2 id="2-部署与配置">2. 部署与配置</h2>
+<h3 id="2-1-在本地部署">2.1 在本地部署</h3>
+<p>在部署 Master 与 Agent 节点的服务器上需要先安装好 Docker，安装教程（Ubuntu 系统下）：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu</a>。</p>
+<p>安装 <code>nvidia-container-toolkit</code>（Master 和存储节点不需要 GPU，也无需安装 Nvidia 相关的内容），否则部署使用 GPU 的集群会出现报错 <code>Internal Server Error (&quot;could not select device driver &quot;nvidia&quot; with capabilities: [[gpu utility]]&quot;)</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">distribution=$(. /etc/os-release;echo $ID$VERSION_ID)</span><br><span class="line"></span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -</span><br><span class="line"></span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install -y --no-install-recommends nvidia-container-toolkit</span><br><span class="line"></span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
+<p>安装 Determined 库并在本地启动集群，对于本地开发或小型集群（例如 GPU 工作站），您可能希望同时安装 Master 和 Agent 位于同一节点上，因此可以使用 <code>cluster-up</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip install determined  # 可能会有某些包之间存在版本冲突需要解决</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If your machine has GPUs:</span></span><br><span class="line">det deploy local cluster-up</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If your machine does not have GPUs:</span></span><br><span class="line">det deploy local cluster-up --no-gpu</span><br></pre></td></tr></table></figure>
+<p>如果 <code>det</code> 命令识别不到可能是没有配置环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/environment</span><br><span class="line">在 PATH=&#x27;xxx&#x27; 后面添加 &#x27;:/home/&lt;用户名&gt;/.local/bin&#x27;</span><br><span class="line">即: &#x27;xxx:/home/&lt;用户名&gt;/.local/bin&#x27;</span><br><span class="line"></span><br><span class="line">source /etc/environment  # 应用更新</span><br></pre></td></tr></table></figure>
+<p>要停止 Determined 集群，请在当前运行 Determined 集群的计算机上，运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det deploy local cluster-down</span><br></pre></td></tr></table></figure>
+<p>在许多情况下，Determined 集群将由多个节点组成。在这种情况下，您将需要分别启动 Master 和 Agents。启动和停止独立 Master：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">det deploy local master-up  # 启动</span><br><span class="line">det deploy local master-down  # 停止</span><br></pre></td></tr></table></figure>
+<p>若要在计算机上部署独立的 Agent，请运行以下命令之一，<code>&lt;master_hostname&gt;</code> 为 Master 的主机名：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If the machine has GPUs:</span></span><br><span class="line">det deploy local agent-up &lt;master_hostname&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">If the machine doesn<span class="string">&#x27;t have GPUs:</span></span></span><br><span class="line">det deploy local agent-up --no-gpu &lt;master_hostname&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Stop Agent</span></span></span><br><span class="line">det deploy local agent-down</span><br></pre></td></tr></table></figure>
+<p>与用户相关的指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">det user list  # 列出所有的用户，包括他们的用户名、管理员状态、活动状态等</span><br><span class="line">det user get &lt;username&gt;  # 显示某用户的详细信息，包括他们是否已经登录</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:8080/</code>，用户名为 <code>determined</code>，密码留空，即可登录。</p>
+<h3 id="2-2-配置参考">2.2 配置参考</h3>
+<p>查看当前 Master 配置信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det master config</span><br></pre></td></tr></table></figure>
+<p>我们可以自定义 Master 的配置，在需要部署 Master 的服务器上创建 Master 配置文件 <code>master-config.yaml</code>，具体配置教程见：<a target="_blank" rel="noopener" href="https://docs.determined.ai/latest/reference/deploy/master-config-reference.html">Master Configuration Reference</a>，参考内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">__internal:</span></span><br><span class="line">  <span class="attr">audit_logging_enabled:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">external_sessions:</span></span><br><span class="line">    <span class="attr">jwt_key:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="attr">login_uri:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="attr">logout_uri:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">proxied_servers:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">cache_dir:</span> <span class="string">/var/cache/determined</span></span><br><span class="line"><span class="attr">checkpoint_storage:</span></span><br><span class="line">  <span class="attr">host_path:</span> <span class="string">/home/ubuntu/.local/share/determined</span></span><br><span class="line">  <span class="attr">propagation:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">save_experiment_best:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">save_trial_best:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">save_trial_latest:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">storage_path:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">shared_fs</span></span><br><span class="line"><span class="attr">cluster_name:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">config_file:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">db:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">determined-db</span></span><br><span class="line">  <span class="attr">migrations:</span> <span class="string">file:///usr/share/determined/master/static/migrations</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">determined</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">&#x27;********&#x27;</span></span><br><span class="line">  <span class="attr">port:</span> <span class="string">&#x27;5432&#x27;</span></span><br><span class="line">  <span class="attr">ssl_mode:</span> <span class="string">disable</span></span><br><span class="line">  <span class="attr">ssl_root_cert:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">user:</span> <span class="string">postgres</span></span><br><span class="line"><span class="attr">enable_cors:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">feature_switches:</span> []</span><br><span class="line"><span class="attr">integrations:</span></span><br><span class="line">  <span class="attr">pachyderm:</span></span><br><span class="line">    <span class="attr">address:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">launch_error:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">log:</span></span><br><span class="line">  <span class="attr">color:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">level:</span> <span class="string">info</span></span><br><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">notebook_timeout:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">observability:</span></span><br><span class="line">  <span class="attr">enable_prometheus:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">reserved_ports:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">resource_manager:</span></span><br><span class="line">  <span class="attr">client_ca:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">default_aux_resource_pool:</span> <span class="string">default</span>  <span class="comment"># 默认辅助资源池</span></span><br><span class="line">  <span class="attr">default_compute_resource_pool:</span> <span class="string">defaut</span>  <span class="comment"># 默认计算资源池</span></span><br><span class="line">  <span class="attr">no_default_resource_pools:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">require_authentication:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">scheduler:</span></span><br><span class="line">    <span class="attr">allow_heterogeneous_fits:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">fitting_policy:</span> <span class="string">best</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">fair_share</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">agent</span></span><br><span class="line"><span class="attr">resource_pools:</span>  <span class="comment"># 设置资源池</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">agent_reattach_enabled:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">agent_reconnect_wait:</span> <span class="string">25s</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">kubernetes_namespace:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">max_aux_containers_per_agent:</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">pool_name:</span> <span class="string">default</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">task_container_defaults:</span> <span class="literal">null</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">agent_reattach_enabled:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">agent_reconnect_wait:</span> <span class="string">25s</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">kubernetes_namespace:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">max_aux_containers_per_agent:</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">pool_name:</span> <span class="string">RTX3090</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">task_container_defaults:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/usr/share/determined/master</span></span><br><span class="line"><span class="attr">security:</span></span><br><span class="line">  <span class="attr">authz:</span></span><br><span class="line">    <span class="attr">_strict_ntsc_enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">fallback:</span> <span class="string">basic</span></span><br><span class="line">    <span class="attr">rbac_ui_enabled:</span> <span class="literal">null</span></span><br><span class="line">    <span class="attr">strict_job_queue_control:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">basic</span></span><br><span class="line">    <span class="attr">workspace_creator_assign_role:</span></span><br><span class="line">      <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">role_id:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">default_task:</span></span><br><span class="line">    <span class="attr">gid:</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">group:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">id:</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">uid:</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">user_id:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">ssh:</span></span><br><span class="line">    <span class="attr">rsa_key_size:</span> <span class="number">1024</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">    <span class="attr">cert:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">task_container_defaults:</span></span><br><span class="line">  <span class="attr">add_capabilities:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">bind_mounts:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">cpu_pod_spec:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">devices:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">drop_capabilities:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">gpu_pod_spec:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">kubernetes:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">log_policies:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">network_mode:</span> <span class="string">bridge</span></span><br><span class="line">  <span class="attr">pbs:</span> &#123;&#125;</span><br><span class="line">  <span class="attr">shm_size_bytes:</span> <span class="number">4294967296</span></span><br><span class="line">  <span class="attr">slurm:</span> &#123;&#125;</span><br><span class="line">  <span class="attr">work_dir:</span> <span class="literal">null</span></span><br><span class="line"><span class="attr">telemetry:</span></span><br><span class="line">  <span class="attr">cluster_id:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">otel_enabled:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">otel_endpoint:</span> <span class="string">localhost:4317</span></span><br><span class="line">  <span class="attr">segment_master_key:</span> <span class="string">&#x27;********&#x27;</span></span><br><span class="line">  <span class="attr">segment_webui_key:</span> <span class="string">&#x27;********&#x27;</span></span><br><span class="line"><span class="attr">tensorboard_timeout:</span> <span class="number">300</span></span><br><span class="line"><span class="attr">webhooks:</span></span><br><span class="line">  <span class="attr">base_url:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">signing_key:</span> <span class="string">fc9942f4d575</span></span><br></pre></td></tr></table></figure>
+<p>然后即可使用配置文件启动集群：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det deploy local cluster-up --master-config-path ./master-config.yaml</span><br></pre></td></tr></table></figure>
+<p>在需要部署 Agent 的服务器上创建 Agent 配置文件 <code>agent-config.yaml</code>，具体配置教程见：<a target="_blank" rel="noopener" href="https://docs.determined.ai/latest/reference/deploy/agent-config-reference.html">Agent Configuration Reference</a>，参考内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必填，用于确定 Master 节点的主机名或 IP 地址</span></span><br><span class="line"><span class="attr">master_host:</span> <span class="string">&lt;ip_of_your_master_node&gt;</span></span><br><span class="line"><span class="comment"># Master 节点的端口。</span></span><br><span class="line"><span class="attr">master_port:</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 此 Agent 的 ID，默认为当前计算机的主机名，ID 在集群中必须是唯一的</span></span><br><span class="line"><span class="attr">agent_id:</span> <span class="string">RTX3090_0</span></span><br><span class="line"><span class="comment"># 指定分配到哪个资源池</span></span><br><span class="line"><span class="attr">resource_pool:</span> <span class="string">RTX3090</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Agent 容器的 HTTP/HTTPS 代理地址</span></span><br><span class="line"><span class="attr">http_proxy:</span> <span class="string">&lt;ip_of_proxy&gt;</span></span><br><span class="line"><span class="attr">https_proxy:</span> <span class="string">&lt;ip_of_proxy&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里主要配置3个内容：</p>
+<ul>
+<li>Master 节点主机名和端口号，用于识别 Master 节点。</li>
+<li><code>agent_id</code> 和 <code>resource_pool</code>，分别对应本机 ID 和资源池，根据显卡型号命名即可，注意资源池需要已在 Master 配置文件中定义过。</li>
+<li>科学上网代理。</li>
+</ul>
+<p>完成后，所有 Agent 节点使用如下命令启动（最后的 <code>0.29.0</code> 为 Determined AI 的版本号，根据自己安装的版本修改即可）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -v /var/run/docker.sock:/var/run/docker.sock -v &quot;$PWD&quot;/agent-config.yaml:/etc/determined/agent.yaml determinedai/determined-agent:0.29.0</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-命令行、Notebook、Shell的使用方法">2.3 命令行、Notebook、Shell的使用方法</h3>
+<p>Determined 主要有两种使用方式：Web 和 CLI。其中 Web 可以直接通过 <code>&lt;Master节点IP&gt;:8080</code> 进行访问，但是不推荐使用 Web 方式，因为网页端创建任务无法自定义存储路径和加载的 Docker 镜像，灵活度十分受限。因此接下来详细介绍 CLI 的用法。</p>
+<p>首先在终端机安装好 Determined，然后在环境变量中配置 Master 节点 IP：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加以下内容，保存并退出</span></span><br><span class="line">export DET_MASTER=&lt;Master节点的IP&gt;</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>接下来可以使用 Determined CLI 创建任务，首先在终端机需要登录，在 Admin 用户（用户名为 <code>admin</code>，密码留空）中可以管理其他用户，假设已经给终端机创建好账号即可登录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det user login</span><br></pre></td></tr></table></figure>
+<p>然后写一个开启任务的 Yaml 配置文件，这里给出一个参考：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">description:</span> <span class="string">test_task</span></span><br><span class="line"><span class="attr">resources:</span></span><br><span class="line">  <span class="attr">resource_pool:</span> <span class="string">RTX3090</span></span><br><span class="line">  <span class="attr">slots:</span> <span class="number">1</span></span><br><span class="line"><span class="comment"># 将物理机上host_path路径下的文件挂载到用户当前使用的容器的container_path路径下</span></span><br><span class="line"><span class="attr">bind_mounts:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host_path:</span> <span class="string">/home/ubuntu/</span></span><br><span class="line">    <span class="attr">container_path:</span> <span class="string">/run/determined/workdir/asanosaki/</span></span><br><span class="line"><span class="attr">environment:</span>  <span class="comment"># Docker容器的环境配置，包括使用的镜像和环境变量</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">determinedai/environments:cuda-11.8-pytorch-2.0-gpu-0.29.1</span></span><br><span class="line">  <span class="attr">environment_variables:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">http_proxy=&lt;ip_of_proxy&gt;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">https_proxy=&lt;ip_of_proxy&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Determined 官方给出了很多个版本的 CUDA 和框架的组合，可以自行选择所需要的镜像，Determined AI Docker 镜像列表：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/determinedai/environments/tags">Docker Hub DeterminedAI</a>。</p>
+<p>完成后，可以选择开启 Jupyter Notebook 或者终端，这取决于使用者的习惯：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Notebook</span></span><br><span class="line">det notebook start --config-file config.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">CMD</span></span><br><span class="line">det cmd run --config-file config.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Shell</span></span><br><span class="line">det shell start --config-file config.yaml</span><br></pre></td></tr></table></figure>
+<p>对应的停止任务指令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Notebook</span></span><br><span class="line">det notebook kill &lt;ID&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">CMD</span></span><br><span class="line">det cmd kill &lt;ID&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Shell</span></span><br><span class="line">det shell kill &lt;ID&gt;</span><br></pre></td></tr></table></figure>
+<p>任务的 <code>&lt;ID&gt;</code> 可通过 <code>det task list</code> 查看所有任务信息获得，写前8位即可。</p>
+<h3 id="2-4-创建实验">2.4 创建实验</h3>
+<p>先下载官方的项目示例代码：<a target="_blank" rel="noopener" href="https://docs.determined.ai/latest/_downloads/61c6df286ba829cb9730a0407275ce50/mnist_pytorch.tgz">mnist_pytorch.tgz</a>。</p>
+<p>将其解压到当前目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf mnist_pytorch.tgz -C ./</span><br><span class="line">cd mnist_pytorch</span><br></pre></td></tr></table></figure>
+<p>可以看到该目录下有单卡运行实验以及多卡并行运行实验的实验配置文件 <code>const.yaml</code> 和 <code>distributed.yaml</code>，此处给出 <code>distributed.yaml</code> 配置参考内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">mnist_pytorch_distributed</span></span><br><span class="line"><span class="attr">hyperparameters:</span></span><br><span class="line">  <span class="attr">learning_rate:</span> <span class="number">1.0</span></span><br><span class="line">  <span class="attr">n_filters1:</span> <span class="number">32</span></span><br><span class="line">  <span class="attr">n_filters2:</span> <span class="number">64</span></span><br><span class="line">  <span class="attr">dropout1:</span> <span class="number">0.25</span></span><br><span class="line">  <span class="attr">dropout2:</span> <span class="number">0.5</span></span><br><span class="line"><span class="attr">searcher:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">single</span></span><br><span class="line">  <span class="attr">metric:</span> <span class="string">validation_loss</span></span><br><span class="line">  <span class="attr">max_length:</span></span><br><span class="line">      <span class="attr">epochs:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">smaller_is_better:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">entrypoint:</span> <span class="string">python3</span> <span class="string">-m</span> <span class="string">determined.launch.torch_distributed</span> <span class="string">python3</span> <span class="string">train.py</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">test_task</span></span><br><span class="line"><span class="attr">resources:</span></span><br><span class="line">  <span class="attr">resource_pool:</span> <span class="string">RTX3090</span></span><br><span class="line">  <span class="attr">slots_per_trial:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">bind_mounts:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host_path:</span> <span class="string">/home/ubuntu/</span></span><br><span class="line">    <span class="attr">container_path:</span> <span class="string">/run/determined/workdir/asanosaki/</span></span><br><span class="line"><span class="attr">environment:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">determinedai/environments:cuda-11.8-pytorch-2.0-gpu-0.29.1</span></span><br><span class="line">  <span class="attr">environment_variables:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">http_proxy=&lt;ip_of_proxy&gt;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">https_proxy=&lt;ip_of_proxy&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下来即可通过配置文件创建任务（最后一个 <code>.</code> 表示上传当前目录中的所有文件，作为模型的上下文目录。Determined 将模型上下文目录内容复制到试验容器工作目录）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det experiment create distributed.yaml .</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-通过VSCode-SSH连接">2.5 通过VSCode SSH连接</h3>
+<p>首先确保 VSCode 已经安装 <code>Remote - SSH</code> 扩展，当用户开启了 Shell 后，可以在终端机上执行以下命令获取 Shell 的 SSH 登录命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det shell show_ssh_command &lt;SHELL UUID&gt;</span><br></pre></td></tr></table></figure>
+<p>复制 SSH 命令，在 VS Code 的 <code>Remote Explorer</code> 页面下即可添加连接。</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/32409.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/32409.html";
+            const title         = "「Determined AI部署与使用教程」";
+            const excerpt       = `GPU 算力池管理工具 Determined AI 使用教程，适用于实验室、企业的服务器 GPU 管理。
+官方文档：Determined AI。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/AI/" rel="tag">AI</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-03-22T14:08:32.837Z" itemprop="dateModified">Last edited: 2024-03-22</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" SpringBoot学习笔记-实现微服务：匹配系统（中）" href="/posts/5710.html">&lt; Previous</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                87
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                9
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                9
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="toc-text">1. 概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AFDetermined%EF%BC%9F"><span class="toc-text">1.1 什么是Determined？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Determined%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84Master%E5%92%8CAgent%E5%88%86%E5%88%AB%E8%A1%A8%E7%A4%BA%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-text">1.2 Determined集群中的Master和Agent分别表示什么意思？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%83%A8%E7%BD%B2%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 部署与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9C%A8%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2"><span class="toc-text">2.1 在本地部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83"><span class="toc-text">2.2 配置参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%91%BD%E4%BB%A4%E8%A1%8C%E3%80%81Notebook%E3%80%81Shell%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">2.3 命令行、Notebook、Shell的使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%AA%8C"><span class="toc-text">2.4 创建实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E9%80%9A%E8%BF%87VSCode-SSH%E8%BF%9E%E6%8E%A5"><span class="toc-text">2.5 通过VSCode SSH连接</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Interview/" style="font-size: 0.67em;">Interview</a> <a href="/tags/Java/" style="font-size: 0.8em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.77em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/32409.html"><i class="fa  fa-book"></i> Determined AI部署与使用教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/5710.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-实现微服务：匹配系统（中）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/2329.html"><i class="fa  fa-book"></i> Spring面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/53737.html"><i class="fa  fa-book"></i> Java进阶面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/36915.html"><i class="fa  fa-book"></i> Java基础面试题总结</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
