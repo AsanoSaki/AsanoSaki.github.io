@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  
+  <title>SpringBoot学习笔记-实现微服务：匹配系统（下） | AsanoSaki</title>
+  
+  <meta name="author" content="AsanoSaki" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Java" />
+  
+  <meta name="description" content="SpringBoot学习笔记-实现微服务：匹配系统（下）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot学习笔记-实现微服务：匹配系统（下）">
+<meta property="og:url" content="https://asanosaki.github.io/posts/24133.html">
+<meta property="og:site_name" content="AsanoSaki">
+<meta property="og:description" content="SpringBoot学习笔记-实现微服务：匹配系统（下）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asanosaki.github.io/images/favicon.ico">
+<meta property="article:published_time" content="2023-12-05T13:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-19T02:55:08.411Z">
+<meta property="article:author" content="AsanoSaki">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://asanosaki.github.io/images/favicon.ico">
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/light.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/opacity.png');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                        
+                                            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                                        
+                                    
+                                        
+                                            <li><a href="/archives/"><i class="fa fa-file"></i>Archives</a></li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-paw"></i>Friends</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://angels-d.github.io">Angels-D</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="http://syh521.cn">SYH</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-link"></i>My Links</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://github.com/AsanoSaki">GitHub</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://gitee.com/asanosaki">Gitee</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://git.acwing.com/AsanoSaki">AcGit</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a href="https://asanosaki.github.io">BLOG</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://asanosaki.blog.csdn.net">CSDN</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.acwing.com/user/myspace/index/82581">AcWing</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/459347">LuoGu</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://codeforces.com/profile/AsanoSaki">CodeForces</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://leetcode.cn/u/asanosaki">LeetCode</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://space.bilibili.com/12300056">Bilibili</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                        
+                                            <li>
+                                                <a><i class="fa fa-heart"></i>Favorite</a>
+                                                <ul class="sub-menu">
+                                                    
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.runoob.com">Runoob</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://wallhaven.cc">Wallhaven</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="http://www.flysheep6.com">Flysheep</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://thrift.apache.org">Thrift</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN">MDN</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://v5.bootcss.com">Bootstrap</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://zh-hans.react.dev">React</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.nextjs.cn">Next.js</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://cn.vuejs.org">Vue.js</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2">Django</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle">Spring Boot</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://hub.docker.com">Docker Hub</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://fontawesome.com.cn">Font Awesome</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://www.online-convert.com">File Convert</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://pytorch.org">PyTorch</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai">D2L</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://board.xcpcio.com">XCPC Board</a></li>
+                                                        
+                                                    
+                                                        
+                                                            <li><a target="_blank" rel="noopener" href="https://kr-demo.candinya.com/posts/Kratos-Rebirth-Manual">Kratos MNL</a></li>
+                                                        
+                                                    
+                                                </ul>
+                                            </li>
+                                        
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">AsanoSaki</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>AsanoSaki</h2> <br />
+                        <span>夏天的海边有冰淇淋口味的海风~</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://asanosaki.github.io/posts/24133.html">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">SpringBoot学习笔记-实现微服务：匹配系统（下）</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-12-05T13:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-12-05</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> Author <span itemprop="name">AsanoSaki</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~36.78K
+                        
+                        words
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1713495308411"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%87%8D%E6%9E%84%E9%A1%B9%E7%9B%AE"><span class="toc-text">1. 重构项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%9D%E5%A7%8B%E5%8C%96Spring-Cloud%E9%A1%B9%E7%9B%AE"><span class="toc-text">1.1 初始化Spring Cloud项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%88%9B%E5%BB%BA%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6"><span class="toc-text">1.2 创建匹配系统框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%BF%81%E7%A7%BBWeb%E5%90%8E%E7%AB%AF"><span class="toc-text">1.3 迁移Web后端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">2. 实现匹配系统微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9B%B4%E6%96%B0"><span class="toc-text">2.1 数据库更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Web%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%AB%AF%E9%80%9A%E4%BF%A1"><span class="toc-text">2.2 Web后端与匹配系统后端通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%9E%E7%8E%B0%E5%8C%B9%E9%85%8D%E9%80%BB%E8%BE%91"><span class="toc-text">2.3 实现匹配逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Web%E5%90%8E%E7%AB%AF%E6%8E%A5%E6%94%B6%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C"><span class="toc-text">2.4 Web后端接收匹配结果</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>本节内容为实现完整的匹配系统微服务。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-重构项目">1. 重构项目</h2>
+<h3 id="1-1-初始化Spring-Cloud项目">1.1 初始化Spring Cloud项目</h3>
+<p>现在需要把匹配系统设计成一个微服务，也就是一个独立的系统，可以认为是一个新的 SpringBoot 后端，当之前的服务器获取到两名玩家的匹配请求后会向后台的匹配系统服务器发送 HTTP 请求，匹配系统类似于之前的 <code>Game</code>，在接收到请求之后也会单独开一个新的线程来匹配，可以设计成每隔一秒扫一遍匹配池中已有的玩家，然后判断能否匹配出来，如果可以就将匹配结果通过 HTTP 请求返回。</p>
+<p>匹配系统和网站后端是两个并列的后端项目，因此可以修改一下项目结构，将这两个后端改为子项目，然后新建一个新的父级项目。</p>
+<p>我们新建一个 Spring 项目，项目名为 <code>backendcloud</code>，还是选用 Maven 管理项目，组名为 <code>com.kob</code>。注意 2023.11.24 之后 SpringBoot 2.x 版本正式弃用，SpringBoot 3.x 版本需要 Java 17 及以上。我们现在选择 SpringBoot 3.2.0 版本，依赖选上 Spring Web 即可。</p>
+<p>父级项目是没有逻辑的，因此可以把 <code>src</code> 目录删掉，然后修改一下 <code>pom.xml</code>，首先在 <code>&lt;description&gt;backendcloud&lt;/description&gt;</code> 后添加一行：<code>&lt;packaging&gt;pom&lt;/packaging&gt;</code>，然后添加 Spring Cloud 的依赖，前往 <a target="_blank" rel="noopener" href="https://mvnrepository.com/">Maven 仓库</a>，搜索并安装以下依赖：</p>
+<ul>
+<li><code>spring-cloud-dependencies</code></li>
+</ul>
+<p>接着在 <code>backendcloud</code> 目录下创建匹配系统子项目，选择新建一个模块（Module），选择空项目，匹配系统的名称为 <code>matchingsystem</code>，在高级设置中将组 ID 设置为 <code>com.kob.matchingsystem</code>。</p>
+<p>这个新建的子项目本质上也是一个 SpringBoot，我们将父级目录的 <code>pom.xml</code> 中的 Spring Web 依赖剪切到 <code>matchingsystem</code> 中的 <code>pom.xml</code>，也就是以下这段依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-2-创建匹配系统框架">1.2 创建匹配系统框架</h3>
+<p>由于有两个 SpringBoot 服务，因此需要修改一下匹配系统的端口，在 <code>resources</code> 目录下创建 <code>application.properties</code> 文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">3001</span></span><br></pre></td></tr></table></figure>
+<p>在 <code>com.kob.matchingsystem</code> 包下创建 <code>controller</code> 和 <code>service</code> 包，在 <code>service</code> 包下创建 <code>impl</code> 包。先在 <code>service</code> 包下创建 <code>MatchingService</code> 接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MatchingService</span> &#123;</span><br><span class="line">    String <span class="title function_">addPlayer</span><span class="params">(Integer userId, Integer rating)</span>;  <span class="comment">// 将玩家添加到匹配池中</span></span><br><span class="line">    String <span class="title function_">removePlayer</span><span class="params">(Integer userId)</span>;  <span class="comment">// 从匹配池中删除玩家</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后简单实现一下 <code>MatchingServiceImpl</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.matchingsystem.service.MatchingService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MatchingServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">MatchingService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">addPlayer</span><span class="params">(Integer userId, Integer rating)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Add Player: &quot;</span> + userId + <span class="string">&quot;, Rating: &quot;</span> + rating);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">removePlayer</span><span class="params">(Integer userId)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Remove Player: &quot;</span> + userId);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后在 <code>controller</code> 包下创建 <code>MatchingController</code>，在 Spring 的 <code>WebClient</code> 中，如果你想要发送一个 <code>Map</code> 类型的数据，你需要将它转换为 <code>MultiValueMap</code>。这是因为 HTTP 的表单数据通常可以包含多个值，而 <code>Map</code> 只能包含一个值。因此，<code>WebClient</code> 使用 <code>MultiValueMap</code> 来表示表单数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.matchingsystem.service.MatchingService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.MultiValueMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MatchingController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MatchingService matchingService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/matching/add/&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">addPlayer</span><span class="params">(<span class="meta">@RequestParam</span> MultiValueMap&lt;String, String&gt; data)</span> &#123;  <span class="comment">// 注意这边不能用Map</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">userId</span> <span class="operator">=</span> Integer.parseInt(Objects.requireNonNull(data.getFirst(<span class="string">&quot;user_id&quot;</span>)));</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">rating</span> <span class="operator">=</span> Integer.parseInt(Objects.requireNonNull(data.getFirst(<span class="string">&quot;rating&quot;</span>)));</span><br><span class="line">        <span class="keyword">return</span> matchingService.addPlayer(userId, rating);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/matching/remove/&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">removePlayer</span><span class="params">(<span class="meta">@RequestParam</span> MultiValueMap&lt;String, String&gt; data)</span> &#123;</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">userId</span> <span class="operator">=</span> Integer.parseInt(Objects.requireNonNull(data.getFirst(<span class="string">&quot;user_id&quot;</span>)));</span><br><span class="line">        <span class="keyword">return</span> matchingService.removePlayer(userId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，匹配系统应该只能接收来自 Web 后端服务器发来的请求，而不能接收其他外网的请求，因此需要使用 Spring Security 实现用户授权，在 <code>matchingsystem</code> 子项目中添加上 <code>spring-boot-starter-security</code> 依赖后创建一个 <code>config</code> 包，然后创建和之前类似的 <code>SecurityConfig</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.http.SessionCreationPolicy;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.SecurityFilterChain;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.util.matcher.RequestMatcher;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> SecurityFilterChain <span class="title function_">filterChain</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        http.csrf(CsrfConfigurer::disable)</span><br><span class="line">                .sessionManagement(sess -&gt; sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span><br><span class="line">                .authorizeHttpRequests(auth -&gt; &#123;</span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="string">&quot;/error&quot;</span>)).permitAll();  <span class="comment">// 放行报错页面</span></span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="string">&quot;/matching/add/&quot;</span>)).permitAll();</span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="string">&quot;/matching/remove/&quot;</span>)).permitAll();</span><br><span class="line">                    auth.requestMatchers(HttpMethod.OPTIONS).permitAll();</span><br><span class="line">                    auth.anyRequest().authenticated();</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> http.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">record</span> <span class="title class_">IpAddressMatcher</span><span class="params">(String remoteAddr, String servletPath)</span> <span class="keyword">implements</span> <span class="title class_">RequestMatcher</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">            <span class="comment">// 放行来自http://remoteAddr/servletPath的请求</span></span><br><span class="line">            <span class="keyword">return</span> remoteAddr.equals(request.getRemoteAddr()) &amp;&amp; servletPath.equals(request.getServletPath());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将自定义的 <code>IpAddressMatcher</code> 类定义为 <code>record</code>，这是 Java 14 中引入的一个新特性。它是一种类似于类的结构，但用于表示不可变数据。相比于传统的 Java 类，<code>record</code> 在定义数据类时更为简洁、易读和易用，<code>record</code> 申明的类，具备以下特点：</p>
+<ul>
+<li>它是一个 <code>final</code> 类。</li>
+<li>自动实现 <code>equals</code>、<code>hashCode</code>、<code>toString</code> 方法。</li>
+<li>成员变量均为 <code>final</code>，且有对应的 <code>public</code> 访问器方法。</li>
+</ul>
+<p>相当于以下的类定义（省略了自动实现的方法）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">IpAddressMatcher</span> <span class="keyword">implements</span> <span class="title class_">RequestMatcher</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String remoteAddr;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String servletPath;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IpAddressMatcher</span><span class="params">(String remoteAddr, String servletPath)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.remoteAddr = remoteAddr;</span><br><span class="line">        <span class="built_in">this</span>.servletPath = servletPath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在需要将这个匹配系统子项目变为 Spring 项目，将 <code>Main</code> 改名为 <code>MatchingSystemApplication</code>，然后将其修改为 SpringBoot 的入口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MatchingSystemApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(MatchingSystemApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-迁移Web后端">1.3 迁移Web后端</h3>
+<p>在 <code>backendcloud</code> 目录下创建一个新的模块名为 <code>backend</code>，然后在高级设置中将组 ID 改为 <code>com.kob.backend</code>，创建好后先将 <code>src</code> 目录删掉，然后将之前的 Web 后端项目中的 <code>src</code> 复制过来，还需要将之前的 <code>pom.xml</code> 配置信息中的依赖配置 <code>&lt;dependencies&gt;</code> 也复制过来，可以将 <code>spring-boot-starter-thymeleaf</code> 依赖删掉。</p>
+<p>由于我们新建的 <code>backendcloud</code> 项目升级到了 SpringBoot 3.2.0，因此迁移过来的 <code>backend</code> 需要重构一部分代码，首先是 <code>javax.servlet</code> 和 <code>javax.websocket</code> 已经被弃用，需要用 Jakarta 提供的依赖包，先在 <code>backend</code> 的 <code>pom.xml</code> 中添加以下依赖：</p>
+<ul>
+<li><code>jakarta.websocket-api</code></li>
+<li><code>jakarta.websocket-client-api</code></li>
+</ul>
+<p>然后修改 <code>JwtAuthenticationTokenFilter</code> 的包导入代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.config.filter;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>修改 <code>WebSocketServer</code> 的包导入代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.consumer;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jakarta.websocket.*;</span><br><span class="line"><span class="keyword">import</span> jakarta.websocket.server.PathParam;</span><br><span class="line"><span class="keyword">import</span> jakarta.websocket.server.ServerEndpoint;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>然后修改 Spring Security 的配置文件 <code>SecurityConfig</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.backend.config.filter.JwtAuthenticationTokenFilter;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.AuthenticationManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.http.SessionCreationPolicy;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.SecurityFilterChain;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.util.matcher.RequestMatcher;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> PasswordEncoder <span class="title function_">passwordEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> AuthenticationManager <span class="title function_">authenticationManagerBean</span><span class="params">(AuthenticationConfiguration authenticationConfiguration)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> authenticationConfiguration.getAuthenticationManager();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> SecurityFilterChain <span class="title function_">filterChain</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        http.csrf(CsrfConfigurer::disable)</span><br><span class="line">                .sessionManagement(sess -&gt; sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span><br><span class="line">                .authorizeHttpRequests(auth -&gt; &#123;</span><br><span class="line"><span class="comment">//                    auth.requestMatchers(&quot;/user/account/login/&quot;, &quot;/user/account/register/&quot;).permitAll();  // 使用这种也行，但是无法通过浏览器地址访问，只能通过前端发出HTTP请求</span></span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>, <span class="string">&quot;/error&quot;</span>)).permitAll();  <span class="comment">// 0:0:0:0:0:0:0:1是localhost的IPv6版本</span></span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>, <span class="string">&quot;/user/account/login/&quot;</span>)).permitAll();</span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>, <span class="string">&quot;/user/account/register/&quot;</span>)).permitAll();</span><br><span class="line">                    auth.requestMatchers(HttpMethod.OPTIONS).permitAll();</span><br><span class="line">                    auth.anyRequest().authenticated();</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> http.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> WebSecurityCustomizer <span class="title function_">webSecurityCustomizer</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (web) -&gt; web.ignoring().requestMatchers(<span class="string">&quot;/websocket/**&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">record</span> <span class="title class_">IpAddressMatcher</span><span class="params">(String remoteAddr, String servletPath)</span> <span class="keyword">implements</span> <span class="title class_">RequestMatcher</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">            <span class="comment">// 放行来自http://remoteAddr/servletPath的请求</span></span><br><span class="line">            <span class="keyword">return</span> remoteAddr.equals(request.getRemoteAddr()) &amp;&amp; servletPath.equals(request.getServletPath());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以注意到我们在放行链接时 IP 地址为 <code>0:0:0:0:0:0:0:1</code>，代码中的 <code>request.getRemoteAddr()</code> 方法用于获取发起 HTTP 请求的客户端的 IP 地址，Vue 前端使用 Ajax 向后端发送 HTTP 请求时所用的 <code>localhost</code> 通过该方法会返回 IPv6 的回环地址 <code>0:0:0:0:0:0:0:1</code>，而如果是 SpringBoot 后端之间发送 HTTP 请求则 <code>localhost</code> 会返回 IPv4 的回环地址 <code>127.0.0.1</code>。</p>
+<p>这时候在 IDEA 中连接上数据库后启动一下 <code>backend</code> 项目会看到报错：<code>Invalid value type for attribute 'factoryBeanObjectType': java.lang.String</code>，这是由于 MyBatis-Plus 中的 MyBatis-Spring 版本较低，以后更新成新版本应该能解决问题，目前我们先在 <code>mybatis-plus-boot-starter</code> 依赖中排除掉 <code>mybatis-spring</code>，然后自己添加一个新的 <code>mybatis-spring</code> 依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.4.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 解决SpringBoot版本升级到3.2.0导致的Invalid value type for attribute &#x27;factoryBeanObjectType&#x27;: java.lang.String --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-实现匹配系统微服务">2. 实现匹配系统微服务</h2>
+<h3 id="2-1-数据库更新">2.1 数据库更新</h3>
+<p>我们将 <code>rating</code> 放到用户身上而不是 BOT 上，每个用户对应一个自己的天梯分。在 <code>user</code> 表中创建 <code>rating</code>，并将 <code>bot</code> 表中的 <code>rating</code> 删去，然后需要修改对应的 <code>pojo</code>，还有 <code>service.impl.user.account</code> 包下的 <code>RegisterServiceImpl</code> 类以及 <code>service.impl.user.bot</code> 包下的 <code>AddServiceImpl</code> 和 <code>UpdateServiceImpl</code> 类。</p>
+<h3 id="2-2-Web后端与匹配系统后端通信">2.2 Web后端与匹配系统后端通信</h3>
+<p>先在 <code>backend</code> 项目的 <code>config</code> 包下创建 <code>RestTemplateConfig</code> 类，便于之后在其他地方注入 <code>RestTemplate</code>。<code>RestTemplate</code> 能够在应用中调用 REST 服务。它简化了与 HTTP 服务的通信方式，统一了 RESTful 的标准，封装了 HTTP 链接，我们只需要传入 URL 及返回值类型即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RestTemplateConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RestTemplate <span class="title function_">getRestTemplate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将 <code>WebSocketServer</code> 的简易匹配代码删去，然后使用 HTTP 请求向 <code>matchingsystem</code> 后端发送匹配请求，注意我们将 <code>startGame()</code> 方法改为 <code>public</code>，因为之后需要在处理匹配成功的 Service 中调用该方法来启动游戏：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.consumer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson2.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.kob.backend.consumer.utils.Game;</span><br><span class="line"><span class="keyword">import</span> com.kob.backend.consumer.utils.JwtAuthentication;</span><br><span class="line"><span class="keyword">import</span> com.kob.backend.mapper.RecordMapper;</span><br><span class="line"><span class="keyword">import</span> com.kob.backend.mapper.UserMapper;</span><br><span class="line"><span class="keyword">import</span> com.kob.backend.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jakarta.websocket.*;</span><br><span class="line"><span class="keyword">import</span> jakarta.websocket.server.PathParam;</span><br><span class="line"><span class="keyword">import</span> jakarta.websocket.server.ServerEndpoint;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.LinkedMultiValueMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.MultiValueMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/websocket/&#123;token&#125;&quot;)</span>  <span class="comment">// 注意不要以&#x27;/&#x27;结尾</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">    <span class="comment">// ConcurrentHashMap是一个线程安全的哈希表，用于将用户ID映射到WS实例</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ConcurrentHashMap&lt;Integer, WebSocketServer&gt; users = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Session</span> <span class="variable">session</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Game</span> <span class="variable">game</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> UserMapper userMapper;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> RecordMapper recordMapper;  <span class="comment">// 要在Game中调用</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> RestTemplate restTemplate;  <span class="comment">// 用于发送HTTP请求</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向匹配系统发送请求的URL</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">matchingAddPlayerUrl</span> <span class="operator">=</span> <span class="string">&quot;http://localhost:3001/matching/add/&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">matchingRemovePlayerUrl</span> <span class="operator">=</span> <span class="string">&quot;http://localhost:3001/matching/remove/&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserMapper</span><span class="params">(UserMapper userMapper)</span> &#123;</span><br><span class="line">        WebSocketServer.userMapper = userMapper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRecordMapper</span><span class="params">(RecordMapper recordMapper)</span> &#123;</span><br><span class="line">        WebSocketServer.recordMapper = recordMapper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRestTemplate</span><span class="params">(RestTemplate restTemplate)</span> &#123;</span><br><span class="line">        WebSocketServer.restTemplate = restTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnOpen</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;token&quot;)</span> String token)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="built_in">this</span>.session = session;</span><br><span class="line"></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">userId</span> <span class="operator">=</span> JwtAuthentication.getUserId(token);</span><br><span class="line">        user = userMapper.selectById(userId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (user != <span class="literal">null</span>) &#123;</span><br><span class="line">            users.put(userId, <span class="built_in">this</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;Player &quot;</span> + user.getId() + <span class="string">&quot; Connected!&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnClose</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (user != <span class="literal">null</span>) &#123;</span><br><span class="line">            users.remove(user.getId());</span><br><span class="line">            System.out.println(<span class="string">&quot;Player &quot;</span> + user.getId() + <span class="string">&quot; Disconnected!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        stopMatching();  <span class="comment">// 断开连接时取消匹配</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnMessage</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;  <span class="comment">// 一般会把onMessage()当作路由</span></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">data</span> <span class="operator">=</span> JSONObject.parseObject(message);</span><br><span class="line">        <span class="type">String</span> <span class="variable">event</span> <span class="operator">=</span> data.getString(<span class="string">&quot;event&quot;</span>);  <span class="comment">// 取出event的内容</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;start_match&quot;</span>.equals(event)) &#123;  <span class="comment">// 开始匹配</span></span><br><span class="line">            <span class="built_in">this</span>.startMatching();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;stop_match&quot;</span>.equals(event)) &#123;  <span class="comment">// 取消匹配</span></span><br><span class="line">            <span class="built_in">this</span>.stopMatching();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;move&quot;</span>.equals(event)) &#123;  <span class="comment">// 移动</span></span><br><span class="line">            move(data.getInteger(<span class="string">&quot;direction&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnError</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onError</span><span class="params">(Session session, Throwable error)</span> &#123;</span><br><span class="line">        error.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMessage</span><span class="params">(String message)</span> &#123;  <span class="comment">// 从后端向当前链接发送消息</span></span><br><span class="line">        <span class="keyword">synchronized</span> (session) &#123;  <span class="comment">// 由于是异步通信，需要加一个锁</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                session.getBasicRemote().sendText(message);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">startGame</span><span class="params">(Integer aId, Integer bId)</span> &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">a</span> <span class="operator">=</span> userMapper.selectById(aId), b = userMapper.selectById(bId);</span><br><span class="line"></span><br><span class="line">        game = <span class="keyword">new</span> <span class="title class_">Game</span>(<span class="number">13</span>, <span class="number">14</span>, <span class="number">20</span>, a.getId(), b.getId());</span><br><span class="line">        game.createMap();</span><br><span class="line">        users.get(a.getId()).game = game;</span><br><span class="line">        users.get(b.getId()).game = game;</span><br><span class="line"></span><br><span class="line">        game.start();  <span class="comment">// 开一个新的线程</span></span><br><span class="line"></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">respGame</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        respGame.put(<span class="string">&quot;a_id&quot;</span>, game.getPlayerA().getId());</span><br><span class="line">        respGame.put(<span class="string">&quot;a_sx&quot;</span>, game.getPlayerA().getSx());</span><br><span class="line">        respGame.put(<span class="string">&quot;a_sy&quot;</span>, game.getPlayerA().getSy());</span><br><span class="line">        respGame.put(<span class="string">&quot;b_id&quot;</span>, game.getPlayerB().getId());</span><br><span class="line">        respGame.put(<span class="string">&quot;b_sx&quot;</span>, game.getPlayerB().getSx());</span><br><span class="line">        respGame.put(<span class="string">&quot;b_sy&quot;</span>, game.getPlayerB().getSy());</span><br><span class="line">        respGame.put(<span class="string">&quot;map&quot;</span>, game.getG());</span><br><span class="line"></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">respA</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>(), respB = <span class="keyword">new</span> <span class="title class_">JSONObject</span>();  <span class="comment">// 发送给A/B的信息</span></span><br><span class="line">        respA.put(<span class="string">&quot;event&quot;</span>, <span class="string">&quot;match_success&quot;</span>);</span><br><span class="line">        respA.put(<span class="string">&quot;opponent_username&quot;</span>, b.getUsername());</span><br><span class="line">        respA.put(<span class="string">&quot;opponent_photo&quot;</span>, b.getPhoto());</span><br><span class="line">        respA.put(<span class="string">&quot;game&quot;</span>, respGame);</span><br><span class="line">        users.get(a.getId()).sendMessage(respA.toJSONString());  <span class="comment">// A不一定是当前链接，因此要在users中获取</span></span><br><span class="line"></span><br><span class="line">        respB.put(<span class="string">&quot;event&quot;</span>, <span class="string">&quot;match_success&quot;</span>);</span><br><span class="line">        respB.put(<span class="string">&quot;opponent_username&quot;</span>, a.getUsername());</span><br><span class="line">        respB.put(<span class="string">&quot;opponent_photo&quot;</span>, a.getPhoto());</span><br><span class="line">        respB.put(<span class="string">&quot;game&quot;</span>, respGame);</span><br><span class="line">        users.get(b.getId()).sendMessage(respB.toJSONString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">startMatching</span><span class="params">()</span> &#123;  <span class="comment">// 需要向MatchingSystem发送请求</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; data = <span class="keyword">new</span> <span class="title class_">LinkedMultiValueMap</span>&lt;&gt;();</span><br><span class="line">        data.add(<span class="string">&quot;user_id&quot;</span>, String.valueOf(user.getId()));</span><br><span class="line">        data.add(<span class="string">&quot;rating&quot;</span>, String.valueOf(user.getRating()));</span><br><span class="line">        <span class="type">String</span> <span class="variable">resp</span> <span class="operator">=</span> restTemplate.postForObject(matchingAddPlayerUrl, data, String.class);  <span class="comment">// 参数为请求地址、数据、返回值的Class</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;success&quot;</span>.equals(resp)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Player &quot;</span> + user.getId() + <span class="string">&quot; start matching!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">stopMatching</span><span class="params">()</span> &#123;  <span class="comment">// 需要向MatchingSystem发送请求</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; data = <span class="keyword">new</span> <span class="title class_">LinkedMultiValueMap</span>&lt;&gt;();</span><br><span class="line">        data.add(<span class="string">&quot;user_id&quot;</span>, String.valueOf(user.getId()));</span><br><span class="line">        <span class="type">String</span> <span class="variable">resp</span> <span class="operator">=</span> restTemplate.postForObject(matchingRemovePlayerUrl, data, String.class);</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;success&quot;</span>.equals(resp)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Player &quot;</span> + user.getId() + <span class="string">&quot; stop matching!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">(Integer direction)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (game.getPlayerA().getId().equals(user.getId())) &#123;</span><br><span class="line">            game.setNextStepA(direction);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (game.getPlayerB().getId().equals(user.getId())) &#123;</span><br><span class="line">            game.setNextStepB(direction);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，从 Spring 5 开始，Spring 引入了一个新的 HTTP 客户端叫做 <code>WebClient</code>。<code>WebClient</code> 是 <code>RestTemplate</code> 的一个现代化的替代品，它不仅提供了传统的同步 API，还支持高效的非阻塞和异步方法。</p>
+<p><code>WebClient</code> 在 WebFlux 模块中，WebFlux 是 Spring 5.0 之后引入的一种基于响应式编程的 Web 框架。它是完全非阻塞式的，与传统的 Spring MVC 相比，WebFlux 是基于 NIO（新 IO，也叫非阻塞 IO），所以在 IO 性能上会比传统的 MVC 性能要好一些。</p>
+<p>如果需要替换成 <code>WebClient</code>，需要先安装依赖：<code>Spring Boot Starter WebFlux</code>，然后在 <code>config</code> 包下创建 <code>WebClientConfig</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.reactive.function.client.WebClient;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebClientConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> WebClient <span class="title function_">getWebClient</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> WebClient.builder().build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>WebClient</code> 接口提供了三个不同的静态方法来创建 <code>WebClient</code> 实例：</p>
+<ul>
+<li>利用 <code>create()</code> 创建。</li>
+<li>利用 <code>create(String baseUrl)</code> 创建。</li>
+<li>利用 <code>builder()</code> 创建（推荐）。</li>
+</ul>
+<p>使用 <code>builder()</code> 返回一个 <code>WebClient.Builder</code>，然后再调用 <code>build()</code> 就可以返回 <code>WebClient</code> 对象，我们可以用 <code>WebClient.Builder</code> 实例配置 <code>WebClient</code>：</p>
+<ul>
+<li><code>baseUrl(String baseUrl)</code>：这个方法用于设置 <code>WebClient</code> 的基础 URL，所有的请求都会基于这个 URL。例如，如果你设置了 <code>baseUrl(&quot;http://base.com&quot;)</code>，那么后续的 <code>.uri(&quot;/user/1&quot;)</code> 实际上是在请求 <code>http://base.com/user/1</code> 这个 URL。</li>
+<li><code>defaultHeader(String headerName, String... headerValues)</code>：这个方法用于设置默认的 HTTP 头，这些头会被添加到所有的请求中。例如，你可以使用 <code>defaultHeader(HttpHeaders.USER_AGENT, &quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)&quot;)</code> 来设置 User-Agent 头。</li>
+<li><code>defaultCookie(String cookieName, String... cookieValues)</code>：这个方法用于设置默认的 HTTP Cookie。这些 Cookie 会被添加到所有的请求中。例如，你可以使用 <code>defaultCookie(&quot;ACCESS_TOKEN&quot;, &quot;test_token&quot;)</code> 来设置一个名为 <code>ACCESS_TOKEN</code> 的 Cookie。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">WebClient</span> <span class="variable">webClient</span> <span class="operator">=</span> WebClient.builder()</span><br><span class="line">        .baseUrl(<span class="string">&quot;http://base.com&quot;</span>)</span><br><span class="line">        .defaultHeader(HttpHeaders.USER_AGENT,<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)&quot;</span>)</span><br><span class="line">        .defaultCookie(<span class="string">&quot;ACCESS_TOKEN&quot;</span>, <span class="string">&quot;test_token&quot;</span>)</span><br><span class="line">        .build();</span><br></pre></td></tr></table></figure>
+<p>在 <code>WebSocketServer</code> 中按如下方式发送请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.reactive.function.BodyInserters;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.reactive.function.client.WebClient;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/websocket/&#123;token&#125;&quot;)</span>  <span class="comment">// 注意不要以&#x27;/&#x27;结尾</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WebClient webClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向匹配系统发送请求的URL</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">matchingAddPlayerUrl</span> <span class="operator">=</span> <span class="string">&quot;http://localhost:3001/matching/add/&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">matchingRemovePlayerUrl</span> <span class="operator">=</span> <span class="string">&quot;http://localhost:3001/matching/remove/&quot;</span>;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWebClient</span><span class="params">(WebClient webClient)</span> &#123;</span><br><span class="line">        WebSocketServer.webClient = webClient;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">startMatching</span><span class="params">()</span> &#123;  <span class="comment">// 需要向MatchingSystem发送请求</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; data = <span class="keyword">new</span> <span class="title class_">LinkedMultiValueMap</span>&lt;&gt;();</span><br><span class="line">        data.add(<span class="string">&quot;user_id&quot;</span>, String.valueOf(user.getId()));</span><br><span class="line">        data.add(<span class="string">&quot;rating&quot;</span>, String.valueOf(user.getRating()));</span><br><span class="line">        webClient.post()  <span class="comment">// POST请求</span></span><br><span class="line">                .uri(matchingAddPlayerUrl)  <span class="comment">// 请求路径</span></span><br><span class="line">                .body(BodyInserters.fromFormData(data))  <span class="comment">// 请求体，MultiValueMap对象默认发起的是Form提交，使用BodyInserters.fromFormData()将其添加到请求体中</span></span><br><span class="line">                .retrieve()  <span class="comment">// 获取响应体</span></span><br><span class="line">                .bodyToMono(String.class)  <span class="comment">// 响应数据类型转换，返回Mono&lt;String&gt;类型的数据</span></span><br><span class="line">                .subscribe(  <span class="comment">// 回调函数会在请求完成时被调用，用于处理响应的结果</span></span><br><span class="line">                        resp -&gt; &#123;  <span class="comment">// 处理请求成功的响应</span></span><br><span class="line">                            <span class="keyword">if</span> (<span class="string">&quot;success&quot;</span>.equals(resp)) &#123;</span><br><span class="line">                                System.out.println(<span class="string">&quot;Player &quot;</span> + user.getId() + <span class="string">&quot; start matching!&quot;</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        error -&gt; &#123;  <span class="comment">// 处理请求错误的响应</span></span><br><span class="line">                            System.out.println(<span class="string">&quot;Start Matching WebClient Error: &quot;</span> + error.getMessage());</span><br><span class="line">                        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">stopMatching</span><span class="params">()</span> &#123;  <span class="comment">// 需要向MatchingSystem发送请求</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; data = <span class="keyword">new</span> <span class="title class_">LinkedMultiValueMap</span>&lt;&gt;();</span><br><span class="line">        data.add(<span class="string">&quot;user_id&quot;</span>, String.valueOf(user.getId()));</span><br><span class="line">        webClient.post()</span><br><span class="line">                .uri(matchingRemovePlayerUrl)</span><br><span class="line">                .body(BodyInserters.fromFormData(data))</span><br><span class="line">                .retrieve()</span><br><span class="line">                .bodyToMono(String.class)</span><br><span class="line">                .subscribe(</span><br><span class="line">                        resp -&gt; &#123;</span><br><span class="line">                            <span class="keyword">if</span> (<span class="string">&quot;success&quot;</span>.equals(resp)) &#123;</span><br><span class="line">                                System.out.println(<span class="string">&quot;Player &quot;</span> + user.getId() + <span class="string">&quot; stop matching!&quot;</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        error -&gt; &#123;</span><br><span class="line">                            System.out.println(<span class="string">&quot;Stop Matching WebClient Error: &quot;</span> + error.getMessage());</span><br><span class="line">                        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">(Integer direction)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (game.getPlayerA().getId().equals(user.getId())) &#123;</span><br><span class="line">            game.setNextStepA(direction);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (game.getPlayerB().getId().equals(user.getId())) &#123;</span><br><span class="line">            game.setNextStepB(direction);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在将两个后端项目都启动起来，可以在 IDEA 下方的服务（Services）选项卡的 <code>Add Service</code> 中点击 <code>Run Configuration Type</code>，然后选中 <code>Spring Boot</code>，这样就能在下方窗口中看到两个 SpringBoot 后端的情况。</p>
+<p>尝试在前端中开始匹配，可以看到 <code>matchingsystem</code> 后端控制台输出：<code>Add Player: 1, Rating: 1500</code>。</p>
+<h3 id="2-3-实现匹配逻辑">2.3 实现匹配逻辑</h3>
+<p>匹配系统需要将当前正在匹配的用户放到一个匹配池中，然后开一个新线程每隔一段时间去扫描一遍匹配池，将能够匹配的玩家匹配在一起，我们的匹配逻辑是匹配两名分值接近的玩家，且随着时间的推移，两名玩家的分差可以越来越大。</p>
+<p>首先需要添加 <code>Project Lombok</code> 依赖，我们使用与之前 Web 后端相同的依赖版本：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.30<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 <code>matchingsystem</code> 项目的 <code>service.impl</code> 包下创建 <code>utils</code> 包，然后在其中创建 <code>Player</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.service.impl.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Player</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="keyword">private</span> Integer rating;</span><br><span class="line">    <span class="keyword">private</span> Integer waitingTime;  <span class="comment">// 等待时间</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我们需要在 <code>matchingsystem</code> 项目中向 <code>backend</code> 发请求，因此也需要用 <code>WebClient</code>，将 <code>backend</code> 的 <code>config</code> 包中的 <code>WebClientConfig</code> 复制到 <code>matchingsystem</code> 的 <code>config</code> 包中（别忘了也需要在 <code>matchingsystem</code> 项目的 <code>pom.xml</code> 中添加 <code>Spring Boot Starter WebFlux</code> 依赖）。</p>
+<p>接着创建 <code>MatchingPool</code> 类用来维护我们的这个新线程：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.service.impl.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.LinkedMultiValueMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.MultiValueMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.reactive.function.BodyInserters;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.reactive.function.client.WebClient;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>  <span class="comment">// 为了在类中能够注入Bean</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MatchingPool</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> List&lt;Player&gt; players = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();  <span class="comment">// 我们之后会自己加锁，因此不需要用线程安全的集合</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WebClient webClient;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">startGameUrl</span> <span class="operator">=</span> <span class="string">&quot;http://localhost:3000/pk/startgame/&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWebClient</span><span class="params">(WebClient webClient)</span> &#123;</span><br><span class="line">        MatchingPool.webClient = webClient;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addPlayer</span><span class="params">(Integer userId, Integer rating)</span> &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            players.add(<span class="keyword">new</span> <span class="title class_">Player</span>(userId, rating, <span class="number">0</span>));</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">removePlayer</span><span class="params">(Integer userId)</span> &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            players.removeIf(player -&gt; player.getUserId().equals(userId));</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">increaseWaitingTime</span><span class="params">(Integer waitingTime)</span> &#123;  <span class="comment">// 将当前所有等待匹配的玩家等待时间加waitingTime秒</span></span><br><span class="line">        <span class="keyword">for</span> (Player player: players) &#123;</span><br><span class="line">            player.setWaitingTime(player.getWaitingTime() + waitingTime);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">checkMatched</span><span class="params">(Player a, Player b)</span> &#123;  <span class="comment">// 判断两名玩家是否能够匹配</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">ratingDelta</span> <span class="operator">=</span> Math.abs(a.getRating() - b.getRating());  <span class="comment">// 分差</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">minWatingTime</span> <span class="operator">=</span> Math.min(a.getWaitingTime(), b.getWaitingTime());  <span class="comment">// 等待时间较短的玩家符合匹配要求那么等待时间长的也一定符合要求</span></span><br><span class="line">        <span class="keyword">return</span> ratingDelta &lt;= minWatingTime * <span class="number">10</span>;  <span class="comment">// 每多匹配一秒则匹配的分值范围加10</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">sendResult</span><span class="params">(Player a, Player b)</span> &#123;  <span class="comment">// 返回匹配结果给Web后端</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; data = <span class="keyword">new</span> <span class="title class_">LinkedMultiValueMap</span>&lt;&gt;();</span><br><span class="line">        data.add(<span class="string">&quot;a_id&quot;</span>, String.valueOf(a.getUserId()));</span><br><span class="line">        data.add(<span class="string">&quot;b_id&quot;</span>, String.valueOf(b.getUserId()));</span><br><span class="line">        webClient.post()</span><br><span class="line">                .uri(startGameUrl)</span><br><span class="line">                .body(BodyInserters.fromFormData(data))</span><br><span class="line">                .retrieve()</span><br><span class="line">                .bodyToMono(String.class)</span><br><span class="line">                .subscribe(</span><br><span class="line">                        resp -&gt; &#123;</span><br><span class="line">                            <span class="keyword">if</span> (<span class="string">&quot;success&quot;</span>.equals(resp)) &#123;</span><br><span class="line">                                System.out.println(<span class="string">&quot;Match Success: Player &quot;</span> + a.getUserId() + <span class="string">&quot; and Player &quot;</span> + b.getUserId());</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        error -&gt; &#123;</span><br><span class="line">                            System.out.println(<span class="string">&quot;Matching WebClient Error: &quot;</span> + error.getMessage());</span><br><span class="line">                        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">matchPlayers</span><span class="params">()</span> &#123;  <span class="comment">// 尝试匹配所有玩家</span></span><br><span class="line">        Set&lt;Player&gt; used = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();  <span class="comment">// 标记玩家是否已经被匹配</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; players.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (used.contains(players.get(i))) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; players.size(); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (used.contains(players.get(j))) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="type">Player</span> <span class="variable">a</span> <span class="operator">=</span> players.get(i), b = players.get(j);</span><br><span class="line">                <span class="keyword">if</span> (checkMatched(a, b)) &#123;</span><br><span class="line">                    used.add(a);</span><br><span class="line">                    used.add(b);</span><br><span class="line">                    sendResult(a, b);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        players.removeIf(used::contains);  <span class="comment">// 从players中移除used中的玩家</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                System.out.println(players);  <span class="comment">// 输出当前匹配池中的玩家</span></span><br><span class="line">                lock.lock();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    increaseWaitingTime(<span class="number">1</span>);</span><br><span class="line">                    matchPlayers();</span><br><span class="line">                &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                    lock.unlock();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从匹配池中删除玩家需要遍历找出 <code>userId</code> 所对应的玩家，<code>players.removeIf(player -&gt; player.getUserId().equals(userId));</code> 就等价于以下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Iterator&lt;Player&gt; it = players.iterator(); it.hasNext();) &#123;</span><br><span class="line">    <span class="type">Player</span> <span class="variable">player</span> <span class="operator">=</span> it.next();</span><br><span class="line">    <span class="keyword">if</span> (player.getUserId().equals(userId)) &#123;</span><br><span class="line">        it.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在即可将这个线程在 <code>MatchingServiceImpl</code> 中定义出来：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.matchingsystem.service.MatchingService;</span><br><span class="line"><span class="keyword">import</span> com.kob.matchingsystem.service.impl.utils.MatchingPool;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MatchingServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">MatchingService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">MatchingPool</span> <span class="variable">matchingPool</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MatchingPool</span>();  <span class="comment">// 全局只有一个匹配线程</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">addPlayer</span><span class="params">(Integer userId, Integer rating)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Add Player: &quot;</span> + userId + <span class="string">&quot;, Rating: &quot;</span> + rating);</span><br><span class="line">        matchingPool.addPlayer(userId, rating);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">removePlayer</span><span class="params">(Integer userId)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Remove Player: &quot;</span> + userId);</span><br><span class="line">        matchingPool.removePlayer(userId);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以在启动 <code>matchingsystem</code> 项目的时候就将该线程启动，即在 <code>MatchingSystemApplication</code> 这个主入口处启动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.matchingsystem;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.matchingsystem.service.impl.MatchingServiceImpl;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MatchingSystemApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MatchingServiceImpl.matchingPool.start();  <span class="comment">// 启动匹配线程</span></span><br><span class="line">        SpringApplication.run(MatchingSystemApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-Web后端接收匹配结果">2.4 Web后端接收匹配结果</h3>
+<p>我们的 Web 后端还需要从 <code>matchingsystem</code> 接收请求，即接收匹配系统匹配成功的信息。在 <code>backend</code> 项目的 <code>service</code> 以及 <code>service.impl</code> 包下创建 <code>pk</code> 包，然后在 <code>service.pk</code> 包下创建 <code>StartGameService</code> 接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.service.pk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StartGameService</span> &#123;</span><br><span class="line">    String <span class="title function_">startGame</span><span class="params">(Integer aId, Integer bId)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>service.impl.pk</code> 包下创建接口的实现 <code>StartGameServiceImpl</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.service.impl.pk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.backend.consumer.WebSocketServer;</span><br><span class="line"><span class="keyword">import</span> com.kob.backend.service.pk.StartGameService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StartGameServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">StartGameService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">startGame</span><span class="params">(Integer aId, Integer bId)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Start Game: Player &quot;</span> + aId + <span class="string">&quot; and Player &quot;</span> + bId);</span><br><span class="line">        <span class="type">WebSocketServer</span> <span class="variable">webSocketServer</span> <span class="operator">=</span> WebSocketServer.users.get(aId);</span><br><span class="line">        webSocketServer.startGame(aId, bId);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着在 <code>controller.pk</code> 包下创建 <code>StartGameController</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.controller.pk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kob.backend.service.pk.StartGameService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.MultiValueMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StartGameController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StartGameService startGameService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/pk/startgame/&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">startGame</span><span class="params">(<span class="meta">@RequestParam</span> MultiValueMap&lt;String, String&gt; data)</span> &#123;</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">aId</span> <span class="operator">=</span> Integer.parseInt(Objects.requireNonNull(data.getFirst(<span class="string">&quot;a_id&quot;</span>)));</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">bId</span> <span class="operator">=</span> Integer.parseInt(Objects.requireNonNull(data.getFirst(<span class="string">&quot;b_id&quot;</span>)));</span><br><span class="line">        <span class="keyword">return</span> startGameService.startGame(aId, bId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现完最后需要放行这个 URL，修改 <code>SecurityConfig</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kob.backend.config;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> SecurityFilterChain <span class="title function_">filterChain</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        http.csrf(CsrfConfigurer::disable)</span><br><span class="line">                .sessionManagement(sess -&gt; sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span><br><span class="line">                .authorizeHttpRequests(auth -&gt; &#123;</span><br><span class="line">                    ...</span><br><span class="line">                    auth.requestMatchers(<span class="keyword">new</span> <span class="title class_">IpAddressMatcher</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="string">&quot;/pk/startgame/&quot;</span>)).permitAll();</span><br><span class="line">                    ...</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> Share</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://asanosaki.github.io/posts/24133.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://asanosaki.github.io/posts/24133.html";
+            const title         = "「SpringBoot学习笔记-实现微服务：匹配系统（下）」";
+            const excerpt       = `本节内容为实现完整的匹配系统微服务。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Java/" rel="tag">Java</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-04-19T02:55:08.411Z" itemprop="dateModified">Last edited: 2024-04-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" SpringBoot学习笔记-实现微服务：匹配系统（中）" href="/posts/5710.html">&lt; Previous</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Determined AI部署与使用教程" href="/posts/32409.html">Next &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/head.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                Articles
+            </span>
+            <span class="count">
+                89
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                Classifications
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                Tags
+            </span>
+            <span class="count">
+                10
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        Contents
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%87%8D%E6%9E%84%E9%A1%B9%E7%9B%AE"><span class="toc-text">1. 重构项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%9D%E5%A7%8B%E5%8C%96Spring-Cloud%E9%A1%B9%E7%9B%AE"><span class="toc-text">1.1 初始化Spring Cloud项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%88%9B%E5%BB%BA%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6"><span class="toc-text">1.2 创建匹配系统框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%BF%81%E7%A7%BBWeb%E5%90%8E%E7%AB%AF"><span class="toc-text">1.3 迁移Web后端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">2. 实现匹配系统微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9B%B4%E6%96%B0"><span class="toc-text">2.1 数据库更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Web%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%AB%AF%E9%80%9A%E4%BF%A1"><span class="toc-text">2.2 Web后端与匹配系统后端通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%9E%E7%8E%B0%E5%8C%B9%E9%85%8D%E9%80%BB%E8%BE%91"><span class="toc-text">2.3 实现匹配逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Web%E5%90%8E%E7%AB%AF%E6%8E%A5%E6%94%B6%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C"><span class="toc-text">2.4 Web后端接收匹配结果</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>Contents</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essay/">Essay</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interview/">Interview</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>Tags aggregation</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AI/" style="font-size: 0.77em;">AI</a> <a href="/tags/C/" style="font-size: 0.6em;">C++</a> <a href="/tags/Essay/" style="font-size: 0.6em;">Essay</a> <a href="/tags/Hexo/" style="font-size: 0.63em;">Hexo</a> <a href="/tags/Interview/" style="font-size: 0.67em;">Interview</a> <a href="/tags/Java/" style="font-size: 0.8em;">Java</a> <a href="/tags/Linux/" style="font-size: 0.67em;">Linux</a> <a href="/tags/Others/" style="font-size: 0.7em;">Others</a> <a href="/tags/Python/" style="font-size: 0.77em;">Python</a> <a href="/tags/Web/" style="font-size: 0.73em;">Web</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>Latest articles</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/32409.html"><i class="fa  fa-book"></i> Determined AI部署与使用教程</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/24133.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-实现微服务：匹配系统（下）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/5710.html"><i class="fa  fa-book"></i> SpringBoot学习笔记-实现微服务：匹配系统（中）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/2329.html"><i class="fa  fa-book"></i> Spring面试题总结</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/53737.html"><i class="fa  fa-book"></i> Java进阶面试题总结</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        <li><a target="_blank" rel="nofollow" href="https://weibo.com/u/1952449115"><i class="fa fa-weibo"></i></a></li>
+                        <li><a href="mailto:mail@1195595343@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/AsanoSaki"><i class="fa fa-github"></i></a></li>
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 AsanoSaki Copyright.</li>
+                            <li>This site is running<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by AsanoSaki.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.com/" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
