@@ -4,11 +4,11 @@
     <title>AsanoSaki • Posts by &#34;linux&#34; category</title>
     <link href="https://asanosaki.github.io" />
     <updated>2022-09-28T07:14:00.000Z</updated>
-    <category term="Others" />
     <category term="AI" />
+    <category term="Others" />
     <category term="Python" />
-    <category term="Hexo" />
     <category term="Java" />
+    <category term="Hexo" />
     <category term="Interview" />
     <category term="Linux" />
     <category term="Web" />
@@ -305,6 +305,12 @@ Thrift 官网：&lt;a href=&#34;https://thrift.apache.org/&#34;&gt;Apache Thrift
 &lt;h2 id=&#34;1-SSH&#34;&gt;1. SSH&lt;/h2&gt;
 &lt;h3 id=&#34;1-1-SSH登录&#34;&gt;1.1 SSH登录&lt;/h3&gt;
 &lt;p&gt;（1）基本用法：&lt;/p&gt;
+&lt;p&gt;如果是 Ubuntu 的裸环境需要先安装 SSH：&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;apt-get install openssh-server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;安装完成后，SSH 服务默认自动启动，你可以通过以下命令校验服务运行状态：&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;systemctl status ssh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;重启 SSH 服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;service ssh restart&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;远程登录服务器：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh user@hostname&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;user: 用户名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hostname: IP地址或域名&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;第一次登录时会提示：&lt;/p&gt;
