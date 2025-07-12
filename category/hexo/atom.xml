@@ -5,11 +5,11 @@
     <link href="https://asanosaki.github.io" />
     <updated>2022-12-01T04:30:00.000Z</updated>
     <category term="AI" />
-    <category term="Others" />
     <category term="Python" />
-    <category term="Java" />
+    <category term="Others" />
     <category term="Hexo" />
     <category term="Interview" />
+    <category term="Java" />
     <category term="Linux" />
     <category term="Web" />
     <category term="C++" />
@@ -102,7 +102,7 @@
 &lt;p&gt;（1）安装 Git Bash：&lt;a href=&#34;/posts/31252.html&#34;&gt;Windows 安装配置 Git 教程&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;（2）安装 NodeJS：&lt;a href=&#34;/posts/11062.html&#34;&gt;NodeJS 的安装及配置&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;（3）修改 &lt;code&gt;npm&lt;/code&gt; 镜像源：&lt;/p&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm config set registry https://registry.npm.taobao.org&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm config set registry https://registry.npmmirror.com/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;（4）安装 Hexo：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm install hexo-cli -g&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;（5）安装部署插件：&lt;/p&gt;

@@ -8,11 +8,11 @@
         <pubDate>Mon, 13 Nov 2023 17:22:00 +0800</pubDate>
         <lastBuildDate>Mon, 13 Nov 2023 17:22:00 +0800</lastBuildDate>
         <category>AI</category>
-        <category>Others</category>
         <category>Python</category>
-        <category>Java</category>
+        <category>Others</category>
         <category>Hexo</category>
         <category>Interview</category>
+        <category>Java</category>
         <category>Linux</category>
         <category>Web</category>
         <category>C++</category>
@@ -29,8 +29,8 @@
 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;1-MySQL的安装与配置&#34;&gt;1. MySQL的安装与配置&lt;/h2&gt;
 &lt;p&gt;MySQL Windows Installer 下载地址：&lt;a href=&#34;https://dev.mysql.com/downloads/installer/&#34;&gt;MySQL Installer&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;我们下载最新版本（目前是8.0.35）的安装包，注意要选择更大的那个，名字为 &lt;code&gt;mysql-installer-community-8.0.35.0.msi&lt;/code&gt;。下载时会让我们登录，不用管直接点 &lt;code&gt;No thanks, just start my download.&lt;/code&gt; 即可。&lt;/p&gt;
-&lt;p&gt;打开安装包后选择 &lt;code&gt;Custom&lt;/code&gt; 自定义安装，然后选择要安装的服务，我们选择 &lt;code&gt;MySQL Servers -&amp;gt; MySQL Server -&amp;gt; MySQL Server 8.0&lt;/code&gt; 中的 &lt;code&gt;MySQL Server 8.0.35 - X64&lt;/code&gt;（选中后点击右箭头即可）。然后点中右边的 &lt;code&gt;MySQL Server 8.0.35 - X64&lt;/code&gt; 后可以看到下面会出现一个 &lt;code&gt;Advanced Options&lt;/code&gt;，可以修改安装路径，我们安装在 &lt;code&gt;D:\MySQL\MySQL Server 8.0&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;我们下载最新版本（目前是8.0.41）的安装包，注意要选择更大的那个，名字为 &lt;code&gt;mysql-installer-community-8.0.41.0.msi&lt;/code&gt;。下载时会让我们登录，不用管直接点 &lt;code&gt;No thanks, just start my download.&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;p&gt;打开安装包后选择 &lt;code&gt;Custom&lt;/code&gt; 自定义安装，然后选择要安装的服务，我们选择 &lt;code&gt;MySQL Servers -&amp;gt; MySQL Server -&amp;gt; MySQL Server 8.0&lt;/code&gt; 中的 &lt;code&gt;MySQL Server 8.0.41 - X64&lt;/code&gt;（选中后点击右箭头即可）。然后点中右边的 &lt;code&gt;MySQL Server 8.0.41 - X64&lt;/code&gt; 后可以看到下面会出现一个 &lt;code&gt;Advanced Options&lt;/code&gt;，可以修改安装路径，我们安装在 &lt;code&gt;D:\MySQL\MySQL Server 8.0&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;之后点击 &lt;code&gt;Next -&amp;gt; Execute&lt;/code&gt; 即可开始安装。装好后点 &lt;code&gt;Next -&amp;gt; Next&lt;/code&gt;，然后会看到 &lt;code&gt;Type and Networking&lt;/code&gt; 界面，我们直接默认就好了，除非电脑上有不止一个 MySQL，这样就需要改一下端口号。我们继续点 &lt;code&gt;Next&lt;/code&gt;，看到 &lt;code&gt;Authentication Method&lt;/code&gt; 界面，还是默认就行，继续 &lt;code&gt;Next&lt;/code&gt;，然后我们需要设置根用户的用户名和密码，如果是用于学习的话可以起个简单点的密码防止遗忘。&lt;/p&gt;
 &lt;p&gt;然后我们继续 &lt;code&gt;Next&lt;/code&gt;，会看到 &lt;code&gt;Windows Service&lt;/code&gt; 界面，&lt;code&gt;Windows Service Name&lt;/code&gt; 可以改成 &lt;code&gt;MySQL&lt;/code&gt;，这样以后启动服务的时候方便些，下面的 &lt;code&gt;Start the MySOL Server at System Startup&lt;/code&gt; 表示开机自启动，建议默认让他勾上。然后点 &lt;code&gt;Next&lt;/code&gt;，选择 &lt;code&gt;No, I will manage the permissions after the server configuration.&lt;/code&gt;，最后点 &lt;code&gt;Next -&amp;gt; Execute&lt;/code&gt; 完成最后的安装。&lt;/p&gt;
 &lt;p&gt;安装好后配置一下环境变量，在系统变量的 &lt;code&gt;Path&lt;/code&gt; 中添加 &lt;code&gt;D:\MySQL\MySQL Server 8.0\bin&lt;/code&gt;，然后打开终端，检查一下 MySQL 版本：&lt;/p&gt;
@@ -399,6 +399,8 @@
 &lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;变量名: NODE_PATH&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;路径: D:\NodeJS\node_global\node_modules&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;在&amp;quot;用户变量&amp;quot;的 &lt;code&gt;Path&lt;/code&gt; 变量上点击&amp;quot;编辑&amp;quot;，更改 &lt;code&gt;npm&lt;/code&gt; 安装的默认路径（默认是 &lt;code&gt;C:\Users\&amp;lt;用户名&amp;gt;\AppData\Roaming\npm&lt;/code&gt;）：&lt;/p&gt;
 &lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;D:\NodeJS\node_global&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;修改 &lt;code&gt;npm&lt;/code&gt; 的镜像源：&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm config set registry https://registry.npmmirror.com/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;配置完成后，尝试在命令行窗口中安装一些环境（若安装出错可用管理员身份打开命令行窗口）：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm install express -g&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm install jade -g&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm install mysql -g&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
  ]]></description>
